@@ -54,14 +54,38 @@
 		DF10C7B12D343A3E006035E8 /* Chait */ = {
 			isa = PBXGroup;
 			children = (
+				DF674A0E2D34EFA400B61966 /* AppEntry */,
+				DF674A0F2D34EFAE00B61966 /* Scene */,
+				DF674A102D34EFB300B61966 /* AppResources */,
+			);
+			path = Chait;
+			sourceTree = "<group>";
+		};
+		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
+			isa = PBXGroup;
+			children = (
 				DF10C7B22D343A3E006035E8 /* AppDelegate.swift */,
 				DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */,
+			);
+			path = AppEntry;
+			sourceTree = "<group>";
+		};
+		DF674A0F2D34EFAE00B61966 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
 				DF10C7B62D343A3E006035E8 /* ViewController.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		DF674A102D34EFB300B61966 /* AppResources */ = {
+			isa = PBXGroup;
+			children = (
 				DF10C7BB2D343A3F006035E8 /* Assets.xcassets */,
 				DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */,
 				DF10C7C02D343A3F006035E8 /* Info.plist */,
 			);
-			path = Chait;
+			path = AppResources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
