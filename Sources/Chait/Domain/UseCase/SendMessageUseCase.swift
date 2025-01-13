@@ -7,12 +7,11 @@
 
 import Combine
 
-enum MessageError: Error {
+enum SendMessageError: Error {
     case invalidMessageInput
-    case sendMessageFailed
     case unknown
 }
 
 protocol SendMessageUseCase {
-    func send(_ message: NewUserMessage) -> AnyPublisher<UserMessage, MessageError>
+    func send(_ message: NewUserMessage) -> AnyPublisher<UserMessage, SendMessageError>
 }
