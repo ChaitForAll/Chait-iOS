@@ -31,6 +31,7 @@
 		DF674A642D36C38E00B61966 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = DF674A632D36C38E00B61966 /* Realtime */; };
 		DF674A662D36C38E00B61966 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = DF674A652D36C38E00B61966 /* Storage */; };
 		DFAE5D092D36D5A100999787 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DFAE5D082D36D5A100999787 /* Supabase */; };
+		DFAE5D0C2D36EB3800999787 /* ChannelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		DF674A3B2D36A4DB00B61966 /* SupaBasePlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupaBasePlatform.swift; sourceTree = "<group>"; };
 		DF674A3D2D36A5E800B61966 /* ApplicationSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApplicationSettings.xcconfig; sourceTree = "<group>"; };
 		DF674A3E2D36B3B200B61966 /* DefaultChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChannelRepository.swift; sourceTree = "<group>"; };
+		DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +194,9 @@
 		DF674A3A2D36A42300B61966 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DF674A3B2D36A4DB00B61966 /* SupaBasePlatform.swift */,
+				DFAE5D0A2D36EB2400999787 /* Responses */,
 				DF674A3E2D36B3B200B61966 /* DefaultChannelRepository.swift */,
+				DF674A3B2D36A4DB00B61966 /* SupaBasePlatform.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -203,6 +206,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFAE5D0A2D36EB2400999787 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 				DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */,
 				DF674A152D3561C200B61966 /* UserMessageEntity.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
+				DFAE5D0C2D36EB3800999787 /* ChannelResponse.swift in Sources */,
 				DF674A272D3656E700B61966 /* DefaultFetchChannelsUseCase.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
 				DF674A1B2D35626F00B61966 /* MessagesRepository.swift in Sources */,

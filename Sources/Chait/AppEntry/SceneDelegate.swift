@@ -21,7 +21,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
+        let channelRepository = DefaultChannelRepository()
+        let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository)
+        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase)
         let rootViewController = ChannelListViewController()
+        rootViewController.viewModel = viewModel
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
