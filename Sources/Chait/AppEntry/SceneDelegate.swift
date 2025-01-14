@@ -24,10 +24,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let channelRepository = DefaultChannelRepository()
         let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository)
         let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase)
-        let rootViewController = ChannelListViewController()
-        rootViewController.viewModel = viewModel
+        let channelListViewController = ChannelListViewController()
+        channelListViewController.viewModel = viewModel
+        
+        let tabViewController = UITabBarController()
+        tabViewController.viewControllers = [channelListViewController]
+        channelListViewController.tabBarItem = UITabBarItem(
+            title: "Chat",
+            image: UIImage(systemName: "bubble.left.and.text.bubble.right"),
+            selectedImage: UIImage(systemName: "bubble.left.and.text.bubble.right.fill")
+        )
+        
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = rootViewController
+        window.rootViewController = UINavigationController(rootViewController: tabViewController)
         window.makeKeyAndVisible()
         self.window = window
     }
