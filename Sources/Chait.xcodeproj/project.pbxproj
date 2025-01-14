@@ -96,9 +96,7 @@
 		DF674A0F2D34EFAE00B61966 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DF10C7B62D343A3E006035E8 /* ChannelListViewController.swift */,
-				DF674A282D365D3200B61966 /* ChannelPresentationModel.swift */,
-				DF674A2A2D365D7300B61966 /* ChannelListViewModel.swift */,
+				DF674A2C2D367BA400B61966 /* ChannelList */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -159,6 +157,16 @@
 				DF674A172D35622200B61966 /* NewUserMessage.swift */,
 			);
 			path = Commands;
+			sourceTree = "<group>";
+		};
+		DF674A2C2D367BA400B61966 /* ChannelList */ = {
+			isa = PBXGroup;
+			children = (
+				DF10C7B62D343A3E006035E8 /* ChannelListViewController.swift */,
+				DF674A282D365D3200B61966 /* ChannelPresentationModel.swift */,
+				DF674A2A2D365D7300B61966 /* ChannelListViewModel.swift */,
+			);
+			path = ChannelList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
