@@ -37,4 +37,8 @@ final class ChannelListViewModel {
             )
             .store(in: &cancelBag)
     }
+    
+    func channel(for channelID: ChannelPresentationModel.ID) -> ChannelPresentationModel? {
+        return self.channels[channelID]
+    }
 }
