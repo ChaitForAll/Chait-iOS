@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
-		DF10C7B72D343A3E006035E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B62D343A3E006035E8 /* ViewController.swift */; };
+		DF10C7B72D343A3E006035E8 /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B62D343A3E006035E8 /* ChannelListViewController.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
 		DF674A132D34F61A00B61966 /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */; };
@@ -21,13 +21,15 @@
 		DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A222D3582C100B61966 /* ChannelEntity.swift */; };
 		DF674A252D3624CC00B61966 /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A242D3624CC00B61966 /* ChannelRepository.swift */; };
 		DF674A272D3656E700B61966 /* DefaultFetchChannelsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */; };
+		DF674A292D365D3200B61966 /* ChannelPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A282D365D3200B61966 /* ChannelPresentationModel.swift */; };
+		DF674A2B2D365D7300B61966 /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A2A2D365D7300B61966 /* ChannelListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DF10C7B62D343A3E006035E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DF10C7B62D343A3E006035E8 /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
 		DF10C7BB2D343A3F006035E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF10C7BE2D343A3F006035E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		DF674A222D3582C100B61966 /* ChannelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEntity.swift; sourceTree = "<group>"; };
 		DF674A242D3624CC00B61966 /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
 		DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchChannelsUseCase.swift; sourceTree = "<group>"; };
+		DF674A282D365D3200B61966 /* ChannelPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPresentationModel.swift; sourceTree = "<group>"; };
+		DF674A2A2D365D7300B61966 /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +96,9 @@
 		DF674A0F2D34EFAE00B61966 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DF10C7B62D343A3E006035E8 /* ViewController.swift */,
+				DF10C7B62D343A3E006035E8 /* ChannelListViewController.swift */,
+				DF674A282D365D3200B61966 /* ChannelPresentationModel.swift */,
+				DF674A2A2D365D7300B61966 /* ChannelListViewModel.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -225,11 +231,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF10C7B72D343A3E006035E8 /* ViewController.swift in Sources */,
+				DF10C7B72D343A3E006035E8 /* ChannelListViewController.swift in Sources */,
 				DF674A252D3624CC00B61966 /* ChannelRepository.swift in Sources */,
+				DF674A292D365D3200B61966 /* ChannelPresentationModel.swift in Sources */,
 				DF674A1E2D356A5B00B61966 /* DefaultSendMessageUseCase.swift in Sources */,
 				DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */,
 				DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */,
+				DF674A2B2D365D7300B61966 /* ChannelListViewModel.swift in Sources */,
 				DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */,
 				DF674A152D3561C200B61966 /* UserMessageEntity.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
