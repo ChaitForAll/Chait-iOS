@@ -15,8 +15,12 @@
 		DF674A132D34F61A00B61966 /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */; };
 		DF674A152D3561C200B61966 /* UserMessageEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A142D3561C200B61966 /* UserMessageEntity.swift */; };
 		DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A172D35622200B61966 /* NewUserMessage.swift */; };
-		DF674A1B2D35626F00B61966 /* ChannelMessagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A1A2D35626F00B61966 /* ChannelMessagesRepository.swift */; };
+		DF674A1B2D35626F00B61966 /* MessagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A1A2D35626F00B61966 /* MessagesRepository.swift */; };
 		DF674A1E2D356A5B00B61966 /* DefaultSendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */; };
+		DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */; };
+		DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A222D3582C100B61966 /* ChannelEntity.swift */; };
+		DF674A252D3624CC00B61966 /* ChannelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A242D3624CC00B61966 /* ChannelRepository.swift */; };
+		DF674A272D3656E700B61966 /* DefaultFetchChannelsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +34,12 @@
 		DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF674A142D3561C200B61966 /* UserMessageEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMessageEntity.swift; sourceTree = "<group>"; };
 		DF674A172D35622200B61966 /* NewUserMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserMessage.swift; sourceTree = "<group>"; };
-		DF674A1A2D35626F00B61966 /* ChannelMessagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelMessagesRepository.swift; sourceTree = "<group>"; };
+		DF674A1A2D35626F00B61966 /* MessagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesRepository.swift; sourceTree = "<group>"; };
 		DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSendMessageUseCase.swift; sourceTree = "<group>"; };
+		DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelsUseCase.swift; sourceTree = "<group>"; };
+		DF674A222D3582C100B61966 /* ChannelEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelEntity.swift; sourceTree = "<group>"; };
+		DF674A242D3624CC00B61966 /* ChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepository.swift; sourceTree = "<group>"; };
+		DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFetchChannelsUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				DF674A142D3561C200B61966 /* UserMessageEntity.swift */,
+				DF674A222D3582C100B61966 /* ChannelEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -120,7 +129,8 @@
 		DF674A192D35624A00B61966 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				DF674A1A2D35626F00B61966 /* ChannelMessagesRepository.swift */,
+				DF674A1A2D35626F00B61966 /* MessagesRepository.swift */,
+				DF674A242D3624CC00B61966 /* ChannelRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -128,11 +138,21 @@
 		DF674A1C2D35689B00B61966 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				DF674A172D35622200B61966 /* NewUserMessage.swift */,
+				DF674A1F2D356CE900B61966 /* Commands */,
 				DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */,
+				DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */,
 				DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */,
+				DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		DF674A1F2D356CE900B61966 /* Commands */ = {
+			isa = PBXGroup;
+			children = (
+				DF674A172D35622200B61966 /* NewUserMessage.swift */,
+			);
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,12 +226,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF10C7B72D343A3E006035E8 /* ViewController.swift in Sources */,
+				DF674A252D3624CC00B61966 /* ChannelRepository.swift in Sources */,
 				DF674A1E2D356A5B00B61966 /* DefaultSendMessageUseCase.swift in Sources */,
 				DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */,
+				DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */,
+				DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */,
 				DF674A152D3561C200B61966 /* UserMessageEntity.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
+				DF674A272D3656E700B61966 /* DefaultFetchChannelsUseCase.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
-				DF674A1B2D35626F00B61966 /* ChannelMessagesRepository.swift in Sources */,
+				DF674A1B2D35626F00B61966 /* MessagesRepository.swift in Sources */,
 				DF674A132D34F61A00B61966 /* SendMessageUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
