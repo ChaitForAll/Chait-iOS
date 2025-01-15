@@ -15,6 +15,6 @@ struct NewChannel {
             !title.isEmpty,
             title != ""
         ]
-        return validations.allSatisfy({ $0 == true })
+        return validations.allSatisfy { $0 == true }
     }
 }
