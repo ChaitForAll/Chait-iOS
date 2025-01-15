@@ -39,7 +39,50 @@ final class ChannelListViewController: UIViewController {
         viewModel?.prepareChannels()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureNavigationItems()
+    }
+    
     // MARK: Private Function(s)
+    
+    private func configureNavigationItems() {
+        tabBarController?.navigationItem.title = "Channels"
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(didTapAddChannelButton)
+        )
+    }
+    
+    @objc private func didTapAddChannelButton() {
+        let alertController = UIAlertController(
+            title: "Creating Channel",
+            message: "Please enter channel title.",
+            preferredStyle: .alert
+        )
+        alertController.addTextField()
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default) { [weak self] action in
+            let channelTitle = alertController.textFields?.first?.text ?? ""
+            self?.viewModel?.createNewChannel(channelTitle) { failureMessage in
+                self?.presetCreateChannelFailed(with: failureMessage)
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        present(alertController, animated: true)
+    }
+    
+    private func presetCreateChannelFailed(with message: String) {
+        let failedAlertController = UIAlertController(
+            title: "Failed to create",
+            message: message,
+            preferredStyle: .alert
+        )
+        failedAlertController.addAction(.init(title: "ok", style: .cancel))
+        self.present(failedAlertController, animated: true)
+    }
     
     private func bindViewModel() {
         viewModel?.fetchedChannels
@@ -96,4 +139,3 @@ final class ChannelListViewController: UIViewController {
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
 }
-

@@ -33,6 +33,9 @@
 		DFAE5D092D36D5A100999787 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DFAE5D082D36D5A100999787 /* Supabase */; };
 		DFAE5D0C2D36EB3800999787 /* ChannelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */; };
 		DFAE5D0E2D37A8C300999787 /* NewChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0D2D37A8C300999787 /* NewChannel.swift */; };
+		DFAE5D102D37A91B00999787 /* CreateNewChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */; };
+		DFAE5D122D37BE1700999787 /* NewChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */; };
+		DFAE5D152D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		DF674A3E2D36B3B200B61966 /* DefaultChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChannelRepository.swift; sourceTree = "<group>"; };
 		DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelResponse.swift; sourceTree = "<group>"; };
 		DFAE5D0D2D37A8C300999787 /* NewChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannel.swift; sourceTree = "<group>"; };
+		DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelUseCase.swift; sourceTree = "<group>"; };
+		DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelRequest.swift; sourceTree = "<group>"; };
+		DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCreateNewChannelUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +177,8 @@
 				DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */,
 				DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */,
 				DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */,
+				DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */,
+				DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -197,6 +205,7 @@
 		DF674A3A2D36A42300B61966 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DFAE5D132D37BE2300999787 /* Requests */,
 				DFAE5D0A2D36EB2400999787 /* Responses */,
 				DF674A3E2D36B3B200B61966 /* DefaultChannelRepository.swift */,
 				DF674A3B2D36A4DB00B61966 /* SupaBasePlatform.swift */,
@@ -217,6 +226,14 @@
 				DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		DFAE5D132D37BE2300999787 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +322,7 @@
 				DF674A292D365D3200B61966 /* ChannelPresentationModel.swift in Sources */,
 				DF674A1E2D356A5B00B61966 /* DefaultSendMessageUseCase.swift in Sources */,
 				DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */,
+				DFAE5D152D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift in Sources */,
 				DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */,
 				DFAE5D0E2D37A8C300999787 /* NewChannel.swift in Sources */,
 				DF674A3C2D36A4DB00B61966 /* SupaBasePlatform.swift in Sources */,
@@ -317,6 +335,8 @@
 				DF674A272D3656E700B61966 /* DefaultFetchChannelsUseCase.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
 				DF674A1B2D35626F00B61966 /* MessagesRepository.swift in Sources */,
+				DFAE5D102D37A91B00999787 /* CreateNewChannelUseCase.swift in Sources */,
+				DFAE5D122D37BE1700999787 /* NewChannelRequest.swift in Sources */,
 				DF674A132D34F61A00B61966 /* SendMessageUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
