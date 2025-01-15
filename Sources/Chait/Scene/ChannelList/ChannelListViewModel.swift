@@ -16,9 +16,11 @@ final class ChannelListViewModel {
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let fetchChannelsUseCase: FetchChannelsUseCase
+    private let createNewChannelUseCase: CreateNewChannelUseCase
     
-    init(fetchChannelsUseCase: FetchChannelsUseCase) {
+    init(fetchChannelsUseCase: FetchChannelsUseCase, createNewChannelUseCase: CreateNewChannelUseCase) {
         self.fetchChannelsUseCase = fetchChannelsUseCase
+        self.createNewChannelUseCase = createNewChannelUseCase
     }
     
     func prepareChannels() {
@@ -40,5 +42,17 @@ final class ChannelListViewModel {
     
     func channel(for channelID: ChannelPresentationModel.ID) -> ChannelPresentationModel? {
         return self.channels[channelID]
+    }
+    
+    func createNewChannel(_ title: String, _ failure: @escaping (String) -> Void) {
+        createNewChannelUseCase.create(newChannel: NewChannel(title: title))
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(let error) = completion,
+                   case .invalidInput(let message) = error {
+                    failure(message)
+                }
+            } receiveValue: { }
+            .store(in: &cancelBag)
     }
 }

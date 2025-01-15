@@ -21,19 +21,21 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
+        
         let channelRepository = DefaultChannelRepository()
-        let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository)
-        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase)
+        let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository);
+        let createUseCase = DefaultCreateNewChannelUseCase(repository: channelRepository)
+        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase, createNewChannelUseCase: createUseCase)
         let channelListViewController = ChannelListViewController()
         channelListViewController.viewModel = viewModel
-        
-        let tabViewController = UITabBarController()
-        tabViewController.viewControllers = [channelListViewController]
         channelListViewController.tabBarItem = UITabBarItem(
             title: "Chat",
             image: UIImage(systemName: "bubble.left.and.text.bubble.right"),
             selectedImage: UIImage(systemName: "bubble.left.and.text.bubble.right.fill")
         )
+        
+        let tabViewController = UITabBarController()
+        tabViewController.viewControllers = [channelListViewController]
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController(rootViewController: tabViewController)
@@ -52,3 +54,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) { }
 }
 
+final class AnotherViewController: UIViewController {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.backgroundColor = .systemBackground
+        tabBarController?.navigationItem.title = "Anothers"
+    }
+}
