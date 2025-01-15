@@ -32,6 +32,7 @@
 		DF674A662D36C38E00B61966 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = DF674A652D36C38E00B61966 /* Storage */; };
 		DFAE5D092D36D5A100999787 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DFAE5D082D36D5A100999787 /* Supabase */; };
 		DFAE5D0C2D36EB3800999787 /* ChannelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */; };
+		DFAE5D0E2D37A8C300999787 /* NewChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0D2D37A8C300999787 /* NewChannel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		DF674A3D2D36A5E800B61966 /* ApplicationSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ApplicationSettings.xcconfig; sourceTree = "<group>"; };
 		DF674A3E2D36B3B200B61966 /* DefaultChannelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultChannelRepository.swift; sourceTree = "<group>"; };
 		DFAE5D0B2D36EB3800999787 /* ChannelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelResponse.swift; sourceTree = "<group>"; };
+		DFAE5D0D2D37A8C300999787 /* NewChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				DF674A172D35622200B61966 /* NewUserMessage.swift */,
+				DFAE5D0D2D37A8C300999787 /* NewChannel.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				DF674A1E2D356A5B00B61966 /* DefaultSendMessageUseCase.swift in Sources */,
 				DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */,
 				DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */,
+				DFAE5D0E2D37A8C300999787 /* NewChannel.swift in Sources */,
 				DF674A3C2D36A4DB00B61966 /* SupaBasePlatform.swift in Sources */,
 				DF674A3F2D36B3B200B61966 /* DefaultChannelRepository.swift in Sources */,
 				DF674A2B2D365D7300B61966 /* ChannelListViewModel.swift in Sources */,
