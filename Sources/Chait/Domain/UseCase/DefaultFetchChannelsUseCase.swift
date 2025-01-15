@@ -24,7 +24,7 @@ final class DefaultFetchChannelsUseCase: FetchChannelsUseCase {
             .mapError { error in
                 switch error {
                 case .noAvailableChannels: return .emptyChannelList
-                case .unknown: return FetchChannelsError.unknown
+                default: return .unknown
                 }
             }
             .eraseToAnyPublisher()
