@@ -45,4 +45,27 @@ final class DefaultChannelRepository: ChannelRepository {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func createNewChannel(_ newChannel: NewChannel) -> AnyPublisher<Void, ChannelRepositoryError> {
+        return Future<Void, ChannelRepositoryError>() { promise in
+            Task {
+                do {
+                    let newChannelToInsert = NewChannelRequest(title: newChannel.title)
+                    let response = try await self.service.client
+                        .from("channel")
+                        .insert(newChannelToInsert)
+                        .execute()
+                        .response
+                    
+                    guard (200..<300).contains(response.statusCode) else {
+                        promise(.failure(.serverError))
+                        return
+                    }
+                    
+                } catch {
+                    promise(.failure(.unknown))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 }
