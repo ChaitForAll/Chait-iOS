@@ -173,12 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				DF674A1F2D356CE900B61966 /* Commands */,
-				DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */,
-				DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */,
-				DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */,
-				DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */,
-				DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */,
-				DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */,
+				DFAE5D162D3942F100999787 /* SendMessage */,
+				DFAE5D172D39430500999787 /* FetchChannels */,
+				DFAE5D182D39431200999787 /* CreateChannel */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -234,6 +231,33 @@
 				DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		DFAE5D162D3942F100999787 /* SendMessage */ = {
+			isa = PBXGroup;
+			children = (
+				DF674A122D34F61A00B61966 /* SendMessageUseCase.swift */,
+				DF674A1D2D356A5B00B61966 /* DefaultSendMessageUseCase.swift */,
+			);
+			path = SendMessage;
+			sourceTree = "<group>";
+		};
+		DFAE5D172D39430500999787 /* FetchChannels */ = {
+			isa = PBXGroup;
+			children = (
+				DF674A202D3571BE00B61966 /* FetchChannelsUseCase.swift */,
+				DF674A262D3656E700B61966 /* DefaultFetchChannelsUseCase.swift */,
+			);
+			path = FetchChannels;
+			sourceTree = "<group>";
+		};
+		DFAE5D182D39431200999787 /* CreateChannel */ = {
+			isa = PBXGroup;
+			children = (
+				DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */,
+				DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */,
+			);
+			path = CreateChannel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
