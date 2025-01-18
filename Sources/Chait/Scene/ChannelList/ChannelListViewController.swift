@@ -85,13 +85,25 @@ final class ChannelListViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.fetchedChannels
-            .sink {
-                var snapShot = NSDiffableDataSourceSnapshot<Section, ChannelPresentationModel.ID>()
-                snapShot.appendSections([.channelList])
-                snapShot.appendItems($0)
-                self.diffableDataSource?.apply(snapShot)
-            }
+        guard let viewModel else { return }
+        viewModel.startListeningChannelUpdates()
+        viewModel.fetchedChannels
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                print(completion)
+            }, receiveValue: { newChannels in
+                
+                guard var snapshot = self.diffableDataSource?.snapshot() else {
+                    return
+                }
+                
+                if !snapshot.sectionIdentifiers.contains(where: { $0 == .channelList }) {
+                    snapshot.appendSections([.channelList])
+                }
+
+                snapshot.appendItems(newChannels, toSection: .channelList)
+                self.diffableDataSource?.apply(snapshot)
+            })
             .store(in: &cancelBag)
     }
     
