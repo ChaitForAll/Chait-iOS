@@ -36,6 +36,9 @@
 		DFAE5D102D37A91B00999787 /* CreateNewChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */; };
 		DFAE5D122D37BE1700999787 /* NewChannelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */; };
 		DFAE5D152D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */; };
+		DFAE5D1B2D39460800999787 /* ListenChannelsUpdateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D1A2D39460800999787 /* ListenChannelsUpdateUseCase.swift */; };
+		DFAE5D1D2D3BD9D700999787 /* ChannelUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D1C2D3BD9D700999787 /* ChannelUpdate.swift */; };
+		DFAE5D1F2D3BDA3B00999787 /* DefaultListenChannelUpdateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAE5D1E2D3BDA3B00999787 /* DefaultListenChannelUpdateUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,9 @@
 		DFAE5D0F2D37A91B00999787 /* CreateNewChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChannelUseCase.swift; sourceTree = "<group>"; };
 		DFAE5D112D37BE1700999787 /* NewChannelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelRequest.swift; sourceTree = "<group>"; };
 		DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCreateNewChannelUseCase.swift; sourceTree = "<group>"; };
+		DFAE5D1A2D39460800999787 /* ListenChannelsUpdateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenChannelsUpdateUseCase.swift; sourceTree = "<group>"; };
+		DFAE5D1C2D3BD9D700999787 /* ChannelUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelUpdate.swift; sourceTree = "<group>"; };
+		DFAE5D1E2D3BDA3B00999787 /* DefaultListenChannelUpdateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultListenChannelUpdateUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +162,7 @@
 			children = (
 				DF674A142D3561C200B61966 /* UserMessageEntity.swift */,
 				DF674A222D3582C100B61966 /* ChannelEntity.swift */,
+				DFAE5D1C2D3BD9D700999787 /* ChannelUpdate.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 		DF674A1C2D35689B00B61966 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				DFAE5D192D39439D00999787 /* ListenChannelsUpdate */,
 				DF674A1F2D356CE900B61966 /* Commands */,
 				DFAE5D162D3942F100999787 /* SendMessage */,
 				DFAE5D172D39430500999787 /* FetchChannels */,
@@ -258,6 +266,15 @@
 				DFAE5D142D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift */,
 			);
 			path = CreateChannel;
+			sourceTree = "<group>";
+		};
+		DFAE5D192D39439D00999787 /* ListenChannelsUpdate */ = {
+			isa = PBXGroup;
+			children = (
+				DFAE5D1A2D39460800999787 /* ListenChannelsUpdateUseCase.swift */,
+				DFAE5D1E2D3BDA3B00999787 /* DefaultListenChannelUpdateUseCase.swift */,
+			);
+			path = ListenChannelsUpdate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,8 +365,11 @@
 				DF674A182D35622200B61966 /* NewUserMessage.swift in Sources */,
 				DFAE5D152D37BEB100999787 /* DefaultCreateNewChannelUseCase.swift in Sources */,
 				DF674A212D3571BE00B61966 /* FetchChannelsUseCase.swift in Sources */,
+				DFAE5D1B2D39460800999787 /* ListenChannelsUpdateUseCase.swift in Sources */,
 				DFAE5D0E2D37A8C300999787 /* NewChannel.swift in Sources */,
 				DF674A3C2D36A4DB00B61966 /* SupaBasePlatform.swift in Sources */,
+				DFAE5D1D2D3BD9D700999787 /* ChannelUpdate.swift in Sources */,
+				DFAE5D1F2D3BDA3B00999787 /* DefaultListenChannelUpdateUseCase.swift in Sources */,
 				DF674A3F2D36B3B200B61966 /* DefaultChannelRepository.swift in Sources */,
 				DF674A2B2D365D7300B61966 /* ChannelListViewModel.swift in Sources */,
 				DF674A232D3582C100B61966 /* ChannelEntity.swift in Sources */,

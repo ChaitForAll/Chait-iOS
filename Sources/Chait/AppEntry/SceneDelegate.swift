@@ -25,7 +25,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let channelRepository = DefaultChannelRepository()
         let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository);
         let createUseCase = DefaultCreateNewChannelUseCase(repository: channelRepository)
-        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase, createNewChannelUseCase: createUseCase)
+        let listenChannels = DefaultListenChannelsUpdateUseCase(repository: channelRepository)
+        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase, createNewChannelUseCase: createUseCase, listenChannelUpdateUseCase: listenChannels)
         let channelListViewController = ChannelListViewController()
         channelListViewController.viewModel = viewModel
         channelListViewController.tabBarItem = UITabBarItem(
