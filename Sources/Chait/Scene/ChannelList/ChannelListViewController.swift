@@ -92,11 +92,10 @@ final class ChannelListViewController: UIViewController {
             .sink(receiveCompletion: { completion in
                 print(completion)
             }, receiveValue: { newChannels in
-                
                 guard var snapshot = self.diffableDataSource?.snapshot() else {
                     return
                 }
-                
+
                 if !snapshot.sectionIdentifiers.contains(where: { $0 == .channelList }) {
                     snapshot.appendSections([.channelList])
                 }
@@ -104,6 +103,16 @@ final class ChannelListViewController: UIViewController {
                 snapshot.appendItems(newChannels, toSection: .channelList)
                 self.diffableDataSource?.apply(snapshot)
             })
+            .store(in: &cancelBag)
+        
+        viewModel.removedChannels
+            .receive(on: DispatchQueue.main)
+            .sink { deletedChannelIDs in
+                if var snapShot = self.diffableDataSource?.snapshot() {
+                    snapShot.deleteItems(deletedChannelIDs)
+                    self.diffableDataSource?.apply(snapShot)
+                }
+            }
             .store(in: &cancelBag)
     }
     

@@ -13,6 +13,7 @@ final class ChannelListViewModel {
     // MARK: Property(s)
     
     let fetchedChannels: PassthroughSubject<[ChannelPresentationModel.ID], Never> = .init()
+    let removedChannels: PassthroughSubject<[ChannelPresentationModel.ID], Never> = .init()
     
     private var channels: [ChannelPresentationModel.ID : ChannelPresentationModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
@@ -35,15 +36,22 @@ final class ChannelListViewModel {
     
     func startListeningChannelUpdates() {
         listenChannelUpdateUseCase.execute()
-            .filter { $0.channelUpdateState == .inserted }
-            .map(\.updatedChannel)
-            .map { ChannelPresentationModel(id: $0.id, title: $0.title) }
             .sink(
                 receiveCompletion: { _ in } ,
-                receiveValue: { model in
-                    print("received", model.title)
-                    self.channels[model.id] = model
-                    self.fetchedChannels.send([model.id])
+                receiveValue: { channelUpdate in
+                    switch channelUpdate.channelUpdateState {
+                    case .inserted:
+                        let insertedChannel = ChannelPresentationModel(
+                            id: channelUpdate.updatedChannel.id,
+                            title: channelUpdate.updatedChannel.title
+                        )
+                        self.channels[insertedChannel.id] = insertedChannel
+                        self.fetchedChannels.send([insertedChannel.id])
+                    case .deleted:
+                        self.channels.removeValue(forKey: channelUpdate.updatedChannel.id)
+                        self.removedChannels.send([channelUpdate.updatedChannel.id])
+                    case .updated: return
+                    }
                 }
             ).store(in: &cancelBag)
     }
