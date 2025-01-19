@@ -5,6 +5,7 @@
 //  Copyright (c) 2025 Jeremy All rights reserved.
     
 
+import Foundation
 import Combine
 import Supabase
 
@@ -97,9 +98,15 @@ final class DefaultChannelRepository: ChannelRepository {
                         )
                     case .delete(let deleteAction):
                         updateState = .deleted
-                        updatedChannelResponse = try deleteAction.decodeOldRecord(
-                            as: ChannelResponse.self,
+                        let deleteResponse = try deleteAction.decodeOldRecord(
+                            as: DeleteChannelResponse.self,
                             decoder: .defaultStorageDecoder
+                        )
+                        updatedChannelResponse = ChannelResponse(
+                            id: deleteResponse.id,
+                            title: "",
+                            createdAt: .distantPast,
+                            updateAt: .distantPast
                         )
                     }
                     
