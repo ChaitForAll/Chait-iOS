@@ -14,7 +14,11 @@ final class DefaultChannelRepository: ChannelRepository {
     // MARK: Property(s)
     
     private let channelUpdateSubject = PassthroughSubject<ChannelUpdate, ChannelRepositoryError>()
-    private let service: SupaBasePlatform = .init()
+    private let service: SupaBasePlatform
+    
+    init(service: SupaBasePlatform = .init()) {
+        self.service = service
+    }
     
     // MARK: Function(s)
     
