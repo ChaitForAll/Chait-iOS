@@ -54,12 +54,3 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) { }
 }
-
-final class AnotherViewController: UIViewController {
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.backgroundColor = .systemBackground
-        tabBarController?.navigationItem.title = "Anothers"
-    }
-}
