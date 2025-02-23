@@ -14,5 +14,9 @@ enum MessageRepositoryError: Error {
 
 protocol MessagesRepository {
     var channelID: UUID { get }
-    func create(_ newMessage: NewUserMessage) -> AnyPublisher<UserMessage, MessageRepositoryError>
+    func sendMessage(
+        _ messageText: String,
+        senderID: UUID,
+        toChannelID: UUID
+    ) -> AnyPublisher<UserMessage, MessageRepositoryError>
 }

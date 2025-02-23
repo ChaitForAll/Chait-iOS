@@ -29,18 +29,15 @@ final class DefaultSendMessageUseCase: SendMessageUseCase {
     // MARK: Function(s)
     
     func sendMessage(_ command: SendMessageCommand) -> AnyPublisher<UserMessage, SendMessageError> {
+        
         guard command.isMessageTextValid() else {
-            return Result<UserMessage, SendMessageError>
-                .Publisher(.invalidMessageInput)
+            return Fail<UserMessage, SendMessageError>(error: .invalidMessageInput)
                 .eraseToAnyPublisher()
         }
-        return messagesRepository.create(command)
-            .mapError { error in
-                switch error {
-                case .unknown:
-                    return SendMessageError.unknown
-                }
-            }
+        
+        return messagesRepository
+            .sendMessage(command.text, senderID: command.senderID, toChannelID: command.targetChannelID)
+            .mapError { _ in return SendMessageError.unknown }
             .eraseToAnyPublisher()
     }
 }
