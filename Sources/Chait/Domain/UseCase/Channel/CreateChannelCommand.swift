@@ -9,7 +9,9 @@ import Foundation
 
 struct NewChannel {
     let title: String
-    
+}
+
+extension NewChannel {
     func isValid() -> Bool {
         let validations: [Bool] = [
             !title.isEmpty,
