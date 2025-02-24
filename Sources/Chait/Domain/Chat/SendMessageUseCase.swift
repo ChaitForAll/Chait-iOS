@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 import Foundation
 import Combine
@@ -14,5 +14,5 @@ enum SendMessageError: Error {
 }
 
 protocol SendMessageUseCase {
-    func sendMessage(text: String, _ senderID: UUID, _ channelID: UUID) -> AnyPublisher<Void, SendMessageError>
+    func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError>
 }
