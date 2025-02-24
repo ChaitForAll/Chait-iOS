@@ -10,7 +10,6 @@ import Combine
 
 enum ChatRepositoryError: Error {
     case networkError
-    case unknown
 }
 
 protocol ChatRepository {
