@@ -16,3 +16,30 @@ enum SendMessageError: Error {
 protocol SendMessageUseCase {
     func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError>
 }
+
+final class DefaultSendMessageUseCase: SendMessageUseCase {
+    
+    // MARK: Property(s)
+    
+    private let chatRepository: ChatRepository
+    
+    init(repository: ChatRepository) {
+        self.chatRepository = repository
+    }
+    
+    // MARK: Function(s)
+    
+    func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError> {
+        chatRepository
+            .sendMessage(text: text, senderID: senderID, channelID: channelID)
+            .mapError { repositoryError in
+                switch repositoryError {
+                case .networkError:
+                    return .sendMessageFailed
+                case .unknown:
+                    return .unknown
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+}
