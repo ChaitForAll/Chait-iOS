@@ -96,18 +96,18 @@
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				DFBF6F2F2D6C80E2003B51DB /* Message */,
+				DFBF6F2F2D6C80E2003B51DB /* Chat */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		DFBF6F2F2D6C80E2003B51DB /* Message */ = {
+		DFBF6F2F2D6C80E2003B51DB /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				DFBF6F302D6C80F7003B51DB /* Message.swift */,
 				DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */,
 			);
-			path = Message;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
