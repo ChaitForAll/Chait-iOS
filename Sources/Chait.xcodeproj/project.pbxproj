@@ -14,6 +14,7 @@
 		DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
+		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
+		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				DF674A0E2D34EFA400B61966 /* AppEntry */,
 				DF674A0F2D34EFAE00B61966 /* Scene */,
 				DFBF6F2E2D6C8065003B51DB /* Domain */,
+				DFBF6F342D6C8605003B51DB /* Data */,
 				DF674A102D34EFB300B61966 /* AppResources */,
 			);
 			path = Chait;
@@ -108,6 +111,14 @@
 				DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		DFBF6F342D6C8605003B51DB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */,
+				DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */,
 				DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */,
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
