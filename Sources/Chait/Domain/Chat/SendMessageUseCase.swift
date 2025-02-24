@@ -36,8 +36,6 @@ final class DefaultSendMessageUseCase: SendMessageUseCase {
                 switch repositoryError {
                 case .networkError:
                     return .sendMessageFailed
-                case .unknown:
-                    return .unknown
                 }
             }
             .eraseToAnyPublisher()
