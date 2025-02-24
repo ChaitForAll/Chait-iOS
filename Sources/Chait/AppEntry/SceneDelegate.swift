@@ -21,25 +21,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        
-        let channelRepository = DefaultChannelRepository()
-        let useCase = DefaultFetchChannelsUseCase(channelsRepository: channelRepository);
-        let createUseCase = DefaultCreateNewChannelUseCase(repository: channelRepository)
-        let listenChannels = DefaultListenChannelsUpdateUseCase(repository: channelRepository)
-        let viewModel = ChannelListViewModel(fetchChannelsUseCase: useCase, createNewChannelUseCase: createUseCase, listenChannelUpdateUseCase: listenChannels)
-        let channelListViewController = ChannelListViewController()
-        channelListViewController.viewModel = viewModel
-        channelListViewController.tabBarItem = UITabBarItem(
-            title: "Chat",
-            image: UIImage(systemName: "bubble.left.and.text.bubble.right"),
-            selectedImage: UIImage(systemName: "bubble.left.and.text.bubble.right.fill")
-        )
-        
-        let tabViewController = UITabBarController()
-        tabViewController.viewControllers = [channelListViewController]
-        
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = UINavigationController(rootViewController: tabViewController)
+        window.rootViewController = ViewController()
         window.makeKeyAndVisible()
         self.window = window
     }
