@@ -14,6 +14,7 @@
 		DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49384E2D6C95C800494113 /* SendMessageTests.swift */; };
 		DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938502D6C9C5200494113 /* MockChatRepository.swift */; };
 		DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */; };
+		DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift */; };
 		DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
@@ -41,6 +42,7 @@
 		DF49384E2D6C95C800494113 /* SendMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTests.swift; sourceTree = "<group>"; };
 		DF4938502D6C9C5200494113 /* MockChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatRepository.swift; sourceTree = "<group>"; };
 		DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCase.swift; sourceTree = "<group>"; };
+		DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCaseTeest.swift; sourceTree = "<group>"; };
 		DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				DF49384E2D6C95C800494113 /* SendMessageTests.swift */,
+				DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
+				DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
