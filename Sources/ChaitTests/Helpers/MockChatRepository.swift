@@ -15,6 +15,8 @@ final class MockChatRepository: ChatRepository {
     
     var injectedError: ChatRepositoryError?
     
+    private var listenMessagesSubject: PassthroughSubject<[Message], Never> = .init()
+    
     // MARK: Function(s)
     
     func sendMessage(
@@ -31,5 +33,13 @@ final class MockChatRepository: ChatRepository {
             self.injectedError = nil
         }
         .eraseToAnyPublisher()
+    }
+    
+    func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], Never> {
+        return listenMessagesSubject.eraseToAnyPublisher()
+    }
+    
+    func sendMessages(_ message: Message) {
+        listenMessagesSubject.send([message])
     }
 }
