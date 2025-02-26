@@ -14,6 +14,7 @@
 		DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49384E2D6C95C800494113 /* SendMessageTests.swift */; };
 		DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938502D6C9C5200494113 /* MockChatRepository.swift */; };
 		DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */; };
+		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift */; };
 		DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
@@ -42,6 +43,7 @@
 		DF49384E2D6C95C800494113 /* SendMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTests.swift; sourceTree = "<group>"; };
 		DF4938502D6C9C5200494113 /* MockChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatRepository.swift; sourceTree = "<group>"; };
 		DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCase.swift; sourceTree = "<group>"; };
+		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTeest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCaseTeest.swift; sourceTree = "<group>"; };
 		DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
+				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */,
 				DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */,
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
+				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
 				DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */,
