@@ -166,6 +166,7 @@
 				DFBF6F302D6C80F7003B51DB /* Message.swift */,
 				DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */,
 				DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */,
+				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -173,7 +174,6 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
 				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
 			);
 			path = Data;
