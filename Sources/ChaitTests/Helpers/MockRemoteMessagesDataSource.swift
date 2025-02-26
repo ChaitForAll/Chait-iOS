@@ -15,7 +15,18 @@ final class MockRemoteMessagesDataSource: RemoteMessagesDataSource {
     private let listenMessagesSubject: PassthroughSubject<[MessageResponse], RemoteMessagesDataSourceError> = .init()
     
     func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, RemoteMessagesDataSourceError> {
-        return sendMessagesSubject.eraseToAnyPublisher()
+        return sendMessagesSubject
+            .map { _ in
+                let messageResponse = MessageResponse(
+                    text: text,
+                    messageID: UUID(),
+                    senderID: senderID,
+                    channelID: channelID,
+                    createdAt: .now
+                )
+                self.listenMessagesSubject.send([messageResponse])
+            }
+            .eraseToAnyPublisher()
     }
     
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError> {
