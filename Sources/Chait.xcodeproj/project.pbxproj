@@ -112,10 +112,9 @@
 		DF4938442D6C958300494113 /* ChaitTests */ = {
 			isa = PBXGroup;
 			children = (
-				DF9C91F92D6F166500A2BCDA /* Integration */,
 				DF4938542D6C9C6200494113 /* Helpers */,
-				DF49384D2D6C95B800494113 /* Domain */,
-				DF9C91F42D6EF51400A2BCDA /* Data */,
+				DF9C91FC2D6F19AA00A2BCDA /* Unit */,
+				DF9C91F92D6F166500A2BCDA /* Integration */,
 			);
 			path = ChaitTests;
 			sourceTree = "<group>";
@@ -179,6 +178,15 @@
 				DF9C91FA2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift */,
 			);
 			path = Integration;
+			sourceTree = "<group>";
+		};
+		DF9C91FC2D6F19AA00A2BCDA /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				DF49384D2D6C95B800494113 /* Domain */,
+				DF9C91F42D6EF51400A2BCDA /* Data */,
+			);
+			path = Unit;
 			sourceTree = "<group>";
 		};
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
