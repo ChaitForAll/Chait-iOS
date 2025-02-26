@@ -13,9 +13,10 @@ final class MockChatRepository: ChatRepository {
     
     // MARK: Property(s)
     
-    var injectedError: ChatRepositoryError?
+    var injectedSendMessageError: SendMessageError?
+    var injectedListenMessageError: ListenMessagesError?
     
-    private var listenMessagesSubject: PassthroughSubject<[Message], Never> = .init()
+    private var listenMessagesSubject: PassthroughSubject<[Message], ListenMessagesError> = .init()
     
     // MARK: Function(s)
     
@@ -23,19 +24,22 @@ final class MockChatRepository: ChatRepository {
         text: String,
         senderID: UUID,
         channelID: UUID
-    ) -> AnyPublisher<Void, ChatRepositoryError> {
+    ) -> AnyPublisher<Void, SendMessageError> {
         Future { promise in
-            if let error = self.injectedError {
+            if let error = self.injectedSendMessageError {
                 promise(.failure(error))
             } else {
                 promise(.success(()))
             }
-            self.injectedError = nil
+            self.injectedSendMessageError = nil
         }
         .eraseToAnyPublisher()
     }
     
-    func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], Never> {
+    func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError> {
+        if let injectedListenMessageError {
+            listenMessagesSubject.send(completion: .failure(injectedListenMessageError))
+        }
         return listenMessagesSubject.eraseToAnyPublisher()
     }
     

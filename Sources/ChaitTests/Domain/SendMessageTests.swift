@@ -21,14 +21,14 @@ final class SendMessageTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        mockChatRepository.injectedError = .none
+        mockChatRepository.injectedSendMessageError = .none
     }
     
     func test_SendingMessageFailsOnNetworkError() {
         
         // Arrange
         
-        mockChatRepository.injectedError = .networkError
+        mockChatRepository.injectedSendMessageError = .sendMessageFailed
         
         let expectation = XCTestExpectation(description: "Send failure received")
         

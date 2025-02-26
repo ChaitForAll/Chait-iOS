@@ -49,11 +49,13 @@ final class ListenMessagesTests: XCTestCase {
         
         sut
             .startListening(channelID: UUID())
-            .sink { messages in
-                print(messages)
-                receivedMessages.append(contentsOf: messages)
-                expectation.fulfill()
-            }
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { messages in
+                    receivedMessages.append(contentsOf: messages)
+                    expectation.fulfill()
+                }
+            )
             .store(in: &cancelBag)
         
         expectedMessages.forEach { message in
