@@ -10,5 +10,5 @@ import Combine
 
 protocol ChatRepository {
     func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError>
-    func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], Never>
+    func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError>
 }

@@ -8,8 +8,13 @@
 import Foundation
 import Combine
 
+enum ListenMessagesError: Error {
+    case networkError
+    case unknown
+}
+
 protocol ListenMessagesUseCase {
-    func startListening(channelID: UUID) -> AnyPublisher<[Message], Never>
+    func startListening(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError>
 }
 
 final class DefaultListenMessagesUseCase: ListenMessagesUseCase {
@@ -20,7 +25,7 @@ final class DefaultListenMessagesUseCase: ListenMessagesUseCase {
         self.chatRepository = chatRepository
     }
     
-    func startListening(channelID: UUID) -> AnyPublisher<[Message], Never> {
+    func startListening(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError> {
         chatRepository
             .startListeningMessages(channelID: channelID)
             .eraseToAnyPublisher()
