@@ -63,6 +63,33 @@ final class ChatRepositoryTests: XCTestCase {
         }
     }
     
+    func test_ListenMessagesReceivesNetworkError() {
+        
+        // Arrange
+        
+        let expectation = XCTestExpectation(description: "Expect to fail with network error")
+        
+        // Act
+        
+        sut
+            .startListeningMessages(channelID: UUID())
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let remoteError) = completion, remoteError == .networkError {
+                        expectation.fulfill()
+                    }
+                },
+                receiveValue: { _ in }
+            )
+            .store(in: &cancelBag)
+        
+        mockRemoteDataSource.simulateReceiveErrorListeningMessages(.networkError)
+        
+        // Asssert
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
     private func generateResponses(count: Int) -> [MessageResponse] {
         return (0..<count).map {
             return MessageResponse(
