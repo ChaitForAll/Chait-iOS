@@ -17,6 +17,7 @@
 		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */; };
+		DF9C91F82D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */; };
 		DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */; };
 		DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
@@ -48,6 +49,7 @@
 		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryImplementation.swift; sourceTree = "<group>"; };
+		DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCaseTest.swift; sourceTree = "<group>"; };
 		DFBF6F2B2D6C7DE4003B51DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				DF4938542D6C9C6200494113 /* Helpers */,
 				DF49384D2D6C95B800494113 /* Domain */,
+				DF9C91F42D6EF51400A2BCDA /* Data */,
 			);
 			path = ChaitTests;
 			sourceTree = "<group>";
@@ -125,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				DF4938502D6C9C5200494113 /* MockChatRepository.swift */,
+				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -305,6 +309,7 @@
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
 				DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift in Sources */,
+				DF9C91F82D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
