@@ -90,6 +90,31 @@ final class ChatRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
+    func test_SendMessageReceivesVoidOnSuccess() {
+        
+        // Arrange
+        
+        let expectation = XCTestExpectation(description: "Receives Void on success sending")
+        
+        sut
+            .sendMessage(text: "", senderID: UUID(), channelID: UUID())
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { _ in
+                    expectation.fulfill()
+                }
+            )
+            .store(in: &cancelBag)
+        
+        // Act
+        
+        mockRemoteDataSource.simulateSendMessagesSuccess()
+        
+        // Assert
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
     private func generateResponses(count: Int) -> [MessageResponse] {
         return (0..<count).map {
             return MessageResponse(
