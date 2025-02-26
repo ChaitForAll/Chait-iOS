@@ -13,6 +13,6 @@ enum ChatRepositoryError: Error {
 }
 
 protocol ChatRepository {
-    func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, ChatRepositoryError>
+    func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError>
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], Never>
 }
