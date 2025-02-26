@@ -32,12 +32,6 @@ final class DefaultSendMessageUseCase: SendMessageUseCase {
     func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError> {
         chatRepository
             .sendMessage(text: text, senderID: senderID, channelID: channelID)
-            .mapError { repositoryError in
-                switch repositoryError {
-                case .networkError:
-                    return .sendMessageFailed
-                }
-            }
             .eraseToAnyPublisher()
     }
 }
