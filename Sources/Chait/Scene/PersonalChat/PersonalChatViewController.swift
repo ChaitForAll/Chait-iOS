@@ -6,6 +6,7 @@
     
 
 import UIKit
+import Combine
 
 final class PersonalChatViewController: UIViewController {
     
@@ -17,12 +18,15 @@ final class PersonalChatViewController: UIViewController {
     
     // MARK: Property(s)
     
+    var viewModel: PersonalChatViewModel?
+    
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var cancelBag: Set<AnyCancellable> = .init()
+    
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: .init()
     )
-    
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, String>?
     
     // MARK: Override(s)
     
@@ -34,6 +38,7 @@ final class PersonalChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        bindViewModel()
     }
     
     // MARK: Private Function(s)
@@ -69,5 +74,24 @@ final class PersonalChatViewController: UIViewController {
                 item: itemIdentifier
             )
         }
+    }
+    
+    private func bindViewModel() {
+        viewModel?.startListening()
+        viewModel?.messages
+            .publisher
+            .sink { [weak self] message in
+                guard var snapshot = self?.diffableDataSource?.snapshot() else {
+                    return
+                }
+                
+                if snapshot.sectionIdentifiers.isEmpty {
+                    snapshot.appendSections([.messages])
+                }
+                
+                snapshot.appendItems([message])
+                self?.diffableDataSource?.apply(snapshot)
+            }
+            .store(in: &cancelBag)
     }
 }
