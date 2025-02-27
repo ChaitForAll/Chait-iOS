@@ -32,12 +32,12 @@ final class PersonalChatViewController: UIViewController {
     
     override func loadView() {
         self.view = collectionView
-        collectionView.backgroundColor = .systemGreen
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureNavigationItem()
         bindViewModel()
     }
     
@@ -93,5 +93,33 @@ final class PersonalChatViewController: UIViewController {
                 self?.diffableDataSource?.apply(snapshot)
             }
             .store(in: &cancelBag)
+    }
+    
+    private func configureNavigationItem() {
+        let rightBarButton = UIBarButtonItem(systemItem: .add)
+        rightBarButton.primaryAction = UIAction(title: "Add Message") { [weak self] action in
+            self?.presentAddMessage()
+        }
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    private func presentAddMessage() {
+        let writeMessageAlert = UIAlertController(
+            title: "Send message",
+            message: "Type message to send",
+            preferredStyle: .alert
+        )
+        writeMessageAlert.addTextField { textField in
+            textField.placeholder = "message"
+        }
+        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
+        let sendAction = UIAlertAction(title: "send", style: .default) { [weak self] _ in
+            if let userInput = writeMessageAlert.textFields?.first?.text {
+                self?.viewModel?.userMessageText = userInput
+            }
+        }
+        writeMessageAlert.addAction(cancelAction)
+        writeMessageAlert.addAction(sendAction)
+        present(writeMessageAlert, animated: true)
     }
 }
