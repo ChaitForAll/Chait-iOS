@@ -30,5 +30,12 @@ final class PersonalChatViewController: UIViewController {
     
     // MARK: Private Function(s)
     
-    private func configureCollectionView() { }
+    private func configureCollectionView() { 
+        collectionView.collectionViewLayout = createListCollectionViewLayout()
+    }
+    
+    private func createListCollectionViewLayout() -> UICollectionViewLayout {
+        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        return UICollectionViewCompositionalLayout.list(using: listConfiguration)
+    }
 }
