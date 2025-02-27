@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF0D43DE2D70AD770083AA14 /* StubSendMessageSucceed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSendMessageSucceed.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				DF4938502D6C9C5200494113 /* MockChatRepository.swift */,
 				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
+				DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF0D43DE2D70AD770083AA14 /* StubSendMessageSucceed.swift in Sources */,
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
 				DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */,
