@@ -36,18 +36,17 @@ final class PersonalChatViewModel {
     func onSendMessage() {
         sendMessageUseCase
             .sendMessage(text: userMessageText, senderID: UUID(), channelID: channelID)
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { _ in }
-            )
+            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancelBag)
+        userMessageText.removeAll()
     }
     
     func startListening() {
         listenMessagesUseCase
             .startListening(channelID: channelID)
             .map { messages in
-                messages.map { $0.text } }
+                messages.map { $0.text }
+            }
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self ] receivedMessages in
