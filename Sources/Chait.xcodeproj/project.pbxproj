@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF0D43DE2D70AD770083AA14 /* StubSendMessageSucceed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */; };
 		DF0D43E02D70ADB10083AA14 /* StubSendMessageFailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */; };
+		DF0D43E22D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSendMessageSucceed.swift; sourceTree = "<group>"; };
 		DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSendMessageFailed.swift; sourceTree = "<group>"; };
+		DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubListenMessagesReceivesMessages.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
 				DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */,
 				DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */,
+				DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
 				DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */,
 				DF0D43E02D70ADB10083AA14 /* StubSendMessageFailed.swift in Sources */,
+				DF0D43E22D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift in Sources */,
 				DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift in Sources */,
 				DF9C91F82D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift in Sources */,
 				DF9C91F62D6EF52300A2BCDA /* ChatRepositoryTests.swift in Sources */,
