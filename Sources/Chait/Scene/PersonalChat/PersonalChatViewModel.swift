@@ -18,15 +18,18 @@ final class PersonalChatViewModel {
     private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
+    private let userID: UUID
     private let channelID: UUID
     private let sendMessageUseCase: SendMessageUseCase
     private let listenMessagesUseCase: ListenMessagesUseCase
     
     init(
+        userID: UUID = UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
         channelID: UUID,
         sendMessageUseCase: SendMessageUseCase, 
         listenMessagesUseCase: ListenMessagesUseCase
     ) {
+        self.userID = userID
         self.channelID = channelID
         self.sendMessageUseCase = sendMessageUseCase
         self.listenMessagesUseCase = listenMessagesUseCase
@@ -36,7 +39,7 @@ final class PersonalChatViewModel {
     
     func onSendMessage() {
         sendMessageUseCase
-            .sendMessage(text: userMessageText, senderID: UUID(), channelID: channelID)
+            .sendMessage(text: userMessageText, senderID: userID, channelID: channelID)
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancelBag)
         userMessageText.removeAll()
