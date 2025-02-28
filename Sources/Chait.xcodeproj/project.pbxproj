@@ -27,6 +27,8 @@
 		DF7BC6222D71965600AAF678 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6212D71965600AAF678 /* Storage */; };
 		DF7BC6242D71965600AAF678 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6232D71965600AAF678 /* Supabase */; };
 		DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */; };
+		DF7BC6282D72106800AAF678 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6272D72106800AAF678 /* Channel.swift */; };
+		DF7BC62B2D7210D100AAF678 /* FetchChannelListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC62A2D7210D100AAF678 /* FetchChannelListUseCase.swift */; };
 		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */; };
@@ -71,6 +73,8 @@
 		DF4938502D6C9C5200494113 /* MockChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatRepository.swift; sourceTree = "<group>"; };
 		DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCase.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatMessage.swift; sourceTree = "<group>"; };
+		DF7BC6272D72106800AAF678 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		DF7BC62A2D7210D100AAF678 /* FetchChannelListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelListUseCase.swift; sourceTree = "<group>"; };
 		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryImplementation.swift; sourceTree = "<group>"; };
@@ -219,6 +223,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DF7BC6292D72106F00AAF678 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				DF7BC6272D72106800AAF678 /* Channel.swift */,
+				DF7BC62A2D7210D100AAF678 /* FetchChannelListUseCase.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
 		DF9C91F42D6EF51400A2BCDA /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				DFBF6F2F2D6C80E2003B51DB /* Chat */,
+				DF7BC6292D72106F00AAF678 /* Channel */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -403,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFBF6F2C2D6C7DE4003B51DB /* ViewController.swift in Sources */,
+				DF7BC6282D72106800AAF678 /* Channel.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */,
 				DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */,
 				DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */,
@@ -417,6 +432,7 @@
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
 				DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */,
+				DF7BC62B2D7210D100AAF678 /* FetchChannelListUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
