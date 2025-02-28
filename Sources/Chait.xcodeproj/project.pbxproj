@@ -11,6 +11,7 @@
 		DF0D43E02D70ADB10083AA14 /* StubSendMessageFailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */; };
 		DF0D43E22D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */; };
 		DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E32D70B9930083AA14 /* PersonalChatViewController.swift */; };
+		DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -48,6 +49,8 @@
 		DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubSendMessageFailed.swift; sourceTree = "<group>"; };
 		DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubListenMessagesReceivesMessages.swift; sourceTree = "<group>"; };
 		DF0D43E32D70B9930083AA14 /* PersonalChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewController.swift; sourceTree = "<group>"; };
+		DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
 			isa = PBXGroup;
 			children = (
+				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
 				DF10C7B22D343A3E006035E8 /* AppDelegate.swift */,
 				DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */,
 			);
@@ -176,6 +180,7 @@
 				DF10C7BB2D343A3F006035E8 /* Assets.xcassets */,
 				DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */,
 				DF10C7C02D343A3F006035E8 /* Info.plist */,
+				DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */,
 			);
 			path = AppResources;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */,
 				DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */,
 				DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */,
+				DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */,
 				DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */,
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
@@ -411,6 +417,7 @@
 /* Begin XCBuildConfiguration section */
 		DF10C7C12D343A3F006035E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -474,6 +481,7 @@
 		};
 		DF10C7C22D343A3F006035E8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -535,6 +543,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 22WLLT8Q75;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Chait/AppResources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -561,6 +570,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 22WLLT8Q75;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Chait/AppResources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
