@@ -7,8 +7,14 @@
 
 import Foundation
 
-struct NewMessagesRequest: Encodable {
+struct NewMessageRequest: Encodable {
     let text: String
     let senderID: UUID
     let channelID: UUID
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case senderID = "sender"
+        case channelID = "channel_id"
+    }
 }
