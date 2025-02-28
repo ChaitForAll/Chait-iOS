@@ -12,9 +12,10 @@ final class PersonalChatViewModel {
     
     // MARK: Property(s)
     
-    @Published var messages: [String] = []
     var userMessageText: String = ""
     
+    private var receivedMessagesSubject: PassthroughSubject<PersonalChatMessage.ID, Never> = .init()
+    private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let channelID: UUID
@@ -41,18 +42,35 @@ final class PersonalChatViewModel {
         userMessageText.removeAll()
     }
     
-    func startListening() {
+    func startListening() -> AnyPublisher<UUID, Never> {
         listenMessagesUseCase
             .startListening(channelID: channelID)
-            .map { messages in
-                messages.map { $0.text }
-            }
+            .receive(on: DispatchQueue.main)
+            .map { $0.map { self.toPersonalChatMessage($0).id } }
             .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self ] receivedMessages in
-                    self?.messages.append(contentsOf: receivedMessages)
+                receiveCompletion: { completion in
+                    print(completion)
+                },
+                receiveValue: { [weak self] allReceivedIdentifiers in
+                    allReceivedIdentifiers.forEach { messageIdentifier in
+                        self?.receivedMessagesSubject.send(messageIdentifier)
+                    }
                 }
             )
             .store(in: &cancelBag)
+        return receivedMessagesSubject.eraseToAnyPublisher()
+    }
+    
+    // MARK: Private Function(s)
+    
+    private func toPersonalChatMessage(_ message: Message) -> PersonalChatMessage {
+        let personalChatMessage = PersonalChatMessage(
+            id: message.messageID,
+            text: message.text,
+            senderID: message.senderID,
+            createdAt: message.createdAt
+        )
+        self.chatMessagesDictionary[personalChatMessage.id] = personalChatMessage
+        return personalChatMessage
     }
 }

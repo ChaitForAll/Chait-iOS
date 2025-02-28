@@ -12,7 +12,7 @@ final class PersonalChatViewController: UIViewController {
     
     // MARK: Type(s)
     
-    enum Section {
+    private enum Section {
         case messages
     }
     
@@ -20,7 +20,7 @@ final class PersonalChatViewController: UIViewController {
     
     var viewModel: PersonalChatViewModel?
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, String>?
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let collectionView: UICollectionView = UICollectionView(
@@ -55,17 +55,20 @@ final class PersonalChatViewController: UIViewController {
     }
     
     private func createMessageCellRegisration(
-    ) -> UICollectionView.CellRegistration<UICollectionViewListCell, String> {
-        return .init { cell, indexPath, messageText in
+    ) -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
+        return .init { cell, indexPath, messageID in
 
             var content = cell.defaultContentConfiguration()
-            content.text = messageText
+            if let message = self.viewModel?.message(for: messageID) {
+                content.text = message.text
+                content.secondaryText = message.createdAt.description
+            }
             cell.contentConfiguration = content
         }
     }
     
     private func createDiffableDataSource(
-    ) -> UICollectionViewDiffableDataSource<Section, String> {
+    ) -> UICollectionViewDiffableDataSource<Section, UUID> {
         let messageCellRegistration = createMessageCellRegisration()
         return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(
@@ -78,19 +81,18 @@ final class PersonalChatViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel?.startListening()
-        viewModel?.messages
-            .publisher
-            .sink { [weak self] message in
-                guard var snapshot = self?.diffableDataSource?.snapshot() else {
+            .sink { identifier in
+                
+                guard var snapShot = self.diffableDataSource?.snapshot() else {
                     return
                 }
                 
-                if snapshot.sectionIdentifiers.isEmpty {
-                    snapshot.appendSections([.messages])
+                if snapShot.sectionIdentifiers.isEmpty {
+                    snapShot.appendSections([.messages])
                 }
                 
-                snapshot.appendItems([message])
-                self?.diffableDataSource?.apply(snapshot)
+                snapShot.appendItems([identifier])
+                self.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
     }
