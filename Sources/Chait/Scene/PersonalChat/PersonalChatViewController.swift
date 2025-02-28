@@ -99,7 +99,7 @@ final class PersonalChatViewController: UIViewController {
     
     private func configureNavigationItem() {
         let rightBarButton = UIBarButtonItem(systemItem: .add)
-        rightBarButton.primaryAction = UIAction(title: "Add Message") { [weak self] action in
+        rightBarButton.primaryAction = UIAction { [weak self] action in
             self?.presentAddMessage()
         }
         navigationItem.rightBarButtonItem = rightBarButton
