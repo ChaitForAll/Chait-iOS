@@ -107,21 +107,45 @@ final class PersonalChatViewController: UIViewController {
     
     private func presentAddMessage() {
         let writeMessageAlert = UIAlertController(
-            title: "Send message",
-            message: "Type message to send",
+            title: PersonalChatStrings.sendAlertTitle.string,
+            message: PersonalChatStrings.sendAlertMessage.string,
             preferredStyle: .alert
         )
         writeMessageAlert.addTextField { textField in
-            textField.placeholder = "message"
+            textField.placeholder = PersonalChatStrings.sendAlertTextFieldPlaceHolder.string
         }
-        let cancelAction = UIAlertAction(title: "cancel", style: .cancel)
-        let sendAction = UIAlertAction(title: "send", style: .default) { [weak self] _ in
+        let cancelAction = UIAlertAction(title: PersonalChatStrings.cancel.string, style: .cancel)
+        let sendAction = UIAlertAction(
+            title: PersonalChatStrings.send.string,
+            style: .default
+        ) { [weak self] _ in
             if let userInput = writeMessageAlert.textFields?.first?.text {
                 self?.viewModel?.userMessageText = userInput
+                self?.viewModel?.onSendMessage()
             }
         }
         writeMessageAlert.addAction(cancelAction)
         writeMessageAlert.addAction(sendAction)
         present(writeMessageAlert, animated: true)
+    }
+}
+
+extension PersonalChatViewController {
+    private enum PersonalChatStrings {
+        case sendAlertTitle
+        case sendAlertMessage
+        case sendAlertTextFieldPlaceHolder
+        case cancel
+        case send
+        
+        var string: String {
+            switch self {
+            case .sendAlertTitle: String(localized: "Send Message")
+            case .sendAlertMessage: String(localized: "Type Message")
+            case .sendAlertTextFieldPlaceHolder: String(localized: "Message")
+            case .cancel: String(localized: "Cancel")
+            case .send: String(localized: "Send")
+            }
+        }
     }
 }
