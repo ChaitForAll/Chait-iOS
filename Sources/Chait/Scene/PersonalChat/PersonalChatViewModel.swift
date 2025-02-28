@@ -61,6 +61,10 @@ final class PersonalChatViewModel {
         return receivedMessagesSubject.eraseToAnyPublisher()
     }
     
+    func message(for identifier: UUID) -> PersonalChatMessage? {
+        return chatMessagesDictionary[identifier]
+    }
+    
     // MARK: Private Function(s)
     
     private func toPersonalChatMessage(_ message: Message) -> PersonalChatMessage {
