@@ -94,6 +94,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF0D43E92D718CC70083AA14 /* RemoteMessages */ = {
+			isa = PBXGroup;
+			children = (
+				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
+				DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */,
+			);
+			path = RemoteMessages;
+			sourceTree = "<group>";
+		};
 		DF10C7A62D343A3E006035E8 = {
 			isa = PBXGroup;
 			children = (
@@ -250,8 +259,7 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
-				DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */,
+				DF0D43E92D718CC70083AA14 /* RemoteMessages */,
 				DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */,
 			);
 			path = Data;
