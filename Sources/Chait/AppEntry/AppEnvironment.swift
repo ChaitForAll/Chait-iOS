@@ -28,10 +28,13 @@ enum AppEnvironment {
         return key
     }()
     
-    static let projectURL: String = {
-        guard let url = AppEnvironment.infoPListDictionary[Keys.projectURL.rawValue] as? String else {
+    static let projectURL: URL = {
+        guard let projectURLString = AppEnvironment.infoPListDictionary[Keys.projectURL.rawValue] as? String else {
             fatalError("\(Keys.projectURL.rawValue) not found.")
         }
-        return url
+        guard let projectURL = URL(string: projectURLString) else {
+            fatalError("cannot form Project URL.")
+        }
+        return projectURL
     }()
 }
