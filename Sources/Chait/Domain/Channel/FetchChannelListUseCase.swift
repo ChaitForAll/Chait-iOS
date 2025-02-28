@@ -5,6 +5,7 @@
 //  Copyright (c) 2025 Jeremy All rights reserved.
     
 
+import Foundation
 import Combine
 
 enum FetchChannelListUseCaseError: Error {
@@ -12,5 +13,5 @@ enum FetchChannelListUseCaseError: Error {
 }
 
 protocol FetchChannelListUseCase {
-    func fetchChannels() -> AnyPublisher<[Channel], FetchChannelListUseCaseError>
+    func fetchChannels(_ userID: UUID) -> AnyPublisher<[Channel], FetchChannelListUseCaseError>
 }
