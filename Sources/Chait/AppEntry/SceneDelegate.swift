@@ -6,10 +6,16 @@
     
 
 import UIKit
+import Supabase
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: Property(s)
+    
+    private var client: SupabaseClient = SupabaseClient(
+        supabaseURL: AppEnvironment.projectURL,
+        supabaseKey: AppEnvironment.secretKey
+    )
 
     var window: UIWindow?
     
@@ -22,7 +28,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
+        let remoteMessagesDataSource = DefaultRemoteMessagesDataSource(client: client)
+        let chatRepository = DefaultChatRepository(remoteChatMessages: remoteMessagesDataSource)
+        let sendMessageUseCase = DefaultSendMessageUseCase(repository: chatRepository)
+        let listenMessagesUseCase = DefaultListenMessagesUseCase(chatRepository: chatRepository)
+        let personalChatVieWModel = PersonalChatViewModel(
+            channelID: UUID(uuidString: "5de13657-a02c-43f8-ac2a-636d268d80d5")!,
+            sendMessageUseCase: sendMessageUseCase,
+            listenMessagesUseCase: listenMessagesUseCase
+        )
         let personalChatViewController = PersonalChatViewController()
+        personalChatViewController.viewModel = personalChatVieWModel
         let navigationViewController = UINavigationController(rootViewController: personalChatViewController)
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = navigationViewController
