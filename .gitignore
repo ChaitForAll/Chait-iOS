@@ -5,6 +5,7 @@
 ## User settings
 xcuserdata/
 *.DS_Store/
+Secrets.xcconfig
 ApplicationSettings.xcconfig
 **/.DS_Store
 ## Obj-C/Swift specific
