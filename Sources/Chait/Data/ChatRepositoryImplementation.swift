@@ -25,7 +25,7 @@ final class DefaultChatRepository: ChatRepository {
             .sendMessage(text: text, senderID: senderID, channelID: channelID)
             .mapError { remoteDataSourceError in
                 switch remoteDataSourceError {
-                case .networkError:
+                case .networkError, .serverError, .unknownError(_):
                     return .sendMessageFailed
                 }
             }
@@ -33,16 +33,16 @@ final class DefaultChatRepository: ChatRepository {
     }
     
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError> {
-        remoteChatMessages
+        return remoteChatMessages
             .startListeningMessages(channelID: channelID)
             .mapError { remoteDataSourceError in
                 switch remoteDataSourceError {
-                case .networkError: 
+                case .networkError, .serverError, .unknownError(_): 
                     return .networkError
-                }
+                }   
             }
             .map { messagesResponse in
-                messagesResponse.map { response in
+                return messagesResponse.map { response in
                     Message(
                         text: response.text,
                         messageID: response.messageID,
