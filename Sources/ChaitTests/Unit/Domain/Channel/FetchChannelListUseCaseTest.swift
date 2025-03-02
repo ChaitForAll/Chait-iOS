@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 @testable import Chait
 import Combine
@@ -51,5 +51,29 @@ final class FetchChannelListUseCaseTest: XCTestCase {
             XCTAssertEqual(expected.title, received.title)
         }
     }
-
+    
+    func test_FetchChannelFailsWithNoChannels() {
+        
+        // Arrange
+        
+        let expectedError: FetchChannelListUseCaseError = .noChannels
+        let stubFetchFails = StubFetchChannelFails(error: expectedError)
+        let sut = DefaultFetchChannelListUseCase(repository: stubFetchFails)
+        let failExpectation = XCTestExpectation(description: "Fetch fails")
+        
+        // Act & Assert
+        
+        sut
+            .fetchChannels(.init())
+            .sink(
+                receiveCompletion: { completion in
+                    failExpectation.fulfill()
+                    if case .failure(let receivedError) = completion {
+                        XCTAssertEqual(receivedError, expectedError)
+                    }
+                },
+                receiveValue: { _ in }
+            )
+            .store(in: &cancelBag)
+    }
 }
