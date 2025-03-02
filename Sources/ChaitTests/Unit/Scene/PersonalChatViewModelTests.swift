@@ -68,24 +68,25 @@ final class PersonalChatViewModelTests: XCTestCase {
         
         // Act
         
-        var receivedMessages: [String] = []
+        var receivedMessages: [PersonalChatMessage] = []
         
         sut.startListening()
-        
-        sut.messages.publisher
-            .sink { message in
-                receivedMessages.append(message)
+            .sink { identifier in
                 expectation.fulfill()
-                print(message)
+                if let message = sut.message(for: identifier) {
+                    receivedMessages.append(message)
+                }
             }
             .store(in: &cancelBag)
         
-        // Assert
+//        // Assert
         
         wait(for: [expectation], timeout: 1.0)
         
         for (received, expected) in zip(expectedMessages, receivedMessages) {
-            XCTAssertEqual(received.text, expected)
+            XCTAssertEqual(received.text, expected.text)
+            XCTAssertEqual(received.senderID, expected.senderID)
+            XCTAssertEqual(received.createdAt, expected.createdAt)
         }
     }
 }
