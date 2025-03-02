@@ -44,6 +44,7 @@
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
 		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
+		DFC1DDB42D749D07005011A7 /* FetchChannelListUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC1DDB32D749D07005011A7 /* FetchChannelListUseCaseTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
+		DFC1DDB32D749D07005011A7 /* FetchChannelListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelListUseCaseTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		DF49384D2D6C95B800494113 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DFC1DDB22D749CE6005011A7 /* Channel */,
 				DFC1DDB02D749CA8005011A7 /* Message */,
 			);
 			path = Domain;
@@ -319,6 +322,14 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		DFC1DDB22D749CE6005011A7 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				DFC1DDB32D749D07005011A7 /* FetchChannelListUseCaseTest.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -459,6 +470,7 @@
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
 				DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */,
+				DFC1DDB42D749D07005011A7 /* FetchChannelListUseCaseTest.swift in Sources */,
 				DF0D43E02D70ADB10083AA14 /* StubSendMessageFailed.swift in Sources */,
 				DF9C92022D70416D00A2BCDA /* PersonalChatViewModelTests.swift in Sources */,
 				DF0D43E22D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift in Sources */,
