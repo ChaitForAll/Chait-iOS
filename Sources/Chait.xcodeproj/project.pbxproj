@@ -170,8 +170,7 @@
 		DF49384D2D6C95B800494113 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				DF49384E2D6C95C800494113 /* SendMessageTests.swift */,
-				DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */,
+				DFC1DDB02D749CA8005011A7 /* Message */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -306,6 +305,15 @@
 				DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		DFC1DDB02D749CA8005011A7 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				DF49384E2D6C95C800494113 /* SendMessageTests.swift */,
+				DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
