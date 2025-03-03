@@ -14,10 +14,12 @@ enum RemoteChannelsDataSourceError: Error {
     case serverError(HTTPError)
     case postgRestError(PostgrestError)
     case decodingError(DecodingError)
+    case noItems
 }
 
 protocol RemoteChannelsDataSource {
     func fetchChannelMembership(
+        userID: UUID
     ) -> AnyPublisher<[ChannelMembershipResponse], RemoteChannelsDataSourceError>
     func fetchChannels(
         for memberShip: [ChannelMembershipResponse]
