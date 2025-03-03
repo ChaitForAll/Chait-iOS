@@ -40,4 +40,24 @@ final class ChannelListViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return layout
     }
+    
+    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<Section, UUID> {
+        let listCellRegistration = createListCellRegistration()
+        return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+            collectionView.dequeueConfiguredReusableCell(
+                using: listCellRegistration,
+                for: indexPath,
+                item: itemIdentifier
+            )
+        }
+    }
+    
+    private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
+        return .init { cell, indexPath, itemIdentifier in
+            
+            var content = cell.defaultContentConfiguration()
+            // TODO: Add cell configuration using viewmodel
+            cell.contentConfiguration = content
+        }
+    }
 }
