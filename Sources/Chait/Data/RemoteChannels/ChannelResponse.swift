@@ -11,4 +11,10 @@ struct ChannelResponse: Decodable {
     let title: String
     let channelID: UUID
     let createdAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case channelID = "id"
+        case createdAt = "created_at"
+    }
 }
