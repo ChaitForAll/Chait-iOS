@@ -19,4 +19,7 @@ enum RemoteChannelsDataSourceError: Error {
 protocol RemoteChannelsDataSource {
     func fetchChannelMembership(
     ) -> AnyPublisher<[ChannelMembershipResponse], RemoteChannelsDataSourceError>
+    func fetchChannels(
+        for memberShip: [ChannelMembershipResponse]
+    ) -> AnyPublisher<[ChannelResponse], RemoteChannelsDataSourceError>
 }
