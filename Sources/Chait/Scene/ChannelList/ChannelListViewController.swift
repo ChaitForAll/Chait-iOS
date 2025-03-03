@@ -6,6 +6,7 @@
     
 
 import UIKit
+import Combine
 
 final class ChannelListViewController: UIViewController {
     
@@ -15,8 +16,10 @@ final class ChannelListViewController: UIViewController {
     
     // MARK: Property(s)
     
+    var viewModel: ChannelListViewModel?
+    
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
-    private var viewModel: ChannelListViewModel?
+    private var cancelBag: Set<AnyCancellable> = .init()
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -29,9 +32,17 @@ final class ChannelListViewController: UIViewController {
         self.view = collectionView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureCollectionView()
+        bindViewModel()
+        viewModel?.onNeedItems()
+    }
+    
     // MARK: Function(s)
     
     private func configureCollectionView() { 
+        self.diffableDataSource = createDiffableDataSource()
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.collectionView.dataSource = diffableDataSource
     }
@@ -61,5 +72,27 @@ final class ChannelListViewController: UIViewController {
             content.text = item?.title
             cell.contentConfiguration = content
         }
+    }
+    
+    private func bindViewModel() {
+        let output = viewModel?.bindOutput()
+        
+        output?
+            .fetchedChannelListItems
+            .sink { [weak self] itemIdentifiers in
+                
+                guard var snapShot = self?.diffableDataSource?.snapshot() else {
+                    return
+                }
+                
+                if snapShot.sectionIdentifiers.isEmpty {
+                    snapShot.appendSections([.channelList])
+                }
+                
+                snapShot.appendItems(itemIdentifiers)
+                
+                self?.diffableDataSource?.apply(snapShot)
+            }
+            .store(in: &cancelBag)
     }
 }
