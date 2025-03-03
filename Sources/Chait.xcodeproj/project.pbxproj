@@ -34,6 +34,8 @@
 		DF7FBD902D74AB7A00753FCE /* StubFetchChannelFails.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */; };
 		DF7FBD932D74AF4100753FCE /* RemoteChannelsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD922D74AF4100753FCE /* RemoteChannelsDataSource.swift */; };
 		DF7FBD952D7555FA00753FCE /* ChannelMembershipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD942D7555FA00753FCE /* ChannelMembershipResponse.swift */; };
+		DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */; };
+		DF7FBD992D7558F900753FCE /* ChannelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD982D7558F900753FCE /* ChannelResponse.swift */; };
 		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */; };
@@ -86,6 +88,8 @@
 		DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFetchChannelFails.swift; sourceTree = "<group>"; };
 		DF7FBD922D74AF4100753FCE /* RemoteChannelsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteChannelsDataSource.swift; sourceTree = "<group>"; };
 		DF7FBD942D7555FA00753FCE /* ChannelMembershipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelMembershipResponse.swift; sourceTree = "<group>"; };
+		DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepositoryImplementation.swift; sourceTree = "<group>"; };
+		DF7FBD982D7558F900753FCE /* ChannelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelResponse.swift; sourceTree = "<group>"; };
 		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryImplementation.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 			children = (
 				DF7FBD922D74AF4100753FCE /* RemoteChannelsDataSource.swift */,
 				DF7FBD942D7555FA00753FCE /* ChannelMembershipResponse.swift */,
+				DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */,
+				DF7FBD982D7558F900753FCE /* ChannelResponse.swift */,
 			);
 			path = RemoteChannels;
 			sourceTree = "<group>";
@@ -472,7 +478,9 @@
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
+				DF7FBD992D7558F900753FCE /* ChannelResponse.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
+				DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
