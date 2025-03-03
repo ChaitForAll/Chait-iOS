@@ -9,7 +9,13 @@ import UIKit
 
 final class ChannelListViewController: UIViewController {
     
+    enum Section {
+        case channelList
+    }
+    
     // MARK: Property(s)
+    
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -24,5 +30,14 @@ final class ChannelListViewController: UIViewController {
     
     // MARK: Function(s)
     
-    private func configureCollectionView() { }
+    private func configureCollectionView() { 
+        self.collectionView.collectionViewLayout = createCompositionalLayout()
+        self.collectionView.dataSource = diffableDataSource
+    }
+    
+    private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
+        return layout
+    }
 }
