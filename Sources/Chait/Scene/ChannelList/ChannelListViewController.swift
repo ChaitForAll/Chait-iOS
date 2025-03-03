@@ -16,6 +16,7 @@ final class ChannelListViewController: UIViewController {
     // MARK: Property(s)
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
+    private var viewModel: ChannelListViewModel?
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -55,8 +56,9 @@ final class ChannelListViewController: UIViewController {
     private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
         return .init { cell, indexPath, itemIdentifier in
             
+            let item = self.viewModel?.item(for: itemIdentifier)
             var content = cell.defaultContentConfiguration()
-            // TODO: Add cell configuration using viewmodel
+            content.text = item?.title
             cell.contentConfiguration = content
         }
     }
