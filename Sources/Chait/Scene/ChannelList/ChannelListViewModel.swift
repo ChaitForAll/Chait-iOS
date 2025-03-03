@@ -54,5 +54,9 @@ final class ChannelListViewModel {
         
         return fetchedChannelListItems.eraseToAnyPublisher()
     }
+    
+    func item(for identifier: UUID) -> ChannelListItem? {
+        return itemsMap[identifier]
+    }
 }
 
