@@ -36,7 +36,7 @@ final class ChannelListViewModel {
         return Output(fetchedChannelListItems: fetchedChannelListItems.eraseToAnyPublisher())
     }
     
-    func onNeedItems() -> AnyPublisher<[UUID], Never> {
+    func onNeedItems() {
         fetchChannelListUseCase.fetchChannels(userID)
             .map { channels in
                 channels.map {
@@ -51,8 +51,6 @@ final class ChannelListViewModel {
                 self?.fetchedChannelListItems.send(items.map { $0.id })
             }
             .store(in: &cancelBag)
-        
-        return fetchedChannelListItems.eraseToAnyPublisher()
     }
     
     func item(for identifier: UUID) -> ChannelListItem? {
