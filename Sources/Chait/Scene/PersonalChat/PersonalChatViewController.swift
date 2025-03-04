@@ -56,10 +56,10 @@ final class PersonalChatViewController: UIViewController {
     
     private func createMessageCellRegisration(
     ) -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-        return .init { cell, indexPath, messageID in
+        return .init { [weak self] cell, indexPath, messageID in
 
             var content = cell.defaultContentConfiguration()
-            if let message = self.viewModel?.message(for: messageID) {
+            if let message = self?.viewModel?.message(for: messageID) {
                 content.text = message.text
                 content.secondaryText = message.createdAt.description
             }
@@ -81,9 +81,9 @@ final class PersonalChatViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel?.startListening()
-            .sink { identifier in
+            .sink { [weak self] identifier in
                 
-                guard var snapShot = self.diffableDataSource?.snapshot() else {
+                guard var snapShot = self?.diffableDataSource?.snapshot() else {
                     return
                 }
                 
@@ -92,7 +92,7 @@ final class PersonalChatViewController: UIViewController {
                 }
                 
                 snapShot.appendItems([identifier])
-                self.diffableDataSource?.apply(snapShot)
+                self?.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
     }
