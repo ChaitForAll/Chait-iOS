@@ -49,14 +49,15 @@ final class PersonalChatViewModel {
         listenMessagesUseCase
             .startListening(channelID: channelID)
             .receive(on: DispatchQueue.main)
-            .map { $0.map { self.toPersonalChatMessage($0).id } }
+            .map { $0.toUI() }
             .sink(
                 receiveCompletion: { completion in
                     print(completion)
                 },
-                receiveValue: { [weak self] allReceivedIdentifiers in
-                    allReceivedIdentifiers.forEach { messageIdentifier in
-                        self?.receivedMessagesSubject.send(messageIdentifier)
+                receiveValue: { [weak self] allReceivedMessages in
+                    allReceivedMessages.forEach {
+                        self?.chatMessagesDictionary[$0.id] = $0
+                        self?.receivedMessagesSubject.send($0.id)
                     }
                 }
             )
@@ -79,5 +80,18 @@ final class PersonalChatViewModel {
         )
         self.chatMessagesDictionary[personalChatMessage.id] = personalChatMessage
         return personalChatMessage
+    }
+}
+
+private extension Array where Element == Message {
+    func toUI() -> [PersonalChatMessage] {
+        self.map { message in
+            PersonalChatMessage(
+                id: message.channelID,
+                text: message.text,
+                senderID: message.senderID,
+                createdAt: message.createdAt
+            )
+        }
     }
 }
