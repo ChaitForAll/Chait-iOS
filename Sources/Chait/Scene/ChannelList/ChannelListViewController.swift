@@ -17,6 +17,7 @@ final class ChannelListViewController: UIViewController {
     // MARK: Property(s)
     
     var viewModel: ChannelListViewModel?
+    var coordinator: AppCoordinator?
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
@@ -45,6 +46,7 @@ final class ChannelListViewController: UIViewController {
         self.diffableDataSource = createDiffableDataSource()
         self.collectionView.collectionViewLayout = createCompositionalLayout()
         self.collectionView.dataSource = diffableDataSource
+        self.collectionView.delegate = self
     }
     
     private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
@@ -94,5 +96,14 @@ final class ChannelListViewController: UIViewController {
                 self?.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
+    }
+}
+
+extension ChannelListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        if let id = diffableDataSource?.itemIdentifier(for: indexPath), let channel = viewModel?.item(for: id) {
+            coordinator?.enterChannel(channel.id)
+        }
     }
 }

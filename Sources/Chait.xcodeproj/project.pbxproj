@@ -41,6 +41,7 @@
 		DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */; };
 		DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */; };
 		DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */; };
+		DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */; };
 		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */; };
@@ -99,6 +100,7 @@
 		DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
 		DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListItem.swift; sourceTree = "<group>"; };
 		DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
+		DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryImplementation.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
 				DF10C7B22D343A3E006035E8 /* AppDelegate.swift */,
 				DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */,
+				DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */,
 			);
 			path = AppEntry;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 			files = (
 				DF7BC6282D72106800AAF678 /* Channel.swift in Sources */,
 				DF7FBD952D7555FA00753FCE /* ChannelMembershipResponse.swift in Sources */,
+				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */,
