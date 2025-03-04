@@ -71,7 +71,13 @@ final class ChannelListViewController: UIViewController {
             
             let item = self.viewModel?.item(for: itemIdentifier)
             var content = cell.defaultContentConfiguration()
+            content.image = [
+                UIImage(systemName: "square.fill"),
+                UIImage(systemName: "circle.fill"),
+                UIImage(systemName: "triangle.fill")
+            ].randomElement() ?? .none
             content.text = item?.title
+            content.secondaryText = item?.id.uuidString
             cell.contentConfiguration = content
         }
     }
