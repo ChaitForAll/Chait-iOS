@@ -50,6 +50,7 @@
 		DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FA2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift */; };
 		DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */; };
 		DF9C92022D70416D00A2BCDA /* PersonalChatViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C92012D70416D00A2BCDA /* PersonalChatViewModelTests.swift */; };
+		DFB26CB12D78971E00BD0A4D /* FetchChatHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB26CB02D78971E00BD0A4D /* FetchChatHistoryUseCase.swift */; };
 		DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
@@ -109,6 +110,7 @@
 		DF9C91FA2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageToListenMessageIntegration.swift; sourceTree = "<group>"; };
 		DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewModel.swift; sourceTree = "<group>"; };
 		DF9C92012D70416D00A2BCDA /* PersonalChatViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewModelTests.swift; sourceTree = "<group>"; };
+		DFB26CB02D78971E00BD0A4D /* FetchChatHistoryUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchChatHistoryUseCase.swift; sourceTree = "<group>"; };
 		DFBE9A5D2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCaseTest.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				DFBF6F302D6C80F7003B51DB /* Message.swift */,
 				DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */,
 				DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */,
+				DFB26CB02D78971E00BD0A4D /* FetchChatHistoryUseCase.swift */,
 				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
 			);
 			path = Chat;
@@ -507,6 +510,7 @@
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */,
 				DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */,
+				DFB26CB12D78971E00BD0A4D /* FetchChatHistoryUseCase.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */,
