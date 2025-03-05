@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 import UIKit
 import Supabase
@@ -16,11 +16,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         supabaseURL: AppEnvironment.projectURL,
         supabaseKey: AppEnvironment.secretKey
     )
-
+    
     var window: UIWindow?
     
     // MARK: Function(s)
-
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,

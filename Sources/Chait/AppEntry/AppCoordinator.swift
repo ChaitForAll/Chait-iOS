@@ -24,7 +24,7 @@ final class AppCoordinator {
     // MARK: Function(s)
     
     func prepareRoot() {
-        navigationController.pushViewController(createChannelList(), animated: false)
+        navigationController.pushViewController(createMainTabFlow(), animated: false)
     }
     
     func enterChannel(_ channelIdentifier: UUID) {
@@ -32,6 +32,14 @@ final class AppCoordinator {
     }
     
     // MARK: Private Function(s)
+    
+    private func createMainTabFlow() -> UITabBarController {
+        let tabViewController = UITabBarController()
+        let channelList = createChannelList()
+        channelList.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), tag: .zero)
+        tabViewController.viewControllers = [channelList]
+        return tabViewController
+    }
     
     private func createChannelList() -> ChannelListViewController {
         let defaultDataSource = DefaultRemoteChannelsDataSource(client: client)
