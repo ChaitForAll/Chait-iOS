@@ -14,5 +14,6 @@ enum FetchChatHistoryError: Error {
 }
 
 protocol FetchChatHistoryUseCase {
-    func fetchHistory(channelID: UUID, messagesOffset: Int) -> AnyPublisher<[Message], FetchChatHistoryError>
+    func fetchHistory(channelID: UUID, messagesOffset: Int, maxItemsCount: Int) -> AnyPublisher<[Message], FetchChatHistoryError>
+}
 }
