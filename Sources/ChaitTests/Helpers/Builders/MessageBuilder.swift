@@ -44,4 +44,16 @@ final class MessagesBuilder {
             createdAt: createdAt
         )
     }
+    
+    func buildExactly(_ count: Int) -> [Message] {
+        return (0..<count).map {
+            Message(
+                text: text + "\($0)",
+                messageID: messageID,
+                senderID: senderID,
+                channelID: channelID,
+                createdAt: createdAt
+            )
+        }
+    }
 }
