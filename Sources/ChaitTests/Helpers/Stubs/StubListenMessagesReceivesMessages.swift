@@ -12,14 +12,19 @@ import Combine
 final class StubListenMessageReceiveMessages: ListenMessagesUseCase {
     
     private let messages: [Message]
+    private let messagesSubject: PassthroughSubject<[Message], ListenMessagesError> = .init()
     
     init(messages: [Message] = []) {
         self.messages = messages
     }
     
     func startListening(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError> {
-        return Just(messages)
-            .setFailureType(to: ListenMessagesError.self)
-            .eraseToAnyPublisher()
+        return messagesSubject.eraseToAnyPublisher()
+    }
+    
+    func fire() {
+        messages.forEach { message in
+            messagesSubject.send([message])
+        }
     }
 }
