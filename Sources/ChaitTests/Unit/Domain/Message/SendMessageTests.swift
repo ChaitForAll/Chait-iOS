@@ -11,24 +11,18 @@ import Combine
 
 final class SendMessageTests: XCTestCase {
     
-    private var sut: SendMessageUseCase!
-    private var mockChatRepository = MockChatRepository()
     private var cancelBag = Set<AnyCancellable>()
     
-    override func setUp() {
-        sut = DefaultSendMessageUseCase(repository: mockChatRepository)
-    }
-    
     override func tearDown() {
-        super.tearDown()
-        mockChatRepository.injectedSendMessageError = .none
+        cancelBag.removeAll()
     }
     
     func test_SendingMessageFailsOnNetworkError() {
         
         // Arrange
         
-        mockChatRepository.injectedSendMessageError = .sendMessageFailed
+        let stubSendFails = StubChatRepository(failWithSendMessageError: .sendMessageFailed)
+        let sut = DefaultSendMessageUseCase(repository: stubSendFails)
         
         let expectation = XCTestExpectation(description: "Send failure received")
         
@@ -36,10 +30,12 @@ final class SendMessageTests: XCTestCase {
         
         sut.sendMessage(text: "", senderID: UUID(), channelID: UUID())
             .sink { completion in
-                if case .failure(let useCaseError) = completion, 
-                    useCaseError == .sendMessageFailed
-                {
-                    expectation.fulfill()
+                expectation.fulfill()
+                switch completion {
+                case .finished:
+                    XCTFail("Expected to fail but finished.")
+                case .failure(let error):
+                    XCTAssertEqual(error, SendMessageError.sendMessageFailed)
                 }
             } receiveValue: { _ in }
             .store(in: &cancelBag)

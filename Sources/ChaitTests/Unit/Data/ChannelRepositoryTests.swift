@@ -22,23 +22,21 @@ final class ChannelRepositoryTests: XCTestCase {
         
         // Arrange
         
-        let userID = UUID()
-        let expectedMemberships = (0..<5).map { _ in
-            ChannelMembershipResponse(userID: userID, channelID: UUID())
-        }
-        let stubDataSource = StubRemoteChannelDataSourceSucceed(memberShipResponses: expectedMemberships)
+        let stubDataSource = StubRemoteChannelsDataSource(error: .noItems)
         let sut = DefaultChannelRepository(dataSource: stubDataSource)
+        let receivedErrorExpectation = XCTestExpectation(description: "Receives completion")
         
         // Act
         
-        let receivedErrorExpectation = XCTestExpectation(description: "Received no channels error")
-        sut
-            .fetchChannels(userID: userID)
+        sut.fetchChannels(userID: UUID())
             .sink(
                 receiveCompletion: { completion in
-                    if case .failure(let error) = completion {
-                        receivedErrorExpectation.fulfill()
-                        XCTAssertEqual(error, .noChannels)
+                    receivedErrorExpectation.fulfill()
+                    switch completion {
+                    case .finished:
+                        XCTFail("Expected to fail. But finished")
+                    case .failure(let failure):
+                        XCTAssertEqual(FetchChannelListUseCaseError.noChannels, failure)
                     }
                 },
                 receiveValue: { _ in }

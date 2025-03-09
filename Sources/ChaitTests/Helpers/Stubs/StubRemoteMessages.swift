@@ -12,6 +12,7 @@ final class StubRemoteMessages: RemoteMessagesDataSource {
     
     private let error: RemoteMessagesDataSourceError?
     private let messageResponses: [MessageResponse]
+    private let messageListenerSubject: PassthroughSubject<[MessageResponse], RemoteMessagesDataSourceError> = .init()
     
     init(failWith: RemoteMessagesDataSourceError? = nil, messageResponses: [MessageResponse] = []) {
         self.error = failWith
@@ -40,9 +41,7 @@ final class StubRemoteMessages: RemoteMessagesDataSource {
             return Fail<[MessageResponse], RemoteMessagesDataSourceError>(error: error)
                 .eraseToAnyPublisher()
         } else {
-            return Just(messageResponses)
-                .setFailureType(to: RemoteMessagesDataSourceError.self)
-                .eraseToAnyPublisher()
+            return messageListenerSubject.eraseToAnyPublisher()
         }
     }
     
@@ -58,6 +57,12 @@ final class StubRemoteMessages: RemoteMessagesDataSource {
             return Just(messageResponses)
                 .setFailureType(to: RemoteMessagesDataSourceError.self)
                 .eraseToAnyPublisher()
+        }
+    }
+    
+    func fireToListener() {
+        messageResponses.forEach { response in
+            messageListenerSubject.send([response])
         }
     }
 }

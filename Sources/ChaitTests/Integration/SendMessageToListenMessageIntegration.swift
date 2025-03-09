@@ -12,19 +12,21 @@ import XCTest
 
 final class SendMessageToListenMessageIntegration: XCTestCase {
     
+    private var cancelBag: Set<AnyCancellable> = .init()
+    
+    override func tearDown() {
+        cancelBag.removeAll()
+    }
+    
     func test_SendingSingleMessage_ListenerReceivesSameMessageSuccessfully() {
         
-        var cancelBag: Set<AnyCancellable> = .init()
-        let mockRemoteMessages = MockRemoteMessagesDataSource()
-        let chatRepository = DefaultChatRepository(remoteChatMessages: mockRemoteMessages)
+        let expectedMessage = MessageResponseBuilder().build()
+        let stubRemoteMessages = StubRemoteMessages(messageResponses: [expectedMessage])
+        let chatRepository = DefaultChatRepository(remoteChatMessages: stubRemoteMessages)
         let sendMessageUseCase = DefaultSendMessageUseCase(repository: chatRepository)
         let listenMessagesUseCase = DefaultListenMessagesUseCase(chatRepository: chatRepository)
         
         // Arrange
-        
-        let messageTextToSend: String = "Test Message"
-        let messageSenderID: UUID = .init()
-        let messageChannelDestinationID: UUID = .init()
         
         let expectSendMessageSucceed = XCTestExpectation(description: "Sending succeed")
         let expectReceivingMessage = XCTestExpectation(description: "Listener received message")
@@ -33,7 +35,7 @@ final class SendMessageToListenMessageIntegration: XCTestCase {
         var receivedMessage: Message?
         
         listenMessagesUseCase
-            .startListening(channelID: messageChannelDestinationID)
+            .startListening(channelID: .init())
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { messages in
@@ -45,11 +47,13 @@ final class SendMessageToListenMessageIntegration: XCTestCase {
         
         // Act
         
+        stubRemoteMessages.fireToListener()
+        
         sendMessageUseCase
             .sendMessage(
-                text: messageTextToSend,
-                senderID: messageSenderID, 
-                channelID: messageChannelDestinationID
+                text: expectedMessage.text,
+                senderID: expectedMessage.senderID,
+                channelID: expectedMessage.channelID
             )
             .sink(
                 receiveCompletion: { _ in },
@@ -59,8 +63,6 @@ final class SendMessageToListenMessageIntegration: XCTestCase {
             )
             .store(in: &cancelBag)
         
-        mockRemoteMessages.simulateSendMessagesSuccess()
-        
         // Assert
         
         wait(for: [expectSendMessageSucceed, expectReceivingMessage], timeout: 1.0)
@@ -69,9 +71,9 @@ final class SendMessageToListenMessageIntegration: XCTestCase {
             return XCTFail("No message was received")
         }
         
-        XCTAssertEqual(messageTextToSend, receivedMessage.text)
-        XCTAssertEqual(messageSenderID, receivedMessage.senderID)
-        XCTAssertEqual(messageChannelDestinationID, receivedMessage.channelID)
+        XCTAssertEqual(expectedMessage.text, receivedMessage.text)
+        XCTAssertEqual(expectedMessage.senderID, receivedMessage.senderID)
+        XCTAssertEqual(expectedMessage.channelID, receivedMessage.channelID)
     }
 }
 

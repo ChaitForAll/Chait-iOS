@@ -23,10 +23,11 @@
 		DF45D6F72D7DE08F00D5418D /* PersonalChatViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F62D7DE08F00D5418D /* PersonalChatViewModelBuilder.swift */; };
 		DF45D6FC2D7DE6D600D5418D /* MessageBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6FB2D7DE6D600D5418D /* MessageBuilder.swift */; };
 		DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49384E2D6C95C800494113 /* SendMessageTests.swift */; };
-		DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938502D6C9C5200494113 /* MockChatRepository.swift */; };
 		DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */; };
 		DF5611042D7DF9C700B41259 /* StubRemoteMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */; };
 		DF5611062D7E003E00B41259 /* MessageResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611052D7E003E00B41259 /* MessageResponseBuilder.swift */; };
+		DF5611082D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611072D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift */; };
+		DF56110A2D7F1D6900B41259 /* StubChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611092D7F1D6900B41259 /* StubChatRepository.swift */; };
 		DF7BC61A2D71965600AAF678 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6192D71965600AAF678 /* Auth */; };
 		DF7BC61C2D71965600AAF678 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC61B2D71965600AAF678 /* Functions */; };
 		DF7BC61E2D71965600AAF678 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC61D2D71965600AAF678 /* PostgREST */; };
@@ -44,7 +45,7 @@
 		DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */; };
 		DF7FBD992D7558F900753FCE /* ChannelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD982D7558F900753FCE /* ChannelResponse.swift */; };
 		DF7FBD9B2D75E7EC00753FCE /* ChannelRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9A2D75E7EC00753FCE /* ChannelRepositoryTests.swift */; };
-		DF7FBD9D2D75F08900753FCE /* StubChatRepositorySuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */; };
+		DF7FBD9D2D75F08900753FCE /* StubRemoteChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9C2D75F08900753FCE /* StubRemoteChannels.swift */; };
 		DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */; };
 		DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */; };
 		DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */; };
@@ -53,7 +54,6 @@
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */; };
 		DF9C91F62D6EF52300A2BCDA /* ChatRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F52D6EF52300A2BCDA /* ChatRepositoryTests.swift */; };
-		DF9C91F82D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */; };
 		DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FA2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift */; };
 		DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */; };
 		DF9C92022D70416D00A2BCDA /* PersonalChatViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C92012D70416D00A2BCDA /* PersonalChatViewModelTests.swift */; };
@@ -96,10 +96,11 @@
 		DF45D6FB2D7DE6D600D5418D /* MessageBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBuilder.swift; sourceTree = "<group>"; };
 		DF4938432D6C958300494113 /* ChaitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF49384E2D6C95C800494113 /* SendMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTests.swift; sourceTree = "<group>"; };
-		DF4938502D6C9C5200494113 /* MockChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatRepository.swift; sourceTree = "<group>"; };
 		DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenMessagesUseCase.swift; sourceTree = "<group>"; };
 		DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRemoteMessages.swift; sourceTree = "<group>"; };
 		DF5611052D7E003E00B41259 /* MessageResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponseBuilder.swift; sourceTree = "<group>"; };
+		DF5611072D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelMembershipResponseBuilder.swift; sourceTree = "<group>"; };
+		DF5611092D7F1D6900B41259 /* StubChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubChatRepository.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatMessage.swift; sourceTree = "<group>"; };
 		DF7BC6272D72106800AAF678 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		DF7BC62A2D7210D100AAF678 /* FetchChannelListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchChannelListUseCase.swift; sourceTree = "<group>"; };
@@ -111,7 +112,7 @@
 		DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DF7FBD982D7558F900753FCE /* ChannelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelResponse.swift; sourceTree = "<group>"; };
 		DF7FBD9A2D75E7EC00753FCE /* ChannelRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelRepositoryTests.swift; sourceTree = "<group>"; };
-		DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubChatRepositorySuccess.swift; sourceTree = "<group>"; };
+		DF7FBD9C2D75F08900753FCE /* StubRemoteChannels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRemoteChannels.swift; sourceTree = "<group>"; };
 		DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
 		DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListItem.swift; sourceTree = "<group>"; };
 		DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DF9C91F52D6EF52300A2BCDA /* ChatRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepositoryTests.swift; sourceTree = "<group>"; };
-		DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91FA2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageToListenMessageIntegration.swift; sourceTree = "<group>"; };
 		DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewModel.swift; sourceTree = "<group>"; };
 		DF9C92012D70416D00A2BCDA /* PersonalChatViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewModelTests.swift; sourceTree = "<group>"; };
@@ -213,6 +213,7 @@
 				DF45D6F62D7DE08F00D5418D /* PersonalChatViewModelBuilder.swift */,
 				DF45D6FB2D7DE6D600D5418D /* MessageBuilder.swift */,
 				DF5611052D7E003E00B41259 /* MessageResponseBuilder.swift */,
+				DF5611072D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -225,8 +226,9 @@
 				DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */,
 				DF7FBD8D2D74A3D300753FCE /* StubFetchChannelListSuccess.swift */,
 				DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */,
-				DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */,
+				DF7FBD9C2D75F08900753FCE /* StubRemoteChannels.swift */,
 				DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */,
+				DF5611092D7F1D6900B41259 /* StubChatRepository.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -255,8 +257,6 @@
 			children = (
 				DF45D6F52D7DE04C00D5418D /* Builders */,
 				DF45D6F02D7DD92900D5418D /* Dummies */,
-				DF4938502D6C9C5200494113 /* MockChatRepository.swift */,
-				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
 				DF45D6FA2D7DE16300D5418D /* Stubs */,
 			);
 			path = Helpers;
@@ -572,10 +572,11 @@
 				DF0D43DE2D70AD770083AA14 /* StubSendMessageSucceed.swift in Sources */,
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
 				DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */,
-				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
+				DF5611082D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift in Sources */,
 				DF7FBD9B2D75E7EC00753FCE /* ChannelRepositoryTests.swift in Sources */,
 				DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */,
 				DFC1DDB42D749D07005011A7 /* FetchChannelListUseCaseTest.swift in Sources */,
+				DF56110A2D7F1D6900B41259 /* StubChatRepository.swift in Sources */,
 				DF45D6FC2D7DE6D600D5418D /* MessageBuilder.swift in Sources */,
 				DF0D43E02D70ADB10083AA14 /* StubSendMessageFailed.swift in Sources */,
 				DF9C92022D70416D00A2BCDA /* PersonalChatViewModelTests.swift in Sources */,
@@ -585,9 +586,8 @@
 				DF45D6F72D7DE08F00D5418D /* PersonalChatViewModelBuilder.swift in Sources */,
 				DF5611042D7DF9C700B41259 /* StubRemoteMessages.swift in Sources */,
 				DFBE9A5E2D6E0C8100F6880D /* ListenMessagesUseCaseTest.swift in Sources */,
-				DF9C91F82D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift in Sources */,
 				DF45D6F42D7DDA0200D5418D /* DummyListenMessagesUseCase.swift in Sources */,
-				DF7FBD9D2D75F08900753FCE /* StubChatRepositorySuccess.swift in Sources */,
+				DF7FBD9D2D75F08900753FCE /* StubRemoteChannels.swift in Sources */,
 				DF7FBD8E2D74A3D300753FCE /* StubFetchChannelListSuccess.swift in Sources */,
 				DF9C91F62D6EF52300A2BCDA /* ChatRepositoryTests.swift in Sources */,
 			);

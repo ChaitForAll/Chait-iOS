@@ -11,18 +11,10 @@ import XCTest
 
 final class ListenMessagesTests: XCTestCase {
     
-    private var sut: ListenMessagesUseCase!
-    
-    private let mockChatRepository: MockChatRepository = .init()
     private var cancelBag: Set<AnyCancellable> = .init()
-    
-    override func setUp() {
-        self.sut = DefaultListenMessagesUseCase(chatRepository: mockChatRepository)
-    }
     
     override func tearDown() {
         cancelBag.removeAll()
-        self.sut = nil
     }
     
     func test_ListenMessagesReceivesFiveMessages() {
@@ -33,34 +25,29 @@ final class ListenMessagesTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Message received")
         expectation.expectedFulfillmentCount = expectedMessagesCount
         
-        let expectedMessages: [Message] = (0..<expectedMessagesCount).map {
-            return Message(
-                text: "Test Message \($0)",
-                messageID: UUID(),
-                senderID: UUID(),
-                channelID: UUID(),
-                createdAt: Date.now
-            )
-        }
+        let expectedMessages = MessagesBuilder().buildExactly(5)
+        let stubSucceedWithFiveMessages = StubChatRepository(succeedWith: expectedMessages)
+        let sut = DefaultListenMessagesUseCase(chatRepository: stubSucceedWithFiveMessages)
         
         // Act
         
         var receivedMessages: [Message] = []
         
-        sut
-            .startListening(channelID: UUID())
+        sut.startListening(channelID: UUID())
             .sink(
-                receiveCompletion: { _ in },
+                receiveCompletion: { completion in
+                    switch completion {
+                    case .finished: return
+                    case .failure(let error):
+                        XCTFail("expected to finish but failed \(error)")
+                    }
+                },
                 receiveValue: { messages in
-                    receivedMessages.append(contentsOf: messages)
                     expectation.fulfill()
+                    receivedMessages.append(contentsOf: messages)
                 }
             )
             .store(in: &cancelBag)
-        
-        expectedMessages.forEach { message in
-            mockChatRepository.sendMessages(message)
-        }
         
         // Assert
         

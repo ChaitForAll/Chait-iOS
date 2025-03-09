@@ -11,44 +11,34 @@ import Combine
 import XCTest
 
 final class ChatRepositoryTests: XCTestCase {
-    
-    private var sut: ChatRepository!
+
     private var cancelBag: Set<AnyCancellable> = .init()
-    private let mockRemoteDataSource = MockRemoteMessagesDataSource()
-    
-    override func setUp() {
-        self.sut = DefaultChatRepository(remoteChatMessages: mockRemoteDataSource)
-    }
     
     func test_ListenMessagesReceivesFiveMessagesFromRemote() {
         
         // Arrange
         
-        let expectedResponseCount: Int = 5
+        var receivedResponses: [Message] = []
+        let expectedMessageResponses = MessageResponseBuilder().buildExactly(5)
         let expectation = XCTestExpectation(description: "Receive 5 remote responses")
-        expectation.expectedFulfillmentCount = expectedResponseCount
+        expectation.expectedFulfillmentCount = 5
         
-        let expectedMessageResponses: [MessageResponse] = generateResponses(count: expectedResponseCount)
+        let succeedWithFiveMessages = StubRemoteMessages(messageResponses: expectedMessageResponses)
+        let sut = DefaultChatRepository(remoteChatMessages: succeedWithFiveMessages)
         
         // Act
         
-        var receivedResponses: [Message] = []
-        
-        sut
-            .startListeningMessages(channelID: UUID())
+        sut.startListeningMessages(channelID: UUID())
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { responses in
                     expectation.fulfill()
-                    print(responses)
                     receivedResponses.append(contentsOf: responses)
                 }
             )
             .store(in: &cancelBag)
         
-        expectedMessageResponses.forEach { expectedResponse in
-            mockRemoteDataSource.simulateReceiveMessageResponses([expectedResponse])
-        }
+        succeedWithFiveMessages.fireToListener()
         
         // Assert
         
@@ -67,25 +57,29 @@ final class ChatRepositoryTests: XCTestCase {
         
         // Arrange
         
-        let expectation = XCTestExpectation(description: "Expect to fail with network error")
+        let expectation = XCTestExpectation(description: "Receives completion")
+        let failWithNetworkError = StubRemoteMessages(failWith: .networkError)
+        
+        let sut = DefaultChatRepository(remoteChatMessages: failWithNetworkError)
         
         // Act
         
-        sut
-            .startListeningMessages(channelID: UUID())
+        sut.startListeningMessages(channelID: UUID())
             .sink(
                 receiveCompletion: { completion in
-                    if case .failure(let remoteError) = completion, remoteError == .networkError {
-                        expectation.fulfill()
+                    expectation.fulfill()
+                    switch completion {
+                    case .finished:
+                        XCTFail("Expected error but finished")
+                    case .failure(let receivedError):
+                        XCTAssertEqual(ListenMessagesError.networkError, receivedError)
                     }
                 },
                 receiveValue: { _ in }
             )
             .store(in: &cancelBag)
         
-        mockRemoteDataSource.simulateReceiveErrorListeningMessages(.networkError)
-        
-        // Asssert
+        // Assert
         
         wait(for: [expectation], timeout: 1.0)
     }
@@ -96,8 +90,10 @@ final class ChatRepositoryTests: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Receives Void on success sending")
         
-        sut
-            .sendMessage(text: "", senderID: UUID(), channelID: UUID())
+        let succeedSendingMessage = StubRemoteMessages()
+        let sut = DefaultChatRepository(remoteChatMessages: succeedSendingMessage)
+        
+        sut.sendMessage(text: "", senderID: .init(), channelID: .init())
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { _ in
@@ -105,10 +101,6 @@ final class ChatRepositoryTests: XCTestCase {
                 }
             )
             .store(in: &cancelBag)
-        
-        // Act
-        
-        mockRemoteDataSource.simulateSendMessagesSuccess()
         
         // Assert
         
@@ -119,38 +111,29 @@ final class ChatRepositoryTests: XCTestCase {
         
         // Arrange
         
-        let expectation = XCTestExpectation(description: "Send message fails on network error")
+        let expectation = XCTestExpectation(description: "Receives Completion")
+        let failWithNetworkError = StubRemoteMessages(failWith: .networkError)
+        let sut = DefaultChatRepository(remoteChatMessages: failWithNetworkError)
         
-        sut
-            .sendMessage(text: "", senderID: UUID(), channelID: UUID())
+        // Act
+        
+        sut.sendMessage(text: "", senderID: UUID(), channelID: UUID())
             .sink(
                 receiveCompletion: { completion in
-                    if case .failure(let sendMessageError) = completion, sendMessageError == .sendMessageFailed {
-                        expectation.fulfill()
+                    expectation.fulfill()
+                    switch completion {
+                    case .finished:
+                        XCTFail("Expected to fail but finished")
+                    case .failure(let receivedError):
+                        XCTAssertEqual(SendMessageError.sendMessageFailed, receivedError)
                     }
                 },
                 receiveValue: { _ in }
             )
             .store(in: &cancelBag)
         
-        // Act
-        
-        mockRemoteDataSource.simulateSendMessageError(.networkError)
-        
         // Assert
         
         wait(for: [expectation], timeout: 1.0)
-    }
-    
-    private func generateResponses(count: Int) -> [MessageResponse] {
-        return (0..<count).map {
-            return MessageResponse(
-                text: "Test Response \($0)",
-                messageID: UUID(),
-                senderID: UUID(),
-                channelID: UUID(),
-                createdAt: Date.now
-            )
-        }
     }
 }
