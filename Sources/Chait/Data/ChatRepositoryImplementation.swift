@@ -27,6 +27,8 @@ final class DefaultChatRepository: ChatRepository {
                 switch remoteDataSourceError {
                 case .networkError, .serverError, .unknownError(_):
                     return .sendMessageFailed
+                default:
+                    return .unknown
                 }
             }
             .eraseToAnyPublisher()
@@ -39,7 +41,37 @@ final class DefaultChatRepository: ChatRepository {
                 switch remoteDataSourceError {
                 case .networkError, .serverError, .unknownError(_): 
                     return .networkError
-                }   
+                default:
+                    return .unknown
+                }
+            }
+            .map { messagesResponse in
+                return messagesResponse.map { response in
+                    Message(
+                        text: response.text,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        channelID: response.channelID,
+                        createdAt: response.createdAt
+                    )
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchHistory(channelID: UUID, offset: Int, maxItemsCount: Int) -> AnyPublisher<[Message], ListenMessagesError> {
+        return remoteChatMessages
+            .fetchHistory(channelID: channelID, historyOffset: offset, maxItemsCount: maxItemsCount)
+            .mapError { dataSourceError in
+                switch dataSourceError {
+                case .noItems:
+                    // TODO: Handle Error
+                    return .unknown
+                case .networkError, .serverError:
+                    return .networkError
+                case .unknownError(_):
+                    return .unknown
+                }
             }
             .map { messagesResponse in
                 return messagesResponse.map { response in
