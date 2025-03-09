@@ -9,8 +9,9 @@ import Foundation
 import Combine
 
 enum FetchChatHistoryError: Error {
-    case endOfHistory
+    case endOfHistoryError
     case networkError
+    case unknownError
 }
 
 protocol FetchChatHistoryUseCase {
