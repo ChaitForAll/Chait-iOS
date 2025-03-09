@@ -19,14 +19,11 @@ final class PersonalChatViewModelTests: XCTestCase {
         
         //Arrange
         
-        let fakeChannelID = UUID()
-        let fakeListenMessagesUseCase = StubListenMessageReceiveMessages()
+        let sendSucceed = StubSendMessageSucceed()
         
-        let sut = PersonalChatViewModel(
-            channelID: fakeChannelID,
-            sendMessageUseCase: StubSendMessageSucceed(),
-            listenMessagesUseCase: fakeListenMessagesUseCase
-        )
+        let sut = PersonalChatViewModelBuilder()
+            .withSendMessageUseCase(sendSucceed)
+            .build()
         
         // Act
         
@@ -42,44 +39,35 @@ final class PersonalChatViewModelTests: XCTestCase {
         
         // Arrange
         
-        let fakeChannelID = UUID()
-        let fakeSendMessagesUseCase = StubSendMessageSucceed()
-        
-        let expectedMessages = (0..<5).map {
-            return Message(
-                text: "Test Message \($0)",
-                messageID: UUID(),
-                senderID: UUID(),
-                channelID: UUID(),
-                createdAt: Date.now
-            )
-        }
-        
-        let sut = PersonalChatViewModel(
-            channelID: fakeChannelID,
-            sendMessageUseCase: fakeSendMessagesUseCase,
-            listenMessagesUseCase: StubListenMessageReceiveMessages(
-                messages: expectedMessages
-            )
-        )
+        var receivedMessages: [PersonalChatMessage] = []
+        let expectedMessages = MessagesBuilder().buildExactly(5)
+        let stubListenMessagesSucceed = StubListenMessageReceiveMessages(messages: expectedMessages)
+        let sut = PersonalChatViewModelBuilder()
+            .withListenMessageUseCase(stubListenMessagesSucceed)
+            .build()
+        let sutOutput = sut.bindOutput().chatListeningPublisher
         
         let expectation = XCTestExpectation(description: "receives messages 5 times")
         expectation.expectedFulfillmentCount = 5
         
         // Act
-        
-        var receivedMessages: [PersonalChatMessage] = []
-        
+
         sut.startListening()
-            .sink { identifier in
+        
+        sutOutput
+            .sink { messageIdentifiers in
                 expectation.fulfill()
-                if let message = sut.message(for: identifier) {
-                    receivedMessages.append(message)
+                messageIdentifiers.forEach { id in
+                    if let message = sut.message(for: id) {
+                        receivedMessages.append(message)
+                    }
                 }
             }
             .store(in: &cancelBag)
         
-//        // Assert
+        stubListenMessagesSucceed.fire()
+        
+        // Assert
         
         wait(for: [expectation], timeout: 1.0)
         
