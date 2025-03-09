@@ -209,6 +209,19 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
+		DF45D6FA2D7DE16300D5418D /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */,
+				DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */,
+				DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */,
+				DF7FBD8D2D74A3D300753FCE /* StubFetchChannelListSuccess.swift */,
+				DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */,
+				DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
 		DF4938442D6C958300494113 /* ChaitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,12 +248,7 @@
 				DF45D6F02D7DD92900D5418D /* Dummies */,
 				DF4938502D6C9C5200494113 /* MockChatRepository.swift */,
 				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
-				DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */,
-				DF0D43DF2D70ADB10083AA14 /* StubSendMessageFailed.swift */,
-				DF0D43E12D70AF270083AA14 /* StubListenMessagesReceivesMessages.swift */,
-				DF7FBD8D2D74A3D300753FCE /* StubFetchChannelListSuccess.swift */,
-				DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */,
-				DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */,
+				DF45D6FA2D7DE16300D5418D /* Stubs */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
