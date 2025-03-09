@@ -18,6 +18,7 @@
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
 		DF45D6EF2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */; };
+		DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */; };
 		DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF49384E2D6C95C800494113 /* SendMessageTests.swift */; };
 		DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938502D6C9C5200494113 /* MockChatRepository.swift */; };
 		DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */; };
@@ -84,6 +85,7 @@
 		DF10C7BE2D343A3F006035E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFetchHistoriesUseCase.swift; sourceTree = "<group>"; };
+		DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF4938432D6C958300494113 /* ChaitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChaitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF49384E2D6C95C800494113 /* SendMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageTests.swift; sourceTree = "<group>"; };
 		DF4938502D6C9C5200494113 /* MockChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatRepository.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */,
+				DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */,
 			);
 			path = Dummies;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 			files = (
 				DF0D43DE2D70AD770083AA14 /* StubSendMessageSucceed.swift in Sources */,
 				DF49384F2D6C95C800494113 /* SendMessageTests.swift in Sources */,
+				DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */,
 				DF4938512D6C9C5200494113 /* MockChatRepository.swift in Sources */,
 				DF7FBD9B2D75E7EC00753FCE /* ChannelRepositoryTests.swift in Sources */,
 				DF9C91FB2D6F167C00A2BCDA /* SendMessageToListenMessageIntegration.swift in Sources */,
