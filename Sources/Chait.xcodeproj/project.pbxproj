@@ -185,6 +185,14 @@
 			path = Chait;
 			sourceTree = "<group>";
 		};
+		DF45D6F02D7DD92900D5418D /* Dummies */ = {
+			isa = PBXGroup;
+			children = (
+				DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */,
+			);
+			path = Dummies;
+			sourceTree = "<group>";
+		};
 		DF4938442D6C958300494113 /* ChaitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +215,7 @@
 		DF4938542D6C9C6200494113 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DF45D6F02D7DD92900D5418D /* Dummies */,
 				DF4938502D6C9C5200494113 /* MockChatRepository.swift */,
 				DF9C91F72D6EF58400A2BCDA /* MockRemoteMessagesDataSource.swift */,
 				DF0D43DD2D70AD770083AA14 /* StubSendMessageSucceed.swift */,
@@ -215,7 +224,6 @@
 				DF7FBD8D2D74A3D300753FCE /* StubFetchChannelListSuccess.swift */,
 				DF7FBD8F2D74AB7A00753FCE /* StubFetchChannelFails.swift */,
 				DF7FBD9C2D75F08900753FCE /* StubChatRepositorySuccess.swift */,
-				DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
