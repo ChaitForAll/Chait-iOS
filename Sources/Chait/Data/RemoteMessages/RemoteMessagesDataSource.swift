@@ -12,6 +12,7 @@ import Supabase
 enum RemoteMessagesDataSourceError: Error {
     case networkError
     case serverError
+    case noItems
     case unknownError(_ error: Error)
 }
 
@@ -23,6 +24,7 @@ protocol RemoteMessagesDataSource {
     ) -> AnyPublisher<Void, RemoteMessagesDataSourceError>
     
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError>
+    func fetchHistory(channelID: UUID, historyOffset: Int, maxItemsCount: Int) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError>
 }
 
 final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
@@ -98,5 +100,36 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
         return messageListenSubject
             .handleEvents(receiveCancel: { listenTask.cancel() })
             .eraseToAnyPublisher()
+    }
+    
+    func fetchHistory(
+        channelID: UUID,
+        historyOffset: Int,
+        maxItemsCount: Int
+    ) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError> {
+        return Future<[MessageResponse], RemoteMessagesDataSourceError> { promise in
+            Task {
+                do {
+                    let historyResponses: [MessageResponse] = try await self.client
+                        .from("messages")
+                        .select()
+                        .eq("channel_id", value: channelID)
+                        .order("created_at", ascending: false)
+                        .range(from: historyOffset, to: historyOffset + maxItemsCount)
+                        .execute()
+                        .value
+                    
+                    guard !historyResponses.isEmpty else {
+                        return promise(.failure(.noItems))
+                    }
+                    
+                    promise(.success(historyResponses))
+                } catch {
+                    // TODO: Hadle Error
+                    promise(.failure(.unknownError(error)))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
