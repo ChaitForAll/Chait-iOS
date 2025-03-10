@@ -59,18 +59,21 @@ final class DefaultChatRepository: ChatRepository {
             .eraseToAnyPublisher()
     }
     
-    func fetchHistory(channelID: UUID, offset: Int, maxItemsCount: Int) -> AnyPublisher<[Message], ListenMessagesError> {
+    func fetchHistory(
+        channelID: UUID,
+        offset: Int,
+        maxItemsCount: Int
+    ) -> AnyPublisher<[Message], FetchChatHistoryError> {
         return remoteChatMessages
             .fetchHistory(channelID: channelID, historyOffset: offset, maxItemsCount: maxItemsCount)
             .mapError { dataSourceError in
                 switch dataSourceError {
                 case .noItems:
-                    // TODO: Handle Error
-                    return .unknown
+                    return .endOfHistoryError
                 case .networkError, .serverError:
                     return .networkError
                 case .unknownError(_):
-                    return .unknown
+                    return .unknownError
                 }
             }
             .map { messagesResponse in
