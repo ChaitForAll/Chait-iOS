@@ -71,16 +71,6 @@ final class PersonalChatViewModel {
     
     // MARK: Private Function(s)
     
-    private func toPersonalChatMessage(_ message: Message) -> PersonalChatMessage {
-        let personalChatMessage = PersonalChatMessage(
-            id: message.messageID,
-            text: message.text,
-            senderID: message.senderID,
-            createdAt: message.createdAt
-        )
-        self.chatMessagesDictionary[personalChatMessage.id] = personalChatMessage
-        return personalChatMessage
-    }
 }
 
 private extension Array where Element == Message {
