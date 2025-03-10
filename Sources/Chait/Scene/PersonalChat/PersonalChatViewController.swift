@@ -84,19 +84,22 @@ final class PersonalChatViewController: UIViewController {
         let output = viewModel?.bindOutput()
         output?.onReceiveNewMessages
             .sink { [weak self] newMessageIdentifiers in
-                
-                guard var snapShot = self?.diffableDataSource?.snapshot() else {
-                    return
-                }
-                
-                if snapShot.sectionIdentifiers.isEmpty {
-                    snapShot.appendSections([.messages])
-                }
-                
-                snapShot.appendItems(newMessageIdentifiers)
-                self?.diffableDataSource?.apply(snapShot)
+                self?.addNewMessages(newMessageIdentifiers)
             }
             .store(in: &cancelBag)
+    }
+    
+    private func addNewMessages(_ newMessages: [UUID]) {
+        guard var snapShot = diffableDataSource?.snapshot() else {
+            return
+        }
+        
+        if snapShot.sectionIdentifiers.isEmpty {
+            snapShot.appendSections([.messages])
+        }
+        
+        snapShot.appendItems(newMessages)
+        diffableDataSource?.apply(snapShot)
     }
     
     private func configureNavigationItem() {
