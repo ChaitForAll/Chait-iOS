@@ -52,12 +52,12 @@ final class PersonalChatViewModelBuilder {
     
     func build() -> PersonalChatViewModel {
         return PersonalChatViewModel(
-            maxChatHistoryCount: maxChatHistoryCount,
             userID: userID,
             channelID: channelID,
+            historyBatchSize: maxChatHistoryCount,
             sendMessageUseCase: sendMessageUseCase,
             listenMessagesUseCase: listenMessagesUseCase,
-            fetchHistoryUseCase: fetchHistoriesUseCase
+            fetchChatHistoryUseCase: fetchHistoriesUseCase
         )
     }
 }

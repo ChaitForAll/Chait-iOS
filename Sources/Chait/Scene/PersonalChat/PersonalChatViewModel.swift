@@ -12,41 +12,55 @@ final class PersonalChatViewModel {
     
     struct Output {
         let onReceiveNewMessages: AnyPublisher<[UUID], Never>
+        let onReceiveChatHistories: AnyPublisher<[UUID], Never>
     }
     
     // MARK: Property(s)
     
     var userMessageText: String = ""
     
-    private var receivedMessagesSubject: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
     private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
+    private var historyItemsOffset: Int = .zero
+    
+    private let receivedNewMessage: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
+    private let receivedChatHistories: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
     
     private let userID: UUID
     private let channelID: UUID
+    private let historyBatchSize: Int
     private let sendMessageUseCase: SendMessageUseCase
     private let listenMessagesUseCase: ListenMessagesUseCase
+    private let fetchChatHistoryUseCase: FetchChatHistoryUseCase
     
     init(
-        userID: UUID = UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
+        userID: UUID,
         channelID: UUID,
-        sendMessageUseCase: SendMessageUseCase, 
-        listenMessagesUseCase: ListenMessagesUseCase
+        historyBatchSize: Int = 10,
+        sendMessageUseCase: SendMessageUseCase,
+        listenMessagesUseCase: ListenMessagesUseCase,
+        fetchChatHistoryUseCase: FetchChatHistoryUseCase
     ) {
         self.userID = userID
         self.channelID = channelID
+        self.historyBatchSize = historyBatchSize
         self.sendMessageUseCase = sendMessageUseCase
         self.listenMessagesUseCase = listenMessagesUseCase
+        self.fetchChatHistoryUseCase = fetchChatHistoryUseCase
     }
     
     // MARK: Function(s)
     
     func bindOutput() -> Output {
-        return Output(onReceiveNewMessages: receivedMessagesSubject.eraseToAnyPublisher())
+        return Output(
+            onReceiveNewMessages: receivedNewMessage.eraseToAnyPublisher(),
+            onReceiveChatHistories: receivedChatHistories.eraseToAnyPublisher()
+        )
     }
     
     func onViewDidLoad() {
         startListening()
+        fetchChatHistories()
     }
     
     func onSendMessage() {
@@ -71,10 +85,30 @@ final class PersonalChatViewModel {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] allReceivedMessages in
-                    self?.receivedMessagesSubject.send(allReceivedMessages.map {$0.id })
+                    self?.receivedNewMessage.send(allReceivedMessages.map {$0.id })
                     allReceivedMessages.forEach {
                         self?.chatMessagesDictionary[$0.id] = $0
                     }
+                }
+            )
+            .store(in: &cancelBag)
+    }
+    
+    private func fetchChatHistories() {
+        fetchChatHistoryUseCase
+            .fetchHistory(
+                channelID: channelID,
+                messagesOffset: historyItemsOffset,
+                maxItemsCount: historyBatchSize
+            )
+            .receive(on: DispatchQueue.main)
+            .map { $0.toUI() }
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] historyMessages in
+                    print(historyMessages)
+                    self?.historyItemsOffset += self?.historyBatchSize ?? .zero
+                    historyMessages.forEach { self?.chatMessagesDictionary[$0.id] = $0 }
                 }
             )
             .store(in: &cancelBag)

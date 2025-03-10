@@ -56,17 +56,17 @@ final class AppCoordinator {
         let remoteMessagesDataSource = DefaultRemoteMessagesDataSource(client: client)
         let chatRepository = DefaultChatRepository(remoteChatMessages: remoteMessagesDataSource)
         let sendMessageUseCase = DefaultSendMessageUseCase(repository: chatRepository)
+        let fetchChatHistoryUseCase = DefaultFEtchChatHistoryUseCase(repository: chatRepository)
         let listenMessagesUseCase = DefaultListenMessagesUseCase(chatRepository: chatRepository)
         let personalChatVieWModel = PersonalChatViewModel(
+            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
             channelID: channelID,
             sendMessageUseCase: sendMessageUseCase,
-            listenMessagesUseCase: listenMessagesUseCase
+            listenMessagesUseCase: listenMessagesUseCase,
+            fetchChatHistoryUseCase: fetchChatHistoryUseCase
         )
         let personalChatViewController = PersonalChatViewController()
         personalChatViewController.viewModel = personalChatVieWModel
-        print(client.realtimeV2.channels)
-        
-        // FIXME: UNSUBSCRIBE SHIT
         return personalChatViewController
     }
 }
