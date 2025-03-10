@@ -10,11 +10,15 @@ import Combine
 
 final class PersonalChatViewModel {
     
+    struct Output {
+        let onReceiveNewMessages: AnyPublisher<[UUID], Never>
+    }
+    
     // MARK: Property(s)
     
     var userMessageText: String = ""
     
-    private var receivedMessagesSubject: PassthroughSubject<PersonalChatMessage.ID, Never> = .init()
+    private var receivedMessagesSubject: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
     private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
@@ -37,6 +41,10 @@ final class PersonalChatViewModel {
     
     // MARK: Function(s)
     
+    func bindOutput() -> Output {
+        return Output(onReceiveNewMessages: receivedMessagesSubject.eraseToAnyPublisher())
+    }
+    
     func onSendMessage() {
         sendMessageUseCase
             .sendMessage(text: userMessageText, senderID: userID, channelID: channelID)
@@ -45,7 +53,13 @@ final class PersonalChatViewModel {
         userMessageText.removeAll()
     }
     
-    func startListening() -> AnyPublisher<UUID, Never> {
+    func message(for identifier: UUID) -> PersonalChatMessage? {
+        return chatMessagesDictionary[identifier]
+    }
+    
+    // MARK: Private Function(s)
+    
+    private func startListening() {
         listenMessagesUseCase
             .startListening(channelID: channelID)
             .receive(on: DispatchQueue.main)
@@ -55,22 +69,14 @@ final class PersonalChatViewModel {
                     print(completion)
                 },
                 receiveValue: { [weak self] allReceivedMessages in
+                    self?.receivedMessagesSubject.send(allReceivedMessages.map {$0.id })
                     allReceivedMessages.forEach {
                         self?.chatMessagesDictionary[$0.id] = $0
-                        self?.receivedMessagesSubject.send($0.id)
                     }
                 }
             )
             .store(in: &cancelBag)
-        return receivedMessagesSubject.eraseToAnyPublisher()
     }
-    
-    func message(for identifier: UUID) -> PersonalChatMessage? {
-        return chatMessagesDictionary[identifier]
-    }
-    
-    // MARK: Private Function(s)
-    
 }
 
 private extension Array where Element == Message {

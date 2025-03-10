@@ -39,6 +39,7 @@ final class PersonalChatViewController: UIViewController {
         configureCollectionView()
         configureNavigationItem()
         bindViewModel()
+        viewModel?.onViewDidLoad()
     }
     
     // MARK: Private Function(s)
@@ -80,8 +81,9 @@ final class PersonalChatViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.startListening()
-            .sink { [weak self] identifier in
+        let output = viewModel?.bindOutput()
+        output?.onReceiveNewMessages
+            .sink { [weak self] newMessageIdentifiers in
                 
                 guard var snapShot = self?.diffableDataSource?.snapshot() else {
                     return
@@ -91,7 +93,7 @@ final class PersonalChatViewController: UIViewController {
                     snapShot.appendSections([.messages])
                 }
                 
-                snapShot.appendItems([identifier])
+                snapShot.appendItems(newMessageIdentifiers)
                 self?.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
