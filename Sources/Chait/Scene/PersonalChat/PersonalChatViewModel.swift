@@ -45,6 +45,10 @@ final class PersonalChatViewModel {
         return Output(onReceiveNewMessages: receivedMessagesSubject.eraseToAnyPublisher())
     }
     
+    func onViewDidLoad() {
+        startListening()
+    }
+    
     func onSendMessage() {
         sendMessageUseCase
             .sendMessage(text: userMessageText, senderID: userID, channelID: channelID)
@@ -65,9 +69,7 @@ final class PersonalChatViewModel {
             .receive(on: DispatchQueue.main)
             .map { $0.toUI() }
             .sink(
-                receiveCompletion: { completion in
-                    print(completion)
-                },
+                receiveCompletion: { _ in },
                 receiveValue: { [weak self] allReceivedMessages in
                     self?.receivedMessagesSubject.send(allReceivedMessages.map {$0.id })
                     allReceivedMessages.forEach {
