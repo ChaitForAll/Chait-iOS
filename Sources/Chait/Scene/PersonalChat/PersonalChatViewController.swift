@@ -82,9 +82,17 @@ final class PersonalChatViewController: UIViewController {
     
     private func bindViewModel() {
         let output = viewModel?.bindOutput()
-        output?.onReceiveNewMessages
+        output?
+            .onReceiveNewMessages
             .sink { [weak self] newMessageIdentifiers in
                 self?.addNewMessages(newMessageIdentifiers)
+            }
+            .store(in: &cancelBag)
+        
+        output?
+            .onReceiveChatHistories
+            .sink { [weak self] chatHistoryIdentifiers in
+                self?.insertChatHistories(chatHistoryIdentifiers)
             }
             .store(in: &cancelBag)
     }
@@ -99,6 +107,24 @@ final class PersonalChatViewController: UIViewController {
         }
         
         snapShot.appendItems(newMessages)
+        diffableDataSource?.apply(snapShot)
+    }
+    
+    private func insertChatHistories(_ chatHistories: [UUID]) {
+        guard var snapShot = diffableDataSource?.snapshot() else {
+            return
+        }
+        
+        if snapShot.sectionIdentifiers.isEmpty {
+            snapShot.appendSections([.messages])
+        }
+        
+        if let lastMessage = snapShot.itemIdentifiers.first {
+            snapShot.insertItems(chatHistories, beforeItem: lastMessage)
+        } else {
+            snapShot.appendItems(chatHistories)
+        }
+        
         diffableDataSource?.apply(snapShot)
     }
     

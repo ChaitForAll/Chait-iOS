@@ -107,8 +107,9 @@ final class PersonalChatViewModel {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] historyMessages in
                     print(historyMessages)
-                    self?.historyItemsOffset += self?.historyBatchSize ?? .zero
+                    self?.historyItemsOffset += (self?.historyBatchSize ?? .zero) + 1
                     historyMessages.forEach { self?.chatMessagesDictionary[$0.id] = $0 }
+                    self?.receivedChatHistories.send(historyMessages.reversed().map { $0.id })
                 }
             )
             .store(in: &cancelBag)
