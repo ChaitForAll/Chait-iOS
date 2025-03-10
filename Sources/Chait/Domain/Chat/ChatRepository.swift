@@ -11,5 +11,5 @@ import Combine
 protocol ChatRepository {
     func sendMessage(text: String, senderID: UUID, channelID: UUID) -> AnyPublisher<Void, SendMessageError>
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[Message], ListenMessagesError>
-    func fetchHistory(channelID: UUID, offset: Int, maxItemsCount: Int) -> AnyPublisher<[Message], ListenMessagesError>
+    func fetchHistory(channelID: UUID, offset: Int, maxItemsCount: Int) -> AnyPublisher<[Message], FetchChatHistoryError>
 }
