@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "21D2DE02-A6B8-41F3-BA1F-8519CFA41D5A",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Chait.xcodeproj",
+        "identifier" : "DF4938422D6C958300494113",
+        "name" : "ChaitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
