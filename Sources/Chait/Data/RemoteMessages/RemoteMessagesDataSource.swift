@@ -115,7 +115,7 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
                         .select()
                         .eq("channel_id", value: channelID)
                         .order("created_at", ascending: false)
-                        .range(from: historyOffset, to: historyOffset + maxItemsCount)
+                        .range(from: historyOffset + 1, to: historyOffset + maxItemsCount)
                         .execute()
                         .value
                     
