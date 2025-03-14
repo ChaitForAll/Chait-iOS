@@ -45,14 +45,17 @@ final class PersonalChatViewModelTests: XCTestCase {
         let sut = PersonalChatViewModelBuilder()
             .withListenMessageUseCase(stubListenMessagesSucceed)
             .build()
-        let sutOutput = sut.bindOutput().chatListeningPublisher
+        
+        let sutOutput = sut
+            .bindOutput()
+            .onReceiveNewMessages
         
         let expectation = XCTestExpectation(description: "receives messages 5 times")
         expectation.expectedFulfillmentCount = 5
         
         // Act
-
-        sut.startListening()
+        
+        sut.onViewDidLoad()
         
         sutOutput
             .sink { messageIdentifiers in
