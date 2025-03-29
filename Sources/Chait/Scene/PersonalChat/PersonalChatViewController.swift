@@ -22,6 +22,10 @@ final class PersonalChatViewController: UIViewController {
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
+    private var lastOffset: CGFloat = .zero
+    
+    private var minCurrentBatchHeight: CGFloat = .zero
+    private var maxCurrentBatchHeight: CGFloat = .zero
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -37,6 +41,7 @@ final class PersonalChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configurePullToFetchHistory()
         configureNavigationItem()
         bindViewModel()
         viewModel?.onViewDidLoad()
@@ -97,6 +102,27 @@ final class PersonalChatViewController: UIViewController {
             .store(in: &cancelBag)
     }
     
+    private func configurePullToFetchHistory() {
+        let topSafeInset = collectionView.safeAreaInsets.top
+        
+        collectionView
+            .publisher(for: \.contentOffset)
+            .sink { [weak self] offset in
+                guard let self, let viewModel else { return }
+                
+                let isScrollingUp = lastOffset > offset.y
+                let currentPosition = maxCurrentBatchHeight - offset.y - topSafeInset
+                let lastContentSize = maxCurrentBatchHeight - minCurrentBatchHeight
+                let normalizedScrollValue =  (currentPosition - minCurrentBatchHeight) / lastContentSize
+                
+                if (0.84...0.85) ~= normalizedScrollValue, isScrollingUp {
+                    viewModel.onReachTop()
+                }
+                lastOffset = offset.y
+            }
+            .store(in: &cancelBag)
+    }
+    
     private func addNewMessages(_ newMessages: [UUID]) {
         guard var snapShot = diffableDataSource?.snapshot() else {
             return
@@ -115,6 +141,8 @@ final class PersonalChatViewController: UIViewController {
             return
         }
         
+        let isSnapshotEmptyBeforeAddingItems = snapShot.itemIdentifiers.isEmpty
+        
         if snapShot.sectionIdentifiers.isEmpty {
             snapShot.appendSections([.messages])
         }
@@ -125,7 +153,19 @@ final class PersonalChatViewController: UIViewController {
             snapShot.appendItems(chatHistories)
         }
         
-        diffableDataSource?.apply(snapShot)
+        diffableDataSource?.apply(snapShot, animatingDifferences: true) { [weak self] in
+            guard let self else { return }
+            
+            minCurrentBatchHeight = maxCurrentBatchHeight
+            maxCurrentBatchHeight = collectionView.contentSize.height
+            
+            guard !isSnapshotEmptyBeforeAddingItems else {
+                let actualOffset = collectionView.contentOffset.y - collectionView.safeAreaInsets.top
+                let diff = collectionView.contentSize.height - collectionView.bounds.height - actualOffset
+                collectionView.contentOffset.y = diff
+                return
+            }
+        }
     }
     
     private func configureNavigationItem() {
