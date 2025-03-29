@@ -19,6 +19,7 @@ final class PersonalChatViewModel {
     
     var userMessageText: String = ""
     
+    private var isFetching: Bool = false
     private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     private var historyItemsOffset: Int = .zero
@@ -36,7 +37,7 @@ final class PersonalChatViewModel {
     init(
         userID: UUID,
         channelID: UUID,
-        historyBatchSize: Int = 10,
+        historyBatchSize: Int = 50,
         sendMessageUseCase: SendMessageUseCase,
         listenMessagesUseCase: ListenMessagesUseCase,
         fetchChatHistoryUseCase: FetchChatHistoryUseCase
@@ -56,6 +57,10 @@ final class PersonalChatViewModel {
             onReceiveNewMessages: receivedNewMessage.eraseToAnyPublisher(),
             onReceiveChatHistories: receivedChatHistories.eraseToAnyPublisher()
         )
+    }
+    
+    func onReachTop() {
+        fetchChatHistories()
     }
     
     func onViewDidLoad() {
@@ -95,6 +100,10 @@ final class PersonalChatViewModel {
     }
     
     private func fetchChatHistories() {
+        guard !isFetching else {
+            return
+        }
+        self.isFetching = true
         fetchChatHistoryUseCase
             .fetchHistory(
                 channelID: channelID,
@@ -104,9 +113,10 @@ final class PersonalChatViewModel {
             .receive(on: DispatchQueue.main)
             .map { $0.toUI() }
             .sink(
-                receiveCompletion: { _ in },
+                receiveCompletion: { [weak self] _ in
+                    self?.isFetching = false
+                },
                 receiveValue: { [weak self] historyMessages in
-                    print(historyMessages)
                     self?.historyItemsOffset += (self?.historyBatchSize ?? .zero) + 1
                     historyMessages.forEach { self?.chatMessagesDictionary[$0.id] = $0 }
                     self?.receivedChatHistories.send(historyMessages.reversed().map { $0.id })
