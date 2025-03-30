@@ -285,6 +285,17 @@
 			path = Friend;
 			sourceTree = "<group>";
 		};
+		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
+			isa = PBXGroup;
+			children = (
+				DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */,
+				DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */,
+				DF7FBD912D74AF3100753FCE /* RemoteChannels */,
+				DF0D43E92D718CC70083AA14 /* RemoteMessages */,
+			);
+			path = NetworkStack;
+			sourceTree = "<group>";
+		};
 		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,7 +349,6 @@
 			children = (
 				DF7FBD922D74AF4100753FCE /* RemoteChannelsDataSource.swift */,
 				DF7FBD942D7555FA00753FCE /* ChannelMembershipResponse.swift */,
-				DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */,
 				DF7FBD982D7558F900753FCE /* ChannelResponse.swift */,
 			);
 			path = RemoteChannels;
@@ -434,9 +444,7 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DF7FBD912D74AF3100753FCE /* RemoteChannels */,
-				DF0D43E92D718CC70083AA14 /* RemoteMessages */,
-				DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */,
+				DF50BFD82D99B34E0022B1E3 /* NetworkStack */,
 			);
 			path = Data;
 			sourceTree = "<group>";
