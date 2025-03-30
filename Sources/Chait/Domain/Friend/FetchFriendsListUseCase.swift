@@ -15,3 +15,16 @@ enum FetchFriendsListError: Error {
 protocol FetchFriendsListUseCase {
     func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError>
 }
+
+final class DefaultFetchFriendsListUseCase: FetchFriendsListUseCase {
+    
+    private let friendRepository: FriendRepository
+    
+    init(repository: FriendRepository) {
+        self.friendRepository = repository
+    }
+    
+    func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError> {
+        friendRepository.fetchFriendList(userID: userID)
+    }
+}
