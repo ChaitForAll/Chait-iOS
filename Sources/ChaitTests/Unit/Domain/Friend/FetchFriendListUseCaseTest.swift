@@ -40,4 +40,36 @@ final class FetchFriendListUseCaseTest: XCTestCase {
         
         wait(for: [expectation], timeout: 2.0)
     }
+    
+    func test_fetchFriendsListSucceedWithTenItems() {
+        
+        let expectedFriends = (0..<10).map { _ in FriendBuilder().build() }
+        let stubFriendRepository = StubFriendRepository().withSuccess(expectedFriends)
+        let sut = DefaultFetchFriendsListUseCase(repository: stubFriendRepository)
+        
+        let expectation = XCTestExpectation(description: "received friends")
+        
+        var receivedFriends: [Friend] = []
+        
+        sut.fetchFriendList(userID: UUID())
+            .sink { completion in
+                if completion != .finished {
+                    XCTFail()
+                }
+            } receiveValue: { friends in
+                expectation.fulfill()
+                receivedFriends.append(contentsOf: friends)
+            }
+            .store(in: &cancelBag)
+
+        XCTAssertEqual(expectedFriends.count, receivedFriends.count)
+        for (expected, received) in zip(expectedFriends, receivedFriends) {
+            XCTAssertEqual(expected.id, received.id)
+            XCTAssertEqual(expected.userID, received.userID)
+            XCTAssertEqual(expected.friendID, received.friendID)
+            XCTAssertEqual(expected.createdAt, received.createdAt)
+        }
+        
+        wait(for: [expectation], timeout: 2.0)
+    }
 }
