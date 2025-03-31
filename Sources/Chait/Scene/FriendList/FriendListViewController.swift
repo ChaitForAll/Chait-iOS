@@ -18,6 +18,8 @@ final class FriendListViewController: UIViewController {
     
     // MARK: Property(s)
     
+    var viewModel: FriendListViewModel?
+    private var cancelBag: Set<AnyCancellable> = .init()
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     
     private let collectionView: UICollectionView = UICollectionView(
@@ -31,7 +33,31 @@ final class FriendListViewController: UIViewController {
         self.view = collectionView
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureCollectionView()
+        bindViewModel()
+        viewModel?.onViewDidLoad()
+    }
+    
     // MARK: Private Function(s)
+    
+    private func bindViewModel() {
+        let output = viewModel?.bind()
+        output?.fetchedFriendList
+            .sink { friendIdentifiers in
+                print(friendIdentifiers)
+                guard var snapShot = self.diffableDataSource?.snapshot() else {
+                    return
+                }
+                if snapShot.sectionIdentifiers.isEmpty {
+                    snapShot.appendSections([.friends])
+                }
+                snapShot.appendItems(friendIdentifiers)
+                self.diffableDataSource?.apply(snapShot)
+            }
+            .store(in: &cancelBag)
+    }
     
     private func configureCollectionView() {
         self.diffableDataSource = createDiffableDataSource()
@@ -58,9 +84,16 @@ final class FriendListViewController: UIViewController {
     
     private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
         return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-            cell,indexPath,itemIdentifier in
+            cell, indexPath, itemIdentifier in
             
-            let content = cell.defaultContentConfiguration()
+            var content = cell.defaultContentConfiguration()
+            content.image = [
+                UIImage(systemName: "square.fill"),
+                UIImage(systemName: "circle.fill"),
+                UIImage(systemName: "triangle.fill")
+            ].randomElement() ?? .none
+            content.text = "User \(indexPath.item)"
+            content.secondaryText = itemIdentifier.uuidString
             cell.contentConfiguration = content
         }
     }
