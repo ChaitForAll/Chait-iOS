@@ -36,6 +36,10 @@ final class FriendListViewModel {
         return Output(fetchedFriendList: fetchedFriendListSubject.eraseToAnyPublisher())
     }
     
+    func onViewDidLoad() {
+        fetchFriendsList()
+    }
+    
     // MARK: Private Function(s)
     
     private func fetchFriendsList() {
