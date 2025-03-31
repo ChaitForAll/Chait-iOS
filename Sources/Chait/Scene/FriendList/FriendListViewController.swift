@@ -22,4 +22,16 @@ final class FriendListViewController: UIViewController {
     override func loadView() {
         self.view = collectionView
     }
+    
+    // MARK: Private Function(s)
+    
+    private func configureCollectionView() {
+        collectionView.collectionViewLayout = createListLayout()
+    }
+    
+    private func createListLayout() -> UICollectionViewCompositionalLayout {
+        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
+        return layout
+    }
 }
