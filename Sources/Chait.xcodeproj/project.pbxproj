@@ -27,6 +27,7 @@
 		DF50BFD22D99643F0022B1E3 /* FriendBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50BFD12D99643F0022B1E3 /* FriendBuilder.swift */; };
 		DF50BFD42D9966070022B1E3 /* StubFriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50BFD32D9965EC0022B1E3 /* StubFriendRepository.swift */; };
 		DF50BFD72D9968180022B1E3 /* FetchFriendListUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50BFD62D99680F0022B1E3 /* FetchFriendListUseCaseTest.swift */; };
+		DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */; };
 		DF5611042D7DF9C700B41259 /* StubRemoteMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */; };
 		DF5611062D7E003E00B41259 /* MessageResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611052D7E003E00B41259 /* MessageResponseBuilder.swift */; };
 		DF5611082D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5611072D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift */; };
@@ -106,6 +107,7 @@
 		DF50BFD12D99643F0022B1E3 /* FriendBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendBuilder.swift; sourceTree = "<group>"; };
 		DF50BFD32D9965EC0022B1E3 /* StubFriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubFriendRepository.swift; sourceTree = "<group>"; };
 		DF50BFD62D99680F0022B1E3 /* FetchFriendListUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFriendListUseCaseTest.swift; sourceTree = "<group>"; };
+		DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendshipResponse.swift; sourceTree = "<group>"; };
 		DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRemoteMessages.swift; sourceTree = "<group>"; };
 		DF5611052D7E003E00B41259 /* MessageResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponseBuilder.swift; sourceTree = "<group>"; };
 		DF5611072D7ECDFE00B41259 /* ChannelMembershipResponseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelMembershipResponseBuilder.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
+				DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */,
 				DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */,
 				DF9C91F22D6EED8800A2BCDA /* ChatRepositoryImplementation.swift */,
 				DF7FBD912D74AF3100753FCE /* RemoteChannels */,
@@ -583,6 +586,7 @@
 				DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */,
+				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
 				DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */,
 				DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */,
 				DF7BC62D2D7211EB00AAF678 /* ChannelRepository.swift in Sources */,
