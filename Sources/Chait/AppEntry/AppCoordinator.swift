@@ -35,10 +35,24 @@ final class AppCoordinator {
     
     private func createMainTabFlow() -> UITabBarController {
         let tabViewController = UITabBarController()
+        let friendList = createFriendsList()
+        friendList.tabBarItem = UITabBarItem(title: "Friends", image: UIImage(systemName: "person.3.fill"), tag: 1)
         let channelList = createChannelList()
         channelList.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), tag: .zero)
-        tabViewController.viewControllers = [channelList]
+        tabViewController.viewControllers = [friendList, channelList]
         return tabViewController
+    }
+    
+    private func createFriendsList() -> FriendListViewController {
+        let friendRepository = FriendRepositoryImplementation(client: client)
+        let useCase = DefaultFetchFriendsListUseCase(repository: friendRepository)
+        let viewModel = FriendListViewModel(
+            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
+            fetchFriendsListUseCase: useCase
+        )
+        let friendListViewController = FriendListViewController()
+        friendListViewController.viewModel = viewModel
+        return friendListViewController
     }
     
     private func createChannelList() -> ChannelListViewController {
