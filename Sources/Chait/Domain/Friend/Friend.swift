@@ -7,9 +7,7 @@
 
 import Foundation
 
-struct Friend: Identifiable {
-    let id: UUID
-    let userID: UUID
+struct Friend {
     let friendID: UUID
     let createdAt: Date
 }
