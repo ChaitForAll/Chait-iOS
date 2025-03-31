@@ -10,6 +10,12 @@ import Combine
 
 final class FriendListViewModel {
     
+    // MARK: Type(s)
+    
+    struct Output {
+        let fetchedFriendList: AnyPublisher<[UUID], Never>
+    }
+    
     // MARK: Property(s)
     
     private var cancelBag: Set<AnyCancellable> = .init()
@@ -17,10 +23,17 @@ final class FriendListViewModel {
     
     private let userID: UUID
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
+    private let fetchedFriendListSubject: PassthroughSubject<[UUID], Never> = .init()
     
     init(userID: UUID, fetchFriendsListUseCase: FetchFriendsListUseCase) {
         self.userID = userID
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
+    }
+    
+    // MARK: Function(s)
+    
+    func bind() -> Output {
+        return Output(fetchedFriendList: fetchedFriendListSubject.eraseToAnyPublisher())
     }
     
     // MARK: Private Function(s)
@@ -30,8 +43,9 @@ final class FriendListViewModel {
             .fetchFriendList(userID: userID)
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { friendsList in
-                    self.friendsList.append(contentsOf: friendsList)
+                receiveValue: { [weak self] friendsList in
+                    self?.friendsList.append(contentsOf: friendsList)
+                    self?.fetchedFriendListSubject.send(friendsList.map { $0.friendID })
                 }
             )
             .store(in: &cancelBag)
