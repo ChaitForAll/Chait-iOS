@@ -64,8 +64,6 @@ final class FetchFriendListUseCaseTest: XCTestCase {
 
         XCTAssertEqual(expectedFriends.count, receivedFriends.count)
         for (expected, received) in zip(expectedFriends, receivedFriends) {
-            XCTAssertEqual(expected.id, received.id)
-            XCTAssertEqual(expected.userID, received.userID)
             XCTAssertEqual(expected.friendID, received.friendID)
             XCTAssertEqual(expected.createdAt, received.createdAt)
         }

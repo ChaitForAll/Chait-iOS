@@ -12,22 +12,10 @@ final class FriendBuilder {
     
     // MARK: Property(s)
     
-    private var friendshipIdentifier: UUID?
-    private var userID: UUID?
     private var friendID: UUID?
     private var createdAt: Date?
     
     // MARK: Function(s)
-    
-    func withFriendshipIdentifier(_ friendshipIdentifier: UUID) -> Self {
-        self.friendshipIdentifier = friendshipIdentifier
-        return self
-    }
-    
-    func withUserID(_ userID: UUID) -> Self {
-        self.userID = userID
-        return self
-    }
     
     func withFriendID(_ friedID: UUID) -> Self {
         self.friendID = friedID
@@ -41,8 +29,6 @@ final class FriendBuilder {
     
     func build() -> Friend {
         return Friend(
-            id: friendID ?? UUID() ,
-            userID: userID ?? UUID(),
             friendID: friendID ?? UUID(),
             createdAt: createdAt ?? Date.now
         )
