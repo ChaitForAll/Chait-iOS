@@ -304,6 +304,14 @@
 			path = NetworkStack;
 			sourceTree = "<group>";
 		};
+		DF50BFE02D9AB7750022B1E3 /* FriendList */ = {
+			isa = PBXGroup;
+			children = (
+				DF50BFDE2D9AB39F0022B1E3 /* FriendListViewModel.swift */,
+			);
+			path = FriendList;
+			sourceTree = "<group>";
+		};
 		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +326,7 @@
 		DF674A0F2D34EFAE00B61966 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DF50BFDE2D9AB39F0022B1E3 /* FriendListViewModel.swift */,
+				DF50BFE02D9AB7750022B1E3 /* FriendList */,
 				DF7FBD9E2D75F67E00753FCE /* ChannelList */,
 				DF9C91FD2D6F555100A2BCDA /* PersonalChat */,
 			);
