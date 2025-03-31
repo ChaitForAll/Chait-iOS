@@ -46,8 +46,22 @@ final class FriendListViewController: UIViewController {
     }
     
     private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<Section, UUID> {
+        let listCellRegistration = createListCellRegistration()
         return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
-            return .init()
+            collectionView.dequeueConfiguredReusableCell(
+                using: listCellRegistration,
+                for: indexPath,
+                item: itemIdentifier
+            )
+        }
+    }
+    
+    private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
+            cell,indexPath,itemIdentifier in
+            
+            let content = cell.defaultContentConfiguration()
+            cell.contentConfiguration = content
         }
     }
 }
