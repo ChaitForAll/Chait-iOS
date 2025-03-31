@@ -115,7 +115,7 @@ final class PersonalChatViewController: UIViewController {
                 let lastContentSize = maxCurrentBatchHeight - minCurrentBatchHeight
                 let normalizedScrollValue =  (currentPosition - minCurrentBatchHeight) / lastContentSize
                 
-                if (0.84...0.85) ~= normalizedScrollValue, isScrollingUp {
+                if (0.84...1.0) ~= normalizedScrollValue, isScrollingUp {
                     viewModel.onReachTop()
                 }
                 lastOffset = offset.y
