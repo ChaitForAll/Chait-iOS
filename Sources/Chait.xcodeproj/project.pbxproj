@@ -13,6 +13,7 @@
 		DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E32D70B9930083AA14 /* PersonalChatViewController.swift */; };
 		DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */; };
 		DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0D43EA2D718EAF0083AA14 /* NewMessagesRequest.swift */; };
+		DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26BF2DAAFD19002308E9 /* User.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		DF0D43EA2D718EAF0083AA14 /* NewMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessagesRequest.swift; sourceTree = "<group>"; };
+		DF0F26BF2DAAFD19002308E9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF0F26BF2DAAFD19002308E9 /* User.swift */,
 				DF9676BD2D994F7F0078D0D5 /* Friend.swift */,
 				DFBF6F302D6C80F7003B51DB /* Message.swift */,
 				DF7BC6272D72106800AAF678 /* Channel.swift */,
@@ -621,6 +624,7 @@
 				DF50BFDF2D9AB3A40022B1E3 /* FriendListViewModel.swift in Sources */,
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
 				DF7FBD992D7558F900753FCE /* ChannelResponse.swift in Sources */,
+				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */,
 				DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */,
