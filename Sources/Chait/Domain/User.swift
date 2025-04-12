@@ -29,4 +29,10 @@ final class User: Identifiable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
+    
+    // MARK: Function(s)
+    
+    func changeDisplayName(_ newDisplayName: String) {
+        self.displayName = newDisplayName
+    }
 }
