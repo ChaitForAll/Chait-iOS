@@ -6,6 +6,10 @@
     
 import Foundation
 
+enum UserError: Error {
+    case invalidImage
+}
+
 final class User: Identifiable {
     let id: UUID
     let userName: String
