@@ -49,4 +49,18 @@ final class GroupConversation: Conversation {
         }
         return title
     }
+    
+    func addParticipantFromContact(_ contactUser: ContactUser) {
+        let newParticipant = Participant(
+            id: contactUser.id,
+            userName: contactUser.userName,
+            displayName: contactUser.displayName,
+            profileImage: contactUser.profileImage,
+            createdAt: contactUser.createdAt
+        )
+        guard !participants.contains(newParticipant) else {
+            return
+        }
+        participants.insert(newParticipant)
+    }
 }
