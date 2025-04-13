@@ -6,6 +6,10 @@
     
 import Foundation
 
+enum GroupConversationError: Error {
+    case participantNotFound
+}
+
 final class GroupConversation: Conversation {
     
     // MARK: Property(s)
@@ -62,5 +66,12 @@ final class GroupConversation: Conversation {
             return
         }
         participants.insert(newParticipant)
+    }
+    
+    func transferOwnership(to nextOwner: Participant) throws {
+        guard participants.contains(nextOwner) else {
+            throw GroupConversationError.participantNotFound
+        }
+        self.owner = nextOwner
     }
 }
