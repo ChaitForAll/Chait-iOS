@@ -20,6 +20,7 @@
 		DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26C92DABA888002308E9 /* Participant.swift */; };
 		DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */; };
 		DF0F26CE2DABAD23002308E9 /* GroupConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26CD2DABAD20002308E9 /* GroupConversation.swift */; };
+		DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26CF2DABB4B9002308E9 /* ContactUser.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -107,6 +108,7 @@
 		DF0F26C92DABA888002308E9 /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateConversation.swift; sourceTree = "<group>"; };
 		DF0F26CD2DABAD20002308E9 /* GroupConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupConversation.swift; sourceTree = "<group>"; };
+		DF0F26CF2DABB4B9002308E9 /* ContactUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUser.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF0F26CF2DABB4B9002308E9 /* ContactUser.swift */,
 				DF0F26CD2DABAD20002308E9 /* GroupConversation.swift */,
 				DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */,
 				DF0F26C92DABA888002308E9 /* Participant.swift */,
@@ -647,6 +650,7 @@
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
 				DF0F26C22DAB8D8A002308E9 /* ProfileImage.swift in Sources */,
 				DF7FBD992D7558F900753FCE /* ChannelResponse.swift in Sources */,
+				DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */,
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */,
