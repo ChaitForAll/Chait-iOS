@@ -11,10 +11,13 @@ enum UserError: Error {
 }
 
 final class User: Identifiable {
+    
+    // MARK: Property(s)
+    
     let id: UUID
     let userName: String
     var displayName: String
-    var profileImage: URL
+    var profileImage: ProfileImage
     let createdAt: Date
     let updatedAt: Date
     
@@ -22,7 +25,7 @@ final class User: Identifiable {
         id: UUID,
         userName: String,
         displayName: String,
-        profileImage: URL,
+        profileImage: ProfileImage,
         createdAt: Date,
         updatedAt: Date
     ) {
