@@ -42,4 +42,12 @@ final class User: Identifiable {
     func changeDisplayName(_ newDisplayName: String) {
         self.displayName = newDisplayName
     }
+    
+    func changeProfileImage(_ newProfileImage: URL) throws {
+        let newProfileImage = ProfileImage(imageURL: newProfileImage)
+        guard newProfileImage.isValid() else {
+            throw UserError.invalidImage
+        }
+        self.profileImage = newProfileImage
+    }
 }
