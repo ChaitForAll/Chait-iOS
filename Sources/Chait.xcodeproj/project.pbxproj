@@ -18,6 +18,7 @@
 		DF0F26C42DAB91E8002308E9 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26C32DAB91E5002308E9 /* Conversation.swift */; };
 		DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26C72DABA402002308E9 /* AppUser.swift */; };
 		DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26C92DABA888002308E9 /* Participant.swift */; };
+		DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
@@ -103,6 +104,7 @@
 		DF0F26C32DAB91E5002308E9 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		DF0F26C72DABA402002308E9 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		DF0F26C92DABA888002308E9 /* Participant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
+		DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateConversation.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */,
 				DF0F26C92DABA888002308E9 /* Participant.swift */,
 				DF0F26C72DABA402002308E9 /* AppUser.swift */,
 				DF0F26C32DAB91E5002308E9 /* Conversation.swift */,
@@ -615,6 +618,7 @@
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
 				DF7BC6282D72106800AAF678 /* Channel.swift in Sources */,
 				DF7FBD952D7555FA00753FCE /* ChannelMembershipResponse.swift in Sources */,
+				DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
