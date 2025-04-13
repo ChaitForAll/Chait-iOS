@@ -11,7 +11,7 @@ enum ConversationType {
     case group
 }
 
-protocol Conversation: Identifiable {
+protocol Conversation: AnyObject, Identifiable {
     var id: UUID { get }
     var title: String { get set }
     var conversationType: ConversationType { get }
@@ -20,4 +20,13 @@ protocol Conversation: Identifiable {
     var lastMessageSentAt: Date { get set }
     
     func defaultTitle() -> String
+}
+
+extension Conversation {
+    func changeTitle(_ newTitle: String) {
+        guard !title.isEmpty, title != newTitle else {
+            return
+        }
+        self.title = newTitle
+    }
 }
