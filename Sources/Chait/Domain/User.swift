@@ -40,6 +40,9 @@ final class User: Identifiable {
     // MARK: Function(s)
     
     func changeDisplayName(_ newDisplayName: String) {
+        guard !newDisplayName.isEmpty, displayName != newDisplayName else {
+            return
+        }
         self.displayName = newDisplayName
     }
     
