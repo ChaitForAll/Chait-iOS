@@ -8,6 +8,7 @@ import Foundation
 
 enum GroupConversationError: Error {
     case participantNotFound
+    case lastOneStanding
 }
 
 final class GroupConversation: Conversation {
@@ -73,5 +74,9 @@ final class GroupConversation: Conversation {
             throw GroupConversationError.participantNotFound
         }
         self.owner = nextOwner
+    }
+    
+    func removeParticipant(_ participant: Participant) {
+        participants.remove(participant)
     }
 }
