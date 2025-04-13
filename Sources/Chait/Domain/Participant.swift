@@ -11,17 +11,17 @@ final class Participant: User {
     // MARK: Property(s)
     
     var displayName: String
-    var profileImage: ProfileImage?
     
     let id: UUID
     let userName: String
     let createdAt: Date
+    let profileImage: ProfileImage?
     
     init(
         id: UUID,
         userName: String,
         displayName: String,
-        profileImage: ProfileImage? = nil,
+        profileImage: ProfileImage?,
         createdAt: Date
     ) {
         self.id = id

@@ -14,7 +14,7 @@ protocol User: AnyObject, Identifiable {
     var id: UUID { get }
     var userName: String { get }
     var displayName: String { get set }
-    var profileImage: ProfileImage? { get set }
+    var profileImage: ProfileImage? { get }
     var createdAt: Date { get }
 }
 
