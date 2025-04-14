@@ -16,7 +16,7 @@ final class PrivateConversation: Conversation {
     
     let id: UUID
     let createdAt: Date
-    let otherParticipant: Participant
+    let participants: Set<Participant>
     let conversationType: ConversationType = .private
     
     init(
@@ -25,19 +25,20 @@ final class PrivateConversation: Conversation {
         lastMessageSentAt: Date,
         id: UUID,
         createdAt: Date,
-        otherParticipant: Participant
+        participants: Set<Participant>
     ) {
         self.title = title
         self.updatedAt = updatedAt
         self.lastMessageSentAt = lastMessageSentAt
         self.id = id
         self.createdAt = createdAt
-        self.otherParticipant = otherParticipant
+        self.participants = participants
     }
     
     // MARK: Function(s)
     
     func defaultTitle() -> String {
-        return title.isEmpty ? otherParticipant.userName : title
+        let participantNames = participants.map { $0.displayName }.joined(separator: ",")
+        return title.isEmpty ? participantNames : title
     }
 }
