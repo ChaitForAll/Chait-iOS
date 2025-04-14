@@ -30,4 +30,8 @@ extension Conversation {
         }
         self.title = newTitle
     }
+    
+    func isParticipant(_ userLookingFor: UUID) -> Bool {
+        return participants.contains(where: { $0.id == userLookingFor })
+    }
 }
