@@ -8,5 +8,5 @@ import Foundation
 import Combine
 
 protocol ConversationRepository {
-    func fetchConversationList(_ userID: UUID) -> AnyPublisher<[any Conversation], ConversationError>
+    func fetchConversationList(_ userID: UUID) -> AnyPublisher<[ConversationType], ConversationError>
 }

@@ -12,7 +12,7 @@ enum ConversationError: Error {
 }
 
 protocol ConversationUseCase {
-    func fetchConversationList() -> AnyPublisher<[any Conversation], ConversationError>
+    func fetchConversationList() -> AnyPublisher<[ConversationType], ConversationError>
 }
 
 final class DefaultChatUseCase: ConversationUseCase {
@@ -29,7 +29,7 @@ final class DefaultChatUseCase: ConversationUseCase {
     
     // MARK: Function(s)
     
-    func fetchConversationList() -> AnyPublisher<[any Conversation], ConversationError> {
+    func fetchConversationList() -> AnyPublisher<[ConversationType], ConversationError> {
         return conversationRepository.fetchConversationList(userID)
     }
 }
