@@ -43,3 +43,15 @@ extension ConversationResponse {
         )
     }
 }
+
+extension ConversationResponse {
+    
+    func toConversationType(participants: Set<Participant>) -> ConversationType {
+        switch conversationType {
+        case .group:
+                return ConversationType.group(self.toGroupConversation(participants: participants))
+        case .private:
+                return ConversationType.private(self.toPrivateConversation(participants: participants))
+        }
+    }
+}
