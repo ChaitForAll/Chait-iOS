@@ -18,3 +18,28 @@ struct ConversationResponse: Decodable {
     let createdAt: Date
     let updatedAt: Date
 }
+
+extension ConversationResponse {
+    func toPrivateConversation(participants: Set<Participant>) -> PrivateConversation {
+        return PrivateConversation(
+            title: title,
+            updatedAt: updatedAt,
+            lastMessageSentAt: .now, /* TODO: Add Actual Capability */
+            id: id,
+            createdAt: createdAt,
+            participants: participants
+        )
+    }
+    
+    func toGroupConversation(participants: Set<Participant>) -> GroupConversation {
+        return GroupConversation(
+            title: title,
+            updatedAt: updatedAt,
+            lastMessageSentAt: .now, /* TODO: Add Actual Capability */
+            participants: participants,
+            id: id,
+            createdAt: createdAt,
+            owner: participants.first! /* TODO: Add Actual Capability */
+        )
+    }
+}
