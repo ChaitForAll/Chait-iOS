@@ -8,6 +8,7 @@ import Foundation
     
 struct ConversationMembershipResponse: Decodable {
     let id: UUID
+    let userID: UUID
     let conversationID: UUID
     let createdAt: UUID
 }
