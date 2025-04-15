@@ -9,6 +9,7 @@ import Supabase
 
 protocol ConversationMembershipRemoteDataSource {
     func fetchConversationMemberships(_ userID: UUID) async throws -> [ConversationMembershipResponse]
+    func fetchMembers(_ conversationID: UUID) async throws -> [UUID]
 }
 
 final class DefaultConversationMembershipRemoteDataSource: ConversationMembershipRemoteDataSource {
@@ -32,5 +33,15 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .eq("userID", value: userID)
             .execute()
             .value
+    }
+    
+    func fetchMembers(_ conversationID: UUID) async throws -> [UUID] {
+        let responses: [ConversationMembershipResponse] =  try await supabase
+            .from("conversation_membership")
+            .select()
+            .eq("conversation_id", value: conversationID)
+            .execute()
+            .value
+        return responses.map { $0.userID }
     }
 }
