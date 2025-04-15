@@ -9,10 +9,14 @@ import Combine
 import Supabase
 
 protocol ConversationRemoteDataSource {
-    func fetchConversations(_ conversationIdentifiers: [UUID]) async throws -> [ConversationResponse]
+    func fetchConversations(
+        _ conversationIdentifiers: [UUID]
+    ) async throws -> [ConversationResponse]
 }
 
 final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
+    
+    // MARK: Property(s)
     
     private let supabase: SupabaseClient
     
@@ -20,12 +24,16 @@ final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
         self.supabase = supabase
     }
     
-    func fetchConversations(_ conversationIdentifiers: [UUID]) async throws -> [ConversationResponse] {
+    // MARK: Function(s)
+    
+    func fetchConversations(
+        _ conversationIdentifiers: [UUID]
+    ) async throws -> [ConversationResponse] {
         return try await supabase
             .from("conversations")
             .select()
             .in("id", values: conversationIdentifiers)
             .execute()
-            .value
+            .decode(using: .convertFromSnakeCase)
     }
 }

@@ -8,7 +8,9 @@ import Foundation
 import Supabase
 
 protocol ConversationMembershipRemoteDataSource {
-    func fetchConversationMemberships(_ userID: UUID) async throws -> [ConversationMembershipResponse]
+    func fetchConversationMemberships(
+        _ userID: UUID
+    ) async throws -> [ConversationMembershipResponse]
     func fetchMembers(_ conversationID: UUID) async throws -> [UUID]
 }
 
@@ -32,7 +34,7 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .select()
             .eq("user_id", value: userID)
             .execute()
-            .value
+            .decode(using: .convertFromSnakeCase)
     }
     
     func fetchMembers(_ conversationID: UUID) async throws -> [UUID] {
@@ -41,7 +43,7 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .select()
             .eq("conversation_id", value: conversationID)
             .execute()
-            .value
-        return responses.map { $0.user_id }
+            .decode(using: .convertFromSnakeCase)
+        return responses.map { $0.userID }
     }
 }
