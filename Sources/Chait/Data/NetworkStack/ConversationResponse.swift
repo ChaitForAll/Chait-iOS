@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum ConversationTypeResponse: Decodable {
+enum ConversationTypeResponse: String, Decodable {
     case `private`
     case group
 }
