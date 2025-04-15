@@ -9,5 +9,23 @@ import Combine
 import Supabase
 
 protocol ConversationRemoteDataSource {
-    func fetchConversation(_ conversationIdentifiers: [UUID]) async throws -> [ConversationResponse]
+    func fetchConversations(_ conversationIdentifiers: [UUID]) async throws -> [ConversationResponse]
+}
+
+final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
+    
+    private let supabase: SupabaseClient
+    
+    init(supabase: SupabaseClient) {
+        self.supabase = supabase
+    }
+    
+    func fetchConversations(_ conversationIdentifiers: [UUID]) async throws -> [ConversationResponse] {
+        return try await supabase
+            .from("conversations")
+            .select()
+            .in("id", values: conversationIdentifiers)
+            .execute()
+            .value
+    }
 }
