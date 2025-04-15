@@ -23,7 +23,6 @@ final class GroupConversation: Conversation {
     
     let id: UUID
     let createdAt: Date
-    let conversationType: ConversationType = .group
     
     init(
         title: String,

@@ -7,14 +7,13 @@
 import Foundation
 
 enum ConversationType {
-    case `private`
-    case group
+    case `private`(PrivateConversation)
+    case group(GroupConversation)
 }
 
 protocol Conversation: AnyObject, Identifiable {
     var id: UUID { get }
     var title: String { get set }
-    var conversationType: ConversationType { get }
     var participants: Set<Participant> { get }
     var createdAt: Date { get }
     var updatedAt: Date { get set }

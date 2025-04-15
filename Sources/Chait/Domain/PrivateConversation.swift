@@ -17,7 +17,6 @@ final class PrivateConversation: Conversation {
     let id: UUID
     let createdAt: Date
     let participants: Set<Participant>
-    let conversationType: ConversationType = .private
     
     init(
         title: String,
