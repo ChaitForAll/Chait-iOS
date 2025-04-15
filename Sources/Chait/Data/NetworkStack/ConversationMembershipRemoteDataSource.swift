@@ -30,7 +30,7 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
         return try await supabase
             .from("conversation_membership")
             .select()
-            .eq("userID", value: userID)
+            .eq("user_id", value: userID)
             .execute()
             .value
     }
@@ -42,6 +42,6 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .eq("conversation_id", value: conversationID)
             .execute()
             .value
-        return responses.map { $0.userID }
+        return responses.map { $0.user_id }
     }
 }
