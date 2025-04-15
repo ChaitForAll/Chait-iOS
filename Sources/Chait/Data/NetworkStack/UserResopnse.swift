@@ -14,3 +14,19 @@ struct UserResponse: Decodable {
     let profileImageURL: URL
 }
 
+// MARK: Domain Mapping
+
+extension UserResponse {
+    
+    func toParticipant() -> Participant {
+        return Participant(
+            id: id,
+            userName: name,
+            displayName: displayName,
+            profileImage: ProfileImage(
+                imageURL: profileImageURL
+            ),
+            createdAt: createdAt
+        )
+    }
+}
