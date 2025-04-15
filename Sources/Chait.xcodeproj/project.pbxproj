@@ -25,6 +25,7 @@
 		DF0F26DB2DAD18AF002308E9 /* ConversationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26DA2DAD18AA002308E9 /* ConversationRepository.swift */; };
 		DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */; };
 		DF0F26DF2DADE400002308E9 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */; };
+		DF0F26E22DADE8A3002308E9 /* ConversationMembershipRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */; };
 		DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
@@ -118,6 +119,7 @@
 		DF0F26DA2DAD18AA002308E9 /* ConversationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRepository.swift; sourceTree = "<group>"; };
 		DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRemoteDataSource.swift; sourceTree = "<group>"; };
 		DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMembershipRemoteDataSource.swift; sourceTree = "<group>"; };
 		DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMembershipResponse.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -357,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */,
+				DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */,
 				DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */,
 				DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */,
 				DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */,
@@ -664,6 +667,7 @@
 				DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */,
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
 				DF9676BE2D994F7F0078D0D5 /* Friend.swift in Sources */,
+				DF0F26E22DADE8A3002308E9 /* ConversationMembershipRemoteDataSource.swift in Sources */,
 				DF50BFDF2D9AB3A40022B1E3 /* FriendListViewModel.swift in Sources */,
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
 				DF0F26C22DAB8D8A002308E9 /* ProfileImage.swift in Sources */,
