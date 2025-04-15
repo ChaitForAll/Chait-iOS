@@ -27,6 +27,7 @@
 		DF0F26DF2DADE400002308E9 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */; };
 		DF0F26E22DADE8A3002308E9 /* ConversationMembershipRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */; };
 		DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */; };
+		DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */; };
 		DF0F26E82DADF52B002308E9 /* UserRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E72DADF51E002308E9 /* UserRemoteDataSource.swift */; };
 		DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0F26E92DADF9AC002308E9 /* UserResopnse.swift */; };
 		DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B22D343A3E006035E8 /* AppDelegate.swift */; };
@@ -124,6 +125,8 @@
 		DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
 		DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMembershipRemoteDataSource.swift; sourceTree = "<group>"; };
 		DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMembershipResponse.swift; sourceTree = "<group>"; };
+		DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRepositoryImplementation.swift; sourceTree = "<group>"; };
+		DF0F26E72DADF51E002308E9 /* UserRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemoteDataSource.swift; sourceTree = "<group>"; };
 		DF0F26E92DADF9AC002308E9 /* UserResopnse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResopnse.swift; sourceTree = "<group>"; };
 		DF10C7AF2D343A3E006035E8 /* Chait.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chait.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF10C7B22D343A3E006035E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -514,6 +517,7 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
 				DF50BFD82D99B34E0022B1E3 /* NetworkStack */,
 			);
 			path = Data;
@@ -688,6 +692,7 @@
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */,
 				DF7FBD972D7556DF00753FCE /* ChannelRepositoryImplementation.swift in Sources */,
+				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFB26CB12D78971E00BD0A4D /* FetchChatHistoryUseCase.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
 				DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */,
