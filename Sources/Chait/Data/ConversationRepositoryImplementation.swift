@@ -27,6 +27,23 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     
     // MARK: Function(s)
     
+    func fetchConversationSummaryList(_ userID: UUID) -> AnyPublisher<[ConversationSummary], ConversationError> {
+        return Future { promise in
+            Task {
+                do {
+                    let memberships = try await self.conversationMembershipRemote.fetchConversationMemberships(userID)
+                    let conversationSummaries = try await self.conversationRemote
+                        .fetchConversations(memberships.map { $0.conversationID })
+                        .map { ConversationSummary(id: $0.id,title: $0.title) }
+                    promise(.success(conversationSummaries))
+                } catch {
+                    promise(.failure(.fetchFailed))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
     func fetchConversationList(
         _ userID: UUID
     ) -> AnyPublisher<[ConversationType], ConversationError> {
