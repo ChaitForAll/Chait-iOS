@@ -56,10 +56,15 @@ final class AppCoordinator {
     }
     
     private func createChannelList() -> ChannelListViewController {
-        let defaultDataSource = DefaultRemoteChannelsDataSource(client: client)
-        let defaultRepo = DefaultChannelRepository(dataSource: defaultDataSource)
-        let channelsUseCaes = DefaultFetchChannelListUseCase(repository: defaultRepo)
-        let viewModel = ChannelListViewModel(fetchChannelListUseCase: channelsUseCaes, userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!)
+        let conversationUseCase = DefaultConversationUseCase(
+            conversationRepository: ConversationRepositoryImplementation(
+                conversationRemote: DefaultConversationRemoteDataSource(supabase: client),
+                conversationMembershipRemote: DefaultConversationMembershipRemoteDataSource(supabase: client),
+                userRemote: DefaultUserRemoteDataSource(supabase: client)
+            ),
+            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!
+        )
+        let viewModel = ChannelListViewModel(conversationUseCase: conversationUseCase)
         let channelListViewController = ChannelListViewController()
         channelListViewController.coordinator = self
         channelListViewController.viewModel = viewModel

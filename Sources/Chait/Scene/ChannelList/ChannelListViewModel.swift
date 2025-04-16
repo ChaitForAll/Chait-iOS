@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 import Foundation
 import Combine
@@ -16,45 +16,40 @@ final class ChannelListViewModel {
     
     // MARK: Property(s)
     
-    private var itemsInOrder: [ChannelListItem] = []
-    private var itemsMap: [ChannelListItem.ID: ChannelListItem] = [:]
+    private var conversationSummaries: [UUID: ConversationSummaryViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
-    private let fetchedChannelListItems: PassthroughSubject<[UUID], Never> = .init()
+    private let conversationSummariesSubject: PassthroughSubject<[UUID], Never> = .init()
+    private let conversationUseCase: ConversationUseCase
     
-    private let fetchChannelListUseCase: FetchChannelListUseCase
-    private let userID: UUID
-    
-    init(fetchChannelListUseCase: FetchChannelListUseCase, userID: UUID) {
-        self.fetchChannelListUseCase = fetchChannelListUseCase
-        self.userID = userID
+    init(conversationUseCase: ConversationUseCase) {
+        self.conversationUseCase = conversationUseCase
     }
     
     // MARK: Function(s)
     
     func bindOutput() -> Output {
-        return Output(fetchedChannelListItems: fetchedChannelListItems.eraseToAnyPublisher())
+        return Output(fetchedChannelListItems: conversationSummariesSubject.eraseToAnyPublisher())
     }
     
     func onNeedItems() {
-        fetchChannelListUseCase.fetchChannels(userID)
-            .map { channels in
-                channels.map {
-                    ChannelListItem(id: $0.channelID, title: $0.title)
+        conversationUseCase
+            .fetchConversationSummaryList()
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] conversationSummaries in
+                    conversationSummaries
+                        .map { ConversationSummaryViewModel($0) }
+                        .forEach { summaryViewModel in
+                            self?.conversationSummaries[summaryViewModel.id] = summaryViewModel
+                        }
                 }
-            }
-            .sink { _ in
-                // TODO: Add Error handling flow
-            } receiveValue: { [weak self] items in
-                items.forEach { self?.itemsMap[$0.id] = $0 }
-                self?.itemsInOrder.append(contentsOf: items)
-                self?.fetchedChannelListItems.send(items.map { $0.id })
-            }
+            )
             .store(in: &cancelBag)
     }
     
-    func item(for identifier: UUID) -> ChannelListItem? {
-        return itemsMap[identifier]
+    func item(for identifier: UUID) -> ConversationSummaryViewModel? {
+        return conversationSummaries[identifier]
     }
 }
 
