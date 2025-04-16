@@ -16,7 +16,7 @@ protocol ConversationUseCase {
     func fetchConversationSummaryList(_ userID: UUID) -> AnyPublisher<[ConversationSummary], ConversationError>
 }
 
-final class DefaultChatUseCase: ConversationUseCase {
+final class DefaultConversationUseCase: ConversationUseCase {
     
     // MARK: Property(s)
     
