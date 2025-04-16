@@ -329,6 +329,26 @@
 			path = Stubs;
 			sourceTree = "<group>";
 		};
+		DF4920052DB043C700EA51D2 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				DF0F26E92DADF9AC002308E9 /* UserResopnse.swift */,
+				DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */,
+				DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
+		DF4920062DB0440300EA51D2 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				DF0F26E72DADF51E002308E9 /* UserRemoteDataSource.swift */,
+				DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */,
+				DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		DF4938442D6C958300494113 /* ChaitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,13 +390,9 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
+				DF4920062DB0440300EA51D2 /* DataSource */,
+				DF4920052DB043C700EA51D2 /* Response */,
 				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
-				DF0F26E92DADF9AC002308E9 /* UserResopnse.swift */,
-				DF0F26E72DADF51E002308E9 /* UserRemoteDataSource.swift */,
-				DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */,
-				DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */,
-				DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */,
-				DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */,
 				DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */,
 				DF50BFDA2D99B3C20022B1E3 /* FriendRepositoryImplementation.swift */,
 				DF7FBD962D7556DF00753FCE /* ChannelRepositoryImplementation.swift */,
