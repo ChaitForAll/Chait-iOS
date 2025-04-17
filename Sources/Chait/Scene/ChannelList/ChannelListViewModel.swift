@@ -42,6 +42,7 @@ final class ChannelListViewModel {
                         .map { ConversationSummaryViewModel($0) }
                         .forEach { summaryViewModel in
                             self?.conversationSummaries[summaryViewModel.id] = summaryViewModel
+                            self?.conversationSummariesSubject.send([summaryViewModel.id])
                         }
                 }
             )
