@@ -34,6 +34,7 @@
 		DF10C7B52D343A3E006035E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */; };
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
+		DF350FB62DB104670010FE8A /* SnakeKeyISODateJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */; };
 		DF45D6EF2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */; };
 		DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */; };
 		DF45D6F42D7DDA0200D5418D /* DummyListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */; };
@@ -136,6 +137,7 @@
 		DF10C7BB2D343A3F006035E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF10C7BE2D343A3F006035E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeKeyISODateJSONDecoder.swift; sourceTree = "<group>"; };
 		DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFetchHistoriesUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyListenMessagesUseCase.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
+				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
 				DF4920062DB0440300EA51D2 /* DataSource */,
 				DF4920052DB043C700EA51D2 /* Response */,
 				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
@@ -726,6 +729,7 @@
 				DF4938562D6CA37B00494113 /* ListenMessagesUseCase.swift in Sources */,
 				DF0F26DF2DADE400002308E9 /* ConversationResponse.swift in Sources */,
 				DF7BC62B2D7210D100AAF678 /* FetchChannelListUseCase.swift in Sources */,
+				DF350FB62DB104670010FE8A /* SnakeKeyISODateJSONDecoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
