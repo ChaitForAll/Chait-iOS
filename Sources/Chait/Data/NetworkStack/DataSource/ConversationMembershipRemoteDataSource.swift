@@ -34,7 +34,7 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .select()
             .eq("user_id", value: userID)
             .execute()
-            .decode(using: .convertFromSnakeCase)
+            .decodeJSON()
     }
     
     func fetchMembers(_ conversationID: UUID) async throws -> [UUID] {
@@ -43,7 +43,7 @@ final class DefaultConversationMembershipRemoteDataSource: ConversationMembershi
             .select()
             .eq("conversation_id", value: conversationID)
             .execute()
-            .decode(using: .convertFromSnakeCase)
+            .decodeJSON()
         return responses.map { $0.userID }
     }
 }

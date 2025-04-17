@@ -30,7 +30,7 @@ final class DefaultUserRemoteDataSource: UserRemoteDataSource {
             .select()
             .eq("id", value: userIdentifier)
             .execute()
-            .decode(using: .convertFromSnakeCase)
+            .decodeJSON()
     }
     
     func fetchUsers(_ userIdentifiers: [UUID]) async throws -> [UserResponse] {
@@ -39,6 +39,6 @@ final class DefaultUserRemoteDataSource: UserRemoteDataSource {
             .select()
             .in("id", values: userIdentifiers)
             .execute()
-            .decode(using: .convertFromSnakeCase)
+            .decodeJSON()
     }
 }

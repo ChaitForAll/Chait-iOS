@@ -34,6 +34,6 @@ final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
             .select()
             .in("id", values: conversationIdentifiers)
             .execute()
-            .decode(using: .convertFromSnakeCase)
+            .decodeJSON()
     }
 }

@@ -8,12 +8,7 @@ import Supabase
 import Foundation
 
 extension PostgrestResponse {
-    
-    func decode<ResponseType: Decodable>(
-        using decodingStrategy: JSONDecoder.KeyDecodingStrategy
-    ) throws -> ResponseType {
-        let snakeCaseDecoder = JSONDecoder()
-        snakeCaseDecoder.keyDecodingStrategy = decodingStrategy
-        return try snakeCaseDecoder.decode(ResponseType.self, from: data)
+    func decodeJSON<ResponseType: Decodable>() throws -> ResponseType {
+        return try SnakeKeyISODateJSONDecoder().decode(ResponseType.self, from: data)
     }
 }
