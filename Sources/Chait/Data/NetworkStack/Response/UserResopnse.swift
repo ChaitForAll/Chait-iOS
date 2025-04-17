@@ -12,6 +12,14 @@ struct UserResponse: Decodable {
     let displayName: String
     let createdAt: Date
     let profileImageURL: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case displayName
+        case createdAt
+        case profileImageURL = "profileImageUrl"
+    }
 }
 
 // MARK: Domain Mapping
