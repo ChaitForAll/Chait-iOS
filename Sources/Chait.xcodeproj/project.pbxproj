@@ -36,6 +36,7 @@
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
 		DF350FB62DB104670010FE8A /* SnakeKeyISODateJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */; };
 		DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */; };
+		DF350FBA2DB216E80010FE8A /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB92DB216DF0010FE8A /* AuthView.swift */; };
 		DF45D6EF2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */; };
 		DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */; };
 		DF45D6F42D7DDA0200D5418D /* DummyListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */; };
@@ -129,6 +130,7 @@
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeKeyISODateJSONDecoder.swift; sourceTree = "<group>"; };
 		DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		DF350FB92DB216DF0010FE8A /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFetchHistoriesUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyListenMessagesUseCase.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 		DFB7EFE92DB2DBA0005999E6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				DF350FB92DB216DF0010FE8A /* AuthView.swift */,
 				DFB7EFEA2DB2DBAB005999E6 /* AuthViewModel.swift */,
 			);
 			path = Auth;
@@ -656,6 +659,7 @@
 				DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */,
 				DF9C91F32D6EED8800A2BCDA /* ChatRepositoryImplementation.swift in Sources */,
 				DF4920022DB02B5300EA51D2 /* ConversationSummary.swift in Sources */,
+				DF350FBA2DB216E80010FE8A /* AuthView.swift in Sources */,
 				DF50BFDB2D99B3C80022B1E3 /* FriendRepositoryImplementation.swift in Sources */,
 				DF50BFE22D9AB7920022B1E3 /* FriendListViewController.swift in Sources */,
 				DF9676C22D9951830078D0D5 /* FriendRepository.swift in Sources */,
