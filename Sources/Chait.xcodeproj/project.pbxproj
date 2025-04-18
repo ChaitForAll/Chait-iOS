@@ -35,6 +35,7 @@
 		DF10C7BC2D343A3F006035E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BB2D343A3F006035E8 /* Assets.xcassets */; };
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
 		DF350FB62DB104670010FE8A /* SnakeKeyISODateJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */; };
+		DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */; };
 		DF45D6EF2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */; };
 		DF45D6F22D7DD94A00D5418D /* DummySendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */; };
 		DF45D6F42D7DDA0200D5418D /* DummyListenMessagesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */; };
@@ -126,6 +127,7 @@
 		DF10C7BE2D343A3F006035E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeKeyISODateJSONDecoder.swift; sourceTree = "<group>"; };
+		DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		DF45D6EE2D7DD81D00D5418D /* DummyFetchHistoriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyFetchHistoriesUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F12D7DD94A00D5418D /* DummySendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF45D6F32D7DDA0200D5418D /* DummyListenMessagesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyListenMessagesUseCase.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */,
 				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
 				DF50BFD82D99B34E0022B1E3 /* NetworkStack */,
 			);
@@ -647,6 +650,7 @@
 				DF9676C22D9951830078D0D5 /* FriendRepository.swift in Sources */,
 				DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */,
 				DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */,
+				DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */,
 				DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */,
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
 				DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */,
