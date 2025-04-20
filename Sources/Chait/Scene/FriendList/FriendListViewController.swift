@@ -46,7 +46,6 @@ final class FriendListViewController: UIViewController {
         let output = viewModel?.bind()
         output?.fetchedFriendList
             .sink { friendIdentifiers in
-                print(friendIdentifiers)
                 guard var snapShot = self.diffableDataSource?.snapshot() else {
                     return
                 }
