@@ -52,7 +52,7 @@ final class AppCoordinator {
         let tabViewController = UITabBarController()
         let friendList = createFriendsList()
         friendList.tabBarItem = UITabBarItem(title: "Friends", image: UIImage(systemName: "person.3.fill"), tag: 1)
-        let channelList = createChannelList()
+        let channelList = createConversationListViewController()
         channelList.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), tag: .zero)
         tabViewController.viewControllers = [friendList, channelList]
         return tabViewController
@@ -70,7 +70,7 @@ final class AppCoordinator {
         return friendListViewController
     }
     
-    private func createChannelList() -> ChannelListViewController {
+    private func createConversationListViewController() -> ConversationListViewController {
         let conversationUseCase = DefaultConversationUseCase(
             conversationRepository: ConversationRepositoryImplementation(
                 conversationRemote: DefaultConversationRemoteDataSource(supabase: client),
@@ -79,8 +79,8 @@ final class AppCoordinator {
             ),
             userID: authService.userID ?? UUID() /* TODO: Resolve optional */
         )
-        let viewModel = ChannelListViewModel(conversationUseCase: conversationUseCase)
-        let channelListViewController = ChannelListViewController()
+        let viewModel = ConversationListViewModel(conversationUseCase: conversationUseCase)
+        let channelListViewController = ConversationListViewController()
         channelListViewController.coordinator = self
         channelListViewController.viewModel = viewModel
         return channelListViewController

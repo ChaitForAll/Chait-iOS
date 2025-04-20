@@ -1,5 +1,5 @@
 //
-//  ChannelListViewController.swift
+//  ConversationListViewController.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class ChannelListViewController: UIViewController {
+final class ConversationListViewController: UIViewController {
     
     enum Section {
         case channelList
@@ -16,7 +16,7 @@ final class ChannelListViewController: UIViewController {
     
     // MARK: Property(s)
     
-    var viewModel: ChannelListViewModel?
+    var viewModel: ConversationListViewModel?
     var coordinator: AppCoordinator?
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
@@ -105,7 +105,7 @@ final class ChannelListViewController: UIViewController {
     }
 }
 
-extension ChannelListViewController: UICollectionViewDelegate {
+extension ConversationListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         if let id = diffableDataSource?.itemIdentifier(for: indexPath), let channel = viewModel?.item(for: id) {

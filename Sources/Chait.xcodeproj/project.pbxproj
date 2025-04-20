@@ -65,9 +65,8 @@
 		DF7BC6242D71965600AAF678 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6232D71965600AAF678 /* Supabase */; };
 		DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */; };
 		DF7BC6282D72106800AAF678 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6272D72106800AAF678 /* Channel.swift */; };
-		DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */; };
-		DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */; };
-		DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */; };
+		DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */; };
+		DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */; };
 		DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */; };
 		DF9676BE2D994F7F0078D0D5 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9676BD2D994F7F0078D0D5 /* Friend.swift */; };
 		DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */; };
@@ -154,9 +153,8 @@
 		DF5611092D7F1D6900B41259 /* StubChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubChatRepository.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatMessage.swift; sourceTree = "<group>"; };
 		DF7BC6272D72106800AAF678 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
-		DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListItem.swift; sourceTree = "<group>"; };
-		DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewController.swift; sourceTree = "<group>"; };
+		DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewModel.swift; sourceTree = "<group>"; };
+		DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		DF9676BD2D994F7F0078D0D5 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFriendsListUseCase.swift; sourceTree = "<group>"; };
@@ -404,7 +402,7 @@
 			children = (
 				DFB7EFE92DB2DBA0005999E6 /* Auth */,
 				DF50BFE02D9AB7750022B1E3 /* FriendList */,
-				DF7FBD9E2D75F67E00753FCE /* ChannelList */,
+				DF7FBD9E2D75F67E00753FCE /* ConversationList */,
 				DF9C91FD2D6F555100A2BCDA /* PersonalChat */,
 			);
 			path = Scene;
@@ -428,15 +426,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DF7FBD9E2D75F67E00753FCE /* ChannelList */ = {
+		DF7FBD9E2D75F67E00753FCE /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
 				DF4920032DB03EBA00EA51D2 /* ConversationSummaryViewModel.swift */,
-				DF7FBD9F2D75F69200753FCE /* ChannelListViewModel.swift */,
-				DF7FBDA12D75F77A00753FCE /* ChannelListItem.swift */,
-				DF7FBDA32D75FAB700753FCE /* ChannelListViewController.swift */,
+				DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */,
+				DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */,
 			);
-			path = ChannelList;
+			path = ConversationList;
 			sourceTree = "<group>";
 		};
 		DF9C91F42D6EF51400A2BCDA /* Data */ = {
@@ -650,9 +647,9 @@
 				DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */,
 				DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
-				DF7FBDA02D75F69200753FCE /* ChannelListViewModel.swift in Sources */,
+				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
-				DF7FBDA42D75FAB700753FCE /* ChannelListViewController.swift in Sources */,
+				DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */,
 				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
 				DF0F26CE2DABAD23002308E9 /* GroupConversation.swift in Sources */,
@@ -680,7 +677,6 @@
 				DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */,
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
-				DF7FBDA22D75F77A00753FCE /* ChannelListItem.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFB7EFEB2DB2DBAE005999E6 /* AuthViewModel.swift in Sources */,
 				DFB26CB12D78971E00BD0A4D /* FetchChatHistoryUseCase.swift in Sources */,

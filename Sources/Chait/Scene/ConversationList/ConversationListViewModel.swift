@@ -1,5 +1,5 @@
 //
-//  ChannelListViewModel.swift
+//  ConversationListViewModel.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class ChannelListViewModel {
+final class ConversationListViewModel {
     
     struct Output {
         let fetchedChannelListItems: AnyPublisher<[UUID], Never>
