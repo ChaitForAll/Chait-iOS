@@ -108,8 +108,9 @@ final class ConversationListViewController: UIViewController {
 extension ConversationListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        if let id = diffableDataSource?.itemIdentifier(for: indexPath), let channel = viewModel?.item(for: id) {
-            coordinator?.enterChannel(channel.id)
+        if let id = diffableDataSource?.itemIdentifier(for: indexPath),
+            let conversation = viewModel?.item(for: id) {
+            coordinator?.enterChannel(conversation.conversationID)
         }
     }
 }

@@ -8,12 +8,12 @@ import Foundation
     
 struct ConversationSummaryViewModel: Identifiable {
     let id: UUID
-    let channelID: UUID
+    let conversationID: UUID
     let title: String
     
     init(_ conversationSummary: ConversationSummary) {
         self.id = UUID()
-        self.channelID = conversationSummary.id
+        self.conversationID = conversationSummary.id
         self.title = conversationSummary.title
     }
 }
