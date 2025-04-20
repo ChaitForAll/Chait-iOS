@@ -17,29 +17,22 @@ struct AuthView: View {
         case email, password
     }
     
-    weak var delegate: AuthenticationViewControllerDelegate?
+    var delegate: AuthenticationViewControllerDelegate?
     
     @FocusState private var focusedField: Field?
     @State private var viewModel: AuthViewModel
-    private var cancelBag: Set<AnyCancellable> = .init()
     
-    init(
-        viewModel: AuthViewModel,
-        delegate: AuthenticationViewControllerDelegate
-    ) {
-        self.viewModel =  viewModel
-        self.delegate = delegate
+    init(viewModel: AuthViewModel) {
+        self.viewModel = viewModel
     }
-    
+
     var body: some View {
         VStack {
-            Text("Welcome to Chait ").font(.title)
+            Text("Welcome to Chait").font(.title)
             TextField("Email", text: $viewModel.email)
-                .frame(width: 200)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .focused($focusedField, equals: .email)
             SecureField("Password", text: $viewModel.password)
-                .frame(width: 200)
                 .focused($focusedField, equals: .password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             Button("Sign In") {
@@ -47,6 +40,7 @@ struct AuthView: View {
             }
             .buttonStyle(.borderedProminent)
         }
+        .frame(width: 250)
         .onReceive(viewModel.$isAuthenticated) { isAuthenticated in
             if isAuthenticated {
                 delegate?.authenticationSucceed()
