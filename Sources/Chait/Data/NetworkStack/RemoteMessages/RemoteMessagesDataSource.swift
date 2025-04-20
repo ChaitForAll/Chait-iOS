@@ -113,7 +113,7 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
                     let historyResponses: [MessageResponse] = try await self.client
                         .from("messages")
                         .select()
-                        .eq("channel_id", value: channelID)
+                        .eq("conversation_id", value: channelID)
                         .order("created_at", ascending: false)
                         .range(from: historyOffset + 1, to: historyOffset + maxItemsCount)
                         .execute()

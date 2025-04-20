@@ -51,7 +51,7 @@ final class DefaultChatRepository: ChatRepository {
                         text: response.text,
                         messageID: response.messageID,
                         senderID: response.senderID,
-                        channelID: response.channelID,
+                        channelID: response.conversationID,
                         createdAt: response.createdAt
                     )
                 }
@@ -82,7 +82,7 @@ final class DefaultChatRepository: ChatRepository {
                         text: response.text,
                         messageID: response.messageID,
                         senderID: response.senderID,
-                        channelID: response.channelID,
+                        channelID: response.conversationID,
                         createdAt: response.createdAt
                     )
                 }
