@@ -8,6 +8,7 @@
 import Foundation
 import Supabase
 import UIKit
+import SwiftUI
 
 final class AppCoordinator {
     
@@ -16,15 +17,29 @@ final class AppCoordinator {
     let navigationController: UINavigationController = UINavigationController()
     
     private let client: SupabaseClient
+    private let authService: AuthenticationService
     
     init(client: SupabaseClient) {
         self.client = client
+        self.authService = AuthenticationService(supabase: client)
     }
     
     // MARK: Function(s)
     
     func prepareRoot() {
-        navigationController.pushViewController(createMainTabFlow(), animated: false)
+        if authService.isAuthenticated {
+            toMainFlow()
+        } else {
+            toAuthenticationFlow()
+        }
+    }
+    
+    func toMainFlow() {
+        navigationController.setViewControllers([createMainTabFlow()], animated: true)
+    }
+    
+    func toAuthenticationFlow() {
+        navigationController.setViewControllers([createAuthFlow()], animated: true)
     }
     
     func enterChannel(_ channelIdentifier: UUID) {
@@ -47,7 +62,7 @@ final class AppCoordinator {
         let friendRepository = FriendRepositoryImplementation(client: client)
         let useCase = DefaultFetchFriendsListUseCase(repository: friendRepository)
         let viewModel = FriendListViewModel(
-            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
+            userID: authService.userID ?? UUID(), /* TODO: Resolve optional */
             fetchFriendsListUseCase: useCase
         )
         let friendListViewController = FriendListViewController()
@@ -62,7 +77,7 @@ final class AppCoordinator {
                 conversationMembershipRemote: DefaultConversationMembershipRemoteDataSource(supabase: client),
                 userRemote: DefaultUserRemoteDataSource(supabase: client)
             ),
-            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!
+            userID: authService.userID ?? UUID() /* TODO: Resolve optional */
         )
         let viewModel = ChannelListViewModel(conversationUseCase: conversationUseCase)
         let channelListViewController = ChannelListViewController()
@@ -71,14 +86,14 @@ final class AppCoordinator {
         return channelListViewController
     }
     
-    private func createPersonalChat(_ channelID: UUID = UUID(uuidString: "5de13657-a02c-43f8-ac2a-636d268d80d5")!) -> PersonalChatViewController {
+    private func createPersonalChat(_ channelID: UUID) -> PersonalChatViewController {
         let remoteMessagesDataSource = DefaultRemoteMessagesDataSource(client: client)
         let chatRepository = DefaultChatRepository(remoteChatMessages: remoteMessagesDataSource)
         let sendMessageUseCase = DefaultSendMessageUseCase(repository: chatRepository)
         let fetchChatHistoryUseCase = DefaultFEtchChatHistoryUseCase(repository: chatRepository)
         let listenMessagesUseCase = DefaultListenMessagesUseCase(chatRepository: chatRepository)
         let personalChatVieWModel = PersonalChatViewModel(
-            userID: UUID(uuidString: "e22ffdc4-dddf-47cc-99e6-82cd56c7d415")!,
+            userID: authService.userID!,
             channelID: channelID,
             sendMessageUseCase: sendMessageUseCase,
             listenMessagesUseCase: listenMessagesUseCase,
@@ -87,5 +102,22 @@ final class AppCoordinator {
         let personalChatViewController = PersonalChatViewController()
         personalChatViewController.viewModel = personalChatVieWModel
         return personalChatViewController
+    }
+    
+    private func createAuthFlow() -> UIHostingController<AuthView> {
+        let authViewModel = AuthViewModel(authService: authService)
+        var authView = AuthView(viewModel: authViewModel)
+        authView.delegate = self
+        let authHostingViewController = UIHostingController(rootView: authView)
+        return authHostingViewController
+    }
+}
+
+// MARK: AuthenticationViewControllerDelegate
+
+extension AppCoordinator: AuthenticationViewControllerDelegate {
+    
+    func authenticationSucceed() {
+        toMainFlow()
     }
 }
