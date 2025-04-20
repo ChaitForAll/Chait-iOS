@@ -14,6 +14,10 @@ final class AuthenticationService {
     
     var userID: UUID?
     
+    var isAuthenticated: Bool {
+        return userID != nil
+    }
+    
     private let supabase: SupabaseClient
     
     init(supabase: SupabaseClient) {
