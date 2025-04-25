@@ -84,6 +84,7 @@
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
 		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
+		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
+		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +382,7 @@
 		DF50BFE02D9AB7750022B1E3 /* FriendList */ = {
 			isa = PBXGroup;
 			children = (
+				DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */,
 				DF50BFE12D9AB78E0022B1E3 /* FriendListViewController.swift */,
 				DF50BFDE2D9AB39F0022B1E3 /* FriendListViewModel.swift */,
 			);
@@ -646,6 +649,7 @@
 				DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */,
 				DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */,
 				DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */,
+				DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
