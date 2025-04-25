@@ -88,6 +88,7 @@
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
 		DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */; };
+		DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImplementation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -523,6 +525,7 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */,
 				DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */,
 				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
 				DF50BFD82D99B34E0022B1E3 /* NetworkStack */,
@@ -663,6 +666,7 @@
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
+				DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */,
 				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
