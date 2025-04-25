@@ -10,6 +10,6 @@ struct Message {
     let text: String
     let messageID: UUID
     let senderID: UUID
-    let channelID: UUID
+    let conversationID: UUID
     let createdAt: Date
 }
