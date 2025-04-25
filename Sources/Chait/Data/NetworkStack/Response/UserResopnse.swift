@@ -11,14 +11,14 @@ struct UserResponse: Decodable {
     let name: String
     let displayName: String
     let createdAt: Date
-    let profileImageURL: URL
+    let profileImage: URL
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
         case displayName
         case createdAt
-        case profileImageURL = "profileImageUrl"
+        case profileImage = "profileImage"
     }
 }
 
@@ -32,7 +32,7 @@ extension UserResponse {
             userName: name,
             displayName: displayName,
             profileImage: ProfileImage(
-                imageURL: profileImageURL
+                imageURL: profileImage
             ),
             createdAt: createdAt
         )

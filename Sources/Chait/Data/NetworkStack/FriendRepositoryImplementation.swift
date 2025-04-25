@@ -36,7 +36,7 @@ final class FriendRepositoryImplementation: FriendRepository {
                             name: user.name,
                             displayName: user.displayName,
                             createdAt: user.createdAt,
-                            image: user.profileImageURL
+                            image: user.profileImage
                         )
                     }
                     promise(.success(friendsList))
