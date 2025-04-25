@@ -6,17 +6,21 @@
     
 import UIKit
 
-struct FriendViewModel: Identifiable {
+final class FriendViewModel: Identifiable {
+    
+    var image: UIImage?
+    
     let id: UUID
     let name: String
     let displayName: String
     let createdAt: Date
-    var image: UIImage?
+    let imageURL: URL
     
     init(friend: Friend) {
         self.id = friend.friendID
         self.name = friend.name
         self.displayName = friend.displayName.isEmpty ? friend.name : friend.displayName
         self.createdAt = friend.createdAt
+        self.imageURL = friend.image
     }
 }
