@@ -86,6 +86,7 @@
 		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
+		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
+		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 		DF0F26BE2DAAFC7B002308E9 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */,
 				DF0F26DA2DAD18AA002308E9 /* ConversationRepository.swift */,
 				DF9676C12D9951830078D0D5 /* FriendRepository.swift */,
 				DFBF6F352D6C8616003B51DB /* ChatRepository.swift */,
@@ -670,6 +673,7 @@
 				DF9676C22D9951830078D0D5 /* FriendRepository.swift in Sources */,
 				DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */,
 				DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */,
+				DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */,
 				DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */,
 				DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */,
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
