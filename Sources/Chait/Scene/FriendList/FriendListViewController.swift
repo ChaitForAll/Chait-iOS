@@ -57,6 +57,16 @@ final class FriendListViewController: UIViewController {
                 self.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
+        
+        output?.imageReady
+            .sink { imageReadyFriendIdentifiers in
+                guard var snapshot = self.diffableDataSource?.snapshot() else {
+                    return
+                }
+                snapshot.reconfigureItems(imageReadyFriendIdentifiers)
+                self.diffableDataSource?.apply(snapshot)
+            }
+            .store(in: &cancelBag)
     }
     
     private func configureCollectionView() {
@@ -95,6 +105,19 @@ final class FriendListViewController: UIViewController {
                 content.image = friend.image
             }
             cell.contentConfiguration = content
+        }
+    }
+}
+
+extension FriendListViewController: UICollectionViewDelegate {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if let friendIdentifier = diffableDataSource?.itemIdentifier(for: indexPath) {
+            viewModel?.onWillDisplayFriend(friendIdentifier)
         }
     }
 }

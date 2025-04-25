@@ -48,6 +48,14 @@ final class FriendListViewModel {
         fetchFriendsList()
     }
     
+    func onWillDisplayFriend(_ friendIdentifier: UUID) {
+        if let friendViewModel = friend(for: friendIdentifier) {
+            prepareImage(friendViewModel)
+                .sink { self.imageReadySubject.send([$0]) }
+                .store(in: &cancelBag)
+        }
+    }
+    
     func friend(for id: UUID) -> FriendViewModel? {
         return friendsList.first { $0.id == id }
     }
@@ -72,7 +80,7 @@ final class FriendListViewModel {
     private func prepareImage(_ friendViewModel: FriendViewModel) -> AnyPublisher<UUID, Never> {
         fetchImageUseCase.fetchImage(url: friendViewModel.imageURL)
             .receive(on: DispatchQueue.main)
-            .replaceError(with: UIImage.add)
+            .replaceError(with: UIImage.add) // TODO: Replace with default empty image
             .flatMap { image in
                 friendViewModel.image = image
                 return Just(friendViewModel.id)
