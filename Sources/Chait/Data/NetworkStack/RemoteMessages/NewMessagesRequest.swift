@@ -9,12 +9,12 @@ import Foundation
 
 struct NewMessageRequest: Encodable {
     let text: String
-    let senderID: UUID
-    let channelID: UUID
+    let sender: UUID
+    let conversationId: UUID
     
     enum CodingKeys: String, CodingKey {
         case text
-        case senderID = "sender"
-        case channelID = "channel_id"
+        case sender
+        case conversationId = "conversation_id"
     }
 }

@@ -50,7 +50,11 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     ) -> AnyPublisher<Void, RemoteMessagesDataSourceError> {
         return Future<Void, RemoteMessagesDataSourceError> { promise in
             Task {
-                let newMessageRequest = NewMessageRequest(text: text, senderID: senderID, channelID: channelID)
+                let newMessageRequest = NewMessageRequest(
+                    text: text,
+                    sender: senderID,
+                    conversationId: channelID
+                )
                 
                 do {
                     let response = try await self.client
