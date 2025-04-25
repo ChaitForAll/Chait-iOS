@@ -159,8 +159,12 @@ final class PersonalChatViewController: UIViewController {
             minCurrentBatchHeight = maxCurrentBatchHeight
             maxCurrentBatchHeight = collectionView.contentSize.height
             
+            guard !(collectionView.contentSize.height < collectionView.bounds.height) else {
+                return
+            }
+            
             guard !isSnapshotEmptyBeforeAddingItems else {
-                let actualOffset = collectionView.contentOffset.y - collectionView.safeAreaInsets.top
+                let actualOffset = collectionView.contentOffset.y + collectionView.safeAreaInsets.top
                 let diff = collectionView.contentSize.height - collectionView.bounds.height - actualOffset
                 collectionView.contentOffset.y = diff
                 return
