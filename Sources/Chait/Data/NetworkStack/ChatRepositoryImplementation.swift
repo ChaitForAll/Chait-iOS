@@ -49,9 +49,9 @@ final class DefaultChatRepository: ChatRepository {
                 return messagesResponse.map { response in
                     Message(
                         text: response.text,
-                        messageId: response.messageID,
-                        senderId: response.senderID,
-                        conversationId: response.conversationID,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        conversationID: response.conversationID,
                         createdAt: response.createdAt
                     )
                 }
@@ -80,9 +80,9 @@ final class DefaultChatRepository: ChatRepository {
                 return messagesResponse.map { response in
                     Message(
                         text: response.text,
-                        messageId: response.messageID,
-                        senderId: response.senderID,
-                        conversationId: response.conversationID,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        conversationID: response.conversationID,
                         createdAt: response.createdAt
                     )
                 }

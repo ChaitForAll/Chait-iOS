@@ -130,9 +130,9 @@ private extension Array where Element == Message {
     func toUI() -> [PersonalChatMessage] {
         self.map { message in
             PersonalChatMessage(
-                id: message.messageId,
+                id: message.messageID,
                 text: message.text,
-                senderID: message.senderId,
+                senderID: message.senderID,
                 createdAt: message.createdAt
             )
         }
