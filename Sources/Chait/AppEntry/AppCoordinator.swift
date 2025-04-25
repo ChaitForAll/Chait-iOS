@@ -59,7 +59,10 @@ final class AppCoordinator {
     }
     
     private func createFriendsList() -> FriendListViewController {
-        let friendRepository = FriendRepositoryImplementation(client: client)
+        let friendRepository = FriendRepositoryImplementation(
+            client: client,
+            usersRemote: DefaultUserRemoteDataSource(supabase: client)
+        )
         let useCase = DefaultFetchFriendsListUseCase(repository: friendRepository)
         let viewModel = FriendListViewModel(
             userID: authService.userID ?? UUID(), /* TODO: Resolve optional */
