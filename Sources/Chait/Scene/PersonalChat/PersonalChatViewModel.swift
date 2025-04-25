@@ -90,10 +90,10 @@ final class PersonalChatViewModel {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] allReceivedMessages in
-                    self?.receivedNewMessage.send(allReceivedMessages.map {$0.id })
                     allReceivedMessages.forEach {
                         self?.chatMessagesDictionary[$0.id] = $0
                     }
+                    self?.receivedNewMessage.send(allReceivedMessages.map {$0.id })
                 }
             )
             .store(in: &cancelBag)
