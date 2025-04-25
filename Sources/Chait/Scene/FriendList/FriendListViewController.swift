@@ -35,6 +35,7 @@ final class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
         configureCollectionView()
         bindViewModel()
         viewModel?.onViewDidLoad()
@@ -91,6 +92,7 @@ final class FriendListViewController: UIViewController {
                 content.text = friend.displayName
                 content.secondaryText = friend.createdAt.formatted()
                 content.imageProperties.maximumSize = .init(width: 60, height: 60)
+                content.image = friend.image
             }
             cell.contentConfiguration = content
         }
