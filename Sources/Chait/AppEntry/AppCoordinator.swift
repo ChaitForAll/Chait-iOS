@@ -66,7 +66,10 @@ final class AppCoordinator {
         let useCase = DefaultFetchFriendsListUseCase(repository: friendRepository)
         let viewModel = FriendListViewModel(
             userID: authService.userID ?? UUID(), /* TODO: Resolve optional */
-            fetchFriendsListUseCase: useCase
+            fetchFriendsListUseCase: useCase,
+            fetchImageUseCase: DefaultFetchImageUseCase(
+                imageRepository: ImageRepositoryImplementation()
+            )
         )
         let friendListViewController = FriendListViewController()
         friendListViewController.viewModel = viewModel

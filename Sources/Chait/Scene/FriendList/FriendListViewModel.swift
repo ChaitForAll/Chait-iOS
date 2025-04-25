@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 final class FriendListViewModel {
     
@@ -14,6 +15,7 @@ final class FriendListViewModel {
     
     struct Output {
         let fetchedFriendList: AnyPublisher<[UUID], Never>
+        let imageReady: AnyPublisher<[UUID], Never>
     }
     
     // MARK: Property(s)
@@ -24,16 +26,22 @@ final class FriendListViewModel {
     private let userID: UUID
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
     private let fetchedFriendListSubject: PassthroughSubject<[UUID], Never> = .init()
+    private let imageReadySubject: PassthroughSubject<[UUID], Never> = .init()
+    private let fetchImageUseCase: FetchImageUseCase
     
-    init(userID: UUID, fetchFriendsListUseCase: FetchFriendsListUseCase) {
+    init(userID: UUID, fetchFriendsListUseCase: FetchFriendsListUseCase, fetchImageUseCase: FetchImageUseCase) {
         self.userID = userID
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
+        self.fetchImageUseCase = fetchImageUseCase
     }
     
     // MARK: Function(s)
     
     func bind() -> Output {
-        return Output(fetchedFriendList: fetchedFriendListSubject.eraseToAnyPublisher())
+        return Output(
+            fetchedFriendList: fetchedFriendListSubject.eraseToAnyPublisher(),
+            imageReady: imageReadySubject.eraseToAnyPublisher()
+        )
     }
     
     func onViewDidLoad() {
@@ -59,5 +67,16 @@ final class FriendListViewModel {
                 }
             )
             .store(in: &cancelBag)
+    }
+    
+    private func prepareImage(_ friendViewModel: FriendViewModel) -> AnyPublisher<UUID, Never> {
+        fetchImageUseCase.fetchImage(url: friendViewModel.imageURL)
+            .receive(on: DispatchQueue.main)
+            .replaceError(with: UIImage.add)
+            .flatMap { image in
+                friendViewModel.image = image
+                return Just(friendViewModel.id)
+            }
+            .eraseToAnyPublisher()
     }
 }
