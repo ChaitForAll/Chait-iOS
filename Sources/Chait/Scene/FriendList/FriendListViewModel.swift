@@ -19,7 +19,7 @@ final class FriendListViewModel {
     // MARK: Property(s)
     
     private var cancelBag: Set<AnyCancellable> = .init()
-    private var friendsList: [Friend] = []
+    private var friendsList: [FriendViewModel] = []
     
     private let userID: UUID
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
@@ -40,6 +40,10 @@ final class FriendListViewModel {
         fetchFriendsList()
     }
     
+    func friend(for id: UUID) -> FriendViewModel? {
+        return friendsList.first { $0.id == id }
+    }
+    
     // MARK: Private Function(s)
     
     private func fetchFriendsList() {
@@ -48,7 +52,9 @@ final class FriendListViewModel {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] friendsList in
-                    self?.friendsList.append(contentsOf: friendsList)
+                    self?.friendsList.append(
+                        contentsOf: friendsList.map { FriendViewModel(friend: $0) }
+                    )
                     self?.fetchedFriendListSubject.send(friendsList.map { $0.friendID })
                 }
             )
