@@ -9,5 +9,8 @@ import Foundation
 
 struct Friend {
     let friendID: UUID
+    let name: String
+    let displayName: String
     let createdAt: Date
+    let image: URL
 }

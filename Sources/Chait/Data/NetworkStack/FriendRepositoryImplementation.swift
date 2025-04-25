@@ -14,9 +14,11 @@ final class FriendRepositoryImplementation: FriendRepository {
     // MARK: Property(s)
     
     private let client: SupabaseClient
+    private let usersRemote: UserRemoteDataSource
     
-    init(client: SupabaseClient) {
+    init(client: SupabaseClient, usersRemote: UserRemoteDataSource) {
         self.client = client
+        self.usersRemote = usersRemote
     }
     
     // MARK: Function(s)
@@ -26,9 +28,16 @@ final class FriendRepositoryImplementation: FriendRepository {
             Task {
                 do {
                     let friendsResponse = try await self.asyncFetchFriendshipResponse(userID)
-                    let friendsList = friendsResponse.map {
-                        let friendID = $0.friendID == userID ? $0.userID : $0.friendID
-                        return Friend(friendID: friendID, createdAt: $0.created_at)
+                        .map { $0.userID == userID ? $0.friendID : $0.userID }
+                    let users = try await self.usersRemote.fetchUsers(friendsResponse)
+                    let friendsList = users.map { user in
+                        return Friend(
+                            friendID: user.id,
+                            name: user.name,
+                            displayName: user.displayName,
+                            createdAt: user.createdAt,
+                            image: user.profileImageURL
+                        )
                     }
                     promise(.success(friendsList))
                 } catch {
