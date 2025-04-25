@@ -86,13 +86,12 @@ final class FriendListViewController: UIViewController {
             cell, indexPath, itemIdentifier in
             
             var content = cell.defaultContentConfiguration()
-            content.image = [
-                UIImage(systemName: "square.fill"),
-                UIImage(systemName: "circle.fill"),
-                UIImage(systemName: "triangle.fill")
-            ].randomElement() ?? .none
-            content.text = "User \(indexPath.item)"
-            content.secondaryText = itemIdentifier.uuidString
+            
+            if let friend = self.viewModel?.friend(for: itemIdentifier) {
+                content.text = friend.displayName
+                content.secondaryText = friend.createdAt.formatted()
+                content.imageProperties.maximumSize = .init(width: 60, height: 60)
+            }
             cell.contentConfiguration = content
         }
     }
