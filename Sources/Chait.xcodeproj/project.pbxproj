@@ -85,6 +85,7 @@
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
 		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
+		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 		DF0F26BD2DAAFC66002308E9 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */,
 				DF0F26D42DAD14BB002308E9 /* ConversationUseCase.swift */,
 				DF4938552D6CA37B00494113 /* ListenMessagesUseCase.swift */,
 				DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */,
@@ -649,6 +652,7 @@
 				DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */,
 				DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */,
 				DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */,
+				DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */,
 				DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
