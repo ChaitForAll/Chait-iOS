@@ -12,7 +12,6 @@ enum ConversationError: Error {
 }
 
 protocol ConversationUseCase {
-    func fetchConversationList() -> AnyPublisher<[ConversationType], ConversationError>
     func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError>
 }
 
@@ -29,10 +28,6 @@ final class DefaultConversationUseCase: ConversationUseCase {
     }
     
     // MARK: Function(s)
-    
-    func fetchConversationList() -> AnyPublisher<[ConversationType], ConversationError> {
-        return conversationRepository.fetchConversationList(userID)
-    }
     
     func fetchConversationSummaryList(
     ) -> AnyPublisher<[ConversationSummary], ConversationError> {
