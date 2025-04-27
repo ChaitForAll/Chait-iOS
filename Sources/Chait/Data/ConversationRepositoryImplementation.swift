@@ -75,8 +75,33 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         return conversationRemote.startListeningInsertions(conversationID)
             .mapError { conversationError in
                 switch conversationError {
+                default:
+                    return .listeningMessagesFailed
+                }
+            }
+            .map { responses in
+                return responses.map { response in
+                    Message(
+                        text: response.text,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        conversationID: response.conversationID,
+                        createdAt: response.createdAt
+                    )
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchHistory(_ conversationID: UUID, historyOffset: Int, maxItems: Int) -> AnyPublisher<[Message], ConversationError> {
+        return conversationRemote
+            .readHistory(channelID: conversationID, historyOffset: historyOffset, maxItemsCount: maxItems)
+            .mapError { datasourceError in
+                switch datasourceError {
                 case .unknown:
-                    return ConversationError.listeningMessagesFailed
+                    return ConversationError.fetchFailed
+                case .endOfItems:
+                    return ConversationError.endOfItems
                 }
             }
             .map { responses in

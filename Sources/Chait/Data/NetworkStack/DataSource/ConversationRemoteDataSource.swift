@@ -10,6 +10,7 @@ import Supabase
 
 enum ConversationDatasourceError: Error {
     case unknown
+    case endOfItems
 }
 
 protocol ConversationRemoteDataSource {
@@ -17,7 +18,14 @@ protocol ConversationRemoteDataSource {
         _ conversationIdentifiers: [UUID]
     ) async throws -> [ConversationResponse]
     func insertNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
-    func startListeningInsertions(_ conversationID: UUID) -> AnyPublisher<[MessageResponse], ConversationDatasourceError>
+    func startListeningInsertions(
+        _ conversationID: UUID
+    ) -> AnyPublisher<[MessageResponse], ConversationDatasourceError>
+    func readHistory(
+        channelID: UUID,
+        historyOffset: Int,
+        maxItemsCount: Int
+    ) -> AnyPublisher<[MessageResponse], ConversationDatasourceError>
 }
 
 final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
@@ -78,5 +86,35 @@ final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
         return messageListenSubject
             .handleEvents(receiveCancel: { listenTask.cancel() })
             .eraseToAnyPublisher()
+    }
+    
+    func readHistory(
+        channelID: UUID,
+        historyOffset: Int,
+        maxItemsCount: Int
+    ) -> AnyPublisher<[MessageResponse], ConversationDatasourceError> {
+        return Future<[MessageResponse], ConversationDatasourceError> { promise in
+            Task {
+                do {
+                    let historyResponses: [MessageResponse] = try await self.supabase
+                        .from("messages")
+                        .select()
+                        .eq("conversation_id", value: channelID)
+                        .order("created_at", ascending: false)
+                        .range(from: historyOffset + 1, to: historyOffset + maxItemsCount)
+                        .execute()
+                        .value
+                    
+                    guard !historyResponses.isEmpty else {
+                        return promise(.failure(.endOfItems))
+                    }
+                    
+                    promise(.success(historyResponses))
+                } catch {
+                    promise(.failure(.unknown))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
     }
 }
