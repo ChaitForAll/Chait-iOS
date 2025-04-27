@@ -70,4 +70,26 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         }
         .eraseToAnyPublisher()
     }
+    
+    func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError> {
+        return conversationRemote.startListeningInsertions(conversationID)
+            .mapError { conversationError in
+                switch conversationError {
+                case .unknown:
+                    return ConversationError.listeningMessagesFailed
+                }
+            }
+            .map { responses in
+                return responses.map { response in
+                    Message(
+                        text: response.text,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        conversationID: response.conversationID,
+                        createdAt: response.createdAt
+                    )
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 }

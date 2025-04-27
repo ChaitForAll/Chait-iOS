@@ -9,11 +9,13 @@ import Combine
 
 enum ConversationError: Error {
     case fetchFailed
+    case listeningMessagesFailed
 }
 
 protocol ConversationUseCase {
     func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError>
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError>
+    func startListeningMessages(_ channelID: UUID) -> AnyPublisher<[Message], ConversationError>
 }
 
 final class DefaultConversationUseCase: ConversationUseCase {
@@ -37,5 +39,11 @@ final class DefaultConversationUseCase: ConversationUseCase {
     
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError> {
         conversationRepository.sendMessage(newMessage)
+    }
+
+    func startListeningMessages(
+        _ conversationID: UUID
+    ) -> AnyPublisher<[Message], ConversationError> {
+        conversationRepository.startListening(conversationID)
     }
 }

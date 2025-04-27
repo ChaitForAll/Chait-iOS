@@ -10,4 +10,5 @@ import Combine
 protocol ConversationRepository {
     func fetchConversationSummaryList(_ userID: UUID) -> AnyPublisher<[ConversationSummary], ConversationError>
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError>
+    func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError>
 }
