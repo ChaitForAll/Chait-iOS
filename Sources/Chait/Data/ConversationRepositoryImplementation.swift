@@ -43,4 +43,31 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         }
         .eraseToAnyPublisher()
     }
+    
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError> {
+        return Future { promise in
+            Task {
+                do {
+                    let response = try await self.conversationRemote.insertNewMessage(
+                        NewMessageRequest(
+                            text: newMessage.text,
+                            sender: newMessage.senderID,
+                            conversationId: newMessage.conversationID
+                        )
+                    )
+                    let message = Message(
+                        text: response.text,
+                        messageID: response.messageID,
+                        senderID: response.senderID,
+                        conversationID: response.conversationID,
+                        createdAt: response.createdAt
+                    )
+                    promise(.success(message))
+                } catch {
+                    promise(.failure(.sendMessageFailed))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
 }

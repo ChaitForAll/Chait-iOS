@@ -13,6 +13,7 @@ enum ConversationError: Error {
 
 protocol ConversationUseCase {
     func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError>
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError>
 }
 
 final class DefaultConversationUseCase: ConversationUseCase {
@@ -32,5 +33,9 @@ final class DefaultConversationUseCase: ConversationUseCase {
     func fetchConversationSummaryList(
     ) -> AnyPublisher<[ConversationSummary], ConversationError> {
         return conversationRepository.fetchConversationSummaryList(userID)
+    }
+    
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError> {
+        conversationRepository.sendMessage(newMessage)
     }
 }
