@@ -14,33 +14,37 @@ final class AppCoordinator {
     
     // MARK: Property(s)
     
-    let navigationController: UINavigationController = UINavigationController()
-    
+    private let navigationController: UINavigationController = UINavigationController()
     private let appContainer: AppContainer = AppContainer()
     
     // MARK: Function(s)
     
-    func prepareRoot() {
+    func start(on window: UIWindow) {
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
         if appContainer.authService.isAuthenticated {
             toMainFlow()
         } else {
             toAuthenticationFlow()
         }
     }
-    
-    func toMainFlow() {
-        navigationController.setViewControllers([createMainTabFlow()], animated: true)
-    }
-    
-    func toAuthenticationFlow() {
-        navigationController.setViewControllers([createAuthFlow()], animated: true)
-    }
-    
+
     func enterChannel(_ channelIdentifier: UUID) {
-        navigationController.pushViewController(createPersonalChat(channelIdentifier), animated: true)
+        navigationController.pushViewController(
+            createPersonalChat(channelIdentifier),
+            animated: true
+        )
     }
     
     // MARK: Private Function(s)
+    
+    private func toMainFlow() {
+        navigationController.setViewControllers([createMainTabFlow()], animated: true)
+    }
+    
+    private func toAuthenticationFlow() {
+        navigationController.setViewControllers([createAuthFlow()], animated: true)
+    }
     
     private func createMainTabFlow() -> UITabBarController {
         let tabViewController = UITabBarController()
