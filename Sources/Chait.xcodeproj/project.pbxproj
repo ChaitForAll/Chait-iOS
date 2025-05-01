@@ -85,6 +85,7 @@
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFBF6F332D6C8424003B51DB /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */; };
 		DFBF6F362D6C8616003B51DB /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F352D6C8616003B51DB /* ChatRepository.swift */; };
+		DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
@@ -179,6 +180,7 @@
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFBF6F322D6C8424003B51DB /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DFBF6F352D6C8616003B51DB /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
+		DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
 			isa = PBXGroup;
 			children = (
+				DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */,
 				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
 				DF10C7B22D343A3E006035E8 /* AppDelegate.swift */,
 				DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */,
@@ -703,6 +706,7 @@
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
 				DFB7EFEB2DB2DBAE005999E6 /* AuthViewModel.swift in Sources */,
+				DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */,
 				DFB26CB12D78971E00BD0A4D /* FetchChatHistoryUseCase.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
 				DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */,
