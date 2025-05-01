@@ -15,7 +15,7 @@ final class AppContainer {
     
     // MARK: Service(s)
     
-    private let authService: AuthenticationService
+    let authService: AuthenticationService
     
     // MARK: Repository(s)
     
