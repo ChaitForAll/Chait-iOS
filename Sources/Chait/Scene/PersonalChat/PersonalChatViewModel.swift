@@ -28,26 +28,20 @@ final class PersonalChatViewModel {
     private let receivedChatHistories: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
     
     private let userID: UUID
-    private let channelID: UUID
+    private let conversationID: UUID
     private let historyBatchSize: Int
-    private let sendMessageUseCase: SendMessageUseCase
-    private let listenMessagesUseCase: ListenMessagesUseCase
-    private let fetchChatHistoryUseCase: FetchChatHistoryUseCase
+    private let conversationUseCase: ConversationUseCase
     
     init(
         userID: UUID,
         channelID: UUID,
         historyBatchSize: Int = 50,
-        sendMessageUseCase: SendMessageUseCase,
-        listenMessagesUseCase: ListenMessagesUseCase,
-        fetchChatHistoryUseCase: FetchChatHistoryUseCase
+        conversationUseCase: ConversationUseCase
     ) {
         self.userID = userID
-        self.channelID = channelID
+        self.conversationID = channelID
         self.historyBatchSize = historyBatchSize
-        self.sendMessageUseCase = sendMessageUseCase
-        self.listenMessagesUseCase = listenMessagesUseCase
-        self.fetchChatHistoryUseCase = fetchChatHistoryUseCase
+        self.conversationUseCase = conversationUseCase
     }
     
     // MARK: Function(s)
@@ -69,8 +63,8 @@ final class PersonalChatViewModel {
     }
     
     func onSendMessage() {
-        sendMessageUseCase
-            .sendMessage(text: userMessageText, senderID: userID, channelID: channelID)
+        conversationUseCase
+            .sendMessage(NewMessage(text: userMessageText, senderID: userID, conversationID: conversationID))
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancelBag)
         userMessageText.removeAll()
@@ -83,10 +77,19 @@ final class PersonalChatViewModel {
     // MARK: Private Function(s)
     
     private func startListening() {
-        listenMessagesUseCase
-            .startListening(channelID: channelID)
+        conversationUseCase
+            .startListeningMessages(conversationID)
             .receive(on: DispatchQueue.main)
-            .map { $0.toUI() }
+            .map { messages in
+                messages.map { message in
+                    PersonalChatMessage(
+                        id: message.messageID,
+                        text: message.text,
+                        senderID: message.senderID,
+                        createdAt: message.createdAt
+                    )
+                }
+            }
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] allReceivedMessages in
@@ -104,14 +107,23 @@ final class PersonalChatViewModel {
             return
         }
         self.isFetching = true
-        fetchChatHistoryUseCase
+        conversationUseCase
             .fetchHistory(
-                channelID: channelID,
-                messagesOffset: historyItemsOffset,
-                maxItemsCount: historyBatchSize
+                conversationID,
+                historyOffset: historyItemsOffset,
+                maxItems: historyBatchSize
             )
             .receive(on: DispatchQueue.main)
-            .map { $0.toUI() }
+            .map { messages in
+                messages.map { message in
+                    PersonalChatMessage(
+                        id: message.messageID,
+                        text: message.text,
+                        senderID: message.senderID,
+                        createdAt: message.createdAt
+                    )
+                }
+            }
             .sink(
                 receiveCompletion: { [weak self] _ in
                     self?.isFetching = false
@@ -123,18 +135,5 @@ final class PersonalChatViewModel {
                 }
             )
             .store(in: &cancelBag)
-    }
-}
-
-private extension Array where Element == Message {
-    func toUI() -> [PersonalChatMessage] {
-        self.map { message in
-            PersonalChatMessage(
-                id: message.messageID,
-                text: message.text,
-                senderID: message.senderID,
-                createdAt: message.createdAt
-            )
-        }
     }
 }

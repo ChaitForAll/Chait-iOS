@@ -93,17 +93,18 @@ final class AppCoordinator {
     }
     
     private func createPersonalChat(_ channelID: UUID) -> PersonalChatViewController {
-        let remoteMessagesDataSource = DefaultRemoteMessagesDataSource(client: client)
-        let chatRepository = DefaultChatRepository(remoteChatMessages: remoteMessagesDataSource)
-        let sendMessageUseCase = DefaultSendMessageUseCase(repository: chatRepository)
-        let fetchChatHistoryUseCase = DefaultFEtchChatHistoryUseCase(repository: chatRepository)
-        let listenMessagesUseCase = DefaultListenMessagesUseCase(chatRepository: chatRepository)
+        let conversationUseCase = DefaultConversationUseCase(
+            conversationRepository: ConversationRepositoryImplementation(
+                conversationRemote: DefaultConversationRemoteDataSource(supabase: client),
+                conversationMembershipRemote: DefaultConversationMembershipRemoteDataSource(supabase: client),
+                userRemote: DefaultUserRemoteDataSource(supabase: client)
+            ),
+            userID: authService.userID!
+        )
         let personalChatVieWModel = PersonalChatViewModel(
             userID: authService.userID!,
             channelID: channelID,
-            sendMessageUseCase: sendMessageUseCase,
-            listenMessagesUseCase: listenMessagesUseCase,
-            fetchChatHistoryUseCase: fetchChatHistoryUseCase
+            conversationUseCase: conversationUseCase
         )
         let personalChatViewController = PersonalChatViewController()
         personalChatViewController.viewModel = personalChatVieWModel
