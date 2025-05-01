@@ -44,7 +44,7 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         .eraseToAnyPublisher()
     }
     
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError> {
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
         return Future { promise in
             Task {
                 do {

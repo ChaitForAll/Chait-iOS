@@ -11,11 +11,12 @@ enum ConversationError: Error {
     case fetchFailed
     case listeningMessagesFailed
     case endOfItems
+    case sendMessageFailed
 }
 
 protocol ConversationUseCase {
     func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError>
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError>
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError>
     func startListeningMessages(_ channelID: UUID) -> AnyPublisher<[Message], ConversationError>
     func fetchHistory(
         _ conversationID: UUID,
@@ -43,7 +44,7 @@ final class DefaultConversationUseCase: ConversationUseCase {
         return conversationRepository.fetchConversationSummaryList(userID)
     }
     
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, SendMessageError> {
+    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
         conversationRepository.sendMessage(newMessage)
     }
 
