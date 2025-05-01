@@ -51,7 +51,6 @@
 		DF7BC6222D71965600AAF678 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6212D71965600AAF678 /* Storage */; };
 		DF7BC6242D71965600AAF678 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6232D71965600AAF678 /* Supabase */; };
 		DF7BC6262D72060100AAF678 /* PersonalChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */; };
-		DF7BC6282D72106800AAF678 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7BC6272D72106800AAF678 /* Channel.swift */; };
 		DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C16F52DBDDBF700CAF20F /* NewMessage.swift */; };
 		DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */; };
 		DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */; };
@@ -125,7 +124,6 @@
 		DF5611032D7DF9C700B41259 /* StubRemoteMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRemoteMessages.swift; sourceTree = "<group>"; };
 		DF5611092D7F1D6900B41259 /* StubChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubChatRepository.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatMessage.swift; sourceTree = "<group>"; };
-		DF7BC6272D72106800AAF678 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		DF7C16F52DBDDBF700CAF20F /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
 		DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewModel.swift; sourceTree = "<group>"; };
 		DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -405,7 +403,6 @@
 				DF0F26BF2DAAFD19002308E9 /* User.swift */,
 				DF9676BD2D994F7F0078D0D5 /* Friend.swift */,
 				DFBF6F302D6C80F7003B51DB /* Message.swift */,
-				DF7BC6272D72106800AAF678 /* Channel.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -533,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
-				DF7BC6282D72106800AAF678 /* Channel.swift in Sources */,
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
 				DF4920042DB03EC000EA51D2 /* ConversationSummaryViewModel.swift in Sources */,
