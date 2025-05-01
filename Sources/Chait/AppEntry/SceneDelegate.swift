@@ -28,7 +28,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: windowScene)
-        let coordinator = AppCoordinator(client: client)
+        let coordinator = AppCoordinator()
         coordinator.prepareRoot()
         window.rootViewController = coordinator.navigationController
         window.makeKeyAndVisible()

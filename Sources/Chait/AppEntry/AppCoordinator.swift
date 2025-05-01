@@ -16,18 +16,12 @@ final class AppCoordinator {
     
     let navigationController: UINavigationController = UINavigationController()
     
-    private let client: SupabaseClient
-    private let authService: AuthenticationService
-    
-    init(client: SupabaseClient) {
-        self.client = client
-        self.authService = AuthenticationService(supabase: client)
-    }
+    private let appContainer: AppContainer = AppContainer()
     
     // MARK: Function(s)
     
     func prepareRoot() {
-        if authService.isAuthenticated {
+        if appContainer.authService.isAuthenticated {
             toMainFlow()
         } else {
             toAuthenticationFlow()
@@ -59,61 +53,26 @@ final class AppCoordinator {
     }
     
     private func createFriendsList() -> FriendListViewController {
-        let friendRepository = FriendRepositoryImplementation(
-            client: client,
-            usersRemote: DefaultUserRemoteDataSource(supabase: client)
-        )
-        let useCase = DefaultFetchFriendsListUseCase(repository: friendRepository)
-        let viewModel = FriendListViewModel(
-            userID: authService.userID ?? UUID(), /* TODO: Resolve optional */
-            fetchFriendsListUseCase: useCase,
-            fetchImageUseCase: DefaultFetchImageUseCase(
-                imageRepository: ImageRepositoryImplementation()
-            )
-        )
         let friendListViewController = FriendListViewController()
-        friendListViewController.viewModel = viewModel
+        friendListViewController.viewModel = appContainer.friendListViewModel()
         return friendListViewController
     }
     
     private func createConversationListViewController() -> ConversationListViewController {
-        let conversationUseCase = DefaultConversationUseCase(
-            conversationRepository: ConversationRepositoryImplementation(
-                conversationRemote: DefaultConversationRemoteDataSource(supabase: client),
-                conversationMembershipRemote: DefaultConversationMembershipRemoteDataSource(supabase: client),
-                userRemote: DefaultUserRemoteDataSource(supabase: client)
-            ),
-            userID: authService.userID ?? UUID() /* TODO: Resolve optional */
-        )
-        let viewModel = ConversationListViewModel(conversationUseCase: conversationUseCase)
         let channelListViewController = ConversationListViewController()
         channelListViewController.coordinator = self
-        channelListViewController.viewModel = viewModel
+        channelListViewController.viewModel = appContainer.conversationListViewModel()
         return channelListViewController
     }
     
     private func createPersonalChat(_ channelID: UUID) -> PersonalChatViewController {
-        let conversationUseCase = DefaultConversationUseCase(
-            conversationRepository: ConversationRepositoryImplementation(
-                conversationRemote: DefaultConversationRemoteDataSource(supabase: client),
-                conversationMembershipRemote: DefaultConversationMembershipRemoteDataSource(supabase: client),
-                userRemote: DefaultUserRemoteDataSource(supabase: client)
-            ),
-            userID: authService.userID!
-        )
-        let personalChatVieWModel = PersonalChatViewModel(
-            userID: authService.userID!,
-            channelID: channelID,
-            conversationUseCase: conversationUseCase
-        )
         let personalChatViewController = PersonalChatViewController()
-        personalChatViewController.viewModel = personalChatVieWModel
+        personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
         return personalChatViewController
     }
     
     private func createAuthFlow() -> UIHostingController<AuthView> {
-        let authViewModel = AuthViewModel(authService: authService)
-        var authView = AuthView(viewModel: authViewModel)
+        var authView = AuthView(viewModel: appContainer.authViewModel())
         authView.delegate = self
         let authHostingViewController = UIHostingController(rootView: authView)
         return authHostingViewController
