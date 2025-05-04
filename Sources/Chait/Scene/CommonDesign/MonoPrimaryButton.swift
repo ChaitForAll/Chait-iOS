@@ -6,10 +6,13 @@
     
 import UIKit
 
-
 final class MonoPrimaryButton: UIButton {
     
     // MARK: Override(s)
+    
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: CGFloat(50))
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
