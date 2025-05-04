@@ -63,6 +63,7 @@
 		DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */; };
 		DFD122622DC5E6AA005E3ED1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */; };
 		DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */; };
+		DFD122692DC74E7D005E3ED1 /* MonoPrimaryButto.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122682DC74E78005E3ED1 /* MonoPrimaryButto.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
@@ -135,6 +136,7 @@
 		DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+DarkMode.swift"; sourceTree = "<group>"; };
+		DFD122682DC74E78005E3ED1 /* MonoPrimaryButto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoPrimaryButto.swift; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 		DFD122652DC74DB9005E3ED1 /* CommonDesign */ = {
 			isa = PBXGroup;
 			children = (
+				DFD122682DC74E78005E3ED1 /* MonoPrimaryButto.swift */,
 				DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */,
 			);
 			path = CommonDesign;
@@ -560,6 +563,7 @@
 				DF9676C22D9951830078D0D5 /* FriendRepository.swift in Sources */,
 				DF0D43E82D70C95F0083AA14 /* AppEnvironment.swift in Sources */,
 				DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */,
+				DFD122692DC74E7D005E3ED1 /* MonoPrimaryButto.swift in Sources */,
 				DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */,
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
 				DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */,
