@@ -19,8 +19,8 @@ final class WelcomeViewController: UIViewController {
     private let descriptionLabel = UILabel()
     
     private let buttonStack = UIStackView()
-    private let getStartedButton = UIButton()
-    private let alreadyHaveAccountButton = UIButton()
+    private let getStartedButton = MonoPrimaryButton()
+    private let alreadyHaveAccountButton = MonoSecondaryBorderedButton()
     
     // MARK: Override(s)
     
