@@ -99,7 +99,7 @@ final class WelcomeViewController: UIViewController {
         
         alreadyHaveAccountButton.addAction(
             UIAction { [weak self] _ in
-                self?.coordinator?.toAuthenticationFlow()
+                self?.coordinator?.toSingInFlow()
             },
             for: .touchUpInside
         )

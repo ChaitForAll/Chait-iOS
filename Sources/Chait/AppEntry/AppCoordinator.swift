@@ -22,11 +22,7 @@ final class AppCoordinator {
     func start(on window: UIWindow) {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
-        if appContainer.authService.isAuthenticated {
-            toMainFlow()
-        } else {
-            toAuthenticationFlow()
-        }
+        toOnboardingFlow()
     }
 
     func enterChannel(_ channelIdentifier: UUID) {
@@ -42,8 +38,10 @@ final class AppCoordinator {
         navigationController.setViewControllers([createMainTabFlow()], animated: true)
     }
     
-    private func toAuthenticationFlow() {
-        navigationController.setViewControllers([createAuthFlow()], animated: true)
+    private func toOnboardingFlow() {
+        let welcomeViewController = WelcomeViewController()
+        welcomeViewController.coordinator = self
+        navigationController.setViewControllers([welcomeViewController], animated: true)
     }
     
     private func createMainTabFlow() -> UITabBarController {
@@ -73,13 +71,6 @@ final class AppCoordinator {
         let personalChatViewController = PersonalChatViewController()
         personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
         return personalChatViewController
-    }
-    
-    private func createAuthFlow() -> UIHostingController<AuthView> {
-        var authView = AuthView(viewModel: appContainer.authViewModel())
-        authView.delegate = self
-        let authHostingViewController = UIHostingController(rootView: authView)
-        return authHostingViewController
     }
 }
 
