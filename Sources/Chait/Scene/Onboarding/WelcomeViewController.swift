@@ -61,6 +61,7 @@ final class WelcomeViewController: UIViewController {
                 equalTo: welcomeBannerStack.bottomAnchor,
                 constant: 45
             ),
+            buttonStack.widthAnchor.constraint(equalToConstant: 350),
         ])
     }
     
