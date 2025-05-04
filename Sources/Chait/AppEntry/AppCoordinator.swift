@@ -32,6 +32,11 @@ final class AppCoordinator {
         )
     }
     
+    func toSingInFlow() {
+        let authViewController = SignInViewController()
+        navigationController.pushViewController(authViewController, animated: true)
+    }
+    
     // MARK: Private Function(s)
     
     private func toMainFlow() {
