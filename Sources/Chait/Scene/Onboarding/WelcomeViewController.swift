@@ -27,8 +27,9 @@ final class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewHierarchy()
-        fillContentText()
+        fillContents()
         configureViewStyle()
+        configureButtonActions()
     }
     
     // MARK: Private Function(s)
@@ -63,9 +64,16 @@ final class WelcomeViewController: UIViewController {
         ])
     }
     
-    private func fillContentText() {
+    private func fillContents() {
         titleLabel.text = "Welcome to Chait"
         descriptionLabel.text = "Simple chatting \n Just a little bit \"botter\""
+        alreadyHaveAccountButton.setTitle("I already have an account", for: .normal)
+        getStartedButton.setTitle("Get Started", for: .normal)
+        let titleImage = UIImage(systemName: "message.fill")
+        let titleImageColor = UIColor { $0.isDarkMode ? UIColor.white : UIColor.black }
+        let titleImageConfig = UIImage.SymbolConfiguration(pointSize: 80)
+            .applying(UIImage.SymbolConfiguration(paletteColors: [titleImageColor]))
+        appIconImageView.image = titleImage?.applyingSymbolConfiguration(titleImageConfig)
     }
     
     private func configureViewStyle() {
@@ -76,16 +84,11 @@ final class WelcomeViewController: UIViewController {
         welcomeBannerStack.setCustomSpacing(13, after: appIconImageView)
         welcomeBannerStack.setCustomSpacing(28, after: titleLabel)
         buttonStack.setCustomSpacing(8, after: getStartedButton)
-        
-        let backgroundColor = UIColor { $0.isDarkMode ? UIColor.white : UIColor.black }
-        let fontColor = UIColor { $0.isDarkMode ? UIColor.darkText : UIColor.white }
-        
-        var getStartedButtonConfiguration = UIButton.Configuration.filled()
-        getStartedButtonConfiguration.title = "Get Started"
-        getStartedButtonConfiguration.baseBackgroundColor = backgroundColor
-        getStartedButtonConfiguration.baseForegroundColor = fontColor
-        getStartedButton.configuration = getStartedButtonConfiguration
         getStartedButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        alreadyHaveAccountButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+    }
+    
+    private func configureButtonActions() {
         getStartedButton.addAction(
             UIAction { _ in
                 // TODO: handle registration
@@ -93,24 +96,11 @@ final class WelcomeViewController: UIViewController {
             for: .touchUpInside
         )
         
-        var alreadyHaveAccountConfiguration = UIButton.Configuration.bordered()
-        alreadyHaveAccountConfiguration.title = "I already have an account"
-        alreadyHaveAccountConfiguration.baseBackgroundColor = .systemGray6
-        alreadyHaveAccountConfiguration.baseForegroundColor = .label
-        alreadyHaveAccountConfiguration.background.strokeColor = .lightGray
-        alreadyHaveAccountButton.configuration = alreadyHaveAccountConfiguration
-        alreadyHaveAccountButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         alreadyHaveAccountButton.addAction(
             UIAction { [weak self] _ in
                 self?.coordinator?.toAuthenticationFlow()
             },
             for: .touchUpInside
         )
-        
-        let titleImage = UIImage(systemName: "message.fill")
-        let titleImageColor = UIColor { $0.isDarkMode ? UIColor.white : UIColor.black }
-        let titleImageConfig = UIImage.SymbolConfiguration(pointSize: 80)
-            .applying(UIImage.SymbolConfiguration(paletteColors: [titleImageColor]))
-        appIconImageView.image = titleImage?.applyingSymbolConfiguration(titleImageConfig)
     }
 }
