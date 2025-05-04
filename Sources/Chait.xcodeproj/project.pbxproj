@@ -33,7 +33,6 @@
 		DF10C7BF2D343A3F006035E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF10C7BD2D343A3F006035E8 /* LaunchScreen.storyboard */; };
 		DF350FB62DB104670010FE8A /* SnakeKeyISODateJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */; };
 		DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */; };
-		DF350FBA2DB216E80010FE8A /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF350FB92DB216DF0010FE8A /* AuthView.swift */; };
 		DF4920002DAE875200EA51D2 /* Supabase+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */; };
 		DF4920022DB02B5300EA51D2 /* ConversationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */; };
 		DF4920042DB03EC000EA51D2 /* ConversationSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4920032DB03EBA00EA51D2 /* ConversationSummaryViewModel.swift */; };
@@ -58,7 +57,6 @@
 		DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */; };
 		DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */; };
 		DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */; };
-		DFB7EFEB2DB2DBAE005999E6 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFB7EFEA2DB2DBAB005999E6 /* AuthViewModel.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */; };
 		DFD122622DC5E6AA005E3ED1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */; };
@@ -113,7 +111,6 @@
 		DF10C7C02D343A3F006035E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeKeyISODateJSONDecoder.swift; sourceTree = "<group>"; };
 		DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
-		DF350FB92DB216DF0010FE8A /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Supabase+Decode.swift"; sourceTree = "<group>"; };
 		DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSummary.swift; sourceTree = "<group>"; };
 		DF4920032DB03EBA00EA51D2 /* ConversationSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSummaryViewModel.swift; sourceTree = "<group>"; };
@@ -133,7 +130,6 @@
 		DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteMessagesDataSource.swift; sourceTree = "<group>"; };
 		DF9C91FE2D6F556E00A2BCDA /* PersonalChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalChatViewModel.swift; sourceTree = "<group>"; };
-		DFB7EFEA2DB2DBAB005999E6 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -321,7 +317,6 @@
 			children = (
 				DFD122652DC74DB9005E3ED1 /* CommonDesign */,
 				DFD122602DC5E632005E3ED1 /* Onboarding */,
-				DFB7EFE92DB2DBA0005999E6 /* Auth */,
 				DF50BFE02D9AB7750022B1E3 /* FriendList */,
 				DF7FBD9E2D75F67E00753FCE /* ConversationList */,
 				DF9C91FD2D6F555100A2BCDA /* PersonalChat */,
@@ -372,15 +367,6 @@
 				DF7BC6252D72060000AAF678 /* PersonalChatMessage.swift */,
 			);
 			path = PersonalChat;
-			sourceTree = "<group>";
-		};
-		DFB7EFE92DB2DBA0005999E6 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				DF350FB92DB216DF0010FE8A /* AuthView.swift */,
-				DFB7EFEA2DB2DBAB005999E6 /* AuthViewModel.swift */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		DFBF6F2E2D6C8065003B51DB /* Domain */ = {
@@ -563,7 +549,6 @@
 				DF0F26CE2DABAD23002308E9 /* GroupConversation.swift in Sources */,
 				DF9C91FF2D6F556E00A2BCDA /* PersonalChatViewModel.swift in Sources */,
 				DF4920022DB02B5300EA51D2 /* ConversationSummary.swift in Sources */,
-				DF350FBA2DB216E80010FE8A /* AuthView.swift in Sources */,
 				DF50BFDB2D99B3C80022B1E3 /* FriendRepositoryImplementation.swift in Sources */,
 				DFD1226B2DC74E9D005E3ED1 /* MonoSecondaryBorderedButton.swift in Sources */,
 				DF50BFE22D9AB7920022B1E3 /* FriendListViewController.swift in Sources */,
@@ -587,7 +572,6 @@
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
-				DFB7EFEB2DB2DBAE005999E6 /* AuthViewModel.swift in Sources */,
 				DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */,
 				DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
