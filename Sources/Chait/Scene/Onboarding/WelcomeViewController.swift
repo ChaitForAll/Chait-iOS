@@ -114,10 +114,3 @@ final class WelcomeViewController: UIViewController {
         appIconImageView.image = titleImage?.applyingSymbolConfiguration(titleImageConfig)
     }
 }
-
-private extension UITraitCollection {
-    
-    var isDarkMode: Bool {
-        return userInterfaceStyle == .dark
-    }
-}
