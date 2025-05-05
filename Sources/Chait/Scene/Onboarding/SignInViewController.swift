@@ -55,7 +55,9 @@ final class SignInViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             inputStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
             inputStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            inputStackView.widthAnchor.constraint(equalToConstant: 350)
+            inputStackView.widthAnchor.constraint(equalToConstant: 350),
+            emailInput.heightAnchor.constraint(equalTo: signInButton.heightAnchor),
+            passwordInput.heightAnchor.constraint(equalTo: signInButton.heightAnchor)
         ])
     }
     
@@ -63,19 +65,26 @@ final class SignInViewController: UIViewController {
         inputStackView.axis = .vertical
         emailInput.borderStyle = .roundedRect
         passwordInput.borderStyle = .roundedRect
+        descriptionLabel.textColor = .systemGray
         titleLabel.font = .systemFont(ofSize: 32, weight: .semibold)
         descriptionLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         emailLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        emailInput.font = .systemFont(ofSize: 18, weight: .semibold)
         passwordLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        descriptionLabel.textColor = .systemGray
+        passwordInput.font = .systemFont(ofSize: 18, weight: .semibold)
         inputStackView.spacing = 22
+        inputStackView.setCustomSpacing(11, after: emailLabel)
+        inputStackView.setCustomSpacing(11, after: passwordLabel)
     }
     
     private func fillContent() {
         titleLabel.text = "Sign In"
         descriptionLabel.text = "Welcome back!"
         emailInput.placeholder = "Enter your email"
+        emailInput.textContentType = .emailAddress
         passwordInput.placeholder = "Enter your password"
+        passwordInput.textContentType = .password
+        passwordInput.isSecureTextEntry = true
         signInButton.setTitle("Sign In", for: .normal)
         emailLabel.text = "Email"
         passwordLabel.text = "Password"
