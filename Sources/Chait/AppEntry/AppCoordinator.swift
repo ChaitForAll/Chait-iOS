@@ -78,12 +78,3 @@ final class AppCoordinator {
         return personalChatViewController
     }
 }
-
-// MARK: AuthenticationViewControllerDelegate
-
-extension AppCoordinator: AuthenticationViewControllerDelegate {
-    
-    func authenticationSucceed() {
-        toMainFlow()
-    }
-}
