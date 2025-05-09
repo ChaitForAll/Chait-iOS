@@ -95,4 +95,8 @@ final class AppContainer {
             conversationUseCase: conversationUseCase()
         )
     }
+    
+    func signInViewModel() -> SignInViewModel {
+        return SignInViewModel(authService: authService)
+    }
 }
