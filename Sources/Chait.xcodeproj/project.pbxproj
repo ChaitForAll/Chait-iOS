@@ -64,6 +64,7 @@
 		DFD122692DC74E7D005E3ED1 /* MonoPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122682DC74E78005E3ED1 /* MonoPrimaryButton.swift */; };
 		DFD1226B2DC74E9D005E3ED1 /* MonoSecondaryBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */; };
 		DFD1226D2DC74FD0005E3ED1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */; };
+		DFD1226F2DC8C6B5005E3ED1 /* SingInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226E2DC8C6B2005E3ED1 /* SingInViewModel.swift */; };
 		DFD122722DCE49E5005E3ED1 /* UITextField+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */; };
 		DFD122742DCE58FA005E3ED1 /* UIButton+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
@@ -139,6 +140,7 @@
 		DFD122682DC74E78005E3ED1 /* MonoPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoPrimaryButton.swift; sourceTree = "<group>"; };
 		DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoSecondaryBorderedButton.swift; sourceTree = "<group>"; };
 		DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DFD1226E2DC8C6B2005E3ED1 /* SingInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInViewModel.swift; sourceTree = "<group>"; };
 		DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Bind.swift"; sourceTree = "<group>"; };
 		DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Loading.swift"; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		DF674A0F2D34EFAE00B61966 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DFD122702DCE49D9005E3ED1 /* Extension */,
 				DFD122652DC74DB9005E3ED1 /* CommonDesign */,
 				DFD122602DC5E632005E3ED1 /* Onboarding */,
 				DF50BFE02D9AB7750022B1E3 /* FriendList */,
@@ -406,6 +409,7 @@
 		DFD122602DC5E632005E3ED1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				DFD1226E2DC8C6B2005E3ED1 /* SingInViewModel.swift */,
 				DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */,
 				DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */,
 			);
@@ -555,6 +559,7 @@
 				DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
+				DFD1226F2DC8C6B5005E3ED1 /* SingInViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
 				DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */,
