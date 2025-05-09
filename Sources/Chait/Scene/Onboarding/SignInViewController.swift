@@ -5,10 +5,16 @@
 //  Copyright (c) 2025 Jeremy All rights reserved.
     
 import UIKit
+import Combine
 
 final class SignInViewController: UIViewController {
     
     // MARK: Property(s)
+    
+    var viewModel: SignInViewModel?
+    var coordinator: AppCoordinator?
+    
+    private var cancelBag: Set<AnyCancellable> = .init()
     
     private let titleLabel: UILabel = UILabel()
     private let descriptionLabel: UILabel = UILabel()
@@ -31,6 +37,29 @@ final class SignInViewController: UIViewController {
         configureViewStyle()
         fillContent()
         configureButtonActions()
+        
+        guard let viewModel else { return }
+        
+        emailInput
+            .bind(to: \.email, on: viewModel)
+            .store(in: &cancelBag)
+        passwordInput
+            .bind(to: \.password, on: viewModel)
+            .store(in: &cancelBag)
+        
+        viewModel.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] action in
+                switch action {
+                case .showInvalidInput:
+                    return
+                case .showIsLoading:
+                    self?.signInButton.showIsLoadingInCenter()
+                case .coordinateToChat:
+                    self?.coordinator?.toMainFlow()
+                }
+            }
+            .store(in: &cancelBag)
     }
     
     // MARK: Private Function(s)
@@ -70,6 +99,7 @@ final class SignInViewController: UIViewController {
         descriptionLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         emailLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         emailInput.font = .systemFont(ofSize: 18, weight: .semibold)
+        emailInput.autocapitalizationType = .none
         passwordLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         passwordInput.font = .systemFont(ofSize: 18, weight: .semibold)
         inputStackView.spacing = 22
@@ -85,15 +115,18 @@ final class SignInViewController: UIViewController {
         passwordInput.placeholder = "Enter your password"
         passwordInput.textContentType = .password
         passwordInput.isSecureTextEntry = true
-        signInButton.setTitle("Sign In", for: .normal)
         emailLabel.text = "Email"
         passwordLabel.text = "Password"
+        
+        var buttonConfig = signInButton.configuration
+        buttonConfig?.title = "Sign In"
+        signInButton.configuration = buttonConfig
     }
     
     private func configureButtonActions() {
         signInButton.addAction(
-            UIAction { _ in
-                // TODO: Add actual action
+            UIAction { [weak self] _ in
+                self?.viewModel?.onSignIn()
             },
             for: .touchUpInside
         )
