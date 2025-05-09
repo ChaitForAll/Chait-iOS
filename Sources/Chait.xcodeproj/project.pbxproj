@@ -64,6 +64,7 @@
 		DFD122692DC74E7D005E3ED1 /* MonoPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122682DC74E78005E3ED1 /* MonoPrimaryButton.swift */; };
 		DFD1226B2DC74E9D005E3ED1 /* MonoSecondaryBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */; };
 		DFD1226D2DC74FD0005E3ED1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */; };
+		DFD122722DCE49E5005E3ED1 /* UITextField+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
@@ -137,6 +138,7 @@
 		DFD122682DC74E78005E3ED1 /* MonoPrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoPrimaryButton.swift; sourceTree = "<group>"; };
 		DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoSecondaryBorderedButton.swift; sourceTree = "<group>"; };
 		DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Bind.swift"; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
@@ -416,6 +418,14 @@
 				DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */,
 			);
 			path = CommonDesign;
+			sourceTree = "<group>";
+		};
+		DFD122702DCE49D9005E3ED1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
