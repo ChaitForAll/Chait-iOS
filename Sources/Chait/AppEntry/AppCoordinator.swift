@@ -33,8 +33,10 @@ final class AppCoordinator {
     }
     
     func toSingInFlow() {
-        let authViewController = SignInViewController()
-        navigationController.pushViewController(authViewController, animated: true)
+        let signInViewController = SignInViewController()
+        signInViewController.coordinator = self
+        signInViewController.viewModel = SignInViewModel(authService: appContainer.authService)
+        navigationController.pushViewController(signInViewController, animated: true)
     }
     
     // MARK: Private Function(s)
