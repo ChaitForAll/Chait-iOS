@@ -39,7 +39,7 @@ final class AppCoordinator {
     
     // MARK: Private Function(s)
     
-    private func toMainFlow() {
+    func toMainFlow() {
         navigationController.setViewControllers([createMainTabFlow()], animated: true)
     }
     
