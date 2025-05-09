@@ -65,6 +65,7 @@
 		DFD1226B2DC74E9D005E3ED1 /* MonoSecondaryBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */; };
 		DFD1226D2DC74FD0005E3ED1 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */; };
 		DFD122722DCE49E5005E3ED1 /* UITextField+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */; };
+		DFD122742DCE58FA005E3ED1 /* UIButton+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */; };
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
@@ -139,6 +140,7 @@
 		DFD1226A2DC74E98005E3ED1 /* MonoSecondaryBorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonoSecondaryBorderedButton.swift; sourceTree = "<group>"; };
 		DFD1226C2DC74FCC005E3ED1 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Bind.swift"; sourceTree = "<group>"; };
+		DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Loading.swift"; sourceTree = "<group>"; };
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 		DFD122702DCE49D9005E3ED1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */,
 				DFD122712DCE49DD005E3ED1 /* UITextField+Bind.swift */,
 			);
 			path = Extension;
@@ -543,6 +546,7 @@
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
 				DF4920042DB03EC000EA51D2 /* ConversationSummaryViewModel.swift in Sources */,
+				DFD122742DCE58FA005E3ED1 /* UIButton+Loading.swift in Sources */,
 				DF0F26DB2DAD18AF002308E9 /* ConversationRepository.swift in Sources */,
 				DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */,
 				DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */,
@@ -586,6 +590,7 @@
 				DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* PersonalChatViewController.swift in Sources */,
 				DFD122622DC5E6AA005E3ED1 /* WelcomeViewController.swift in Sources */,
+				DFD122722DCE49E5005E3ED1 /* UITextField+Bind.swift in Sources */,
 				DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF0F26C42DAB91E8002308E9 /* Conversation.swift in Sources */,
