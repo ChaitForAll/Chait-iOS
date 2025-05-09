@@ -35,7 +35,7 @@ final class AppCoordinator {
     func toSingInFlow() {
         let signInViewController = SignInViewController()
         signInViewController.coordinator = self
-        signInViewController.viewModel = SignInViewModel(authService: appContainer.authService)
+        signInViewController.viewModel = appContainer.signInViewModel()
         navigationController.pushViewController(signInViewController, animated: true)
     }
     
