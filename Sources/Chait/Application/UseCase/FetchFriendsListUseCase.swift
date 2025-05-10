@@ -13,7 +13,7 @@ enum FetchFriendsListError: Error {
 }
 
 protocol FetchFriendsListUseCase {
-    func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError>
+    func fetchFriendList() -> AnyPublisher<[Friend], FetchFriendsListError>
 }
 
 final class DefaultFetchFriendsListUseCase: FetchFriendsListUseCase {
@@ -24,7 +24,7 @@ final class DefaultFetchFriendsListUseCase: FetchFriendsListUseCase {
         self.friendRepository = repository
     }
     
-    func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError> {
-        friendRepository.fetchFriendList(userID: userID)
+    func fetchFriendList() -> AnyPublisher<[Friend], FetchFriendsListError> {
+        friendRepository.fetchFriendList()
     }
 }

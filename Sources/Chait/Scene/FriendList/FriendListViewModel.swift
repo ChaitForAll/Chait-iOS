@@ -34,17 +34,14 @@ final class FriendListViewModel {
     private var cancelBag: Set<AnyCancellable> = .init()
     private var sections: [SectionType: Section<FriendViewModel>] = [:]
     
-    private let userID: UUID
     private let viewActionSubject = PassthroughSubject<ViewAction, Never>()
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
     private let fetchImageUseCase: FetchImageUseCase
     
     init(
-        userID: UUID,
         fetchFriendsListUseCase: FetchFriendsListUseCase,
         fetchImageUseCase: FetchImageUseCase
     ) {
-        self.userID = userID
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
         self.fetchImageUseCase = fetchImageUseCase
     }
@@ -73,8 +70,7 @@ final class FriendListViewModel {
     // MARK: Private Function(s)
     
     private func fetchFriendsList() {
-        fetchFriendsListUseCase
-            .fetchFriendList(userID: userID)
+        fetchFriendsListUseCase.fetchFriendList()
             .map { $0.map { FriendViewModel(friend: $0) }}
             .sink(
                 receiveCompletion: { _ in },

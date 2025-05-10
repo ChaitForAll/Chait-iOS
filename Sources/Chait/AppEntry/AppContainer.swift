@@ -82,7 +82,6 @@ final class AppContainer {
     
     func friendListViewModel() -> FriendListViewModel {
         return FriendListViewModel(
-            userID: authService.userID ?? UUID(),
             fetchFriendsListUseCase: fetchFriendListUseCase(),
             fetchImageUseCase: fetchImageUseCase()
         )

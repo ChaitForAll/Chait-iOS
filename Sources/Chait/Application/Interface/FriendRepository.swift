@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol FriendRepository {
-    func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError>
+    func fetchFriendList() -> AnyPublisher<[Friend], FetchFriendsListError>
 }

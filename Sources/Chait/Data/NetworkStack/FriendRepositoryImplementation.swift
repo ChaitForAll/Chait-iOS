@@ -23,11 +23,16 @@ final class FriendRepositoryImplementation: FriendRepository {
     
     // MARK: Function(s)
     
-    func fetchFriendList(userID: UUID) -> AnyPublisher<[Friend], FetchFriendsListError> {
+    func fetchFriendList() -> AnyPublisher<[Friend], FetchFriendsListError> {
+        
+        guard let userID = self.client.auth.currentSession?.user.id else {
+            return Fail(error: FetchFriendsListError.unknown).eraseToAnyPublisher()
+        }
+        
         return Future<[Friend], FetchFriendsListError> { promise in
             Task {
                 do {
-                    let friendsResponse = try await self.asyncFetchFriendshipResponse(userID)
+                    let friendsResponse = try await self.asyncFetchFriendshipResponse()
                         .map { $0.userID == userID ? $0.friendID : $0.userID }
                     let users = try await self.usersRemote.fetchUsers(friendsResponse)
                     let friendsList = users.map { user in
@@ -50,8 +55,17 @@ final class FriendRepositoryImplementation: FriendRepository {
     
     // MARK: Private Function(s)
     
-    private func asyncFetchFriendshipResponse(_ userID: UUID) async throws -> [FriendResponse] {
-        try await client
+    enum AuthenticationError: Error {
+        case notAuthenticated
+    }
+    
+    private func asyncFetchFriendshipResponse() async throws -> [FriendResponse] {
+        
+        guard let userID = client.auth.currentSession?.user.id else {
+            throw AuthError.sessionMissing
+        }
+        
+        return try await client
             .from("friend_relations")
             .select()
             .or("userID.eq.\(userID),friendID.eq.\(userID)")
