@@ -9,27 +9,41 @@ import Foundation
 import Combine
 import UIKit
 
+fileprivate enum SectionType: CaseIterable {
+    case friendsList
+}
+
 final class FriendListViewModel {
     
     // MARK: Type(s)
     
-    struct Output {
-        let fetchedFriendList: AnyPublisher<[UUID], Never>
-        let imageReady: AnyPublisher<[UUID], Never>
+    private typealias Section<Item: Identifiable> = ListSection<SectionType, Item>
+    
+    enum ViewAction {
+        case createSections([UUID])
+        case insert(items: [UUID], section: UUID)
+        case update(items: [UUID])
     }
     
     // MARK: Property(s)
     
+    var viewAction: AnyPublisher<ViewAction, Never> {
+        return viewActionSubject.eraseToAnyPublisher()
+    }
+    
     private var cancelBag: Set<AnyCancellable> = .init()
-    private var friendsList: [FriendViewModel] = []
+    private var sections: [SectionType: Section<FriendViewModel>] = [:]
     
     private let userID: UUID
+    private let viewActionSubject = PassthroughSubject<ViewAction, Never>()
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
-    private let fetchedFriendListSubject: PassthroughSubject<[UUID], Never> = .init()
-    private let imageReadySubject: PassthroughSubject<[UUID], Never> = .init()
     private let fetchImageUseCase: FetchImageUseCase
     
-    init(userID: UUID, fetchFriendsListUseCase: FetchFriendsListUseCase, fetchImageUseCase: FetchImageUseCase) {
+    init(
+        userID: UUID,
+        fetchFriendsListUseCase: FetchFriendsListUseCase,
+        fetchImageUseCase: FetchImageUseCase
+    ) {
         self.userID = userID
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
         self.fetchImageUseCase = fetchImageUseCase
@@ -37,27 +51,23 @@ final class FriendListViewModel {
     
     // MARK: Function(s)
     
-    func bind() -> Output {
-        return Output(
-            fetchedFriendList: fetchedFriendListSubject.eraseToAnyPublisher(),
-            imageReady: imageReadySubject.eraseToAnyPublisher()
-        )
-    }
-    
     func onViewDidLoad() {
+        sections = [.friendsList: Section<FriendViewModel>(sectionType: .friendsList)]
+        viewActionSubject.send(.createSections(sections.values.map { $0.id }))
         fetchFriendsList()
     }
     
     func onWillDisplayFriend(_ friendIdentifier: UUID) {
-        if let friendViewModel = friend(for: friendIdentifier) {
+        if let friendViewModel = friendViewModel(for: friendIdentifier) {
             prepareImage(friendViewModel)
-                .sink { self.imageReadySubject.send([$0]) }
+                .map { ViewAction.update(items: [$0]) }
+                .sink { self.viewActionSubject.send($0) }
                 .store(in: &cancelBag)
         }
     }
     
-    func friend(for id: UUID) -> FriendViewModel? {
-        return friendsList.first { $0.id == id }
+    func friendViewModel(for id: UUID) -> FriendViewModel? {
+        return sections[.friendsList]?.items.first { $0.id == id }
     }
     
     // MARK: Private Function(s)
@@ -65,20 +75,26 @@ final class FriendListViewModel {
     private func fetchFriendsList() {
         fetchFriendsListUseCase
             .fetchFriendList(userID: userID)
+            .map { $0.map { FriendViewModel(friend: $0) }}
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] friendsList in
-                    self?.friendsList.append(
-                        contentsOf: friendsList.map { FriendViewModel(friend: $0) }
+                receiveValue: { [weak self] viewModels in
+                    let section = self?.sections[.friendsList]
+                    guard let sectionID = section?.id else { return }
+                    section?.items.append(contentsOf: viewModels)
+                    let viewAction = ViewAction.insert(
+                        items: viewModels.map { $0.id },
+                        section: sectionID
                     )
-                    self?.fetchedFriendListSubject.send(friendsList.map { $0.friendID })
+                    self?.viewActionSubject.send(viewAction)
                 }
             )
             .store(in: &cancelBag)
     }
     
     private func prepareImage(_ friendViewModel: FriendViewModel) -> AnyPublisher<UUID, Never> {
-        fetchImageUseCase.fetchImage(url: friendViewModel.imageURL)
+        fetchImageUseCase
+            .fetchImage(url: friendViewModel.imageURL)
             .receive(on: DispatchQueue.main)
             .replaceError(with: UIImage.add) // TODO: Replace with default empty image
             .flatMap { image in

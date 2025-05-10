@@ -10,17 +10,15 @@ import Combine
 
 final class FriendListViewController: UIViewController {
     
-    // MARK: Type(s)
-    
-    enum Section {
-        case friends
-    }
-    
     // MARK: Property(s)
     
     var viewModel: FriendListViewModel?
+    
     private var cancelBag: Set<AnyCancellable> = .init()
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
+    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
+        return diffableDataSource?.snapshot()
+    }
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -35,7 +33,6 @@ final class FriendListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
         configureCollectionView()
         bindViewModel()
         viewModel?.onViewDidLoad()
@@ -44,27 +41,27 @@ final class FriendListViewController: UIViewController {
     // MARK: Private Function(s)
     
     private func bindViewModel() {
-        let output = viewModel?.bind()
-        output?.fetchedFriendList
-            .sink { friendIdentifiers in
-                guard var snapShot = self.diffableDataSource?.snapshot() else {
-                    return
+        viewModel?.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] viewAction in
+                guard let self else { return }
+                switch viewAction {
+                    
+                case .createSections(let sections):
+                    var snapShot = NSDiffableDataSourceSnapshot<UUID, UUID>()
+                    snapShot.appendSections(sections)
+                    diffableDataSource?.apply(snapShot)
+                    
+                case .insert(items: let insertingItems, section: let section):
+                    guard var currentSnapshot else { return }
+                    currentSnapshot.appendItems(insertingItems, toSection: section)
+                    diffableDataSource?.apply(currentSnapshot)
+                    
+                case .update(items: let updatingItems):
+                    guard var currentSnapshot else { return }
+                    currentSnapshot.reconfigureItems(updatingItems)
+                    diffableDataSource?.apply(currentSnapshot)
                 }
-                if snapShot.sectionIdentifiers.isEmpty {
-                    snapShot.appendSections([.friends])
-                }
-                snapShot.appendItems(friendIdentifiers)
-                self.diffableDataSource?.apply(snapShot)
-            }
-            .store(in: &cancelBag)
-        
-        output?.imageReady
-            .sink { imageReadyFriendIdentifiers in
-                guard var snapshot = self.diffableDataSource?.snapshot() else {
-                    return
-                }
-                snapshot.reconfigureItems(imageReadyFriendIdentifiers)
-                self.diffableDataSource?.apply(snapshot)
             }
             .store(in: &cancelBag)
     }
@@ -73,6 +70,7 @@ final class FriendListViewController: UIViewController {
         self.diffableDataSource = createDiffableDataSource()
         collectionView.collectionViewLayout = createListLayout()
         collectionView.dataSource = diffableDataSource
+        collectionView.delegate = self
     }
     
     private func createListLayout() -> UICollectionViewCompositionalLayout {
@@ -81,7 +79,7 @@ final class FriendListViewController: UIViewController {
         return layout
     }
     
-    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<Section, UUID> {
+    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
         let listCellRegistration = createListCellRegistration()
         return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(
@@ -98,7 +96,7 @@ final class FriendListViewController: UIViewController {
             
             var content = cell.defaultContentConfiguration()
             
-            if let friend = self.viewModel?.friend(for: itemIdentifier) {
+            if let friend = self.viewModel?.friendViewModel(for: itemIdentifier) {
                 content.text = friend.displayName
                 content.secondaryText = friend.createdAt.formatted()
                 content.imageProperties.maximumSize = .init(width: 60, height: 60)
