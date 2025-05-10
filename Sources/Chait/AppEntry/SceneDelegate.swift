@@ -12,11 +12,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: Property(s)
     
-    private var client: SupabaseClient = SupabaseClient(
-        supabaseURL: AppEnvironment.projectURL,
-        supabaseKey: AppEnvironment.secretKey
-    )
-    
     var window: UIWindow?
     
     // MARK: Function(s)
