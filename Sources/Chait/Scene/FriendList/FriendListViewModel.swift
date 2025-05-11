@@ -64,7 +64,7 @@ final class FriendListViewModel {
     }
     
     func friendViewModel(for id: UUID) -> FriendViewModel? {
-        return sections[.friendsList]?.items.first { $0.id == id }
+        return sections[.friendsList]?.item(for: id)
     }
     
     // MARK: Private Function(s)
@@ -77,7 +77,7 @@ final class FriendListViewModel {
                 receiveValue: { [weak self] viewModels in
                     let section = self?.sections[.friendsList]
                     guard let sectionID = section?.id else { return }
-                    section?.items.append(contentsOf: viewModels)
+                    section?.insertItems(viewModels)
                     let viewAction = ViewAction.insert(
                         items: viewModels.map { $0.id },
                         section: sectionID
