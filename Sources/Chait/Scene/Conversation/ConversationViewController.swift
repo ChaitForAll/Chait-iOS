@@ -10,22 +10,19 @@ import Combine
 
 final class ConversationViewController: UIViewController {
     
-    // MARK: Type(s)
-    
-    private enum Section {
-        case messages
-    }
-    
     // MARK: Property(s)
     
     var viewModel: ConversationViewModel?
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
+    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
     private var lastOffset: CGFloat = .zero
-    
     private var minCurrentBatchHeight: CGFloat = .zero
     private var maxCurrentBatchHeight: CGFloat = .zero
+    
+    private var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
+        return diffableDataSource?.snapshot()
+    }
     
     private let collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -41,9 +38,9 @@ final class ConversationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configurePullToFetchHistory()
         configureNavigationItem()
         bindViewModel()
+        configurePullToFetchHistory()
         viewModel?.onViewDidLoad()
     }
     
@@ -60,9 +57,10 @@ final class ConversationViewController: UIViewController {
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
     
-    private func createMessageCellRegisration(
+    private func createMessageCellRegistration(
     ) -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-        return .init { [weak self] cell, indexPath, messageID in
+        return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
+            [weak self] cell, indexPath, messageID in
 
             var content = cell.defaultContentConfiguration()
             if let message = self?.viewModel?.message(for: messageID) {
@@ -73,10 +71,11 @@ final class ConversationViewController: UIViewController {
         }
     }
     
-    private func createDiffableDataSource(
-    ) -> UICollectionViewDiffableDataSource<Section, UUID> {
-        let messageCellRegistration = createMessageCellRegisration()
-        return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
+        let messageCellRegistration = createMessageCellRegistration()
+        return UICollectionViewDiffableDataSource<UUID, UUID>(collectionView: collectionView) {
+            collectionView, indexPath, itemIdentifier in
+            
             collectionView.dequeueConfiguredReusableCell(
                 using: messageCellRegistration,
                 for: indexPath,
@@ -86,18 +85,20 @@ final class ConversationViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        let output = viewModel?.bindOutput()
-        output?
-            .onReceiveNewMessages
-            .sink { [weak self] newMessageIdentifiers in
-                self?.addNewMessages(newMessageIdentifiers)
-            }
-            .store(in: &cancelBag)
-        
-        output?
-            .onReceiveChatHistories
-            .sink { [weak self] chatHistoryIdentifiers in
-                self?.insertChatHistories(chatHistoryIdentifiers)
+        viewModel?.viewAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] viewAction in
+                print(viewAction)
+                switch viewAction {
+                case .createSections(identifiers: let sections):
+                    var initialSnapshot = NSDiffableDataSourceSnapshot<UUID, UUID>()
+                    initialSnapshot.appendSections(sections)
+                    self?.diffableDataSource?.apply(initialSnapshot)
+                case .appendItems(identifiers: let identifiers):
+                    self?.appendItems(identifiers)
+                case .insertItemsAtTop(identifiers: let identifiers):
+                    self?.insertItemsAtTop(identifiers)
+                }
             }
             .store(in: &cancelBag)
     }
@@ -123,37 +124,24 @@ final class ConversationViewController: UIViewController {
             .store(in: &cancelBag)
     }
     
-    private func addNewMessages(_ newMessages: [UUID]) {
-        guard var snapShot = diffableDataSource?.snapshot() else {
-            return
-        }
-        
-        if snapShot.sectionIdentifiers.isEmpty {
-            snapShot.appendSections([.messages])
-        }
-        
-        snapShot.appendItems(newMessages)
-        diffableDataSource?.apply(snapShot)
+    private func appendItems(_ newMessages: [UUID]) {
+        guard var currentSnapshot else { return }
+        currentSnapshot.appendItems(newMessages)
+        diffableDataSource?.apply(currentSnapshot)
     }
     
-    private func insertChatHistories(_ chatHistories: [UUID]) {
-        guard var snapShot = diffableDataSource?.snapshot() else {
-            return
-        }
+    private func insertItemsAtTop(_ chatHistories: [UUID]) {
+        guard var currentSnapshot else { return }
         
-        let isSnapshotEmptyBeforeAddingItems = snapShot.itemIdentifiers.isEmpty
+        let isSnapshotEmptyBeforeAddingItems = currentSnapshot.itemIdentifiers.isEmpty
         
-        if snapShot.sectionIdentifiers.isEmpty {
-            snapShot.appendSections([.messages])
-        }
-        
-        if let lastMessage = snapShot.itemIdentifiers.first {
-            snapShot.insertItems(chatHistories, beforeItem: lastMessage)
+        if let lastMessage = currentSnapshot.itemIdentifiers.first {
+            currentSnapshot.insertItems(chatHistories, beforeItem: lastMessage)
         } else {
-            snapShot.appendItems(chatHistories)
+            currentSnapshot.appendItems(chatHistories)
         }
         
-        diffableDataSource?.apply(snapShot, animatingDifferences: true) { [weak self] in
+        diffableDataSource?.apply(currentSnapshot, animatingDifferences: true) { [weak self] in
             guard let self else { return }
             
             minCurrentBatchHeight = maxCurrentBatchHeight
@@ -179,6 +167,8 @@ final class ConversationViewController: UIViewController {
         }
         navigationItem.rightBarButtonItem = rightBarButton
     }
+    
+    // TODO: Replace with actual message input bar
     
     private func presentAddMessage() {
         let writeMessageAlert = UIAlertController(

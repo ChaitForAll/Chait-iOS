@@ -10,23 +10,33 @@ import Combine
 
 final class ConversationViewModel {
     
-    struct Output {
-        let onReceiveNewMessages: AnyPublisher<[UUID], Never>
-        let onReceiveChatHistories: AnyPublisher<[UUID], Never>
+    // MARK: Type(s)
+    
+    private enum SectionType: CaseIterable {
+        case messageList
+    }
+    
+    private typealias Section<Item: Identifiable> = ListSection<SectionType, Item>
+    
+    enum ViewAction {
+        case appendItems(identifiers: [UUID])
+        case insertItemsAtTop(identifiers: [UUID])
+        case createSections(identifiers: [UUID])
     }
     
     // MARK: Property(s)
     
     var userMessageText: String = ""
+    var viewAction: AnyPublisher<ViewAction, Never> {
+        return viewActionSubject.eraseToAnyPublisher()
+    }
     
     private var isFetching: Bool = false
-    private var chatMessagesDictionary: [ConversationMessageViewModel.ID: ConversationMessageViewModel] = [:]
-    private var cancelBag: Set<AnyCancellable> = .init()
     private var historyItemsOffset: Int = .zero
+    private var cancelBag: Set<AnyCancellable> = []
     
-    private let receivedNewMessage: PassthroughSubject<[ConversationMessageViewModel.ID], Never> = .init()
-    private let receivedChatHistories: PassthroughSubject<[ConversationMessageViewModel.ID], Never> = .init()
-    
+    private let messageListSection = Section<ConversationMessageViewModel>(sectionType: .messageList)
+    private let viewActionSubject: PassthroughSubject<ViewAction, Never> = .init()
     private let userID: UUID
     private let conversationID: UUID
     private let historyBatchSize: Int
@@ -46,19 +56,13 @@ final class ConversationViewModel {
     
     // MARK: Function(s)
     
-    func bindOutput() -> Output {
-        return Output(
-            onReceiveNewMessages: receivedNewMessage.eraseToAnyPublisher(),
-            onReceiveChatHistories: receivedChatHistories.eraseToAnyPublisher()
-        )
-    }
-    
-    func onReachTop() {
+    func onViewDidLoad() {
+        viewActionSubject.send(.createSections(identifiers: [messageListSection.id]))
+        startListening()
         fetchChatHistories()
     }
     
-    func onViewDidLoad() {
-        startListening()
+    func onReachTop() {
         fetchChatHistories()
     }
     
@@ -71,7 +75,7 @@ final class ConversationViewModel {
     }
     
     func message(for identifier: UUID) -> ConversationMessageViewModel? {
-        return chatMessagesDictionary[identifier]
+        return messageListSection.item(for: identifier)
     }
     
     // MARK: Private Function(s)
@@ -79,26 +83,15 @@ final class ConversationViewModel {
     private func startListening() {
         conversationUseCase
             .startListeningMessages(conversationID)
-            .receive(on: DispatchQueue.main)
-            .map { messages in
-                messages.map { message in
-                    ConversationMessageViewModel(
-                        id: message.messageID,
-                        text: message.text,
-                        senderID: message.senderID,
-                        createdAt: message.createdAt
-                    )
-                }
-            }
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] allReceivedMessages in
-                    allReceivedMessages.forEach {
-                        self?.chatMessagesDictionary[$0.id] = $0
-                    }
-                    self?.receivedNewMessage.send(allReceivedMessages.map {$0.id })
-                }
-            )
+            .replaceError(with: [])
+            .map { $0.map { ConversationMessageViewModel(message: $0) }}
+            .handleEvents(receiveOutput: { [weak self] viewModels in
+                self?.messageListSection.insertItems(viewModels)
+            })
+            .map { ViewAction.appendItems(identifiers: $0.map(\.id)) }
+            .sink(receiveValue: { [weak self] appendItemsAction in
+                self?.viewActionSubject.send(appendItemsAction)
+            })
             .store(in: &cancelBag)
     }
     
@@ -113,27 +106,22 @@ final class ConversationViewModel {
                 historyOffset: historyItemsOffset,
                 maxItems: historyBatchSize
             )
-            .receive(on: DispatchQueue.main)
-            .map { messages in
-                messages.map { message in
-                    ConversationMessageViewModel(
-                        id: message.messageID,
-                        text: message.text,
-                        senderID: message.senderID,
-                        createdAt: message.createdAt
-                    )
-                }
-            }
-            .sink(
+            .map { $0.map { ConversationMessageViewModel(message: $0)} }
+            .handleEvents(
+                receiveOutput: { [weak self] viewModels in
+                    self?.messageListSection.insertItems(viewModels)
+                    self?.historyItemsOffset += (self?.historyBatchSize ?? .zero) + 1
+                },
                 receiveCompletion: { [weak self] _ in
                     self?.isFetching = false
-                },
-                receiveValue: { [weak self] historyMessages in
-                    self?.historyItemsOffset += (self?.historyBatchSize ?? .zero) + 1
-                    historyMessages.forEach { self?.chatMessagesDictionary[$0.id] = $0 }
-                    self?.receivedChatHistories.send(historyMessages.reversed().map { $0.id })
                 }
             )
+            .replaceError(with: [])
+            .filter { !$0.isEmpty }
+            .map { ViewAction.insertItemsAtTop(identifiers: $0.map(\.id))}
+            .sink(receiveValue: { [weak self] viewAction in
+                self?.viewActionSubject.send(viewAction)
+            })
             .store(in: &cancelBag)
     }
 }
