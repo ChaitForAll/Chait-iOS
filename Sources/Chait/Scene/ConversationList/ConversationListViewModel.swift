@@ -12,7 +12,14 @@ final class ConversationListViewModel {
     
     // MARK: Type(s)
     
+    private enum SectionType: CaseIterable {
+        case conversationList
+    }
+    
+    private typealias Section<ItemIdentifier: Identifiable> = ListSection<SectionType, ItemIdentifier>
+    
     enum ViewAction {
+        case createSections(identifiers: [UUID])
         case insertItems(identifiers: [UUID])
     }
     
@@ -22,8 +29,8 @@ final class ConversationListViewModel {
         return viewActionSubject.eraseToAnyPublisher()
     }
     
+    private var conversationListSection = Section<ConversationSummaryViewModel>(sectionType: .conversationList)
     private var viewActionSubject = PassthroughSubject<ViewAction, Never>()
-    private var conversationSummaries: [UUID: ConversationSummaryViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let conversationSummariesSubject: PassthroughSubject<[UUID], Never> = .init()
@@ -40,7 +47,7 @@ final class ConversationListViewModel {
     }
     
     func item(for identifier: UUID) -> ConversationSummaryViewModel? {
-        return conversationSummaries[identifier]
+        return conversationListSection.item(for: identifier)
     }
     
     //MARK: Private Function(s)
@@ -50,17 +57,15 @@ final class ConversationListViewModel {
             .fetchConversationSummaryList()
             .replaceError(with: [])
             .map { $0.map  { ConversationSummaryViewModel($0) }}
-            .handleEvents(
-                receiveOutput: { [weak self] output in
-                    output.forEach { viewModel in
-                        self?.conversationSummaries[viewModel.id] = viewModel
-                    }
-                }
-            )
+            .handleEvents(receiveOutput: { [weak self] output in
+                self?.conversationListSection.insertItems(output)
+            })
             .map { viewModels in
                 ViewAction.insertItems(identifiers: viewModels.map(\.id))
             }
-            .sink(receiveValue: viewActionSubject.send)
+            .sink { [weak self] in
+                self?.viewActionSubject.send($0)
+            }
             .store(in: &cancelBag)
     }
 }

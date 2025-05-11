@@ -10,16 +10,16 @@ import Combine
 
 final class ConversationListViewController: UIViewController {
     
-    enum Section {
-        case channelList
-    }
-    
     // MARK: Property(s)
     
     var viewModel: ConversationListViewModel?
     var coordinator: AppCoordinator?
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
+    var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
+        return diffableDataSource?.snapshot()
+    }
+    
+    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let collectionView: UICollectionView = UICollectionView(
@@ -55,7 +55,7 @@ final class ConversationListViewController: UIViewController {
         return layout
     }
     
-    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<Section, UUID> {
+    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
         let listCellRegistration = createListCellRegistration()
         return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             collectionView.dequeueConfiguredReusableCell(
@@ -86,15 +86,14 @@ final class ConversationListViewController: UIViewController {
         viewModel?.viewAction
             .sink { [weak self] viewAction in
                 switch viewAction {
+                    
+                case.createSections(identifiers: let sectionIdentifiers):
+                    var initialSnapshot = NSDiffableDataSourceSnapshot<UUID, UUID>()
+                    initialSnapshot.appendSections(sectionIdentifiers)
+                    self?.diffableDataSource?.apply(initialSnapshot)
+                    
                 case .insertItems(identifiers: let items):
-                    guard var currentSnapshot = self?.diffableDataSource?.snapshot() else {
-                        return
-                    }
-                    
-                    if currentSnapshot.sectionIdentifiers.isEmpty {
-                        currentSnapshot.appendSections([.channelList])
-                    }
-                    
+                    guard var currentSnapshot = self?.currentSnapshot  else { return }
                     currentSnapshot.appendItems(items)
                     self?.diffableDataSource?.apply(currentSnapshot)
                 }
