@@ -48,19 +48,19 @@ final class ConversationListViewModel {
     private func fetchConversationList() {
         conversationUseCase
             .fetchConversationSummaryList()
-            .flatMap { $0.publisher }
-            .map { ConversationSummaryViewModel($0) }
-            .handleEvents(receiveOutput: { [weak self] viewModel in
-                self?.conversationSummaries[viewModel.id] = viewModel
-            })
-            .collect()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] summaryViewModels in
-                    self?.viewActionSubject.send(.insertItems(identifiers: summaryViewModels.map { $0.id }))
+            .replaceError(with: [])
+            .map { $0.map  { ConversationSummaryViewModel($0) }}
+            .handleEvents(
+                receiveOutput: { [weak self] output in
+                    output.forEach { viewModel in
+                        self?.conversationSummaries[viewModel.id] = viewModel
+                    }
                 }
             )
+            .map { viewModels in
+                ViewAction.insertItems(identifiers: viewModels.map(\.id))
+            }
+            .sink(receiveValue: viewActionSubject.send)
             .store(in: &cancelBag)
     }
 }
-
