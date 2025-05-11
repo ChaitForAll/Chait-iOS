@@ -38,8 +38,6 @@ final class SignInViewController: UIViewController {
         fillContent()
         configureButtonActions()
         
-        guard let viewModel else { return }
-        
         emailInput
             .bind(to: \.email, on: viewModel)
             .store(in: &cancelBag)
@@ -47,7 +45,7 @@ final class SignInViewController: UIViewController {
             .bind(to: \.password, on: viewModel)
             .store(in: &cancelBag)
         
-        viewModel.viewAction
+        viewModel?.viewAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] action in
                 switch action {
