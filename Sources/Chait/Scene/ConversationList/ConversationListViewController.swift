@@ -93,7 +93,11 @@ final class ConversationListViewController: UIViewController {
                     self?.diffableDataSource?.apply(initialSnapshot)
                     
                 case .insertItems(identifiers: let items):
-                    guard var currentSnapshot = self?.currentSnapshot  else { return }
+                    guard var currentSnapshot = self?.currentSnapshot,
+                            !currentSnapshot.sectionIdentifiers.isEmpty
+                    else {
+                        return
+                    }
                     currentSnapshot.appendItems(items)
                     self?.diffableDataSource?.apply(currentSnapshot)
                 }

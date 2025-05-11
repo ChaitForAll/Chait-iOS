@@ -16,7 +16,7 @@ final class ConversationListViewModel {
         case conversationList
     }
     
-    private typealias Section<ItemIdentifier: Identifiable> = ListSection<SectionType, ItemIdentifier>
+    private typealias Section<Item: Identifiable> = ListSection<SectionType, Item>
     
     enum ViewAction {
         case createSections(identifiers: [UUID])
@@ -43,6 +43,7 @@ final class ConversationListViewModel {
     // MARK: Function(s)
     
     func onViewDidLoad() {
+        viewActionSubject.send(.createSections(identifiers: [conversationListSection.id]))
         fetchConversationList()
     }
     
