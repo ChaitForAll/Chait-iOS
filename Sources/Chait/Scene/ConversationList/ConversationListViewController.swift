@@ -37,7 +37,7 @@ final class ConversationListViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         bindViewModel()
-        viewModel?.onNeedItems()
+        viewModel?.onViewDidLoad()
     }
     
     // MARK: Function(s)
@@ -83,23 +83,21 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        let output = viewModel?.bindOutput()
-        
-        output?
-            .fetchedChannelListItems
-            .sink { [weak self] itemIdentifiers in
-                
-                guard var snapShot = self?.diffableDataSource?.snapshot() else {
-                    return
+        viewModel?.viewAction
+            .sink { [weak self] viewAction in
+                switch viewAction {
+                case .insertItems(identifiers: let items):
+                    guard var currentSnapshot = self?.diffableDataSource?.snapshot() else {
+                        return
+                    }
+                    
+                    if currentSnapshot.sectionIdentifiers.isEmpty {
+                        currentSnapshot.appendSections([.channelList])
+                    }
+                    
+                    currentSnapshot.appendItems(items)
+                    self?.diffableDataSource?.apply(currentSnapshot)
                 }
-                
-                if snapShot.sectionIdentifiers.isEmpty {
-                    snapShot.appendSections([.channelList])
-                }
-                
-                snapShot.appendItems(itemIdentifiers)
-                
-                self?.diffableDataSource?.apply(snapShot)
             }
             .store(in: &cancelBag)
     }

@@ -10,12 +10,19 @@ import Combine
 
 final class ConversationListViewModel {
     
-    struct Output {
-        let fetchedChannelListItems: AnyPublisher<[UUID], Never>
+    // MARK: Type(s)
+    
+    enum ViewAction {
+        case insertItems(identifiers: [UUID])
     }
     
     // MARK: Property(s)
     
+    var viewAction: AnyPublisher<ViewAction, Never> {
+        return viewActionSubject.eraseToAnyPublisher()
+    }
+    
+    private var viewActionSubject = PassthroughSubject<ViewAction, Never>()
     private var conversationSummaries: [UUID: ConversationSummaryViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
@@ -28,29 +35,32 @@ final class ConversationListViewModel {
     
     // MARK: Function(s)
     
-    func bindOutput() -> Output {
-        return Output(fetchedChannelListItems: conversationSummariesSubject.eraseToAnyPublisher())
-    }
-    
-    func onNeedItems() {
-        conversationUseCase
-            .fetchConversationSummaryList()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] conversationSummaries in
-                    conversationSummaries
-                        .map { ConversationSummaryViewModel($0) }
-                        .forEach { summaryViewModel in
-                            self?.conversationSummaries[summaryViewModel.id] = summaryViewModel
-                            self?.conversationSummariesSubject.send([summaryViewModel.id])
-                        }
-                }
-            )
-            .store(in: &cancelBag)
+    func onViewDidLoad() {
+        fetchConversationList()
     }
     
     func item(for identifier: UUID) -> ConversationSummaryViewModel? {
         return conversationSummaries[identifier]
+    }
+    
+    //MARK: Private Function(s)
+    
+    private func fetchConversationList() {
+        conversationUseCase
+            .fetchConversationSummaryList()
+            .flatMap { $0.publisher }
+            .map { ConversationSummaryViewModel($0) }
+            .handleEvents(receiveOutput: { [weak self] viewModel in
+                self?.conversationSummaries[viewModel.id] = viewModel
+            })
+            .collect()
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] summaryViewModels in
+                    self?.viewActionSubject.send(.insertItems(identifiers: summaryViewModels.map { $0.id }))
+                }
+            )
+            .store(in: &cancelBag)
     }
 }
 
