@@ -12,4 +12,11 @@ struct ConversationMessageViewModel: Identifiable {
     let text: String
     let senderID: UUID
     let createdAt: Date
+    
+    init(message: Message) {
+        self.id = message.messageID
+        self.text = message.text
+        self.senderID = message.senderID
+        self.createdAt = message.createdAt
+    }
 }
