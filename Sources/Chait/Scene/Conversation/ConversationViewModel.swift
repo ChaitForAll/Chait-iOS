@@ -1,5 +1,5 @@
 //
-//  PersonalChatViewModel.swift
+//  ConversationViewModel.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class PersonalChatViewModel {
+final class ConversationViewModel {
     
     struct Output {
         let onReceiveNewMessages: AnyPublisher<[UUID], Never>
@@ -20,12 +20,12 @@ final class PersonalChatViewModel {
     var userMessageText: String = ""
     
     private var isFetching: Bool = false
-    private var chatMessagesDictionary: [PersonalChatMessage.ID: PersonalChatMessage] = [:]
+    private var chatMessagesDictionary: [ConversationMessageViewModel.ID: ConversationMessageViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     private var historyItemsOffset: Int = .zero
     
-    private let receivedNewMessage: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
-    private let receivedChatHistories: PassthroughSubject<[PersonalChatMessage.ID], Never> = .init()
+    private let receivedNewMessage: PassthroughSubject<[ConversationMessageViewModel.ID], Never> = .init()
+    private let receivedChatHistories: PassthroughSubject<[ConversationMessageViewModel.ID], Never> = .init()
     
     private let userID: UUID
     private let conversationID: UUID
@@ -70,7 +70,7 @@ final class PersonalChatViewModel {
         userMessageText.removeAll()
     }
     
-    func message(for identifier: UUID) -> PersonalChatMessage? {
+    func message(for identifier: UUID) -> ConversationMessageViewModel? {
         return chatMessagesDictionary[identifier]
     }
     
@@ -82,7 +82,7 @@ final class PersonalChatViewModel {
             .receive(on: DispatchQueue.main)
             .map { messages in
                 messages.map { message in
-                    PersonalChatMessage(
+                    ConversationMessageViewModel(
                         id: message.messageID,
                         text: message.text,
                         senderID: message.senderID,
@@ -116,7 +116,7 @@ final class PersonalChatViewModel {
             .receive(on: DispatchQueue.main)
             .map { messages in
                 messages.map { message in
-                    PersonalChatMessage(
+                    ConversationMessageViewModel(
                         id: message.messageID,
                         text: message.text,
                         senderID: message.senderID,

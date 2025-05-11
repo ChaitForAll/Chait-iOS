@@ -87,8 +87,8 @@ final class AppContainer {
         )
     }
     
-    func personalChatViewModel(_ channelID: UUID) -> PersonalChatViewModel {
-        return PersonalChatViewModel(
+    func personalChatViewModel(_ channelID: UUID) -> ConversationViewModel {
+        return ConversationViewModel(
             userID: authService.userID ?? UUID(),
             channelID: channelID,
             conversationUseCase: conversationUseCase()

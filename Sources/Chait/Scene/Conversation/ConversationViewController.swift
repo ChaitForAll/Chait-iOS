@@ -1,5 +1,5 @@
 //
-//  PersonalChatViewController.swift
+//  ConversationViewController.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class PersonalChatViewController: UIViewController {
+final class ConversationViewController: UIViewController {
     
     // MARK: Type(s)
     
@@ -18,7 +18,7 @@ final class PersonalChatViewController: UIViewController {
     
     // MARK: Property(s)
     
-    var viewModel: PersonalChatViewModel?
+    var viewModel: ConversationViewModel?
     
     private var diffableDataSource: UICollectionViewDiffableDataSource<Section, UUID>?
     private var cancelBag: Set<AnyCancellable> = .init()
@@ -205,7 +205,7 @@ final class PersonalChatViewController: UIViewController {
     }
 }
 
-extension PersonalChatViewController {
+extension ConversationViewController {
     private enum PersonalChatStrings {
         case sendAlertTitle
         case sendAlertMessage

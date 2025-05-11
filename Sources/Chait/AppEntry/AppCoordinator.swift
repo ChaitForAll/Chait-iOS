@@ -74,8 +74,8 @@ final class AppCoordinator {
         return channelListViewController
     }
     
-    private func createPersonalChat(_ channelID: UUID) -> PersonalChatViewController {
-        let personalChatViewController = PersonalChatViewController()
+    private func createPersonalChat(_ channelID: UUID) -> ConversationViewController {
+        let personalChatViewController = ConversationViewController()
         personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
         return personalChatViewController
     }

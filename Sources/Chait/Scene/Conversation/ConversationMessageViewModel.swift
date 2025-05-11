@@ -1,5 +1,5 @@
 //
-//  PersonalChatMessage.swift
+//  ConversationMessageViewModel.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PersonalChatMessage: Identifiable {
+struct ConversationMessageViewModel: Identifiable {
     let id: UUID
     let text: String
     let senderID: UUID
