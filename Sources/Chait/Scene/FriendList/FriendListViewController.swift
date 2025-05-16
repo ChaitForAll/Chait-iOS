@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 import UIKit
 import Combine
@@ -94,14 +94,14 @@ final class FriendListViewController: UIViewController {
         return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
             cell, indexPath, itemIdentifier in
             
-            var content = cell.defaultContentConfiguration()
+            var content = cell.friedListContentConfiguration()
             
             if let friend = self.viewModel?.friendViewModel(for: itemIdentifier) {
-                content.text = friend.displayName
-                content.secondaryText = friend.createdAt.formatted()
-                content.imageProperties.maximumSize = .init(width: 60, height: 60)
+                content.name = friend.displayName
+                content.status = friend.createdAt.formatted()
                 content.image = friend.image
             }
+            cell.directionalLayoutMargins.leading = content.separatorInset
             cell.contentConfiguration = content
         }
     }
