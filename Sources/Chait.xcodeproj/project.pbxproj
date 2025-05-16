@@ -73,6 +73,7 @@
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
 		DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */; };
 		DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */; };
+		DFE17EDA2DD76F5B008A58C2 /* FriendInfoCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17ED92DD76F42008A58C2 /* FriendInfoCellContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImplementation.swift; sourceTree = "<group>"; };
+		DFE17ED92DD76F42008A58C2 /* FriendInfoCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendInfoCellContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 		DF50BFE02D9AB7750022B1E3 /* FriendList */ = {
 			isa = PBXGroup;
 			children = (
+				DFE17ED92DD76F42008A58C2 /* FriendInfoCellContentView.swift */,
 				DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */,
 				DF50BFE12D9AB78E0022B1E3 /* FriendListViewController.swift */,
 				DF50BFDE2D9AB39F0022B1E3 /* FriendListViewModel.swift */,
@@ -550,6 +553,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
+				DFE17EDA2DD76F5B008A58C2 /* FriendInfoCellContentView.swift in Sources */,
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
 				DF4920042DB03EC000EA51D2 /* ConversationSummaryViewModel.swift in Sources */,
