@@ -9,25 +9,24 @@ import UIKit
 import Combine
 
 final class ConversationViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
+    typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
     
     var viewModel: ConversationViewModel?
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
-    private var cancelBag: Set<AnyCancellable> = .init()
     private var lastOffset: CGFloat = .zero
     private var minCurrentBatchHeight: CGFloat = .zero
     private var maxCurrentBatchHeight: CGFloat = .zero
-    
-    private var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
+    private var cancelBag: Set<AnyCancellable> = .init()
+    private var diffableDataSource: DataSource?
+    private var currentSnapshot: SnapShot? {
         return diffableDataSource?.snapshot()
     }
     
-    private let collectionView: UICollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: .init()
-    )
+    private let collectionView = UICollectionView.withEmptyLayout()
     
     // MARK: Override(s)
     
@@ -57,23 +56,23 @@ final class ConversationViewController: UIViewController {
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
     
-    private func createMessageCellRegistration(
-    ) -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-        return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-            [weak self] cell, indexPath, messageID in
-
+    private func createMessageCellRegistration() -> ListCellRegistration {
+        return ListCellRegistration { [weak self] cell, indexPath, messageID in
+            
             var content = cell.defaultContentConfiguration()
+            
             if let message = self?.viewModel?.message(for: messageID) {
                 content.text = message.text
                 content.secondaryText = message.createdAt.description
             }
+            
             cell.contentConfiguration = content
         }
     }
     
-    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
+    private func createDiffableDataSource() -> DataSource {
         let messageCellRegistration = createMessageCellRegistration()
-        return UICollectionViewDiffableDataSource<UUID, UUID>(collectionView: collectionView) {
+        return DataSource(collectionView: collectionView) {
             collectionView, indexPath, itemIdentifier in
             
             collectionView.dequeueConfiguredReusableCell(
@@ -91,7 +90,7 @@ final class ConversationViewController: UIViewController {
                 print(viewAction)
                 switch viewAction {
                 case .createSections(identifiers: let sections):
-                    var initialSnapshot = NSDiffableDataSourceSnapshot<UUID, UUID>()
+                    var initialSnapshot = SnapShot()
                     initialSnapshot.appendSections(sections)
                     self?.diffableDataSource?.apply(initialSnapshot)
                 case .appendItems(identifiers: let identifiers):
