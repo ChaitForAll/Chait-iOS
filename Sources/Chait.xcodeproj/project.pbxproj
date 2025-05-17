@@ -59,6 +59,7 @@
 		DF9C91FF2D6F556E00A2BCDA /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9C91FE2D6F556E00A2BCDA /* ConversationViewModel.swift */; };
 		DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBF6F302D6C80F7003B51DB /* Message.swift */; };
 		DFC300192DD84EEE00A219F7 /* UICollectionView+EmptyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC300182DD84EDF00A219F7 /* UICollectionView+EmptyLayout.swift */; };
+		DFC3001B2DD8613D00A219F7 /* UIFont+PreferredFontWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC3001A2DD8612D00A219F7 /* UIFont+PreferredFontWeight.swift */; };
 		DFD1225D2DC34C15005E3ED1 /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */; };
 		DFD122622DC5E6AA005E3ED1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */; };
 		DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */; };
@@ -139,6 +140,7 @@
 		DF9C91FE2D6F556E00A2BCDA /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		DFBF6F302D6C80F7003B51DB /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		DFC300182DD84EDF00A219F7 /* UICollectionView+EmptyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+EmptyLayout.swift"; sourceTree = "<group>"; };
+		DFC3001A2DD8612D00A219F7 /* UIFont+PreferredFontWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+PreferredFontWeight.swift"; sourceTree = "<group>"; };
 		DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		DFD122612DC5E63E005E3ED1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		DFD122662DC74DC6005E3ED1 /* UITraitCollection+DarkMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITraitCollection+DarkMode.swift"; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		DFD122702DCE49D9005E3ED1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DFC3001A2DD8612D00A219F7 /* UIFont+PreferredFontWeight.swift */,
 				DFC300182DD84EDF00A219F7 /* UICollectionView+EmptyLayout.swift */,
 				DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */,
 				DFD122732DCE58F4005E3ED1 /* UIButton+Loading.swift */,
@@ -576,6 +579,7 @@
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
 				DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */,
+				DFC3001B2DD8613D00A219F7 /* UIFont+PreferredFontWeight.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* ConversationMessageViewModel.swift in Sources */,
 				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
 				DF0F26CE2DABAD23002308E9 /* GroupConversation.swift in Sources */,
