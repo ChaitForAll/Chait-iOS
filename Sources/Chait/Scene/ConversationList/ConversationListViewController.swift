@@ -49,7 +49,7 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return layout
     }
