@@ -13,14 +13,15 @@ import SwiftUI
 final class AppCoordinator {
     
     // MARK: Property(s)
-    
     private let friendNavigation = UINavigationController()
     private let conversationNavigation = UINavigationController()
+    private let mainTabBarController = UITabBarController()
     private let appContainer: AppContainer = AppContainer()
     private let window: UIWindow
     
     init(window: UIWindow) {
         self.window = window
+        configureAppearances()
     }
     
     // MARK: Function(s)
@@ -49,6 +50,21 @@ final class AppCoordinator {
     
     // MARK: Private Function(s)
     
+    private func configureAppearances() {
+        let defaultNavigationAppearance = UINavigationBarAppearance()
+        defaultNavigationAppearance.titlePositionAdjustment = .init(horizontal: -153, vertical: .zero)
+        defaultNavigationAppearance.titleTextAttributes = [
+            .font: UIFont.preferredFont(for: .title3, weight: .semibold)
+        ]
+        let defaultTabBarAppearance = UITabBarAppearance()
+        friendNavigation.navigationBar.standardAppearance = defaultNavigationAppearance
+        friendNavigation.navigationBar.scrollEdgeAppearance = defaultNavigationAppearance
+        conversationNavigation.navigationBar.standardAppearance = defaultNavigationAppearance
+        conversationNavigation.navigationBar.scrollEdgeAppearance = defaultNavigationAppearance
+        mainTabBarController.tabBar.standardAppearance = defaultTabBarAppearance
+        mainTabBarController.tabBar.scrollEdgeAppearance = defaultTabBarAppearance
+    }
+    
     private func onboardingFlow() -> WelcomeViewController {
         let welcomeViewController = WelcomeViewController()
         welcomeViewController.coordinator = self
@@ -64,7 +80,7 @@ final class AppCoordinator {
             tag: 0
         )
         friendNavigation.setViewControllers([friendList], animated: true)
-        friendNavigation.navigationBar.prefersLargeTitles = true
+//        friendNavigation.navigationBar.prefersLargeTitles = true
         
         let conversationList = createConversationListViewController()
         conversationList.tabBarItem = UITabBarItem(
@@ -72,12 +88,11 @@ final class AppCoordinator {
             image: UIImage(systemName: "message.fill"),
             tag: 1
         )
-        conversationNavigation.navigationBar.prefersLargeTitles = true
+//        conversationNavigation.navigationBar.prefersLargeTitles = true
         conversationNavigation.setViewControllers([conversationList], animated: true)
         
-        let tabViewController = UITabBarController()
-        tabViewController.viewControllers = [friendNavigation, conversationNavigation]
-        return tabViewController
+        mainTabBarController.viewControllers = [friendNavigation, conversationNavigation]
+        return mainTabBarController
     }
     
     private func createSignInView() -> SignInViewController {
@@ -107,4 +122,10 @@ final class AppCoordinator {
         personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
         return personalChatViewController
     }
+}
+
+final class DefaultAppearanceNavigationController: UINavigationController {
+    
+    
+    
 }
