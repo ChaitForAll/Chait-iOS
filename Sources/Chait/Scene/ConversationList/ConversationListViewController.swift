@@ -78,7 +78,9 @@ final class ConversationListViewController: UIViewController {
                 UIImage(systemName: "triangle.fill")
             ].randomElement() ?? .none
             content.text = item?.title
-            content.secondaryText = item?.id.uuidString
+//            content.secondaryText = item?.id.uuidString
+            content.secondaryText = "me: What the fuck?"
+            cell.accessories = [.disclosureIndicator()]
             cell.contentConfiguration = content
         }
     }

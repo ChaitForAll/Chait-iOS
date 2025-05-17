@@ -238,11 +238,11 @@
 		DF10C7B12D343A3E006035E8 /* Chait */ = {
 			isa = PBXGroup;
 			children = (
-				DF674A0E2D34EFA400B61966 /* AppEntry */,
 				DF0F26BC2DAAFC57002308E9 /* Application */,
 				DF674A0F2D34EFAE00B61966 /* Scene */,
 				DFBF6F2E2D6C8065003B51DB /* Domain */,
 				DFBF6F342D6C8605003B51DB /* Data */,
+				DF674A0E2D34EFA400B61966 /* AppEntry */,
 				DF674A102D34EFB300B61966 /* AppResources */,
 			);
 			path = Chait;

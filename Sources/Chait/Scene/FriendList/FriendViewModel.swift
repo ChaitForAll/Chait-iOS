@@ -13,6 +13,7 @@ final class FriendViewModel: Identifiable {
     let id: UUID
     let name: String
     let displayName: String
+    let status: String
     let createdAt: Date
     let imageURL: URL
     
@@ -20,6 +21,7 @@ final class FriendViewModel: Identifiable {
         self.id = friend.friendID
         self.name = friend.name
         self.displayName = friend.displayName.isEmpty ? friend.name : friend.displayName
+        self.status = friend.status
         self.createdAt = friend.createdAt
         self.imageURL = friend.image
     }

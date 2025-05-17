@@ -10,6 +10,7 @@ struct UserResponse: Decodable {
     let id: UUID
     let name: String
     let displayName: String
+    let status: String
     let createdAt: Date
     let profileImage: URL
     
@@ -17,6 +18,7 @@ struct UserResponse: Decodable {
         case id
         case name
         case displayName
+        case status
         case createdAt
         case profileImage = "profileImage"
     }

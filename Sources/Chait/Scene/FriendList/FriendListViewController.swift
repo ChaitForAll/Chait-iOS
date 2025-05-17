@@ -104,7 +104,7 @@ final class FriendListViewController: UIViewController {
             
             if let friend = self.viewModel?.friendViewModel(for: itemIdentifier) {
                 content.name = friend.displayName
-                content.status = friend.createdAt.formatted()
+                content.status = friend.status
                 content.image = friend.image
             }
             cell.contentConfiguration = content

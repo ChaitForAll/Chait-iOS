@@ -11,6 +11,7 @@ struct Friend {
     let friendID: UUID
     let name: String
     let displayName: String
+    let status: String
     let createdAt: Date
     let image: URL
 }

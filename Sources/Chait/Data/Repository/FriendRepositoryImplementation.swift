@@ -40,6 +40,7 @@ final class FriendRepositoryImplementation: FriendRepository {
                             friendID: user.id,
                             name: user.name,
                             displayName: user.displayName,
+                            status: user.status,
                             createdAt: user.createdAt,
                             image: user.profileImage
                         )
