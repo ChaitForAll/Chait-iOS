@@ -55,6 +55,7 @@ final class FriendListViewController: UIViewController {
                 case .insert(items: let insertingItems, section: let section):
                     guard var currentSnapshot else { return }
                     currentSnapshot.appendItems(insertingItems, toSection: section)
+                    currentSnapshot.reloadSections([section])
                     diffableDataSource?.apply(currentSnapshot)
                     
                 case .update(items: let updatingItems):
@@ -68,6 +69,7 @@ final class FriendListViewController: UIViewController {
     
     private func configureCollectionView() {
         self.diffableDataSource = createDiffableDataSource()
+        configureSupplementaryProvider()
         collectionView.collectionViewLayout = createListLayout()
         collectionView.dataSource = diffableDataSource
         collectionView.delegate = self
@@ -80,6 +82,8 @@ final class FriendListViewController: UIViewController {
         separator.topSeparatorInsets = separatorInset
         separator.bottomSeparatorInsets = separatorInset
         listConfiguration.separatorConfiguration = separator
+        listConfiguration.headerMode = .supplementary
+        listConfiguration.headerTopPadding = .zero
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return layout
     }
@@ -108,6 +112,29 @@ final class FriendListViewController: UIViewController {
                 content.image = friend.image
             }
             cell.contentConfiguration = content
+        }
+    }
+    
+    private func sectionHeaderRegistration(
+    ) -> UICollectionView.SupplementaryRegistration<UICollectionViewListCell> {
+        return UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(
+            elementKind: UICollectionView.elementKindSectionHeader
+        ) { [weak self] supplementaryView, kind, indexPath in
+            var content = supplementaryView.defaultContentConfiguration()
+            if let currentSnapshot = self?.currentSnapshot {
+                content.text = String("\(currentSnapshot.itemIdentifiers.count) friends")
+            }
+            supplementaryView.contentConfiguration = content
+        }
+    }
+    
+    private func configureSupplementaryProvider() {
+        let sectionHeaderRegistration = sectionHeaderRegistration()
+        diffableDataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+            collectionView.dequeueConfiguredReusableSupplementary(
+                using: sectionHeaderRegistration,
+                for: indexPath
+            )
         }
     }
 }
