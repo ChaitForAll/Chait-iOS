@@ -9,21 +9,21 @@ import UIKit
 import Combine
 
 final class FriendListViewController: UIViewController {
+    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
+    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
+    typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
     
     var viewModel: FriendListViewModel?
     
     private var cancelBag: Set<AnyCancellable> = .init()
-    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
-    private var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
+    private var diffableDataSource: DataSource?
+    private var currentSnapshot: SnapShot? {
         return diffableDataSource?.snapshot()
     }
     
-    private let collectionView: UICollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: .init()
-    )
+    private let collectionView = UICollectionView.withEmptyLayout()
     
     // MARK: Override(s)
     
@@ -48,7 +48,7 @@ final class FriendListViewController: UIViewController {
                 switch viewAction {
                     
                 case .createSections(let sections):
-                    var snapShot = NSDiffableDataSourceSnapshot<UUID, UUID>()
+                    var snapShot = SnapShot()
                     snapShot.appendSections(sections)
                     diffableDataSource?.apply(snapShot)
                     
@@ -84,9 +84,11 @@ final class FriendListViewController: UIViewController {
         return layout
     }
     
-    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
+    private func createDiffableDataSource() -> DataSource {
         let listCellRegistration = createListCellRegistration()
-        return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        return DataSource(collectionView: collectionView) {
+            collectionView, indexPath, itemIdentifier in
+            
             collectionView.dequeueConfiguredReusableCell(
                 using: listCellRegistration,
                 for: indexPath,
@@ -95,9 +97,8 @@ final class FriendListViewController: UIViewController {
         }
     }
     
-    private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-        return UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-            cell, indexPath, itemIdentifier in
+    private func createListCellRegistration() -> ListCellRegistration {
+        return ListCellRegistration { cell, indexPath, itemIdentifier in
             
             var content = cell.friedListContentConfiguration()
             
@@ -110,6 +111,8 @@ final class FriendListViewController: UIViewController {
         }
     }
 }
+
+// MARK: UICollectionViewDelegate
 
 extension FriendListViewController: UICollectionViewDelegate {
     
