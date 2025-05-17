@@ -184,19 +184,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DF0D43E92D718CC70083AA14 /* RemoteMessages */ = {
-			isa = PBXGroup;
-			children = (
-				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
-				DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */,
-				DF0D43EA2D718EAF0083AA14 /* NewMessagesRequest.swift */,
-			);
-			path = RemoteMessages;
-			sourceTree = "<group>";
-		};
 		DF0F26BC2DAAFC57002308E9 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */,
+				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
+				DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */,
 				DF0F26BD2DAAFC66002308E9 /* UseCase */,
 				DF0F26BE2DAAFC7B002308E9 /* Interface */,
 			);
@@ -259,8 +252,10 @@
 			isa = PBXGroup;
 			children = (
 				DF0F26E92DADF9AC002308E9 /* UserResopnse.swift */,
+				DF9C91EC2D6EE95300A2BCDA /* MessageResponse.swift */,
 				DF0F26E32DADE912002308E9 /* ConversationMembershipResponse.swift */,
 				DF0F26DE2DADE3FD002308E9 /* ConversationResponse.swift */,
+				DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -268,6 +263,7 @@
 		DF4920062DB0440300EA51D2 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				DF9C91F02D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift */,
 				DF0F26E72DADF51E002308E9 /* UserRemoteDataSource.swift */,
 				DF0F26E12DADE899002308E9 /* ConversationMembershipRemoteDataSource.swift */,
 				DF0F26DC2DAD1A91002308E9 /* ConversationRemoteDataSource.swift */,
@@ -294,14 +290,12 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
+				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
 				DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */,
 				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
 				DF4920062DB0440300EA51D2 /* DataSource */,
+				DFC3001D2DD863AD00A219F7 /* Request */,
 				DF4920052DB043C700EA51D2 /* Response */,
-				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
-				DF50BFDC2D9AB0240022B1E3 /* FriendshipResponse.swift */,
-				DF50BFDA2D99B3C20022B1E3 /* FriendRepositoryImplementation.swift */,
-				DF0D43E92D718CC70083AA14 /* RemoteMessages */,
 			);
 			path = NetworkStack;
 			sourceTree = "<group>";
@@ -320,11 +314,8 @@
 		DF674A0E2D34EFA400B61966 /* AppEntry */ = {
 			isa = PBXGroup;
 			children = (
-				DFD1225C2DC34C0F005E3ED1 /* AppContainer.swift */,
-				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
 				DF10C7B22D343A3E006035E8 /* AppDelegate.swift */,
 				DF10C7B42D343A3E006035E8 /* SceneDelegate.swift */,
-				DF7FBDA52D7601E100753FCE /* AppCoordinator.swift */,
 			);
 			path = AppEntry;
 			sourceTree = "<group>";
@@ -409,12 +400,29 @@
 		DFBF6F342D6C8605003B51DB /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */,
 				DF350FB72DB2111B0010FE8A /* AuthenticationService.swift */,
-				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
+				DFC3001C2DD8637600A219F7 /* Repository */,
 				DF50BFD82D99B34E0022B1E3 /* NetworkStack */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		DFC3001C2DD8637600A219F7 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
+				DF50BFDA2D99B3C20022B1E3 /* FriendRepositoryImplementation.swift */,
+				DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		DFC3001D2DD863AD00A219F7 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				DF0D43EA2D718EAF0083AA14 /* NewMessagesRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		DFD122602DC5E632005E3ED1 /* Onboarding */ = {
