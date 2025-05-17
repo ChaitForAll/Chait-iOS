@@ -14,56 +14,83 @@ final class AppCoordinator {
     
     // MARK: Property(s)
     
-    private let navigationController: UINavigationController = UINavigationController()
+    private let friendNavigation = UINavigationController()
+    private let conversationNavigation = UINavigationController()
     private let appContainer: AppContainer = AppContainer()
+    private let window: UIWindow
+    
+    init(window: UIWindow) {
+        self.window = window
+    }
     
     // MARK: Function(s)
     
-    func start(on window: UIWindow) {
-        window.rootViewController = navigationController
+    func start() {
+        let authService = appContainer.authService
+        let windowRoot = authService.isAuthenticated ? createMainTabFlow() : onboardingFlow()
+        window.rootViewController = windowRoot
         window.makeKeyAndVisible()
-        toOnboardingFlow()
     }
 
     func enterChannel(_ channelIdentifier: UUID) {
-        navigationController.pushViewController(
+        conversationNavigation.pushViewController(
             createPersonalChat(channelIdentifier),
             animated: true
         )
     }
     
     func toSingInFlow() {
-        let signInViewController = SignInViewController()
-        signInViewController.coordinator = self
-        signInViewController.viewModel = appContainer.signInViewModel()
-        navigationController.pushViewController(signInViewController, animated: true)
+        window.rootViewController = createSignInView()
+    }
+    
+    func toMainTabFlow() {
+        window.rootViewController = createMainTabFlow()
     }
     
     // MARK: Private Function(s)
     
-    func toMainFlow() {
-        navigationController.setViewControllers([createMainTabFlow()], animated: true)
-    }
-    
-    private func toOnboardingFlow() {
+    private func onboardingFlow() -> WelcomeViewController {
         let welcomeViewController = WelcomeViewController()
         welcomeViewController.coordinator = self
-        navigationController.setViewControllers([welcomeViewController], animated: true)
+        return welcomeViewController
     }
     
     private func createMainTabFlow() -> UITabBarController {
-        let tabViewController = UITabBarController()
+        
         let friendList = createFriendsList()
-        friendList.tabBarItem = UITabBarItem(title: "Friends", image: UIImage(systemName: "person.3.fill"), tag: 1)
-        let channelList = createConversationListViewController()
-        channelList.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "message.fill"), tag: .zero)
-        tabViewController.viewControllers = [friendList, channelList]
+        friendList.tabBarItem = UITabBarItem(
+            title: "Friends",
+            image: UIImage(systemName: "person.3.fill"),
+            tag: 0
+        )
+        friendNavigation.setViewControllers([friendList], animated: true)
+        friendNavigation.navigationBar.prefersLargeTitles = true
+        
+        let conversationList = createConversationListViewController()
+        conversationList.tabBarItem = UITabBarItem(
+            title: "Conversation",
+            image: UIImage(systemName: "message.fill"),
+            tag: 1
+        )
+        conversationNavigation.navigationBar.prefersLargeTitles = true
+        conversationNavigation.setViewControllers([conversationList], animated: true)
+        
+        let tabViewController = UITabBarController()
+        tabViewController.viewControllers = [friendNavigation, conversationNavigation]
         return tabViewController
+    }
+    
+    private func createSignInView() -> SignInViewController {
+        let signInViewController = SignInViewController()
+        signInViewController.coordinator = self
+        signInViewController.viewModel = appContainer.signInViewModel()
+        return signInViewController
     }
     
     private func createFriendsList() -> FriendListViewController {
         let friendListViewController = FriendListViewController()
         friendListViewController.viewModel = appContainer.friendListViewModel()
+        friendListViewController.navigationItem.title = "Friends"
         return friendListViewController
     }
     
@@ -71,6 +98,7 @@ final class AppCoordinator {
         let channelListViewController = ConversationListViewController()
         channelListViewController.coordinator = self
         channelListViewController.viewModel = appContainer.conversationListViewModel()
+        channelListViewController.navigationItem.title = "Conversation"
         return channelListViewController
     }
     

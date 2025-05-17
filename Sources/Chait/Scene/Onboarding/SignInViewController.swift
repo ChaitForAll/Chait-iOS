@@ -54,7 +54,7 @@ final class SignInViewController: UIViewController {
                 case .showIsLoading:
                     self?.signInButton.showIsLoadingInCenter()
                 case .coordinateToChat:
-                    self?.coordinator?.toMainFlow()
+                    self?.coordinator?.toMainTabFlow()
                 }
             }
             .store(in: &cancelBag)
