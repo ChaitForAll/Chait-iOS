@@ -13,10 +13,6 @@ final class FriendListCellContentView: UIView,  UIContentView {
         var status: String?
         var imageToTextSpacing: CGFloat = 8
         var imageWidth: CGFloat = 55
-        var contentInset: UIEdgeInsets = .init(top: 2, left: 16, bottom: 2, right: 16)
-        var separatorInset: CGFloat {
-            return contentInset.left + imageToTextSpacing + imageWidth
-        }
         
         func makeContentView() -> any UIView & UIContentView {
             FriendListCellContentView(configuration: self)
@@ -79,11 +75,12 @@ final class FriendListCellContentView: UIView,  UIContentView {
     private func configureLayoutStyle() {
         userInfoStack.axis = .vertical
         userInfoStack.distribution = .fillEqually
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 0.5 * (55)
         imageView.clipsToBounds = true
         nameLabel.font = .preferredFont(forTextStyle: .headline)
         statusLabel.font = .preferredFont(forTextStyle: .subheadline)
+        layoutMargins = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
     }
     
     private func apply(configuration: UIContentConfiguration) {
@@ -93,7 +90,6 @@ final class FriendListCellContentView: UIView,  UIContentView {
         imageView.image = configuration.image
         nameLabel.text = configuration.name
         statusLabel.text = configuration.status
-        layoutMargins = configuration.contentInset
         contentStack.setCustomSpacing(configuration.imageToTextSpacing, after: imageView)
         imageWidthConstraint?.constant = configuration.imageWidth
     }

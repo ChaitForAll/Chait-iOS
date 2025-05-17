@@ -74,7 +74,12 @@ final class FriendListViewController: UIViewController {
     }
     
     private func createListLayout() -> UICollectionViewCompositionalLayout {
-        let listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        var listConfiguration = UICollectionLayoutListConfiguration(appearance: .plain)
+        var separator = listConfiguration.separatorConfiguration
+        let separatorInset = NSDirectionalEdgeInsets(top: 0, leading: 77, bottom: 0, trailing: 0)
+        separator.topSeparatorInsets = separatorInset
+        separator.bottomSeparatorInsets = separatorInset
+        listConfiguration.separatorConfiguration = separator
         let layout = UICollectionViewCompositionalLayout.list(using: listConfiguration)
         return layout
     }
@@ -101,7 +106,6 @@ final class FriendListViewController: UIViewController {
                 content.status = friend.createdAt.formatted()
                 content.image = friend.image
             }
-            cell.directionalLayoutMargins.leading = content.separatorInset
             cell.contentConfiguration = content
         }
     }
