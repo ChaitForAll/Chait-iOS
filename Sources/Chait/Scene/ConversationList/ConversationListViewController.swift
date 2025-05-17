@@ -9,23 +9,22 @@ import UIKit
 import Combine
 
 final class ConversationListViewController: UIViewController {
+    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
+    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
+    typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
     
     var viewModel: ConversationListViewModel?
     var coordinator: AppCoordinator?
     
-    var currentSnapshot: NSDiffableDataSourceSnapshot<UUID, UUID>? {
-        return diffableDataSource?.snapshot()
+    private var cancelBag: Set<AnyCancellable> = .init()
+    private var diffableDataSource: DataSource?
+    private var currentSnapshot: SnapShot? {
+        diffableDataSource?.snapshot()
     }
     
-    private var diffableDataSource: UICollectionViewDiffableDataSource<UUID, UUID>?
-    private var cancelBag: Set<AnyCancellable> = .init()
-    
-    private let collectionView: UICollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: .init()
-    )
+    private let collectionView = UICollectionView.withEmptyLayout()
     
     // MARK: Override(s)
     
@@ -55,9 +54,11 @@ final class ConversationListViewController: UIViewController {
         return layout
     }
     
-    private func createDiffableDataSource() -> UICollectionViewDiffableDataSource<UUID, UUID> {
+    private func createDiffableDataSource() -> DataSource {
         let listCellRegistration = createListCellRegistration()
-        return .init(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
+        return DataSource(collectionView: collectionView) {
+            collectionView, indexPath, itemIdentifier in
+            
             collectionView.dequeueConfiguredReusableCell(
                 using: listCellRegistration,
                 for: indexPath,
@@ -66,8 +67,8 @@ final class ConversationListViewController: UIViewController {
         }
     }
     
-    private func createListCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, UUID> {
-        return .init { cell, indexPath, itemIdentifier in
+    private func createListCellRegistration() -> ListCellRegistration {
+        return ListCellRegistration { cell, indexPath, itemIdentifier in
             
             let item = self.viewModel?.item(for: itemIdentifier)
             var content = cell.defaultContentConfiguration()
