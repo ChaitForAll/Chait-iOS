@@ -120,12 +120,8 @@ final class AppCoordinator {
     private func createPersonalChat(_ channelID: UUID) -> ConversationViewController {
         let personalChatViewController = ConversationViewController()
         personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
+        personalChatViewController.hidesBottomBarWhenPushed = true
         return personalChatViewController
     }
 }
 
-final class DefaultAppearanceNavigationController: UINavigationController {
-    
-    
-    
-}
