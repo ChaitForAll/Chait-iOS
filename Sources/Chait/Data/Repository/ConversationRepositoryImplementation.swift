@@ -49,6 +49,25 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         .eraseToAnyPublisher()
     }
     
+    func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], FetchConversationSummariesUseCase.ExecutionError> {
+        let currentUserID = authSession.currentUserID
+        return Future { promise in
+            Task {
+                do {
+                    let memberships = try await self.conversationMembershipRemote
+                        .fetchConversationMemberships(currentUserID)
+                    let conversationSummaries = try await self.conversationRemote
+                        .fetchConversations(memberships.map { $0.conversationID })
+                        .map { ConversationSummary($0) }
+                    promise(.success(conversationSummaries))
+                } catch {
+                    promise(.failure(.unknown))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
         let currentUserID = authSession.currentUserID
         return Future { promise in
