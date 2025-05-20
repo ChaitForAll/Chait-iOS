@@ -93,13 +93,9 @@ final class SignInViewController: UIViewController {
         emailInput.borderStyle = .roundedRect
         passwordInput.borderStyle = .roundedRect
         descriptionLabel.textColor = .systemGray
-        titleLabel.font = .systemFont(ofSize: 32, weight: .semibold)
-        descriptionLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-        emailLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        emailInput.font = .systemFont(ofSize: 18, weight: .semibold)
+        titleLabel.font = .preferredFont(for: .largeTitle, weight: .bold)
+        descriptionLabel.font = .preferredFont(forTextStyle: .subheadline)
         emailInput.autocapitalizationType = .none
-        passwordLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        passwordInput.font = .systemFont(ofSize: 18, weight: .semibold)
         inputStackView.spacing = 22
         inputStackView.setCustomSpacing(11, after: emailLabel)
         inputStackView.setCustomSpacing(11, after: passwordLabel)
