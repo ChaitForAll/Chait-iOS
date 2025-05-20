@@ -34,10 +34,10 @@ final class ConversationListViewModel {
     private var cancelBag: Set<AnyCancellable> = .init()
     
     private let conversationSummariesSubject: PassthroughSubject<[UUID], Never> = .init()
-    private let conversationUseCase: ConversationUseCase
+    private let fetchConversationSummaries: FetchConversationSummariesUseCase
     
-    init(conversationUseCase: ConversationUseCase) {
-        self.conversationUseCase = conversationUseCase
+    init(fetchConversationSummaries: FetchConversationSummariesUseCase) {
+        self.fetchConversationSummaries = fetchConversationSummaries
     }
     
     // MARK: Function(s)
@@ -54,8 +54,9 @@ final class ConversationListViewModel {
     //MARK: Private Function(s)
     
     private func fetchConversationList() {
-        conversationUseCase
-            .fetchConversationSummaryList()
+        
+        fetchConversationSummaries
+            .execute()
             .replaceError(with: [])
             .map { $0.map  { ConversationSummaryViewModel($0) }}
             .handleEvents(receiveOutput: { [weak self] output in
@@ -68,5 +69,6 @@ final class ConversationListViewModel {
                 self?.viewActionSubject.send($0)
             }
             .store(in: &cancelBag)
+        
     }
 }
