@@ -8,7 +8,6 @@ import Foundation
 import Combine
 
 protocol ConversationRepository {
-    func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError>
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError>
     func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError>
     func fetchHistory(
