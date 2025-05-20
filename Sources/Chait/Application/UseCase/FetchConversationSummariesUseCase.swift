@@ -7,18 +7,18 @@
 import Combine
 import Foundation
 
-final class FetchConversationSummaries {
+final class FetchConversationSummariesUseCase {
     
     // MARK: Type(s)
     
-    enum UseCaseError: Error {
+    enum ExecutionError: Error {
         case noConversations
         case unknown
     }
     
     // MARK: Function(s)
     
-    func execute() -> AnyPublisher<ConversationSummary, UseCaseError> {
+    func execute() -> AnyPublisher<[ConversationSummary], ExecutionError> {
         return Empty().eraseToAnyPublisher()
     }
 }
