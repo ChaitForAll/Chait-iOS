@@ -7,15 +7,7 @@
 import Supabase
 import Foundation
 
-final class AppContainer {
-    
-    // MARK: External(s)
-    
-    private let supabaseClient: SupabaseClient
-    
-    // MARK: Service(s)
-    
-    let authService: AuthenticationService
+final class AppSessionContainer {
     
     // MARK: Repository(s)
     
@@ -30,30 +22,25 @@ final class AppContainer {
     private let conversationDataSource: ConversationRemoteDataSource
     
     
-    init() {
-        let supabaseClient = SupabaseClient(
-            supabaseURL: AppEnvironment.projectURL,
-            supabaseKey: AppEnvironment.secretKey
+    init(client: SupabaseClient, authSession: AuthSession) {
+        self.userRemoteDataSource = DefaultUserRemoteDataSource(supabase: client)
+        self.conversationMembershipDataSource = DefaultConversationMembershipRemoteDataSource(
+            supabase: client
         )
-        
-        self.authService = AuthenticationService(supabase: supabaseClient)
-        
-        self.userRemoteDataSource = DefaultUserRemoteDataSource(supabase: supabaseClient)
-        self.conversationMembershipDataSource = DefaultConversationMembershipRemoteDataSource(supabase: supabaseClient)
-        self.conversationDataSource = DefaultConversationRemoteDataSource(supabase: supabaseClient)
+        self.conversationDataSource = DefaultConversationRemoteDataSource(supabase: client)
         
         self.conversationRepository = ConversationRepositoryImplementation(
             conversationRemote: conversationDataSource,
             conversationMembershipRemote: conversationMembershipDataSource,
-            userRemote: userRemoteDataSource
+            userRemote: userRemoteDataSource,
+            authSession: authSession
         )
         self.friendRepository = FriendRepositoryImplementation(
-            client: supabaseClient,
-            usersRemote: userRemoteDataSource
+            client: client,
+            usersRemote: userRemoteDataSource,
+            authSession: authSession
         )
         self.imageRepository = ImageRepositoryImplementation(imageManager: ImageManager())
-
-        self.supabaseClient = supabaseClient
     }
     
     
@@ -65,8 +52,7 @@ final class AppContainer {
     
     private func conversationUseCase() -> ConversationUseCase {
         return DefaultConversationUseCase(
-            conversationRepository: conversationRepository,
-            userID: authService.userID ?? UUID() // TODO: try get rid of optional
+            conversationRepository: conversationRepository // TODO: try get rid of optional
         )
     }
     
@@ -89,13 +75,8 @@ final class AppContainer {
     
     func personalChatViewModel(_ channelID: UUID) -> ConversationViewModel {
         return ConversationViewModel(
-            userID: authService.userID ?? UUID(),
             channelID: channelID,
             conversationUseCase: conversationUseCase()
         )
-    }
-    
-    func signInViewModel() -> SignInViewModel {
-        return SignInViewModel(authService: authService)
     }
 }

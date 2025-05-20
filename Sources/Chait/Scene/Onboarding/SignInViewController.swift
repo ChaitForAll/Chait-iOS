@@ -12,7 +12,7 @@ final class SignInViewController: UIViewController {
     // MARK: Property(s)
     
     var viewModel: SignInViewModel?
-    var coordinator: AppCoordinator?
+    var coordinator: AppSessionCoordinator?
     
     private var cancelBag: Set<AnyCancellable> = .init()
     
@@ -54,7 +54,7 @@ final class SignInViewController: UIViewController {
                 case .showIsLoading:
                     self?.signInButton.showIsLoadingInCenter()
                 case .coordinateToChat:
-                    self?.coordinator?.toMainTabFlow()
+                    self?.coordinator?.start()
                 }
             }
             .store(in: &cancelBag)

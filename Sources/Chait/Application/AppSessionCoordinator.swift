@@ -1,5 +1,5 @@
 //
-//  AppCoordinator.swift
+//  AppSessionCoordinator.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -10,26 +10,27 @@ import Supabase
 import UIKit
 import SwiftUI
 
-final class AppCoordinator {
+final class AppSessionCoordinator {
     
     // MARK: Property(s)
+    
     private let friendNavigation = UINavigationController()
     private let conversationNavigation = UINavigationController()
     private let mainTabBarController = UITabBarController()
-    private let appContainer: AppContainer = AppContainer()
-    private let window: UIWindow
     
-    init(window: UIWindow) {
+    private let window: UIWindow
+    private let appSessionContainer: AppSessionContainer
+    
+    init(window: UIWindow, appSessionContainer: AppSessionContainer) {
         self.window = window
+        self.appSessionContainer = appSessionContainer
         configureAppearances()
     }
     
     // MARK: Function(s)
     
     func start() {
-        let authService = appContainer.authService
-        let windowRoot = authService.isAuthenticated ? createMainTabFlow() : onboardingFlow()
-        window.rootViewController = windowRoot
+        window.rootViewController = createMainTabFlow()
         window.makeKeyAndVisible()
     }
 
@@ -38,14 +39,6 @@ final class AppCoordinator {
             createPersonalChat(channelIdentifier),
             animated: true
         )
-    }
-    
-    func toSingInFlow() {
-        window.rootViewController = createSignInView()
-    }
-    
-    func toMainTabFlow() {
-        window.rootViewController = createMainTabFlow()
     }
     
     // MARK: Private Function(s)
@@ -64,12 +57,12 @@ final class AppCoordinator {
         mainTabBarController.tabBar.standardAppearance = defaultTabBarAppearance
         mainTabBarController.tabBar.scrollEdgeAppearance = defaultTabBarAppearance
     }
-    
-    private func onboardingFlow() -> WelcomeViewController {
-        let welcomeViewController = WelcomeViewController()
-        welcomeViewController.coordinator = self
-        return welcomeViewController
-    }
+//    
+//    private func onboardingFlow() -> WelcomeViewController {
+//        let welcomeViewController = WelcomeViewController()
+//        welcomeViewController.coordinator = self
+//        return welcomeViewController
+//    }
     
     private func createMainTabFlow() -> UITabBarController {
         
@@ -94,17 +87,11 @@ final class AppCoordinator {
         mainTabBarController.viewControllers = [friendNavigation, conversationNavigation]
         return mainTabBarController
     }
-    
-    private func createSignInView() -> SignInViewController {
-        let signInViewController = SignInViewController()
-        signInViewController.coordinator = self
-        signInViewController.viewModel = appContainer.signInViewModel()
-        return signInViewController
-    }
+
     
     private func createFriendsList() -> FriendListViewController {
         let friendListViewController = FriendListViewController()
-        friendListViewController.viewModel = appContainer.friendListViewModel()
+        friendListViewController.viewModel = appSessionContainer.friendListViewModel()
         friendListViewController.navigationItem.title = "Friends"
         return friendListViewController
     }
@@ -112,16 +99,15 @@ final class AppCoordinator {
     private func createConversationListViewController() -> ConversationListViewController {
         let channelListViewController = ConversationListViewController()
         channelListViewController.coordinator = self
-        channelListViewController.viewModel = appContainer.conversationListViewModel()
+        channelListViewController.viewModel = appSessionContainer.conversationListViewModel()
         channelListViewController.navigationItem.title = "Conversation"
         return channelListViewController
     }
     
     private func createPersonalChat(_ channelID: UUID) -> ConversationViewController {
         let personalChatViewController = ConversationViewController()
-        personalChatViewController.viewModel = appContainer.personalChatViewModel(channelID)
+        personalChatViewController.viewModel = appSessionContainer.personalChatViewModel(channelID)
         personalChatViewController.hidesBottomBarWhenPushed = true
         return personalChatViewController
     }
 }
-

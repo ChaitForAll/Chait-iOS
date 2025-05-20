@@ -11,7 +11,7 @@ final class WelcomeViewController: UIViewController {
     
     // MARK: Property(s)
     
-    var coordinator: AppCoordinator?
+    var coordinator: AppCoreCoordinator?
     
     private let welcomeBannerStack = UIStackView()
     private let appIconImageView = UIImageView()
@@ -95,7 +95,7 @@ final class WelcomeViewController: UIViewController {
         
         alreadyHaveAccountButton.addAction(
             UIAction { [weak self] _ in
-                self?.coordinator?.toSingInFlow()
+                self?.coordinator?.signInFlow()
             },
             for: .touchUpInside
         )

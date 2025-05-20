@@ -30,18 +30,16 @@ final class DefaultConversationUseCase: ConversationUseCase {
     // MARK: Property(s)
     
     private let conversationRepository: ConversationRepository
-    private let userID: UUID
     
-    init(conversationRepository: ConversationRepository, userID: UUID) {
+    init(conversationRepository: ConversationRepository) {
         self.conversationRepository = conversationRepository
-        self.userID = userID
     }
     
     // MARK: Function(s)
     
     func fetchConversationSummaryList(
     ) -> AnyPublisher<[ConversationSummary], ConversationError> {
-        return conversationRepository.fetchConversationSummaryList(userID)
+        return conversationRepository.fetchConversationSummaryList()
     }
     
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {

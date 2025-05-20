@@ -37,18 +37,16 @@ final class ConversationViewModel {
     
     private let messageListSection = Section<ConversationMessageViewModel>(sectionType: .messageList)
     private let viewActionSubject: PassthroughSubject<ViewAction, Never> = .init()
-    private let userID: UUID
     private let conversationID: UUID
     private let historyBatchSize: Int
     private let conversationUseCase: ConversationUseCase
     
     init(
-        userID: UUID,
         channelID: UUID,
         historyBatchSize: Int = 50,
         conversationUseCase: ConversationUseCase
     ) {
-        self.userID = userID
+
         self.conversationID = channelID
         self.historyBatchSize = historyBatchSize
         self.conversationUseCase = conversationUseCase
@@ -68,7 +66,7 @@ final class ConversationViewModel {
     
     func onSendMessage() {
         conversationUseCase
-            .sendMessage(NewMessage(text: userMessageText, senderID: userID, conversationID: conversationID))
+            .sendMessage(NewMessage(text: userMessageText, conversationID: conversationID))
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
             .store(in: &cancelBag)
         userMessageText.removeAll()

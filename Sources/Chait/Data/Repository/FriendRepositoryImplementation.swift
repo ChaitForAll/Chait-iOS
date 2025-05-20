@@ -15,10 +15,12 @@ final class FriendRepositoryImplementation: FriendRepository {
     
     private let client: SupabaseClient
     private let usersRemote: UserRemoteDataSource
+    private let authSession: AuthSession
     
-    init(client: SupabaseClient, usersRemote: UserRemoteDataSource) {
+    init(client: SupabaseClient, usersRemote: UserRemoteDataSource, authSession: AuthSession) {
         self.client = client
         self.usersRemote = usersRemote
+        self.authSession = authSession
     }
     
     // MARK: Function(s)
@@ -61,15 +63,10 @@ final class FriendRepositoryImplementation: FriendRepository {
     }
     
     private func asyncFetchFriendshipResponse() async throws -> [FriendResponse] {
-        
-        guard let userID = client.auth.currentSession?.user.id else {
-            throw AuthError.sessionMissing
-        }
-        
         return try await client
             .from("friend_relations")
             .select()
-            .or("userID.eq.\(userID),friendID.eq.\(userID)")
+            .or("userID.eq.\(authSession.currentUserID),friendID.eq.\(authSession.currentUserID)")
             .execute()
             .value
     }

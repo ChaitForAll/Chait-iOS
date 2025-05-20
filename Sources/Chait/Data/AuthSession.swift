@@ -1,12 +1,12 @@
 //
-//  NewMessage.swift
+//  AuthSession.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
     
+
 import Foundation
 
-struct NewMessage {
-    let text: String
-    let conversationID: UUID
+struct AuthSession {
+    let currentUserID: UUID
 }

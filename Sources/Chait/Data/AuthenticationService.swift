@@ -8,15 +8,14 @@ import Foundation
 import Supabase
 
     
+protocol AuthenticationServiceDelegate: AnyObject {
+    func authenticationComplete(with session: AuthSession)
+}
+
 final class AuthenticationService {
     
     // MARK: Property(s)
-    
-    var userID: UUID?
-    
-    var isAuthenticated: Bool {
-        return userID != nil
-    }
+    weak var delegate: AuthenticationServiceDelegate?
     
     private let supabase: SupabaseClient
     
@@ -28,7 +27,8 @@ final class AuthenticationService {
     
     func signIn(_ email: String, password: String) async throws {
         let auth = try await supabase.auth.signIn(email: email, password: password)
-        self.userID = auth.user.id
+        let authSession = AuthSession(currentUserID: auth.user.id)
+        delegate?.authenticationComplete(with: authSession)
     }
     
     func logOut() async throws {

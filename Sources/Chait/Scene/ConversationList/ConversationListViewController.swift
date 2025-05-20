@@ -16,7 +16,7 @@ final class ConversationListViewController: UIViewController {
     // MARK: Property(s)
     
     var viewModel: ConversationListViewModel?
-    var coordinator: AppCoordinator?
+    var coordinator: AppSessionCoordinator?
     
     private var cancelBag: Set<AnyCancellable> = .init()
     private var diffableDataSource: DataSource?

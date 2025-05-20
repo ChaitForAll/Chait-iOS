@@ -14,24 +14,29 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     private let conversationRemote: ConversationRemoteDataSource
     private let conversationMembershipRemote: ConversationMembershipRemoteDataSource
     private let userRemote: UserRemoteDataSource
+    private let authSession: AuthSession
     
     init(
         conversationRemote: ConversationRemoteDataSource,
         conversationMembershipRemote: ConversationMembershipRemoteDataSource,
-        userRemote: UserRemoteDataSource
+        userRemote: UserRemoteDataSource,
+        authSession: AuthSession
     ) {
         self.conversationRemote = conversationRemote
         self.conversationMembershipRemote = conversationMembershipRemote
         self.userRemote = userRemote
+        self.authSession = authSession
     }
     
     // MARK: Function(s)
     
-    func fetchConversationSummaryList(_ userID: UUID) -> AnyPublisher<[ConversationSummary], ConversationError> {
+    func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], ConversationError> {
+        let currentUserID = authSession.currentUserID
         return Future { promise in
             Task {
                 do {
-                    let memberships = try await self.conversationMembershipRemote.fetchConversationMemberships(userID)
+                    let memberships = try await self.conversationMembershipRemote
+                        .fetchConversationMemberships(currentUserID)
                     let conversationSummaries = try await self.conversationRemote
                         .fetchConversations(memberships.map { $0.conversationID })
                         .map { ConversationSummary($0) }
@@ -45,13 +50,14 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     }
     
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
+        let currentUserID = authSession.currentUserID
         return Future { promise in
             Task {
                 do {
                     let response = try await self.conversationRemote.insertNewMessage(
                         NewMessageRequest(
                             text: newMessage.text,
-                            sender: newMessage.senderID,
+                            sender: currentUserID,
                             conversationId: newMessage.conversationID
                         )
                     )
