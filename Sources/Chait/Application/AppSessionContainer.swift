@@ -60,6 +60,10 @@ final class AppSessionContainer {
         return DefaultFetchFriendsListUseCase(repository: friendRepository)
     }
     
+    private func fetchConversationSummariesUseCase() -> FetchConversationSummariesUseCase {
+        return FetchConversationSummariesUseCase(conversationRepository: conversationRepository)
+    }
+    
     // MARK: ViewModel(s)
     
     func conversationListViewModel() -> ConversationListViewModel {
