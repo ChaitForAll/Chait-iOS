@@ -57,17 +57,14 @@ final class WelcomeViewController: UIViewController {
             welcomeBannerStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             welcomeBannerStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
             buttonStack.centerXAnchor.constraint(equalTo: welcomeBannerStack.centerXAnchor),
-            buttonStack.topAnchor.constraint(
-                equalTo: welcomeBannerStack.bottomAnchor,
-                constant: 45
-            ),
             buttonStack.widthAnchor.constraint(equalToConstant: 350),
+            buttonStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     private func fillContents() {
         titleLabel.text = "Welcome to Chait"
-        descriptionLabel.text = "A bit \"botter\" experience \n On same chatting"
+        descriptionLabel.text = "Botter connection experience."
         alreadyHaveAccountButton.setTitle("I already have an account", for: .normal)
         getStartedButton.setTitle("Get Started", for: .normal)
         let titleImage = UIImage(systemName: "message.fill")
@@ -78,17 +75,15 @@ final class WelcomeViewController: UIViewController {
     }
     
     private func configureViewStyle() {
-        titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
-        descriptionLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        descriptionLabel.numberOfLines = 2
-        descriptionLabel.textColor = .systemGray
+        titleLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        descriptionLabel.font = .preferredFont(forTextStyle: .headline)
+        descriptionLabel.adjustsFontForContentSizeCategory = true
+        descriptionLabel.textColor = .secondaryLabel
         descriptionLabel.textAlignment = .center
         welcomeBannerStack.setCustomSpacing(13, after: appIconImageView)
-        welcomeBannerStack.setCustomSpacing(28, after: titleLabel)
         buttonStack.setCustomSpacing(8, after: getStartedButton)
-        getStartedButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        alreadyHaveAccountButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-    }
+    }   
     
     private func configureButtonActions() {
         getStartedButton.addAction(
