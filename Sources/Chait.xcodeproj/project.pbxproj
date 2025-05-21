@@ -210,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				DF7574472DDCBAC300F08C10 /* FetchConversationSummariesUseCase.swift */,
+				DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */,
 				DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */,
 				DF0F26D42DAD14BB002308E9 /* ConversationUseCase.swift */,
 				DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */,
@@ -393,7 +394,6 @@
 			isa = PBXGroup;
 			children = (
 				DF7C16F52DBDDBF700CAF20F /* NewMessage.swift */,
-				DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */,
 				DF0F26CF2DABB4B9002308E9 /* ContactUser.swift */,
 				DF0F26CD2DABAD20002308E9 /* GroupConversation.swift */,
 				DF0F26CB2DABAACA002308E9 /* PrivateConversation.swift */,
