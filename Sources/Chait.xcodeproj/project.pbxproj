@@ -209,8 +209,7 @@
 		DF0F26BD2DAAFC66002308E9 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				DF7574472DDCBAC300F08C10 /* FetchConversationSummariesUseCase.swift */,
-				DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */,
+				DF75744F2DDE002D00F08C10 /* FetchConversationSummaries */,
 				DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */,
 				DF0F26D42DAD14BB002308E9 /* ConversationUseCase.swift */,
 				DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */,
@@ -354,6 +353,15 @@
 				DF0D43E62D70C74A0083AA14 /* Secrets.xcconfig */,
 			);
 			path = AppResources;
+			sourceTree = "<group>";
+		};
+		DF75744F2DDE002D00F08C10 /* FetchConversationSummaries */ = {
+			isa = PBXGroup;
+			children = (
+				DF7574472DDCBAC300F08C10 /* FetchConversationSummariesUseCase.swift */,
+				DF4920012DB02B5000EA51D2 /* ConversationSummary.swift */,
+			);
+			path = FetchConversationSummaries;
 			sourceTree = "<group>";
 		};
 		DF7BC6182D71965600AAF678 /* Frameworks */ = {
