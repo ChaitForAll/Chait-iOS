@@ -18,15 +18,11 @@ final class FetchConversationSummariesUseCase {
     
     // MARK: Property(s)
     
-    private let conversationRepository: ConversationRepository
-    
-    init(conversationRepository: ConversationRepository) {
-        self.conversationRepository = conversationRepository
-    }
+    // TODO: Add Implementation
     
     // MARK: Function(s)
     
     func execute() -> AnyPublisher<[ConversationSummary], ExecutionError> {
-        return conversationRepository.fetchConversationSummaryList()
+        return Empty().eraseToAnyPublisher()
     }
 }

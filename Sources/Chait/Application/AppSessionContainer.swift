@@ -61,7 +61,7 @@ final class AppSessionContainer {
     }
      
     private func fetchConversationSummariesUseCase() -> FetchConversationSummariesUseCase {
-        return FetchConversationSummariesUseCase(conversationRepository: conversationRepository)
+        return FetchConversationSummariesUseCase()
     }
     
     // MARK: ViewModel(s)

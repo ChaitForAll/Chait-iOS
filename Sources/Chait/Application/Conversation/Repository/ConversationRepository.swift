@@ -15,5 +15,4 @@ protocol ConversationRepository {
         historyOffset: Int,
         maxItems: Int
     ) -> AnyPublisher<[Message], ConversationError>
-    func fetchConversationSummaryList() -> AnyPublisher<[ConversationSummary], FetchConversationSummariesUseCase.ExecutionError>
 }
