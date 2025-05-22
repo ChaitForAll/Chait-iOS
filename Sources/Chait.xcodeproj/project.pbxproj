@@ -48,6 +48,7 @@
 		DF7574562DDF04AC00F08C10 /* ConversationDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574552DDF049000F08C10 /* ConversationDetail.swift */; };
 		DF7574582DDF387600F08C10 /* MessageDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574572DDF387500F08C10 /* MessageDetail.swift */; };
 		DF75745A2DDF388500F08C10 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574592DDF388300F08C10 /* UserDetail.swift */; };
+		DF75745E2DDF40D900F08C10 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF75745D2DDF40D600F08C10 /* MessageRepository.swift */; };
 		DF7BC61A2D71965600AAF678 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6192D71965600AAF678 /* Auth */; };
 		DF7BC61C2D71965600AAF678 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC61B2D71965600AAF678 /* Functions */; };
 		DF7BC61E2D71965600AAF678 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC61D2D71965600AAF678 /* PostgREST */; };
@@ -143,6 +144,7 @@
 		DF7574552DDF049000F08C10 /* ConversationDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetail.swift; sourceTree = "<group>"; };
 		DF7574572DDF387500F08C10 /* MessageDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetail.swift; sourceTree = "<group>"; };
 		DF7574592DDF388300F08C10 /* UserDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
+		DF75745D2DDF40D600F08C10 /* MessageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* ConversationMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageViewModel.swift; sourceTree = "<group>"; };
 		DF7C16F52DBDDBF700CAF20F /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
 		DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewModel.swift; sourceTree = "<group>"; };
@@ -208,8 +210,8 @@
 				DF75744B2DDCCDC100F08C10 /* AppCoreContainer.swift */,
 				DFD1225C2DC34C0F005E3ED1 /* AppSessionContainer.swift */,
 				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
-				DF7574522DDE203400F08C10 /* Repository */,
 				DF0F26BD2DAAFC66002308E9 /* UseCase */,
+				DF7574522DDE203400F08C10 /* Repository */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -368,6 +370,7 @@
 		DF7574522DDE203400F08C10 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				DF75745D2DDF40D600F08C10 /* MessageRepository.swift */,
 				DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */,
 				DF9676C12D9951830078D0D5 /* FriendRepository.swift */,
 				DF7574532DDE486400F08C10 /* ParticipantRepository.swift */,
@@ -653,6 +656,7 @@
 				DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */,
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
+				DF75745E2DDF40D900F08C10 /* MessageRepository.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
 				DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */,
