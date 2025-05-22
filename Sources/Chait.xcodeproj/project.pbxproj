@@ -208,9 +208,8 @@
 				DF75744B2DDCCDC100F08C10 /* AppCoreContainer.swift */,
 				DFD1225C2DC34C0F005E3ED1 /* AppSessionContainer.swift */,
 				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
-				DF7574502DDE1FEB00F08C10 /* Conversation */,
+				DF7574522DDE203400F08C10 /* Repository */,
 				DF0F26BD2DAAFC66002308E9 /* UseCase */,
-				DF0F26BE2DAAFC7B002308E9 /* Interface */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -218,20 +217,12 @@
 		DF0F26BD2DAAFC66002308E9 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				DF75744F2DDE002D00F08C10 /* FetchConversationSummaries */,
 				DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */,
 				DF0F26D42DAD14BB002308E9 /* ConversationUseCase.swift */,
 				DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */,
 			);
 			path = UseCase;
-			sourceTree = "<group>";
-		};
-		DF0F26BE2DAAFC7B002308E9 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */,
-				DF9676C12D9951830078D0D5 /* FriendRepository.swift */,
-			);
-			path = Interface;
 			sourceTree = "<group>";
 		};
 		DF10C7A62D343A3E006035E8 = {
@@ -374,26 +365,11 @@
 			path = FetchConversationSummaries;
 			sourceTree = "<group>";
 		};
-		DF7574502DDE1FEB00F08C10 /* Conversation */ = {
-			isa = PBXGroup;
-			children = (
-				DF7574512DDE1FFB00F08C10 /* UseCase */,
-				DF7574522DDE203400F08C10 /* Repository */,
-			);
-			path = Conversation;
-			sourceTree = "<group>";
-		};
-		DF7574512DDE1FFB00F08C10 /* UseCase */ = {
-			isa = PBXGroup;
-			children = (
-				DF75744F2DDE002D00F08C10 /* FetchConversationSummaries */,
-			);
-			path = UseCase;
-			sourceTree = "<group>";
-		};
 		DF7574522DDE203400F08C10 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */,
+				DF9676C12D9951830078D0D5 /* FriendRepository.swift */,
 				DF7574532DDE486400F08C10 /* ParticipantRepository.swift */,
 				DF0F26DA2DAD18AA002308E9 /* ConversationRepository.swift */,
 			);
