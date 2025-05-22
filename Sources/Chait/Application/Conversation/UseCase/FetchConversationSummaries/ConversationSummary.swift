@@ -12,4 +12,20 @@ struct ConversationSummary {
     let titleImage: String?
     let lastMessageText: String?
     let lastMessageSenderName: String?
+    let lastMessageSenderImage: String?
+}
+
+extension ConversationSummary {
+    init(
+        conversationDetail: ConversationDetail,
+        messageDetail: MessageDetail,
+        userDetail: UserDetail
+    ) {
+        self.id = conversationDetail.id
+        self.title = conversationDetail.title
+        self.titleImage = conversationDetail.titleImage
+        self.lastMessageText = messageDetail.text
+        self.lastMessageSenderName = userDetail.userName
+        self.lastMessageSenderImage = userDetail.profileImage
+    }
 }
