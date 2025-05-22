@@ -7,6 +7,10 @@
 import Foundation
 import Combine
 
+enum ConversationRepositoryError: Error {
+    case unknown
+}
+
 protocol ConversationRepository {
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError>
     func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError>
@@ -15,4 +19,6 @@ protocol ConversationRepository {
         historyOffset: Int,
         maxItems: Int
     ) -> AnyPublisher<[Message], ConversationError>
+    func fetchConversationDetails(
+    ) -> AnyPublisher<[ConversationDetail], ConversationRepositoryError>
 }

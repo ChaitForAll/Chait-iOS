@@ -30,6 +30,11 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     
     // MARK: Function(s)
     
+    func fetchConversationDetails(
+    ) -> AnyPublisher<[ConversationDetail], ConversationRepositoryError> {
+        return Empty().eraseToAnyPublisher()
+    }
+    
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
         let currentUserID = authSession.currentUserID
         return Future { promise in
