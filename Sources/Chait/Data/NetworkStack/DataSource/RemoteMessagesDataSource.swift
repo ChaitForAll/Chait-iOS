@@ -22,7 +22,9 @@ protocol RemoteMessagesDataSource {
         senderID: UUID,
         channelID: UUID
     ) -> AnyPublisher<Void, RemoteMessagesDataSourceError>
-    
+    func fetchLastMessages(
+        _ conversationIdentifiers: [UUID]
+    ) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError>
     func startListeningMessages(channelID: UUID) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError>
     func fetchHistory(channelID: UUID, historyOffset: Int, maxItemsCount: Int) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError>
 }
@@ -42,6 +44,36 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     }
     
     // MARK: Function(s)
+    
+    func fetchLastMessages(
+        _ conversationIdentifiers: [UUID]
+    ) -> AnyPublisher<[MessageResponse], RemoteMessagesDataSourceError> {
+        return Future { promise in
+            Task {
+                do {
+                    var results: [MessageResponse] = []
+                    for conversation in conversationIdentifiers {
+                        let latestMessage: MessageResponse = try await self.client
+                            .from("messages")
+                            .select()
+                            .eq("conversation_id", value: conversation)
+                            .order("created_at", ascending: true)
+                            .limit(1)
+                            .single()
+                            .execute()
+                            .value
+                        results.append(latestMessage)
+                    }
+                    promise(.success(results))
+                } catch let error {
+                    promise(.failure(.unknownError(error)))
+                }
+            }
+            
+        }
+        .print()
+        .eraseToAnyPublisher()
+    }
     
     func sendMessage(
         text: String,
