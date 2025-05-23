@@ -14,12 +14,15 @@ final class AppSessionContainer {
     private let conversationRepository: ConversationRepository
     private let friendRepository: FriendRepository
     private let imageRepository: ImageRepository
+    private let messageRepository: MessageRepository
+    private let userRepository: UserRepository
     
     // MARK: DataSource(s)
     
     private let userRemoteDataSource: UserRemoteDataSource
     private let conversationMembershipDataSource: ConversationMembershipRemoteDataSource
     private let conversationDataSource: ConversationRemoteDataSource
+    private let messageRemoteDataSource: RemoteMessagesDataSource
     
     
     init(client: SupabaseClient, authSession: AuthSession) {
@@ -28,6 +31,7 @@ final class AppSessionContainer {
             supabase: client
         )
         self.conversationDataSource = DefaultConversationRemoteDataSource(supabase: client)
+        self.messageRemoteDataSource = DefaultRemoteMessagesDataSource(client: client)
         
         self.conversationRepository = ConversationRepositoryImplementation(
             conversationRemote: conversationDataSource,
@@ -41,6 +45,10 @@ final class AppSessionContainer {
             authSession: authSession
         )
         self.imageRepository = ImageRepositoryImplementation(imageManager: ImageManager())
+        self.messageRepository = MessageRepositoryImplementation(
+            messagesDataSource: messageRemoteDataSource
+        )
+        self.userRepository = UserRepositoryImplementation(userDataSource: userRemoteDataSource)
     }
     
     
@@ -61,7 +69,11 @@ final class AppSessionContainer {
     }
      
     private func fetchConversationSummariesUseCase() -> FetchConversationSummariesUseCase {
-        return FetchConversationSummariesUseCase()
+        return FetchConversationSummariesUseCase(
+            conversationRepository: conversationRepository,
+            messageRepository: messageRepository,
+            userRepository: userRepository
+        )
     }
     
     // MARK: ViewModel(s)
