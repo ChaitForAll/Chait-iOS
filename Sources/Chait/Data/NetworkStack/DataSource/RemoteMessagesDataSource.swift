@@ -17,6 +17,7 @@ enum RemoteMessagesDataSourceError: Error {
 }
 
 protocol RemoteMessagesDataSource {
+    func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
     func sendMessage(
         text: String,
         senderID: UUID,
@@ -42,6 +43,14 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     }
     
     // MARK: Function(s)
+    
+    func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse {
+        try await self.client
+            .from("messages")
+            .insert(request)
+            .execute()
+            .value
+    }
     
     func fetchLastMessages(_ conversationIdentifiers: [UUID]) async throws -> [MessageResponse] {
         var results: [MessageResponse] = []
