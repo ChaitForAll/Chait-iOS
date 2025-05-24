@@ -52,6 +52,7 @@
 		DF7574602DDF413B00F08C10 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF75745F2DDF413B00F08C10 /* UserRepository.swift */; };
 		DF7574622DDF5F2400F08C10 /* MessageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574612DDF5F0100F08C10 /* MessageRepositoryImplementation.swift */; };
 		DF7574642DDF63E800F08C10 /* UserRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574632DDF63E100F08C10 /* UserRepositoryImplementation.swift */; };
+		DF7574692DE1B0A600F08C10 /* SendMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7574682DE1B0A100F08C10 /* SendMessageUseCase.swift */; };
 		DF75746C2DE1B22900F08C10 /* SendMessageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF75746B2DE1B22600F08C10 /* SendMessageCommand.swift */; };
 		DF7BC61A2D71965600AAF678 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC6192D71965600AAF678 /* Auth */; };
 		DF7BC61C2D71965600AAF678 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DF7BC61B2D71965600AAF678 /* Functions */; };
@@ -152,6 +153,7 @@
 		DF75745F2DDF413B00F08C10 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		DF7574612DDF5F0100F08C10 /* MessageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DF7574632DDF63E100F08C10 /* UserRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImplementation.swift; sourceTree = "<group>"; };
+		DF7574682DE1B0A100F08C10 /* SendMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageUseCase.swift; sourceTree = "<group>"; };
 		DF75746B2DE1B22600F08C10 /* SendMessageCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageCommand.swift; sourceTree = "<group>"; };
 		DF7BC6252D72060000AAF678 /* ConversationMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationMessageViewModel.swift; sourceTree = "<group>"; };
 		DF7C16F52DBDDBF700CAF20F /* NewMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessage.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				DF75746B2DE1B22600F08C10 /* SendMessageCommand.swift */,
+				DF7574682DE1B0A100F08C10 /* SendMessageUseCase.swift */,
 			);
 			path = SendMessage;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				DF4920002DAE875200EA51D2 /* Supabase+Decode.swift in Sources */,
 				DF0F26C22DAB8D8A002308E9 /* ProfileImage.swift in Sources */,
 				DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */,
+				DF7574692DE1B0A600F08C10 /* SendMessageUseCase.swift in Sources */,
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF75745E2DDF40D900F08C10 /* MessageRepository.swift in Sources */,
