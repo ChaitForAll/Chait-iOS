@@ -13,7 +13,5 @@ enum MessageRepositoryError: Error {
 }
 
 protocol MessageRepository {
-    func fetchLastMessageDetails(
-        _ conversationIdentifiers: [UUID]
-    ) -> AnyPublisher<[MessageDetail], MessageRepositoryError>
+    func fetchLastMessageDetails(_ conversationIdentifiers: [UUID]) async throws-> [MessageDetail]
 }

@@ -30,30 +30,21 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     
     // MARK: Function(s)
     
-    func fetchConversationDetails(
-    ) -> AnyPublisher<[ConversationDetail], ConversationRepositoryError> {
-        return Future { promise in
-            Task {
-                do {
-                    let memberships = try await self.conversationMembershipRemote
-                        .fetchConversationMemberships(self.authSession.currentUserID)
-                    let conversationIdentifiers = memberships.map { $0.conversationID }
-                    let conversations = try await self.conversationRemote
-                        .fetchConversations(conversationIdentifiers)
-                    let details = conversations.map {
-                        ConversationDetail(
-                            id: $0.id,
-                            title: $0.title,
-                            titleImage: "", // TODO: Add Actual image response
-                            participantCount: 10
-                        )
-                    }
-                    promise(.success(details))
-                } catch {
-                    promise(.failure(.unknown))
-                }
-            }
-        }.eraseToAnyPublisher()
+    func fetchConversationDetails() async throws -> [ConversationDetail]  {
+        let memberships = try await self.conversationMembershipRemote
+            .fetchConversationMemberships(self.authSession.currentUserID)
+        let conversationIdentifiers = memberships.map { $0.conversationID }
+        let conversations = try await self.conversationRemote
+            .fetchConversations(conversationIdentifiers)
+        let details = conversations.map {
+            ConversationDetail(
+                id: $0.id,
+                title: $0.title,
+                titleImage: "",
+                participantCount: 10
+            )
+        }
+        return details
     }
     
     func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {

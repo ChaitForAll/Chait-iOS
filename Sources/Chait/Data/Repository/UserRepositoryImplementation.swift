@@ -16,26 +16,15 @@ final class UserRepositoryImplementation: UserRepository {
         self.userDataSource = userDataSource
     }
     
-    func fetchUserDetails(
-        _ userIdentifiers: [UUID]
-    ) -> AnyPublisher<[UserDetail], UserRepositoryError> {
-        return Future { promise in
-            Task {
-                do {
-                    let userResponses = try await self.userDataSource.fetchUsers(userIdentifiers)
-                    let userDetails = userResponses.map {
-                        UserDetail(
-                            id: $0.id,
-                            userName: $0.displayName,
-                            profileImage: $0.profileImage.formatted()
-                        )
-                    }
-                    promise(.success(userDetails))
-                } catch {
-                    promise(.failure(.unknown))
-                }
-            }
+    func fetchUserDetails(_ userIdentifiers: [UUID]) async throws -> [UserDetail] {
+        let userResponses = try await self.userDataSource.fetchUsers(userIdentifiers)
+        let userDetails = userResponses.map {
+            UserDetail(
+                id: $0.id,
+                userName: $0.displayName,
+                profileImage: $0.profileImage.formatted()
+            )
         }
-        .eraseToAnyPublisher()
+        return userDetails
     }
 }

@@ -88,6 +88,7 @@ final class ConversationListViewController: UIViewController {
     
     private func bindViewModel() {
         viewModel?.viewAction
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] viewAction in
                 switch viewAction {
                     

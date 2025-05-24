@@ -54,21 +54,11 @@ final class ConversationListViewModel {
     //MARK: Private Function(s)
     
     private func fetchConversationList() {
-        
-        fetchConversationSummaries
-            .execute()
-            .replaceError(with: [])
-            .map { $0.map  { ConversationSummaryViewModel($0) }}
-            .handleEvents(receiveOutput: { [weak self] output in
-                self?.conversationListSection.insertItems(output)
-            })
-            .map { viewModels in
-                ViewAction.insertItems(identifiers: viewModels.map(\.id))
-            }
-            .sink { [weak self] in
-                self?.viewActionSubject.send($0)
-            }
-            .store(in: &cancelBag)
-        
+        Task.detached(priority: .background) {
+            let conversationSummaries = try await self.fetchConversationSummaries.execute()
+            let conversationViewModels = conversationSummaries.map { ConversationSummaryViewModel($0) }
+            self.conversationListSection.insertItems(conversationViewModels)
+            self.viewActionSubject.send(.insertItems(identifiers: conversationViewModels.map(\.id)))
+        }
     }
 }

@@ -34,39 +34,25 @@ final class FetchConversationSummariesUseCase {
     
     // MARK: Function(s)
     
-    func execute() -> AnyPublisher<[ConversationSummary], ExecutionError> {
-        print(#function)
-        return conversationRepository.fetchConversationDetails()
-            .mapError { error in
-                print(error)
-                return ExecutionError.unknown
+    func execute() async throws -> [ConversationSummary] {
+        let conversationDetail = try await conversationRepository.fetchConversationDetails()
+        let conversationLastMessages = try await messageRepository.fetchLastMessageDetails(conversationDetail.map(\.id))
+        let messageSenders = try await userRepository.fetchUserDetails(conversationLastMessages.map(\.senderID))
+        
+        let messageDetails = Dictionary(uniqueKeysWithValues: conversationLastMessages.map { ($0.conversationID, $0)})
+        let userDetails = Dictionary(uniqueKeysWithValues: messageSenders.map { ($0.id, $0) })
+        
+        return conversationDetail.compactMap { conversationDetail in
+            guard let messageDetail = messageDetails[conversationDetail.id],
+                  let userDetail = userDetails[messageDetail.senderID]
+            else {
+                return nil
             }
-            .flatMap { conversationDetails in
-                let conversationIDs = conversationDetails.map(\.id)
-                return self.messageRepository.fetchLastMessageDetails(conversationIDs)
-                    .mapError { _ in ExecutionError.unknown }
-                    .flatMap { messageDetails in
-                        let senderIDs = messageDetails.map(\.senderID)
-                        return self.userRepository.fetchUserDetails(senderIDs)
-                            .mapError { _ in ExecutionError.unknown }
-                            .flatMap { userDetails in
-                                let messageDetails: [MessageDetail] = messageDetails
-                                let userDetails: [UserDetail] = userDetails
-                                var results: [ConversationSummary] = []
-                                let threeZip = zip(conversationDetails, zip(messageDetails, userDetails))
-                                for (conversationDetail, (messageDetail, userDetail)) in threeZip {
-                                    let summary = ConversationSummary(
-                                        conversationDetail: conversationDetail,
-                                        messageDetail: messageDetail,
-                                        userDetail: userDetail
-                                    )
-                                    results.append(summary)
-                                }
-                                return Just(results)
-                                    .eraseToAnyPublisher()
-                            }
-                    }
-            }
-            .eraseToAnyPublisher()
+            return ConversationSummary(
+                conversationDetail: conversationDetail,
+                messageDetail: messageDetail,
+                userDetail: userDetail
+            )
+        }
     }
 }

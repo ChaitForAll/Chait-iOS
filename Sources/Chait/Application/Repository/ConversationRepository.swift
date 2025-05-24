@@ -19,6 +19,5 @@ protocol ConversationRepository {
         historyOffset: Int,
         maxItems: Int
     ) -> AnyPublisher<[Message], ConversationError>
-    func fetchConversationDetails(
-    ) -> AnyPublisher<[ConversationDetail], ConversationRepositoryError>
+    func fetchConversationDetails() async throws -> [ConversationDetail]
 }
