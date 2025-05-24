@@ -11,4 +11,5 @@ struct MessageDetail {
     let id: UUID
     let text: String
     let senderID: UUID
+    let conversationID: UUID
 }
