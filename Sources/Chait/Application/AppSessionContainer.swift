@@ -46,7 +46,8 @@ final class AppSessionContainer {
         )
         self.imageRepository = ImageRepositoryImplementation(imageManager: ImageManager())
         self.messageRepository = MessageRepositoryImplementation(
-            messagesDataSource: messageRemoteDataSource
+            messagesDataSource: messageRemoteDataSource,
+            authSession: authSession
         )
         self.userRepository = UserRepositoryImplementation(userDataSource: userRemoteDataSource)
     }

@@ -14,9 +14,11 @@ final class MessageRepositoryImplementation: MessageRepository {
     // MARK: Property(s)
     
     private let messagesDataSource: RemoteMessagesDataSource
+    private let authSession: AuthSession
     
-    init(messagesDataSource: RemoteMessagesDataSource) {
+    init(messagesDataSource: RemoteMessagesDataSource, authSession: AuthSession) {
         self.messagesDataSource = messagesDataSource
+        self.authSession = authSession
     }
     
     // MARK: Private Function(s)
@@ -30,6 +32,27 @@ final class MessageRepositoryImplementation: MessageRepository {
                 senderID: $0.senderID,
                 conversationID: $0.conversationID
             )
+        }
+    }
+    
+    func create(_ newMessage: NewMessage) async -> Result<Message, MessageRepositoryError> {
+        let newMessageRequest = NewMessageRequest(
+            text: newMessage.text,
+            sender: authSession.currentUserID,
+            conversationId: newMessage.conversationID
+        )
+        do {
+            let messageResponse = try await messagesDataSource.postNewMessage(newMessageRequest)
+            let sentMessage = Message(
+                text: messageResponse.text,
+                messageID: messageResponse.messageID,
+                senderID: messageResponse.senderID,
+                conversationID: messageResponse.conversationID,
+                createdAt: messageResponse.createdAt
+            )
+            return .success(sentMessage)
+        } catch {
+            return .failure(.unknown)
         }
     }
 }
