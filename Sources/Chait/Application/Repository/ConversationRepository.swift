@@ -12,7 +12,6 @@ enum ConversationRepositoryError: Error {
 }
 
 protocol ConversationRepository {
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError>
     func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError>
     func fetchHistory(
         _ conversationID: UUID,

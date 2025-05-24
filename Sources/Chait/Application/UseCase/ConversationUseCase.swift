@@ -15,7 +15,6 @@ enum ConversationError: Error {
 }
 
 protocol ConversationUseCase {
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError>
     func startListeningMessages(_ channelID: UUID) -> AnyPublisher<[Message], ConversationError>
     func fetchHistory(
         _ conversationID: UUID,
@@ -35,10 +34,6 @@ final class DefaultConversationUseCase: ConversationUseCase {
     }
     
     // MARK: Function(s)
-    
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
-        conversationRepository.sendMessage(newMessage)
-    }
 
     func startListeningMessages(
         _ conversationID: UUID

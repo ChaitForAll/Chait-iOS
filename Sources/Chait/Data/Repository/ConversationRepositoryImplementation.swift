@@ -47,34 +47,6 @@ final class ConversationRepositoryImplementation: ConversationRepository {
         return details
     }
     
-    func sendMessage(_ newMessage: NewMessage) -> AnyPublisher<Message, ConversationError> {
-        let currentUserID = authSession.currentUserID
-        return Future { promise in
-            Task {
-                do {
-                    let response = try await self.conversationRemote.insertNewMessage(
-                        NewMessageRequest(
-                            text: newMessage.text,
-                            sender: currentUserID,
-                            conversationId: newMessage.conversationID
-                        )
-                    )
-                    let message = Message(
-                        text: response.text,
-                        messageID: response.messageID,
-                        senderID: response.senderID,
-                        conversationID: response.conversationID,
-                        createdAt: response.createdAt
-                    )
-                    promise(.success(message))
-                } catch {
-                    promise(.failure(.sendMessageFailed))
-                }
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-    
     func startListening(_ conversationID: UUID) -> AnyPublisher<[Message], ConversationError> {
         return conversationRemote.startListeningInsertions(conversationID)
             .mapError { conversationError in
