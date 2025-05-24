@@ -40,16 +40,19 @@ final class ConversationViewModel {
     private let conversationID: UUID
     private let historyBatchSize: Int
     private let conversationUseCase: ConversationUseCase
+    private let sendMessageUseCase: SendMessageUseCase
     
     init(
         channelID: UUID,
         historyBatchSize: Int = 50,
-        conversationUseCase: ConversationUseCase
+        conversationUseCase: ConversationUseCase,
+        sendMessageUseCase: SendMessageUseCase
     ) {
 
         self.conversationID = channelID
         self.historyBatchSize = historyBatchSize
         self.conversationUseCase = conversationUseCase
+        self.sendMessageUseCase = sendMessageUseCase
     }
     
     // MARK: Function(s)
@@ -65,11 +68,16 @@ final class ConversationViewModel {
     }
     
     func onSendMessage() {
-        conversationUseCase
-            .sendMessage(NewMessage(text: userMessageText, conversationID: conversationID))
-            .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
-            .store(in: &cancelBag)
-        userMessageText.removeAll()
+        let messageText = userMessageText
+        let conversationID = conversationID
+        Task.detached(priority: .background) {
+            let sendMessageCommand = SendMessageCommand(
+                message: messageText,
+                conversationIdentifier: conversationID
+            )
+            _ = await self.sendMessageUseCase.execute(sendMessageCommand)
+            self.userMessageText.removeAll()
+        }
     }
     
     func message(for identifier: UUID) -> ConversationMessageViewModel? {

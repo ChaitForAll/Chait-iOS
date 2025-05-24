@@ -65,6 +65,10 @@ final class AppSessionContainer {
         )
     }
     
+    private func sendMessageUseCase() -> SendMessageUseCase {
+        return SendMessageUseCase(messageRepository: messageRepository)
+    }
+    
     private func fetchFriendListUseCase() -> FetchFriendsListUseCase {
         return DefaultFetchFriendsListUseCase(repository: friendRepository)
     }
@@ -95,7 +99,8 @@ final class AppSessionContainer {
     func personalChatViewModel(_ channelID: UUID) -> ConversationViewModel {
         return ConversationViewModel(
             channelID: channelID,
-            conversationUseCase: conversationUseCase()
+            conversationUseCase: conversationUseCase(),
+            sendMessageUseCase: sendMessageUseCase()
         )
     }
 }
