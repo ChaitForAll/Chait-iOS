@@ -23,6 +23,31 @@ final class MessageRepositoryImplementation: MessageRepository {
     
     // MARK: Private Function(s)
     
+    func fetchMessages(
+        from conversationIdentifier: UUID,
+        before messageIdentifier: UUID,
+        limit: Int
+    ) async -> Result<[Message], MessageRepositoryError> {
+        do {
+            let histories  = try await messagesDataSource.requestMessages(
+                from: conversationIdentifier,
+                before: messageIdentifier,
+                limit: limit
+            ).map {
+                Message(
+                    text: $0.text,
+                    messageID: $0.messageID,
+                    senderID: $0.senderID,
+                    conversationID: $0.conversationID,
+                    createdAt: $0.createdAt
+                )
+            }
+            return .success(histories)
+        } catch {
+            return .failure(.unknown)
+        }
+    }
+    
     func fetchLastMessageDetails(_ conversationIdentifiers: [UUID]) async throws -> [MessageDetail] {
         let lastMessages = try await messagesDataSource.fetchLastMessages(conversationIdentifiers)
         return lastMessages.map {

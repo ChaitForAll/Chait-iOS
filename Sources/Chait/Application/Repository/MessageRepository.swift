@@ -13,6 +13,11 @@ enum MessageRepositoryError: Error {
 }
 
 protocol MessageRepository {
+    func fetchMessages(
+        from conversationIdentifier: UUID,
+        before messageIdentifier: UUID,
+        limit: Int
+    ) async -> Result<[Message], MessageRepositoryError>
     func fetchLastMessageDetails(_ conversationIdentifiers: [UUID]) async throws-> [MessageDetail]
     func create(_ newMessage: NewMessage) async -> Result<Message, MessageRepositoryError>
 }
