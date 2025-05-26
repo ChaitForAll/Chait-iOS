@@ -91,6 +91,7 @@
 		DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */; };
 		DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */; };
 		DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */; };
+		DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,6 +230,7 @@
 		DF0F26BD2DAAFC66002308E9 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				DFF27EBC2DE48B3B00582D42 /* FetchConversationHistory */,
 				DF75746A2DE1B21D00F08C10 /* SendMessage */,
 				DF75744F2DDE002D00F08C10 /* FetchConversationSummaries */,
 				DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */,
@@ -516,6 +518,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		DFF27EBC2DE48B3B00582D42 /* FetchConversationHistory */ = {
+			isa = PBXGroup;
+			children = (
+				DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */,
+			);
+			path = FetchConversationHistory;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -693,6 +703,7 @@
 				DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF75746C2DE1B22900F08C10 /* SendMessageCommand.swift in Sources */,
+				DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */,
 				DF0F26C42DAB91E8002308E9 /* Conversation.swift in Sources */,
 				DF75744E2DDCDAAA00F08C10 /* AppCoreCoordinator.swift in Sources */,
 				DFD1226D2DC74FD0005E3ED1 /* SignInViewController.swift in Sources */,
