@@ -15,7 +15,7 @@ enum MessageRepositoryError: Error {
 protocol MessageRepository {
     func fetchMessages(
         from conversationIdentifier: UUID,
-        before messageIdentifier: UUID,
+        query: MessageQuery,
         limit: Int
     ) async -> Result<[Message], MessageRepositoryError>
     func fetchLastMessageDetails(_ conversationIdentifiers: [UUID]) async throws-> [MessageDetail]
