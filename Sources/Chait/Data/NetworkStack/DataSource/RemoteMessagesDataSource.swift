@@ -17,6 +17,11 @@ enum RemoteMessagesDataSourceError: Error {
 }
 
 protocol RemoteMessagesDataSource {
+    func requestMessages(
+        from conversationID: UUID,
+        before identifier: UUID,
+        limit: Int
+    ) async throws -> [MessageResponse]
     func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
     func sendMessage(
         text: String,
@@ -33,9 +38,7 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     // MARK: Property(s)
     
     private var listeningTask: Task<Void, Never>?
-    
     private let messageListenSubject: PassthroughSubject<[MessageResponse], RemoteMessagesDataSourceError> = .init()
-    
     private let client: SupabaseClient
     
     init(client: SupabaseClient) {
@@ -43,6 +46,22 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     }
     
     // MARK: Function(s)
+    
+    func requestMessages(
+        from conversationID: UUID,
+        before identifier: UUID,
+        limit: Int
+    ) async throws -> [MessageResponse] {
+        try await self.client
+            .from("messages")
+            .select()
+            .eq("conversation_id", value: conversationID)
+            .lt("id", value: identifier)
+            .order("created_at", ascending: false)
+            .limit(limit)
+            .execute()
+            .value
+    }
     
     func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse {
         try await self.client
