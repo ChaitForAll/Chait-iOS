@@ -323,7 +323,6 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
-				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
 				DFF27EC32DE4A8A600582D42 /* Supabsae+Extension */,
 				DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */,
 				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
@@ -543,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */,
+				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
 			);
 			path = "Supabsae+Extension";
 			sourceTree = "<group>";
