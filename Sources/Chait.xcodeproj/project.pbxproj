@@ -94,6 +94,7 @@
 		DFF27EBB2DE4841200582D42 /* FetchConversationHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBA2DE483EC00582D42 /* FetchConversationHistoryUseCase.swift */; };
 		DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */; };
 		DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */; };
+		DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,7 @@
 		DFF27EBA2DE483EC00582D42 /* FetchConversationHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryUseCase.swift; sourceTree = "<group>"; };
 		DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryItem.swift; sourceTree = "<group>"; };
 		DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryCommand.swift; sourceTree = "<group>"; };
+		DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,6 +487,7 @@
 		DFC3001D2DD863AD00A219F7 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */,
 				DF0D43EA2D718EAF0083AA14 /* NewMessagesRequest.swift */,
 			);
 			path = Request;
@@ -705,6 +708,7 @@
 				DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */,
 				DFD1225D2DC34C15005E3ED1 /* AppSessionContainer.swift in Sources */,
 				DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */,
+				DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */,
 				DF0D43E42D70B9930083AA14 /* ConversationViewController.swift in Sources */,
 				DFD122622DC5E6AA005E3ED1 /* WelcomeViewController.swift in Sources */,
 				DFD122722DCE49E5005E3ED1 /* UITextField+Bind.swift in Sources */,
