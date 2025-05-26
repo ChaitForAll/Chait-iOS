@@ -91,6 +91,7 @@
 		DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */; };
 		DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */; };
 		DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */; };
+		DFF27EBB2DE4841200582D42 /* FetchConversationHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBA2DE483EC00582D42 /* FetchConversationHistoryUseCase.swift */; };
 		DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */; };
 		DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */; };
 /* End PBXBuildFile section */
@@ -188,6 +189,7 @@
 		DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCellContentView.swift; sourceTree = "<group>"; };
 		DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewListCell+Configuration.swift"; sourceTree = "<group>"; };
+		DFF27EBA2DE483EC00582D42 /* FetchConversationHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryUseCase.swift; sourceTree = "<group>"; };
 		DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryItem.swift; sourceTree = "<group>"; };
 		DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -526,6 +528,7 @@
 			children = (
 				DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */,
 				DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */,
+				DFF27EBA2DE483EC00582D42 /* FetchConversationHistoryUseCase.swift */,
 			);
 			path = FetchConversationHistory;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				DF75746C2DE1B22900F08C10 /* SendMessageCommand.swift in Sources */,
 				DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */,
 				DF0F26C42DAB91E8002308E9 /* Conversation.swift in Sources */,
+				DFF27EBB2DE4841200582D42 /* FetchConversationHistoryUseCase.swift in Sources */,
 				DF75744E2DDCDAAA00F08C10 /* AppCoreCoordinator.swift in Sources */,
 				DFD1226D2DC74FD0005E3ED1 /* SignInViewController.swift in Sources */,
 				DF7574622DDF5F2400F08C10 /* MessageRepositoryImplementation.swift in Sources */,
