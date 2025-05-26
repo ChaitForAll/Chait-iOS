@@ -12,4 +12,5 @@ enum MessageQuery {
 
 struct FetchConversationHistoryCommand {
     let query: MessageQuery
+    let limit: Int
 }
