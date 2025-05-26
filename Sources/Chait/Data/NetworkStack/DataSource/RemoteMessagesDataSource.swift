@@ -19,7 +19,7 @@ enum RemoteMessagesDataSourceError: Error {
 protocol RemoteMessagesDataSource {
     func requestMessages(
         from conversationID: UUID,
-        before identifier: UUID,
+        filters: [RequestFilter],
         limit: Int
     ) async throws -> [MessageResponse]
     func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
@@ -49,14 +49,14 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     
     func requestMessages(
         from conversationID: UUID,
-        before identifier: UUID,
+        filters: [RequestFilter],
         limit: Int
     ) async throws -> [MessageResponse] {
+        
         try await self.client
             .from("messages")
             .select()
-            .eq("conversation_id", value: conversationID)
-            .lt("id", value: identifier)
+            .applying(filters: filters)
             .order("created_at", ascending: false)
             .limit(limit)
             .execute()

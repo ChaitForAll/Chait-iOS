@@ -25,13 +25,24 @@ final class MessageRepositoryImplementation: MessageRepository {
     
     func fetchMessages(
         from conversationIdentifier: UUID,
-        before messageIdentifier: UUID,
+        query: MessageQuery,
         limit: Int
     ) async -> Result<[Message], MessageRepositoryError> {
+        
+        var filters: [RequestFilter] = []
+        
+        if case let .before(message) = query {
+            filters.append(RequestFilter(
+                column: "message_id",
+                requestOperator: "eq",
+                value: message.messageID.uuidString
+            ))
+        }
+        
         do {
             let histories  = try await messagesDataSource.requestMessages(
                 from: conversationIdentifier,
-                before: messageIdentifier,
+                filters: filters,
                 limit: limit
             ).map {
                 Message(
