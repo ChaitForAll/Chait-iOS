@@ -95,6 +95,7 @@
 		DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */; };
 		DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */; };
 		DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */; };
+		DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,7 @@
 		DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryItem.swift; sourceTree = "<group>"; };
 		DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryCommand.swift; sourceTree = "<group>"; };
 		DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFilter.swift; sourceTree = "<group>"; };
+		DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostgrestFilterBuilder+ApplyFilters.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				DF491FFF2DAE874900EA51D2 /* Supabase+Decode.swift */,
+				DFF27EC32DE4A8A600582D42 /* Supabsae+Extension */,
 				DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */,
 				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
 				DF4920062DB0440300EA51D2 /* DataSource */,
@@ -536,6 +539,14 @@
 			path = FetchConversationHistory;
 			sourceTree = "<group>";
 		};
+		DFF27EC32DE4A8A600582D42 /* Supabsae+Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */,
+			);
+			path = "Supabsae+Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -703,6 +714,7 @@
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF75745E2DDF40D900F08C10 /* MessageRepository.swift in Sources */,
+				DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
 				DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */,
