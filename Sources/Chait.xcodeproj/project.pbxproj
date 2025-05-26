@@ -92,6 +92,7 @@
 		DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */; };
 		DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */; };
 		DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */; };
+		DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,8 @@
 		DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCellContentView.swift; sourceTree = "<group>"; };
 		DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewListCell+Configuration.swift"; sourceTree = "<group>"; };
+		DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryItem.swift; sourceTree = "<group>"; };
+		DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchConversationHistoryCommand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +524,7 @@
 		DFF27EBC2DE48B3B00582D42 /* FetchConversationHistory */ = {
 			isa = PBXGroup;
 			children = (
+				DFF27EBF2DE48BC800582D42 /* FetchConversationHistoryCommand.swift */,
 				DFF27EBD2DE48BAF00582D42 /* ConversationHistoryItem.swift */,
 			);
 			path = FetchConversationHistory;
@@ -643,6 +647,7 @@
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
 				DF4920042DB03EC000EA51D2 /* ConversationSummaryViewModel.swift in Sources */,
 				DFD122742DCE58FA005E3ED1 /* UIButton+Loading.swift in Sources */,
+				DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */,
 				DF0F26DB2DAD18AF002308E9 /* ConversationRepository.swift in Sources */,
 				DF75744C2DDCCDC900F08C10 /* AppCoreContainer.swift in Sources */,
 				DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */,
