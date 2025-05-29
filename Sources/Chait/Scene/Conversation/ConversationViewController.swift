@@ -18,6 +18,7 @@ final class ConversationViewController: UIViewController {
     var viewModel: ConversationViewModel?
     
     private var lastOffset: CGFloat = .zero
+    private var lastContentSize: CGSize = .zero
     private var minCurrentBatchHeight: CGFloat = .zero
     private var maxCurrentBatchHeight: CGFloat = .zero
     private var cancelBag: Set<AnyCancellable> = .init()
@@ -30,12 +31,20 @@ final class ConversationViewController: UIViewController {
     
     // MARK: Override(s)
     
-    override func loadView() {
-        self.view = collectionView
-    }
+//    override func loadView() {
+////        self.view = collectionView
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
         configureCollectionView()
         configureNavigationItem()
         bindViewModel()
@@ -87,7 +96,6 @@ final class ConversationViewController: UIViewController {
         viewModel?.viewAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] viewAction in
-                print(viewAction)
                 switch viewAction {
                 case .createSections(identifiers: let sections):
                     var initialSnapshot = SnapShot()
@@ -107,18 +115,17 @@ final class ConversationViewController: UIViewController {
         
         collectionView
             .publisher(for: \.contentOffset)
-            .sink { [weak self] offset in
-                guard let self, let viewModel else { return }
-                
-                let isScrollingUp = lastOffset > offset.y
-                let currentPosition = maxCurrentBatchHeight - offset.y - topSafeInset
-                let lastContentSize = maxCurrentBatchHeight - minCurrentBatchHeight
-                let normalizedScrollValue =  (currentPosition - minCurrentBatchHeight) / lastContentSize
-                
-                if (0.84...1.0) ~= normalizedScrollValue, isScrollingUp {
-                    viewModel.onReachTop()
-                }
-                lastOffset = offset.y
+            .filter { offset in
+                let isScrollingUp = self.lastOffset > offset.y
+                let currentPosition = self.maxCurrentBatchHeight - offset.y - topSafeInset
+                let lastContentSize = self.maxCurrentBatchHeight - self.minCurrentBatchHeight
+                let normalizedScrollValue =  (currentPosition - self.minCurrentBatchHeight) / lastContentSize
+                self.lastOffset = offset.y
+                return ((0.84...1.0) ~= normalizedScrollValue && isScrollingUp)
+            }
+            .throttle(for: 1, scheduler: DispatchQueue.main, latest: false)
+            .sink { offset in
+                self.viewModel?.onReachTop()
             }
             .store(in: &cancelBag)
     }
@@ -139,23 +146,16 @@ final class ConversationViewController: UIViewController {
         } else {
             currentSnapshot.appendItems(chatHistories)
         }
-        
+        lastContentSize = self.collectionView.contentSize
         diffableDataSource?.apply(currentSnapshot, animatingDifferences: true) { [weak self] in
-            guard let self else { return }
-            
-            minCurrentBatchHeight = maxCurrentBatchHeight
-            maxCurrentBatchHeight = collectionView.contentSize.height
-            
-            guard !(collectionView.contentSize.height < collectionView.bounds.height) else {
-                return
-            }
-            
-            guard !isSnapshotEmptyBeforeAddingItems else {
-                let actualOffset = collectionView.contentOffset.y + collectionView.safeAreaInsets.top
-                let diff = collectionView.contentSize.height - collectionView.bounds.height - actualOffset
-                collectionView.contentOffset.y = diff
-                return
-            }
+            guard let self = self else { return }
+            self.collectionView.layoutIfNeeded()
+
+            let contentHeight = self.collectionView.contentSize.height
+            let visibleHeight = self.collectionView.bounds.height - self.collectionView.contentInset.top - self.collectionView.contentInset.bottom
+
+            let targetOffsetY = max(contentHeight - visibleHeight, 0)
+            self.collectionView.setContentOffset(CGPoint(x: 0, y: targetOffsetY), animated: false)
         }
     }
     
@@ -191,6 +191,7 @@ final class ConversationViewController: UIViewController {
         writeMessageAlert.addAction(cancelAction)
         writeMessageAlert.addAction(sendAction)
         present(writeMessageAlert, animated: true)
+
     }
 }
 
