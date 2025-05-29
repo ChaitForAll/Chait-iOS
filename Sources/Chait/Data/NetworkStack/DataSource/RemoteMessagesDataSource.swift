@@ -52,11 +52,11 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
         filters: [RequestFilter],
         limit: Int
     ) async throws -> [MessageResponse] {
-        
         try await self.client
             .from("messages")
             .select()
             .applying(filters: filters)
+            .eq("conversation_id", value: conversationID)
             .order("created_at", ascending: false)
             .limit(limit)
             .execute()
