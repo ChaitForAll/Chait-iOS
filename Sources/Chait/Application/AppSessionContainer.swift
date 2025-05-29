@@ -81,6 +81,10 @@ final class AppSessionContainer {
         )
     }
     
+    private func fetchConversationHistoriesUseCase() -> FetchConversationHistoryUseCase {
+        return DefaultFetchConversationHistory(repository: messageRepository)
+    }
+    
     // MARK: ViewModel(s)
     
     func conversationListViewModel() -> ConversationListViewModel {
