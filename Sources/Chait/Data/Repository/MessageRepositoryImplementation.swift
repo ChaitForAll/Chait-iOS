@@ -33,9 +33,9 @@ final class MessageRepositoryImplementation: MessageRepository {
         
         if case let .before(message) = query {
             filters.append(RequestFilter(
-                column: "message_id",
-                requestOperator: "eq",
-                value: message.messageID.uuidString
+                column: "created_at",
+                requestOperator: "lt",
+                value: message.createdAt.ISO8601Format()
             ))
         }
         
