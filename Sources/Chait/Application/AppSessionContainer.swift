@@ -104,7 +104,8 @@ final class AppSessionContainer {
         return ConversationViewModel(
             channelID: channelID,
             conversationUseCase: conversationUseCase(),
-            sendMessageUseCase: sendMessageUseCase()
+            sendMessageUseCase: sendMessageUseCase(),
+            fetchConversationHistoryUseCase: fetchConversationHistoriesUseCase()
         )
     }
 }

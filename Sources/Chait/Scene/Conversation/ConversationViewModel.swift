@@ -31,9 +31,10 @@ final class ConversationViewModel {
         return viewActionSubject.eraseToAnyPublisher()
     }
     
-    private var isFetching: Bool = false
+    private var isFetchEnabled: Bool = true
     private var historyItemsOffset: Int = .zero
     private var cancelBag: Set<AnyCancellable> = []
+    private var messages: [Message] = []
     
     private let messageListSection = Section<ConversationMessageViewModel>(sectionType: .messageList)
     private let viewActionSubject: PassthroughSubject<ViewAction, Never> = .init()
@@ -41,18 +42,21 @@ final class ConversationViewModel {
     private let historyBatchSize: Int
     private let conversationUseCase: ConversationUseCase
     private let sendMessageUseCase: SendMessageUseCase
+    private let fetchConversationHistoryUseCase: FetchConversationHistoryUseCase
     
     init(
         channelID: UUID,
         historyBatchSize: Int = 50,
         conversationUseCase: ConversationUseCase,
-        sendMessageUseCase: SendMessageUseCase
+        sendMessageUseCase: SendMessageUseCase,
+        fetchConversationHistoryUseCase: FetchConversationHistoryUseCase
     ) {
 
         self.conversationID = channelID
         self.historyBatchSize = historyBatchSize
         self.conversationUseCase = conversationUseCase
         self.sendMessageUseCase = sendMessageUseCase
+        self.fetchConversationHistoryUseCase = fetchConversationHistoryUseCase
     }
     
     // MARK: Function(s)
@@ -60,11 +64,17 @@ final class ConversationViewModel {
     func onViewDidLoad() {
         viewActionSubject.send(.createSections(identifiers: [messageListSection.id]))
         startListening()
-        fetchChatHistories()
+        Task {
+            await fetchChatHistories()
+        }
     }
     
     func onReachTop() {
-        fetchChatHistories()
+        guard isFetchEnabled else { return }
+        isFetchEnabled = false
+        Task {
+            isFetchEnabled =  await fetchChatHistories()
+        }
     }
     
     func onSendMessage() {
@@ -101,33 +111,39 @@ final class ConversationViewModel {
             .store(in: &cancelBag)
     }
     
-    private func fetchChatHistories() {
-        guard !isFetching else {
-            return
+    private func fetchChatHistories() async -> Bool {
+        
+        var messageQuery: MessageQuery = .mostRecent
+        
+        if let lastMessage = messages.first {
+            print(lastMessage)
+            messageQuery = .before(lastMessage)
         }
-        self.isFetching = true
-        conversationUseCase
-            .fetchHistory(
-                conversationID,
-                historyOffset: historyItemsOffset,
-                maxItems: historyBatchSize
-            )
-            .map { $0.map { ConversationMessageViewModel(message: $0)} }
-            .handleEvents(
-                receiveOutput: { [weak self] viewModels in
-                    self?.messageListSection.insertItems(viewModels)
-                    self?.historyItemsOffset += (self?.historyBatchSize ?? .zero) + 1
-                },
-                receiveCompletion: { [weak self] _ in
-                    self?.isFetching = false
+        
+        let result = await fetchConversationHistoryUseCase
+            .execute(FetchConversationHistoryCommand(
+                conversationIdentifier: conversationID,
+                query: messageQuery,
+                limit: 40
+            ))
+        
+        switch result {
+        case .success(let historyItems):
+            var fetchedHistoryMessages: [Message] = []
+            for historyItem in historyItems {
+                switch historyItem {
+                case .message(let message):
+                    fetchedHistoryMessages.append(message)
                 }
-            )
-            .replaceError(with: [])
-            .filter { !$0.isEmpty }
-            .map { ViewAction.insertItemsAtTop(identifiers: $0.map(\.id))}
-            .sink(receiveValue: { [weak self] viewAction in
-                self?.viewActionSubject.send(viewAction)
-            })
-            .store(in: &cancelBag)
+            }
+            fetchedHistoryMessages = fetchedHistoryMessages.reversed()
+            messages.insert(contentsOf: fetchedHistoryMessages, at: .zero)
+            messageListSection.insertItems(fetchedHistoryMessages.map { ConversationMessageViewModel(message: $0)})
+            viewActionSubject.send(.insertItemsAtTop(identifiers: fetchedHistoryMessages.map(\.messageID)))
+        case .failure(let failure):
+            print(failure)
+        }
+        
+        return true
     }
 }
