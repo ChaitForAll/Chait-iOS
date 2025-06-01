@@ -148,14 +148,25 @@ final class ConversationViewController: UIViewController {
         }
         lastContentSize = self.collectionView.contentSize
         diffableDataSource?.apply(currentSnapshot, animatingDifferences: true) { [weak self] in
-            guard let self = self else { return }
-            self.collectionView.layoutIfNeeded()
-
-            let contentHeight = self.collectionView.contentSize.height
-            let visibleHeight = self.collectionView.bounds.height - self.collectionView.contentInset.top - self.collectionView.contentInset.bottom
-
-            let targetOffsetY = max(contentHeight - visibleHeight, 0)
-            self.collectionView.setContentOffset(CGPoint(x: 0, y: targetOffsetY), animated: false)
+            self?.updateBatchHeight()
+            if isSnapshotEmptyBeforeAddingItems {
+                self?.scrollToLastCell(false)
+            }
+        }
+    }
+    
+    private func updateBatchHeight() {
+        minCurrentBatchHeight = maxCurrentBatchHeight
+        maxCurrentBatchHeight = collectionView.contentSize.height
+    }
+    
+    private func scrollToLastCell(_ animated: Bool) {
+        guard let diffableDataSource, let currentSnapshot else { return }
+        DispatchQueue.main.async {
+            if let lastIdentifier = currentSnapshot.itemIdentifiers.last,
+               let lastIndex = diffableDataSource.indexPath(for: lastIdentifier) {
+                self.collectionView.scrollToItem(at: lastIndex, at: .bottom, animated: false)
+            }
         }
     }
     
