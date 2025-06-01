@@ -23,6 +23,7 @@ protocol RemoteMessagesDataSource {
         limit: Int
     ) async throws -> [MessageResponse]
     func postNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
+    func subscribeMessageUpdateStream(_ conversationIdentifier: UUID) async -> AsyncStream<MessageResponse>
     func sendMessage(
         text: String,
         senderID: UUID,
@@ -37,6 +38,7 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
     
     // MARK: Property(s)
     
+    var channel: RealtimeChannelV2?
     private var listeningTask: Task<Void, Never>?
     private let messageListenSubject: PassthroughSubject<[MessageResponse], RemoteMessagesDataSourceError> = .init()
     private let client: SupabaseClient
@@ -115,6 +117,23 @@ final class DefaultRemoteMessagesDataSource: RemoteMessagesDataSource {
             }
         }
         .eraseToAnyPublisher()
+    }
+    
+    func subscribeMessageUpdateStream(_ conversationIdentifier: UUID) async -> AsyncStream<MessageResponse> {
+        let channel = client.realtimeV2.channel(conversationIdentifier.uuidString)
+        self.channel = channel
+        let insertionListener = channel.postgresChange(InsertAction.self, table: "messages")
+            .compactMap { insertion in
+                return try? insertion.decodeRecord(
+                    as: MessageResponse.self,
+                    decoder: .defaultStorageDecoder
+                )
+            }
+            .eraseToStream()
+        
+        await channel.subscribe()
+        
+        return insertionListener
     }
     
     func startListeningMessages(

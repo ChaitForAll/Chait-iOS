@@ -20,4 +20,5 @@ protocol MessageRepository {
     ) async -> Result<[Message], MessageRepositoryError>
     func fetchLastMessageDetails(_ conversationIdentifiers: [UUID]) async throws-> [MessageDetail]
     func create(_ newMessage: NewMessage) async -> Result<Message, MessageRepositoryError>
+    func startListening(_ conversationID: UUID) async -> AsyncStream<Message>
 }

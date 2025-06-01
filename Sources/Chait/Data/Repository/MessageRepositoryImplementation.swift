@@ -91,5 +91,19 @@ final class MessageRepositoryImplementation: MessageRepository {
             return .failure(.unknown)
         }
     }
+    
+    func startListening(_ conversationID: UUID) async -> AsyncStream<Message> {
+        return await messagesDataSource.subscribeMessageUpdateStream(conversationID)
+            .map { response in
+                Message(
+                    text: response.text,
+                    messageID: response.messageID,
+                    senderID: response.senderID,
+                    conversationID: response.conversationID,
+                    createdAt: response.createdAt
+                )
+            }
+            .eraseToStream()
+    }
 }
 
