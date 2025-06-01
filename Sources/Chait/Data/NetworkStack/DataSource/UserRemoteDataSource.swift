@@ -29,6 +29,7 @@ final class DefaultUserRemoteDataSource: UserRemoteDataSource {
             .from("user_profile")
             .select()
             .eq("id", value: userIdentifier)
+            .single()
             .execute()
             .decodeJSON()
     }
