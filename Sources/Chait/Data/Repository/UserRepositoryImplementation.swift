@@ -11,9 +11,11 @@ import Foundation
 final class UserRepositoryImplementation: UserRepository {
     
     private let userDataSource: UserRemoteDataSource
+    private let authSession: AuthSession
     
-    init(userDataSource: UserRemoteDataSource) {
+    init(userDataSource: UserRemoteDataSource, authSession: AuthSession) {
         self.userDataSource = userDataSource
+        self.authSession = authSession
     }
     
     func fetchUserDetails(_ userIdentifiers: [UUID]) async throws -> [UserDetail] {
@@ -26,5 +28,16 @@ final class UserRepositoryImplementation: UserRepository {
             )
         }
         return userDetails
+    }
+    
+    func fetchAppUser() async throws -> AppUser {
+        let userResponse = try await userDataSource.fetchUser(authSession.currentUserID)
+        return AppUser(
+            displayName: userResponse.displayName,
+            id: userResponse.id,
+            userName: userResponse.name,
+            createdAt: userResponse.createdAt,
+            profileImage: ProfileImage(imageURL: userResponse.profileImage)
+        )
     }
 }

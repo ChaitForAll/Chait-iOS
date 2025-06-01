@@ -14,4 +14,5 @@ enum UserRepositoryError: Error {
 
 protocol UserRepository {
     func fetchUserDetails(_ userIdentifiers: [UUID]) async throws -> [UserDetail]
+    func fetchAppUser() async throws -> AppUser
 }
