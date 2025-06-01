@@ -21,6 +21,7 @@ protocol ConversationUseCase {
         historyOffset: Int,
         maxItems: Int
     ) -> AnyPublisher<[Message], ConversationError>
+    func fetchConversation(_ conversationID: UUID) async -> Result<ConversationType, ConversationError>
 }
 
 final class DefaultConversationUseCase: ConversationUseCase {
@@ -51,5 +52,9 @@ final class DefaultConversationUseCase: ConversationUseCase {
             historyOffset: historyOffset,
             maxItems: maxItems
         )
+    }
+    
+    func fetchConversation(_ conversationID: UUID) async -> Result<ConversationType, ConversationError> {
+        return await conversationRepository.fetchConversation(conversationID)
     }
 }

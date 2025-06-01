@@ -19,4 +19,5 @@ protocol ConversationRepository {
         maxItems: Int
     ) -> AnyPublisher<[Message], ConversationError>
     func fetchConversationDetails() async throws -> [ConversationDetail]
+    func fetchConversation(_ conversationID: UUID) async -> Result<ConversationType, ConversationError>
 }

@@ -9,6 +9,7 @@ import Combine
 
 final class ConversationRepositoryImplementation: ConversationRepository {
     
+    
     // MARK: Property(s)
     
     private let conversationRemote: ConversationRemoteDataSource
@@ -29,6 +30,19 @@ final class ConversationRepositoryImplementation: ConversationRepository {
     }
     
     // MARK: Function(s)
+    
+    func fetchConversation(
+        _ conversationID: UUID
+    ) async -> Result<ConversationType, ConversationError> {
+        do {
+            let conversation = try await conversationRemote.fetchConversation(conversationID)
+            let memberships = try await conversationMembershipRemote.fetchMembers(conversationID)
+            let participants = try await userRemote.fetchUsers(memberships).map { $0.toParticipant() }
+            return .success(conversation.toConversationType(participants: participants))
+        } catch {
+            return .failure(.fetchFailed)
+        }
+    }
     
     func fetchConversationDetails() async throws -> [ConversationDetail]  {
         let memberships = try await self.conversationMembershipRemote

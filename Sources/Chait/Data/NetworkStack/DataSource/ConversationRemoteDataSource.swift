@@ -18,6 +18,7 @@ protocol ConversationRemoteDataSource {
         _ conversationIdentifiers: [UUID]
     ) async throws -> [ConversationResponse]
     func insertNewMessage(_ request: NewMessageRequest) async throws -> MessageResponse
+    func fetchConversation(_ conversationIdentifier: UUID) async throws -> ConversationResponse
     func startListeningInsertions(
         _ conversationID: UUID
     ) -> AnyPublisher<[MessageResponse], ConversationDatasourceError>
@@ -42,6 +43,16 @@ final class DefaultConversationRemoteDataSource: ConversationRemoteDataSource {
     }
     
     // MARK: Function(s)
+    
+    func fetchConversation(_ conversationIdentifier: UUID) async throws -> ConversationResponse {
+        return try await supabase
+            .from("conversations")
+            .select()
+            .eq("id", value: conversationIdentifier)
+            .single()
+            .execute()
+            .decodeJSON()
+    }
     
     func fetchConversations(
         _ conversationIdentifiers: [UUID]
