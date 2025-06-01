@@ -40,4 +40,8 @@ final class AppUser: User {
         }
         self.profileImage = profileImage
     }
+    
+    func canAccess(_ conversation: any Conversation) -> Bool {
+        return conversation.isParticipant(self.id)
+    }
 }
