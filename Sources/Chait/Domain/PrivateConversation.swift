@@ -16,7 +16,7 @@ final class PrivateConversation: Conversation {
     
     let id: UUID
     let createdAt: Date
-    let participants: Set<Participant>
+    let participants: [Participant]
     
     init(
         title: String,
@@ -24,7 +24,7 @@ final class PrivateConversation: Conversation {
         lastMessageSentAt: Date,
         id: UUID,
         createdAt: Date,
-        participants: Set<Participant>
+        participants: [Participant]
     ) {
         self.title = title
         self.updatedAt = updatedAt

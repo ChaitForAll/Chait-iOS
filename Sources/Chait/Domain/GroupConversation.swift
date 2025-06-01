@@ -18,7 +18,7 @@ final class GroupConversation: Conversation {
     var title: String
     var updatedAt: Date
     var lastMessageSentAt: Date
-    var participants: Set<Participant>
+    var participants: [Participant]
     var owner: Participant
     
     let id: UUID
@@ -28,7 +28,7 @@ final class GroupConversation: Conversation {
         title: String,
         updatedAt: Date,
         lastMessageSentAt: Date,
-        participants: Set<Participant>,
+        participants: [Participant],
         id: UUID,
         createdAt: Date,
         owner: Participant
@@ -65,7 +65,7 @@ final class GroupConversation: Conversation {
         guard !participants.contains(newParticipant) else {
             return
         }
-        participants.insert(newParticipant)
+        participants.append(newParticipant)
     }
     
     func transferOwnership(to nextOwner: Participant) throws {
@@ -75,7 +75,10 @@ final class GroupConversation: Conversation {
         self.owner = nextOwner
     }
     
-    func removeParticipant(_ participant: Participant) {
-        participants.remove(participant)
+    func removeParticipant(_ participant: Participant) throws {
+        guard let participantIndex = participants.firstIndex(of: participant) else {
+            throw GroupConversationError.participantNotFound
+        }
+        participants.remove(at: participantIndex)
     }
 }

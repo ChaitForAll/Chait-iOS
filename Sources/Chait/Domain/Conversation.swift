@@ -14,7 +14,7 @@ enum ConversationType {
 protocol Conversation: AnyObject, Identifiable {
     var id: UUID { get }
     var title: String { get set }
-    var participants: Set<Participant> { get }
+    var participants: [Participant] { get }
     var createdAt: Date { get }
     var updatedAt: Date { get set }
     var lastMessageSentAt: Date { get set }

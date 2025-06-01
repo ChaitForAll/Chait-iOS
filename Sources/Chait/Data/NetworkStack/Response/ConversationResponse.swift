@@ -20,7 +20,7 @@ struct ConversationResponse: Decodable {
 }
 
 extension ConversationResponse {
-    func toPrivateConversation(participants: Set<Participant>) -> PrivateConversation {
+    func toPrivateConversation(participants: [Participant])-> PrivateConversation {
         return PrivateConversation(
             title: title,
             updatedAt: updatedAt,
@@ -31,7 +31,7 @@ extension ConversationResponse {
         )
     }
     
-    func toGroupConversation(participants: Set<Participant>) -> GroupConversation {
+    func toGroupConversation(participants:  [Participant]) -> GroupConversation {
         return GroupConversation(
             title: title,
             updatedAt: updatedAt,
@@ -46,10 +46,10 @@ extension ConversationResponse {
 
 extension ConversationResponse {
     
-    func toConversationType(participants: Set<Participant>) -> ConversationType {
+    func toConversationType(participants: [Participant]) -> ConversationType {
         switch conversationType {
         case .group:
-                return ConversationType.group(self.toGroupConversation(participants: participants))
+            return ConversationType.group(self.toGroupConversation(participants: participants))
         case .private:
                 return ConversationType.private(self.toPrivateConversation(participants: participants))
         }
