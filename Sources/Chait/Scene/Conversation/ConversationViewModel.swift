@@ -31,6 +31,7 @@ final class ConversationViewModel {
         return viewActionSubject.eraseToAnyPublisher()
     }
     
+    private var thisConversation: (any Conversation)?
     private var isFetchEnabled: Bool = true
     private var historyItemsOffset: Int = .zero
     private var cancelBag: Set<AnyCancellable> = []
@@ -43,13 +44,15 @@ final class ConversationViewModel {
     private let conversationUseCase: ConversationUseCase
     private let sendMessageUseCase: SendMessageUseCase
     private let fetchConversationHistoryUseCase: FetchConversationHistoryUseCase
+    private let streamMessageUpdatesUseCase: StreamMessageUpdatesUseCase
     
     init(
         channelID: UUID,
         historyBatchSize: Int = 50,
         conversationUseCase: ConversationUseCase,
         sendMessageUseCase: SendMessageUseCase,
-        fetchConversationHistoryUseCase: FetchConversationHistoryUseCase
+        fetchConversationHistoryUseCase: FetchConversationHistoryUseCase,
+        streamMessageUpdatesUseCase: StreamMessageUpdatesUseCase
     ) {
 
         self.conversationID = channelID
@@ -57,13 +60,14 @@ final class ConversationViewModel {
         self.conversationUseCase = conversationUseCase
         self.sendMessageUseCase = sendMessageUseCase
         self.fetchConversationHistoryUseCase = fetchConversationHistoryUseCase
+        self.streamMessageUpdatesUseCase = streamMessageUpdatesUseCase
+        prepareConversation()
     }
     
     // MARK: Function(s)
     
     func onViewDidLoad() {
         viewActionSubject.send(.createSections(identifiers: [messageListSection.id]))
-        startListening()
         Task {
             await fetchChatHistories()
         }
@@ -96,19 +100,39 @@ final class ConversationViewModel {
     
     // MARK: Private Function(s)
     
+    private func prepareConversation() {
+        Task {
+            let result = await conversationUseCase.fetchConversation(conversationID)
+            switch result {
+            case .success(let conversationType):
+                switch conversationType {
+                case .group(let conversation):
+                    self.thisConversation = conversation
+                case .private(let conversation):
+                    self.thisConversation = conversation
+                }
+                startListening()
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
     private func startListening() {
-        conversationUseCase
-            .startListeningMessages(conversationID)
-            .replaceError(with: [])
-            .map { $0.map { ConversationMessageViewModel(message: $0) }}
-            .handleEvents(receiveOutput: { [weak self] viewModels in
-                self?.messageListSection.insertItems(viewModels)
-            })
-            .map { ViewAction.appendItems(identifiers: $0.map(\.id)) }
-            .sink(receiveValue: { [weak self] appendItemsAction in
-                self?.viewActionSubject.send(appendItemsAction)
-            })
-            .store(in: &cancelBag)
+        guard let thisConversation else {return}
+        let streamTask = Task {
+            do {
+                let result = try await streamMessageUpdatesUseCase.execute(thisConversation)
+                for await message in result {
+                    let viewModel = ConversationMessageViewModel(message: message)
+                    self.messageListSection.insertItems([viewModel])
+                    self.viewActionSubject.send(.appendItems(identifiers: [viewModel.id]))
+                }
+            } catch {
+                print(error)
+            }
+        }
+        cancelBag.insert(AnyCancellable(streamTask.cancel))
     }
     
     private func fetchChatHistories() async -> Bool {
@@ -116,7 +140,6 @@ final class ConversationViewModel {
         var messageQuery: MessageQuery = .mostRecent
         
         if let lastMessage = messages.first {
-            print(lastMessage)
             messageQuery = .before(lastMessage)
         }
         
