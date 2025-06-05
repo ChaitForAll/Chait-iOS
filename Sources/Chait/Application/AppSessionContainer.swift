@@ -49,7 +49,10 @@ final class AppSessionContainer {
             messagesDataSource: messageRemoteDataSource,
             authSession: authSession
         )
-        self.userRepository = UserRepositoryImplementation(userDataSource: userRemoteDataSource)
+        self.userRepository = UserRepositoryImplementation(
+            userDataSource: userRemoteDataSource,
+            authSession: authSession
+        )
     }
     
     
@@ -85,6 +88,14 @@ final class AppSessionContainer {
         return DefaultFetchConversationHistory(repository: messageRepository)
     }
     
+    private func streamMessageUpdatesUseCase() -> StreamMessageUpdatesUseCase {
+        return DefaultStreamMessageUpdatesUseCase(
+            userRepository: userRepository,
+            conversationRepository: conversationRepository,
+            messagesRepository: messageRepository
+        )
+    }
+    
     // MARK: ViewModel(s)
     
     func conversationListViewModel() -> ConversationListViewModel {
@@ -105,7 +116,8 @@ final class AppSessionContainer {
             channelID: channelID,
             conversationUseCase: conversationUseCase(),
             sendMessageUseCase: sendMessageUseCase(),
-            fetchConversationHistoryUseCase: fetchConversationHistoriesUseCase()
+            fetchConversationHistoryUseCase: fetchConversationHistoriesUseCase(),
+            streamMessageUpdatesUseCase: streamMessageUpdatesUseCase()
         )
     }
 }
