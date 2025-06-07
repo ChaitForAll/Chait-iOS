@@ -27,6 +27,7 @@ final class SendMessageUseCase: SendMessageUseCaseInterface {
     
     // MARK: Function(s)
     
+    @discardableResult
     func execute(_ command: SendMessageCommand) async -> Result<Message, SendMessageError> {
         let newMessage = NewMessage(text: command.message, conversationID: command.conversationIdentifier)
         let sendingResult = await messageRepository.create(newMessage)
