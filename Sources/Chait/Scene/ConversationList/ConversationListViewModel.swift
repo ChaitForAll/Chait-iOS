@@ -10,32 +10,16 @@ import Combine
 
 final class ConversationListViewModel {
     
-    // MARK: Type(s)
-    
-    private enum SectionType: CaseIterable {
-        case conversationList
-    }
-    
-    private typealias Section<Item: Identifiable> = ListSection<SectionType, Item>
-    
-    enum ViewAction {
-        case createSections(identifiers: [UUID])
-        case insertItems(identifiers: [UUID])
-    }
-    
     // MARK: Property(s)
     
-    var viewAction: AnyPublisher<ViewAction, Never> {
-        return viewActionSubject.eraseToAnyPublisher()
-    }
-    
-    private var conversationListSection = Section<ConversationSummaryViewModel>(sectionType: .conversationList)
-    private var viewActionSubject = PassthroughSubject<ViewAction, Never>()
+    @Published var summaryIdentifiers: [ConversationSummaryViewModel.ID] = []
+    private var summaries: [ConversationSummaryViewModel.ID: ConversationSummaryViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     
-    private let conversationSummariesSubject: PassthroughSubject<[UUID], Never> = .init()
-    private let fetchConversationSummaries: FetchConversationSummariesUseCase
+    // MARK: Dependency(s)
     
+    private let fetchConversationSummaries: FetchConversationSummariesUseCase
+
     init(fetchConversationSummaries: FetchConversationSummariesUseCase) {
         self.fetchConversationSummaries = fetchConversationSummaries
     }
@@ -43,22 +27,25 @@ final class ConversationListViewModel {
     // MARK: Function(s)
     
     func onViewDidLoad() {
-        viewActionSubject.send(.createSections(identifiers: [conversationListSection.id]))
         fetchConversationList()
     }
     
     func item(for identifier: UUID) -> ConversationSummaryViewModel? {
-        return conversationListSection.item(for: identifier)
+        return summaries[identifier]
     }
     
     //MARK: Private Function(s)
     
     private func fetchConversationList() {
-        Task.detached(priority: .background) {
-            let conversationSummaries = try await self.fetchConversationSummaries.execute()
-            let conversationViewModels = conversationSummaries.map { ConversationSummaryViewModel($0) }
-            self.conversationListSection.insertItems(conversationViewModels)
-            self.viewActionSubject.send(.insertItems(identifiers: conversationViewModels.map(\.id)))
+        Task { [weak self] in
+            guard let self else { return }
+            let summaries = try await fetchConversationSummaries.execute()
+            let summaryViewModels = summaries.map(ConversationSummaryViewModel.init)
+            let newSummaryIdentifiers = summaryViewModels.map(\.id)
+            for summary in summaryViewModels {
+                self.summaries[summary.id] = summary
+            }
+            summaryIdentifiers.append(contentsOf: newSummaryIdentifiers)
         }
     }
 }

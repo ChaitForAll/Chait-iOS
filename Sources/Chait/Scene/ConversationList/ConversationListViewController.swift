@@ -9,9 +9,14 @@ import UIKit
 import Combine
 
 final class ConversationListViewController: UIViewController {
-    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
-    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
-    typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
+    
+    private enum Section {
+        case summaries
+    }
+    
+    private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, UUID>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, UUID>
+    private typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
     
@@ -87,25 +92,16 @@ final class ConversationListViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.viewAction
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] viewAction in
-                switch viewAction {
-                    
-                case.createSections(identifiers: let sectionIdentifiers):
-                    var initialSnapshot = NSDiffableDataSourceSnapshot<UUID, UUID>()
-                    initialSnapshot.appendSections(sectionIdentifiers)
-                    self?.diffableDataSource?.apply(initialSnapshot)
-                    
-                case .insertItems(identifiers: let items):
-                    guard var currentSnapshot = self?.currentSnapshot,
-                            !currentSnapshot.sectionIdentifiers.isEmpty
-                    else {
-                        return
-                    }
-                    currentSnapshot.appendItems(items)
-                    self?.diffableDataSource?.apply(currentSnapshot)
+        viewModel?.$summaryIdentifiers
+            .sink { [weak self] summaryIdentifiers in
+                guard var currentSnapshot = self?.currentSnapshot else {
+                    return
                 }
+                if currentSnapshot.sectionIdentifiers.isEmpty {
+                    currentSnapshot.appendSections([.summaries])
+                }
+                currentSnapshot.appendItems(summaryIdentifiers)
+                self?.diffableDataSource?.apply(currentSnapshot)
             }
             .store(in: &cancelBag)
     }
