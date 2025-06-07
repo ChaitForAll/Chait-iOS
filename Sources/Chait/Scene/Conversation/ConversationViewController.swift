@@ -9,8 +9,15 @@ import UIKit
 import Combine
 
 final class ConversationViewController: UIViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
+    
+    // MARK: Type(s)
+    
+    enum Section {
+        case messages
+    }
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, UUID>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, UUID>
     typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
@@ -22,6 +29,7 @@ final class ConversationViewController: UIViewController {
     private var minCurrentBatchHeight: CGFloat = .zero
     private var maxCurrentBatchHeight: CGFloat = .zero
     private var cancelBag: Set<AnyCancellable> = .init()
+    
     private var diffableDataSource: DataSource?
     private var currentSnapshot: SnapShot? {
         return diffableDataSource?.snapshot()
@@ -30,10 +38,6 @@ final class ConversationViewController: UIViewController {
     private let collectionView = UICollectionView.withEmptyLayout()
     
     // MARK: Override(s)
-    
-//    override func loadView() {
-////        self.view = collectionView
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,10 +58,18 @@ final class ConversationViewController: UIViewController {
     
     // MARK: Private Function(s)
     
+    private func addSnapshotSections() {
+        if var currentSnapshot {
+            currentSnapshot.appendSections([.messages])
+            diffableDataSource?.apply(currentSnapshot)
+        }
+    }
+    
     private func configureCollectionView() {
         self.diffableDataSource = createDiffableDataSource()
         collectionView.dataSource = diffableDataSource
         collectionView.collectionViewLayout = createListCollectionViewLayout()
+        addSnapshotSections()
     }
     
     private func createListCollectionViewLayout() -> UICollectionViewLayout {
@@ -93,21 +105,16 @@ final class ConversationViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel?.viewAction
+        viewModel?.messageReceive
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] viewAction in
-                switch viewAction {
-                case .createSections(identifiers: let sections):
-                    var initialSnapshot = SnapShot()
-                    initialSnapshot.appendSections(sections)
-                    self?.diffableDataSource?.apply(initialSnapshot)
-                case .appendItems(identifiers: let identifiers):
-                    self?.appendItems(identifiers)
-                case .insertItemsAtTop(identifiers: let identifiers):
-                    self?.insertItemsAtTop(identifiers)
+            .sink { receiveType in
+                switch receiveType {
+                case .history(let historyIdentifiers):
+                    self.insertItemsAtTop(historyIdentifiers)
+                case .new(let newMessageIdentifier):
+                    self.appendItems([newMessageIdentifier])
                 }
-            }
-            .store(in: &cancelBag)
+            }.store(in: &cancelBag)
     }
     
     private func configurePullToFetchHistory() {

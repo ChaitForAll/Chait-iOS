@@ -10,35 +10,26 @@ import Combine
 
 final class ConversationViewModel {
     
-    // MARK: Type(s)
-    
-    private enum SectionType: CaseIterable {
-        case messageList
-    }
-    
-    private typealias Section<Item: Identifiable> = ListSection<SectionType, Item>
-    
-    enum ViewAction {
-        case appendItems(identifiers: [UUID])
-        case insertItemsAtTop(identifiers: [UUID])
-        case createSections(identifiers: [UUID])
+    enum MessageReceiveType {
+        case history([UUID])
+        case new(UUID)
     }
     
     // MARK: Property(s)
     
-    var userMessageText: String = ""
-    var viewAction: AnyPublisher<ViewAction, Never> {
-        return viewActionSubject.eraseToAnyPublisher()
+    @Published var userMessageText: String = ""
+    var messageReceive: AnyPublisher<MessageReceiveType, Never> {
+        return messageReceiveSubject.eraseToAnyPublisher()
     }
     
     private var thisConversation: (any Conversation)?
     private var isFetchEnabled: Bool = true
-    private var historyItemsOffset: Int = .zero
+    private var allMessages: [Message.ID: Message] = [:]
+    private var messageIdentifiers: [UUID] = []
     private var cancelBag: Set<AnyCancellable> = []
-    private var messages: [Message] = []
     
-    private let messageListSection = Section<ConversationMessageViewModel>(sectionType: .messageList)
-    private let viewActionSubject: PassthroughSubject<ViewAction, Never> = .init()
+    private let messageReceiveSubject = PassthroughSubject<MessageReceiveType, Never>()
+
     private let conversationID: UUID
     private let historyBatchSize: Int
     private let conversationUseCase: ConversationUseCase
@@ -54,7 +45,6 @@ final class ConversationViewModel {
         fetchConversationHistoryUseCase: FetchConversationHistoryUseCase,
         streamMessageUpdatesUseCase: StreamMessageUpdatesUseCase
     ) {
-
         self.conversationID = channelID
         self.historyBatchSize = historyBatchSize
         self.conversationUseCase = conversationUseCase
@@ -67,7 +57,7 @@ final class ConversationViewModel {
     // MARK: Function(s)
     
     func onViewDidLoad() {
-        viewActionSubject.send(.createSections(identifiers: [messageListSection.id]))
+        startListening()
         Task {
             await fetchChatHistories()
         }
@@ -82,20 +72,21 @@ final class ConversationViewModel {
     }
     
     func onSendMessage() {
-        let messageText = userMessageText
-        let conversationID = conversationID
-        Task.detached(priority: .background) {
-            let sendMessageCommand = SendMessageCommand(
-                message: messageText,
-                conversationIdentifier: conversationID
-            )
-            _ = await self.sendMessageUseCase.execute(sendMessageCommand)
+        let sendMessageCommand = SendMessageCommand(
+            message: userMessageText,
+            conversationIdentifier: conversationID
+        )
+        Task {
+            await self.sendMessageUseCase.execute(sendMessageCommand)
             self.userMessageText.removeAll()
         }
     }
     
     func message(for identifier: UUID) -> ConversationMessageViewModel? {
-        return messageListSection.item(for: identifier)
+        guard let message = allMessages[identifier] else {
+            return nil
+        }
+        return ConversationMessageViewModel(message: message)
     }
     
     // MARK: Private Function(s)
@@ -121,15 +112,11 @@ final class ConversationViewModel {
     private func startListening() {
         guard let thisConversation else {return}
         let streamTask = Task {
-            do {
-                let result = try await streamMessageUpdatesUseCase.execute(thisConversation)
-                for await message in result {
-                    let viewModel = ConversationMessageViewModel(message: message)
-                    self.messageListSection.insertItems([viewModel])
-                    self.viewActionSubject.send(.appendItems(identifiers: [viewModel.id]))
-                }
-            } catch {
-                print(error)
+            let result = try await streamMessageUpdatesUseCase.execute(thisConversation)
+            for await message in result {
+                allMessages[message.id] = message
+                messageIdentifiers.append(message.id)
+                messageReceiveSubject.send(.new(message.id))
             }
         }
         cancelBag.insert(AnyCancellable(streamTask.cancel))
@@ -139,7 +126,8 @@ final class ConversationViewModel {
         
         var messageQuery: MessageQuery = .mostRecent
         
-        if let lastMessage = messages.first {
+        if let lastIdentifier = self.messageIdentifiers.first,
+           let lastMessage = allMessages[lastIdentifier] {
             messageQuery = .before(lastMessage)
         }
         
@@ -150,23 +138,19 @@ final class ConversationViewModel {
                 limit: 40
             ))
         
-        switch result {
-        case .success(let historyItems):
-            var fetchedHistoryMessages: [Message] = []
-            for historyItem in historyItems {
-                switch historyItem {
-                case .message(let message):
-                    fetchedHistoryMessages.append(message)
-                }
-            }
-            fetchedHistoryMessages = fetchedHistoryMessages.reversed()
-            messages.insert(contentsOf: fetchedHistoryMessages, at: .zero)
-            messageListSection.insertItems(fetchedHistoryMessages.map { ConversationMessageViewModel(message: $0)})
-            viewActionSubject.send(.insertItemsAtTop(identifiers: fetchedHistoryMessages.map(\.messageID)))
-        case .failure(let failure):
-            print(failure)
+        guard case .success(let historyItems) = result else {
+            return false
         }
         
+        var historyIdentifiers = [UUID]()
+        for historyItem in historyItems.reversed() {
+            if case .message(let message) = historyItem {
+                allMessages[message.id] = message
+                historyIdentifiers.append(message.id)
+            }
+        }
+        messageIdentifiers.insert(contentsOf: historyIdentifiers, at: .zero)
+        messageReceiveSubject.send(.history(historyIdentifiers))
         return true
     }
 }
