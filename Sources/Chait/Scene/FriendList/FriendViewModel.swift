@@ -7,9 +7,6 @@
 import UIKit
 
 final class FriendViewModel: Identifiable {
-    
-    var image: UIImage?
-    
     let id: UUID
     let name: String
     let displayName: String

@@ -9,9 +9,15 @@ import UIKit
 import Combine
 
 final class FriendListViewController: UIViewController {
-    typealias SnapShot = NSDiffableDataSourceSnapshot<UUID, UUID>
-    typealias DataSource = UICollectionViewDiffableDataSource<UUID, UUID>
-    typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
+    
+    // MARK: Type(s)
+    
+    private enum Section {
+        case contacts
+    }
+    private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, UUID>
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, UUID>
+    private typealias ListCellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, UUID>
     
     // MARK: Property(s)
     
@@ -41,28 +47,14 @@ final class FriendListViewController: UIViewController {
     // MARK: Private Function(s)
     
     private func bindViewModel() {
-        viewModel?.viewAction
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] viewAction in
-                guard let self else { return }
-                switch viewAction {
-                    
-                case .createSections(let sections):
-                    var snapShot = SnapShot()
-                    snapShot.appendSections(sections)
-                    diffableDataSource?.apply(snapShot)
-                    
-                case .insert(items: let insertingItems, section: let section):
-                    guard var currentSnapshot else { return }
-                    currentSnapshot.appendItems(insertingItems, toSection: section)
-                    currentSnapshot.reloadSections([section])
-                    diffableDataSource?.apply(currentSnapshot)
-                    
-                case .update(items: let updatingItems):
-                    guard var currentSnapshot else { return }
-                    currentSnapshot.reconfigureItems(updatingItems)
-                    diffableDataSource?.apply(currentSnapshot)
+        viewModel?.$friendIdentifiers
+            .sink { [weak self] friendIdentifiers in
+                guard var currentSnapshot = self?.currentSnapshot else { return }
+                if currentSnapshot.sectionIdentifiers.isEmpty {
+                    currentSnapshot.appendSections([.contacts])
                 }
+                currentSnapshot.appendItems(friendIdentifiers)
+                self?.diffableDataSource?.apply(currentSnapshot)
             }
             .store(in: &cancelBag)
     }
@@ -72,7 +64,6 @@ final class FriendListViewController: UIViewController {
         configureSupplementaryProvider()
         collectionView.collectionViewLayout = createListLayout()
         collectionView.dataSource = diffableDataSource
-        collectionView.delegate = self
     }
     
     private func createListLayout() -> UICollectionViewCompositionalLayout {
@@ -109,7 +100,6 @@ final class FriendListViewController: UIViewController {
             if let friend = self.viewModel?.friendViewModel(for: itemIdentifier) {
                 content.name = friend.displayName
                 content.status = friend.status
-                content.image = friend.image
             }
             cell.contentConfiguration = content
         }
@@ -135,21 +125,6 @@ final class FriendListViewController: UIViewController {
                 using: sectionHeaderRegistration,
                 for: indexPath
             )
-        }
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension FriendListViewController: UICollectionViewDelegate {
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        willDisplay cell: UICollectionViewCell,
-        forItemAt indexPath: IndexPath
-    ) {
-        if let friendIdentifier = diffableDataSource?.itemIdentifier(for: indexPath) {
-            viewModel?.onWillDisplayFriend(friendIdentifier)
         }
     }
 }
