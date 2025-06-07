@@ -13,3 +13,9 @@ struct Message {
     let conversationID: UUID
     let createdAt: Date
 }
+
+extension Message: Identifiable {
+    var id: UUID {
+        return messageID
+    }
+}
