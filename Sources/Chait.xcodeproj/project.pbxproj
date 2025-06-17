@@ -99,6 +99,7 @@
 		DFF27EC82DE8BADB00582D42 /* StreamMessageUpdatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */; };
 		DFF2D9962E01966E0057C6BC /* ReadImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* ReadImageMetaPort.swift */; };
 		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
+		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -201,6 +202,7 @@
 		DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostgrestFilterBuilder+ApplyFilters.swift"; sourceTree = "<group>"; };
 		DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamMessageUpdatesUseCase.swift; sourceTree = "<group>"; };
 		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
+		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -398,6 +400,7 @@
 		DF7574522DDE203400F08C10 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */,
 				DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */,
 				DF75745F2DDF413B00F08C10 /* UserRepository.swift */,
 				DF75745D2DDF40D600F08C10 /* MessageRepository.swift */,
@@ -674,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
+				DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */,
 				DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */,
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
