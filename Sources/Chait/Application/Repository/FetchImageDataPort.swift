@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum FetchImageDataPortError: Error {
+    case unknown
+    case failed
+}
+
 protocol FetchImageDataPort {
     func fetchImageData(for url: URL) async throws -> Data
 }

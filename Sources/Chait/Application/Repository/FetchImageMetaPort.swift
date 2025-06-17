@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum FetchImageMetaPortError: Error {
+    case unknown
+    case notFound
+}
+
 protocol FetchImageMetaPort {
-    func read(for userID: UUID) async throws -> ImageMeta
+    func fetch(for userID: UUID) async throws -> ImageMeta
 }
