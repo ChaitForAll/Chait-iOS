@@ -1,5 +1,5 @@
 //
-//  ReadImageMetaPort.swift
+//  FetchImageMetaPort.swift
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ReadImageMetaPort {
+protocol FetchImageMetaPort {
     func read(for userID: UUID) async throws -> ImageMeta
 }
