@@ -97,9 +97,9 @@
 		DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */; };
 		DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */; };
 		DFF27EC82DE8BADB00582D42 /* StreamMessageUpdatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */; };
-		DFF2D9962E01966E0057C6BC /* ReadImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* ReadImageMetaPort.swift */; };
 		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
+		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +203,7 @@
 		DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamMessageUpdatesUseCase.swift; sourceTree = "<group>"; };
 		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
+		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -565,6 +566,14 @@
 			path = StreamMessageUpdatesUseCase;
 			sourceTree = "<group>";
 		};
+		DFF27ED02DFD2D8900582D42 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DFF2D9992E0199400057C6BC /* ImageMeta.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -737,6 +746,7 @@
 				DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
+				DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */,
 				DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */,
 				DFD1225D2DC34C15005E3ED1 /* AppSessionContainer.swift in Sources */,
 				DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */,
