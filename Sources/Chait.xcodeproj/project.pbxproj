@@ -97,6 +97,7 @@
 		DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */; };
 		DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */; };
 		DFF27EC82DE8BADB00582D42 /* StreamMessageUpdatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */; };
+		DFF27ED22DFD2DA800582D42 /* ProfileImageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */; };
 		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
 		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
@@ -201,6 +202,7 @@
 		DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFilter.swift; sourceTree = "<group>"; };
 		DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostgrestFilterBuilder+ApplyFilters.swift"; sourceTree = "<group>"; };
 		DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamMessageUpdatesUseCase.swift; sourceTree = "<group>"; };
+		DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDataService.swift; sourceTree = "<group>"; };
 		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				DF75744B2DDCCDC100F08C10 /* AppCoreContainer.swift */,
 				DFD1225C2DC34C0F005E3ED1 /* AppSessionContainer.swift */,
 				DF0D43E72D70C95F0083AA14 /* AppEnvironment.swift */,
+				DFF27ED02DFD2D8900582D42 /* Service */,
 				DF0F26BD2DAAFC66002308E9 /* UseCase */,
 				DF7574522DDE203400F08C10 /* Repository */,
 			);
@@ -570,6 +573,7 @@
 			isa = PBXGroup;
 			children = (
 				DFF2D9992E0199400057C6BC /* ImageMeta.swift */,
+				DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -743,6 +747,7 @@
 				DF0F26C02DAAFD1B002308E9 /* User.swift in Sources */,
 				DF9C91ED2D6EE95300A2BCDA /* MessageResponse.swift in Sources */,
 				DF75745E2DDF40D900F08C10 /* MessageRepository.swift in Sources */,
+				DFF27ED22DFD2DA800582D42 /* ProfileImageDataService.swift in Sources */,
 				DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
 				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
