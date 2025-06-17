@@ -87,7 +87,7 @@
 		DFD7EC9C2DBB733000E5387B /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */; };
 		DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */; };
 		DFD7ECA22DBB7BB400E5387B /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */; };
-		DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */; };
+		DFD7ECA42DBB7F7100E5387B /* StaleWhileRevalidateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA32DBB7F6500E5387B /* StaleWhileRevalidateSession.swift */; };
 		DFD7ECA72DBB861800E5387B /* ImageRepositoryImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */; };
 		DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */; };
 		DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */; };
@@ -97,7 +97,11 @@
 		DFF27EC22DE4A88F00582D42 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */; };
 		DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */; };
 		DFF27EC82DE8BADB00582D42 /* StreamMessageUpdatesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */; };
+		DFF27ECB2DF4646500582D42 /* ProfileImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ECA2DF4645B00582D42 /* ProfileImageLoader.swift */; };
+		DFF27ECD2DF549CD00582D42 /* CancellableRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ECC2DF549C800582D42 /* CancellableRequest.swift */; };
 		DFF27ED22DFD2DA800582D42 /* ProfileImageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */; };
+		DFF27ED62E00412100582D42 /* HTTPResponseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED52E00411C00582D42 /* HTTPResponseCode.swift */; };
+		DFF27ED82E0045B300582D42 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED72E0045B000582D42 /* RestError.swift */; };
 		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
 		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
@@ -192,7 +196,7 @@
 		DFD7EC9B2DBB732E00E5387B /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		DFD7EC9D2DBB77C600E5387B /* FetchImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageUseCase.swift; sourceTree = "<group>"; };
 		DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
-		DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		DFD7ECA32DBB7F6500E5387B /* StaleWhileRevalidateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaleWhileRevalidateSession.swift; sourceTree = "<group>"; };
 		DFD7ECA62DBB860E00E5387B /* ImageRepositoryImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryImplementation.swift; sourceTree = "<group>"; };
 		DFE17ED92DD76F42008A58C2 /* FriendListCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListCellContentView.swift; sourceTree = "<group>"; };
 		DFE17F0C2DD7AF67008A58C2 /* UICollectionViewListCell+Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewListCell+Configuration.swift"; sourceTree = "<group>"; };
@@ -202,7 +206,11 @@
 		DFF27EC12DE4A88B00582D42 /* RequestFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFilter.swift; sourceTree = "<group>"; };
 		DFF27EC42DE4A8B200582D42 /* PostgrestFilterBuilder+ApplyFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostgrestFilterBuilder+ApplyFilters.swift"; sourceTree = "<group>"; };
 		DFF27EC72DE8BAD500582D42 /* StreamMessageUpdatesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamMessageUpdatesUseCase.swift; sourceTree = "<group>"; };
+		DFF27ECA2DF4645B00582D42 /* ProfileImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageLoader.swift; sourceTree = "<group>"; };
+		DFF27ECC2DF549C800582D42 /* CancellableRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableRequest.swift; sourceTree = "<group>"; };
 		DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDataService.swift; sourceTree = "<group>"; };
+		DFF27ED52E00411C00582D42 /* HTTPResponseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseCode.swift; sourceTree = "<group>"; };
+		DFF27ED72E0045B000582D42 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
@@ -335,9 +343,10 @@
 		DF50BFD82D99B34E0022B1E3 /* NetworkStack */ = {
 			isa = PBXGroup;
 			children = (
+				DFF2D99C2E01A44B0057C6BC /* Decoder */,
+				DFF2D9942E01944A0057C6BC /* Session */,
+				DFF27ED42E00411600582D42 /* Rest */,
 				DFF27EC32DE4A8A600582D42 /* Supabsae+Extension */,
-				DFD7ECA32DBB7F6500E5387B /* ImageManager.swift */,
-				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
 				DF4920062DB0440300EA51D2 /* DataSource */,
 				DFC3001D2DD863AD00A219F7 /* Request */,
 				DF4920052DB043C700EA51D2 /* Response */,
@@ -368,6 +377,7 @@
 		DF674A0F2D34EFAE00B61966 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DFF27EC92DF4644F00582D42 /* UIKIt+Helpers */,
 				DFD122702DCE49D9005E3ED1 /* Extension */,
 				DFD122652DC74DB9005E3ED1 /* CommonDesign */,
 				DFD122602DC5E632005E3ED1 /* Onboarding */,
@@ -569,6 +579,15 @@
 			path = StreamMessageUpdatesUseCase;
 			sourceTree = "<group>";
 		};
+		DFF27EC92DF4644F00582D42 /* UIKIt+Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DFF27ECC2DF549C800582D42 /* CancellableRequest.swift */,
+				DFF27ECA2DF4645B00582D42 /* ProfileImageLoader.swift */,
+			);
+			path = "UIKIt+Helpers";
+			sourceTree = "<group>";
+		};
 		DFF27ED02DFD2D8900582D42 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +595,31 @@
 				DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		DFF27ED42E00411600582D42 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				DFF27ED72E0045B000582D42 /* RestError.swift */,
+				DFF27ED52E00411C00582D42 /* HTTPResponseCode.swift */,
+			);
+			path = Rest;
+			sourceTree = "<group>";
+		};
+		DFF2D9942E01944A0057C6BC /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				DFD7ECA32DBB7F6500E5387B /* StaleWhileRevalidateSession.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		DFF2D99C2E01A44B0057C6BC /* Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				DF350FB52DB1045B0010FE8A /* SnakeKeyISODateJSONDecoder.swift */,
+			);
+			path = Decoder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -699,7 +743,9 @@
 				DFF27EC02DE48BCD00582D42 /* FetchConversationHistoryCommand.swift in Sources */,
 				DF0F26DB2DAD18AF002308E9 /* ConversationRepository.swift in Sources */,
 				DF75744C2DDCCDC900F08C10 /* AppCoreContainer.swift in Sources */,
+				DFF27ED62E00412100582D42 /* HTTPResponseCode.swift in Sources */,
 				DF0F26E42DADE918002308E9 /* ConversationMembershipResponse.swift in Sources */,
+				DFF27ECD2DF549CD00582D42 /* CancellableRequest.swift in Sources */,
 				DF0F26EA2DADF9AD002308E9 /* UserResopnse.swift in Sources */,
 				DF0F26CC2DABAAD0002308E9 /* PrivateConversation.swift in Sources */,
 				DFD7EC9E2DBB77D100E5387B /* FetchImageUseCase.swift in Sources */,
@@ -736,6 +782,7 @@
 				DFBF6F312D6C80F7003B51DB /* Message.swift in Sources */,
 				DF9676BE2D994F7F0078D0D5 /* Friend.swift in Sources */,
 				DF0F26E22DADE8A3002308E9 /* ConversationMembershipRemoteDataSource.swift in Sources */,
+				DFF27ED82E0045B300582D42 /* RestError.swift in Sources */,
 				DF0F26E82DADF52B002308E9 /* UserRemoteDataSource.swift in Sources */,
 				DF50BFDF2D9AB3A40022B1E3 /* FriendListViewModel.swift in Sources */,
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
@@ -750,8 +797,8 @@
 				DFF27ED22DFD2DA800582D42 /* ProfileImageDataService.swift in Sources */,
 				DFF27EC52DE4A8BB00582D42 /* PostgrestFilterBuilder+ApplyFilters.swift in Sources */,
 				DF0F26E62DADEA2F002308E9 /* ConversationRepositoryImplementation.swift in Sources */,
-				DFD7ECA42DBB7F7100E5387B /* ImageManager.swift in Sources */,
 				DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */,
+				DFD7ECA42DBB7F7100E5387B /* StaleWhileRevalidateSession.swift in Sources */,
 				DFE17F0D2DD7AF6D008A58C2 /* UICollectionViewListCell+Configuration.swift in Sources */,
 				DFD1225D2DC34C15005E3ED1 /* AppSessionContainer.swift in Sources */,
 				DFD122672DC74DD8005E3ED1 /* UITraitCollection+DarkMode.swift in Sources */,
@@ -762,6 +809,7 @@
 				DF0F26DD2DAD1A9F002308E9 /* ConversationRemoteDataSource.swift in Sources */,
 				DF10C7B32D343A3E006035E8 /* AppDelegate.swift in Sources */,
 				DF75746C2DE1B22900F08C10 /* SendMessageCommand.swift in Sources */,
+				DFF27ECB2DF4646500582D42 /* ProfileImageLoader.swift in Sources */,
 				DFF27EBE2DE48BB500582D42 /* ConversationHistoryItem.swift in Sources */,
 				DFF27EC82DE8BADB00582D42 /* StreamMessageUpdatesUseCase.swift in Sources */,
 				DF0F26C42DAB91E8002308E9 /* Conversation.swift in Sources */,
