@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum ReadImageMetaPortError: Error {
-    case unknown
-}
-
 protocol ReadImageMetaPort {
     func read(for userID: UUID) async throws -> ImageMeta
 }
