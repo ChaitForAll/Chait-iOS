@@ -13,7 +13,6 @@ final class AppSessionContainer {
     
     private let conversationRepository: ConversationRepository
     private let friendRepository: FriendRepository
-    private let imageRepository: ImageRepository
     private let messageRepository: MessageRepository
     private let userRepository: UserRepository
     
@@ -44,7 +43,6 @@ final class AppSessionContainer {
             usersRemote: userRemoteDataSource,
             authSession: authSession
         )
-        self.imageRepository = ImageRepositoryImplementation(imageManager: ImageManager())
         self.messageRepository = MessageRepositoryImplementation(
             messagesDataSource: messageRemoteDataSource,
             authSession: authSession
@@ -57,10 +55,6 @@ final class AppSessionContainer {
     
     
     // MARK: UseCase(s)
-    
-    private func fetchImageUseCase() -> FetchImageUseCase {
-        return DefaultFetchImageUseCase(imageRepository: imageRepository)
-    }
     
     private func conversationUseCase() -> ConversationUseCase {
         return DefaultConversationUseCase(
@@ -106,8 +100,7 @@ final class AppSessionContainer {
     
     func friendListViewModel() -> FriendListViewModel {
         return FriendListViewModel(
-            fetchFriendsListUseCase: fetchFriendListUseCase(),
-            fetchImageUseCase: fetchImageUseCase()
+            fetchFriendsListUseCase: fetchFriendListUseCase()
         )
     }
     

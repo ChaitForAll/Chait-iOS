@@ -18,14 +18,9 @@ final class FriendListViewModel {
     private var allFriends: [FriendViewModel.ID: FriendViewModel] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
-    private let fetchImageUseCase: FetchImageUseCase
     
-    init(
-        fetchFriendsListUseCase: FetchFriendsListUseCase,
-        fetchImageUseCase: FetchImageUseCase
-    ) {
+    init(fetchFriendsListUseCase: FetchFriendsListUseCase) {
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
-        self.fetchImageUseCase = fetchImageUseCase
     }
     
     // MARK: Function(s)
