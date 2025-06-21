@@ -5,11 +5,10 @@
 //  Copyright (c) 2025 Jeremy All rights reserved.
 
 import Foundation
-import UIKit
+import Combine
 
 enum ProfileImageDataServiceError: Error {
-    case failedFetchingData
-    case notFound
+    case failed
     case unknown
 }
 
@@ -17,37 +16,26 @@ struct ProfileImageDataService {
     
     // MARK: Property(s)
     
-    private let fetchImageMetaPort: FetchImageMetaPort
-    private let fetchImageDataPort: FetchImageDataPort
+    private let fetchImageDataPort: FetchUserImageDataPort
     
-    init(fetchImageMetaPort: FetchImageMetaPort, fetchImageDataPort: FetchImageDataPort) {
-        self.fetchImageMetaPort = fetchImageMetaPort
+    init(fetchImageDataPort: FetchUserImageDataPort) {
         self.fetchImageDataPort = fetchImageDataPort
     }
     
     // MARK: Function(s)
     
-    func fetchImageData(for userID: UUID) async throws -> Data {
-        do {
-            let userImageMeta = try await fetchImageMetaPort.fetch(for: userID)
-            let userImageData = try await fetchImageDataPort.fetchImageData(
-                for: userImageMeta.sourceURL
-            )
-            return userImageData
-        } catch let error as FetchImageMetaPortError {
-            switch error {
-            case .unknown:
-                throw ProfileImageDataServiceError.unknown
-            case .notFound:
-                throw ProfileImageDataServiceError.notFound
-            }
-        } catch let error as FetchImageDataPortError {
-            switch error {
-            case .unknown:
-                throw ProfileImageDataServiceError.unknown
-            case .failed:
-                throw ProfileImageDataServiceError.failedFetchingData
-            }
-        }
+    func fetchImageData(
+        _ command: FetchUserImageCommand
+    ) -> AnyPublisher<UserImage, ProfileImageDataServiceError> {
+        return fetchImageDataPort.fetchImageData(command)
+            .mapError { fetchImageDataPortError in
+                print(fetchImageDataPortError)
+                switch fetchImageDataPortError {
+                case .unknown:
+                    return .unknown
+                case .failed:
+                    return .failed
+                }
+            }.eraseToAnyPublisher()
     }
 }
