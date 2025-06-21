@@ -102,8 +102,6 @@
 		DFF27ED22DFD2DA800582D42 /* ProfileImageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */; };
 		DFF27ED62E00412100582D42 /* HTTPResponseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED52E00411C00582D42 /* HTTPResponseCode.swift */; };
 		DFF27ED82E0045B300582D42 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED72E0045B000582D42 /* RestError.swift */; };
-		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
-		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchUserImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */; };
 		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
 /* End PBXBuildFile section */
@@ -212,8 +210,6 @@
 		DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDataService.swift; sourceTree = "<group>"; };
 		DFF27ED52E00411C00582D42 /* HTTPResponseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPResponseCode.swift; sourceTree = "<group>"; };
 		DFF27ED72E0045B000582D42 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
-		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
-		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -415,8 +411,6 @@
 		DF7574522DDE203400F08C10 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */,
-				DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */,
 				DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */,
 				DF75745F2DDF413B00F08C10 /* UserRepository.swift */,
 				DF75745D2DDF40D600F08C10 /* MessageRepository.swift */,
@@ -729,7 +723,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
-				DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */,
 				DFF2D9982E0197070057C6BC /* FetchUserImageDataPort.swift in Sources */,
 				DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */,
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
@@ -784,7 +777,6 @@
 				DF50BFDF2D9AB3A40022B1E3 /* FriendListViewModel.swift in Sources */,
 				DF0D43EB2D718EAF0083AA14 /* NewMessagesRequest.swift in Sources */,
 				DF4920002DAE875200EA51D2 /* Supabase+Decode.swift in Sources */,
-				DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */,
 				DF0F26C22DAB8D8A002308E9 /* ProfileImage.swift in Sources */,
 				DF0F26D02DABB4BC002308E9 /* ContactUser.swift in Sources */,
 				DF7574692DE1B0A600F08C10 /* SendMessageUseCase.swift in Sources */,
