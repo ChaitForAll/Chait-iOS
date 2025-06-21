@@ -7,12 +7,12 @@
 import Foundation
 import Combine
 
-enum ProfileImageDataServiceError: Error {
+enum UserImageServiceError: Error {
     case failed
     case unknown
 }
 
-struct ProfileImageDataService {
+final class UserImageService {
     
     // MARK: Property(s)
     
@@ -26,10 +26,9 @@ struct ProfileImageDataService {
     
     func fetchImageData(
         _ command: FetchUserImageCommand
-    ) -> AnyPublisher<UserImage, ProfileImageDataServiceError> {
+    ) -> AnyPublisher<UserImage, UserImageServiceError> {
         return fetchImageDataPort.fetchImageData(command)
             .mapError { fetchImageDataPortError in
-                print(fetchImageDataPortError)
                 switch fetchImageDataPortError {
                 case .unknown:
                     return .unknown
