@@ -105,6 +105,7 @@
 		DFF27ED82E0045B300582D42 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED72E0045B000582D42 /* RestError.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchUserImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */; };
 		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
+		DFF2D99E2E02D6200057C6BC /* UserImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D99D2E02D61A0057C6BC /* UserImageRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +215,7 @@
 		DFF27ED72E0045B000582D42 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
+		DFF2D99D2E02D61A0057C6BC /* UserImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +502,7 @@
 		DFC3001C2DD8637600A219F7 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				DFF2D99D2E02D61A0057C6BC /* UserImageRepository.swift */,
 				DF7574632DDF63E100F08C10 /* UserRepositoryImplementation.swift */,
 				DF7574612DDF5F0100F08C10 /* MessageRepositoryImplementation.swift */,
 				DF0F26E52DADEA1E002308E9 /* ConversationRepositoryImplementation.swift */,
@@ -751,6 +754,7 @@
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
 				DF7574542DDE487800F08C10 /* ParticipantRepository.swift in Sources */,
 				DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */,
+				DFF2D99E2E02D6200057C6BC /* UserImageRepository.swift in Sources */,
 				DFC3001B2DD8613D00A219F7 /* UIFont+PreferredFontWeight.swift in Sources */,
 				DF7BC6262D72060100AAF678 /* ConversationMessageViewModel.swift in Sources */,
 				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
