@@ -65,6 +65,9 @@
 		DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */; };
 		DF7FBDA42D75FAB700753FCE /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */; };
 		DF7FBDA62D7601E100753FCE /* AppSessionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7FBDA52D7601E100753FCE /* AppSessionCoordinator.swift */; };
+		DF9122112E043BBA00036DD2 /* UserImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9122102E043BB800036DD2 /* UserImageType.swift */; };
+		DF9122132E043BCF00036DD2 /* FetchUserImageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9122122E043BC400036DD2 /* FetchUserImageCommand.swift */; };
+		DF9122152E043CDA00036DD2 /* UserImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9122142E043CD800036DD2 /* UserImage.swift */; };
 		DF9676BE2D994F7F0078D0D5 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9676BD2D994F7F0078D0D5 /* Friend.swift */; };
 		DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */; };
 		DF9676C22D9951830078D0D5 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9676C12D9951830078D0D5 /* FriendRepository.swift */; };
@@ -101,6 +104,7 @@
 		DFF27ED82E0045B300582D42 /* RestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF27ED72E0045B000582D42 /* RestError.swift */; };
 		DFF2D9962E01966E0057C6BC /* FetchImageMetaPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */; };
 		DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */; };
+		DFF2D9982E0197070057C6BC /* FetchUserImageDataPort.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */; };
 		DFF2D99A2E0199450057C6BC /* ImageMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF2D9992E0199400057C6BC /* ImageMeta.swift */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +175,9 @@
 		DF7FBD9F2D75F69200753FCE /* ConversationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewModel.swift; sourceTree = "<group>"; };
 		DF7FBDA32D75FAB700753FCE /* ConversationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		DF7FBDA52D7601E100753FCE /* AppSessionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSessionCoordinator.swift; sourceTree = "<group>"; };
+		DF9122102E043BB800036DD2 /* UserImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageType.swift; sourceTree = "<group>"; };
+		DF9122122E043BC400036DD2 /* FetchUserImageCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserImageCommand.swift; sourceTree = "<group>"; };
+		DF9122142E043CD800036DD2 /* UserImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImage.swift; sourceTree = "<group>"; };
 		DF9676BD2D994F7F0078D0D5 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		DF9676BF2D994F980078D0D5 /* FetchFriendsListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchFriendsListUseCase.swift; sourceTree = "<group>"; };
 		DF9676C12D9951830078D0D5 /* FriendRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRepository.swift; sourceTree = "<group>"; };
@@ -207,6 +214,7 @@
 		DFF27ED72E0045B000582D42 /* RestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestError.swift; sourceTree = "<group>"; };
 		DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageMetaPort.swift; sourceTree = "<group>"; };
 		DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchImageDataPort.swift; sourceTree = "<group>"; };
+		DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUserImageDataPort.swift; sourceTree = "<group>"; };
 		DFF2D9992E0199400057C6BC /* ImageMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -409,6 +417,7 @@
 			children = (
 				DFF2D9972E0196F20057C6BC /* FetchImageDataPort.swift */,
 				DFF2D9952E01966A0057C6BC /* FetchImageMetaPort.swift */,
+				DFF2D9972E0196F20057C6BC /* FetchUserImageDataPort.swift */,
 				DF75745F2DDF413B00F08C10 /* UserRepository.swift */,
 				DF75745D2DDF40D600F08C10 /* MessageRepository.swift */,
 				DFD7ECA12DBB7BAE00E5387B /* ImageRepository.swift */,
@@ -574,6 +583,9 @@
 		DFF27ED02DFD2D8900582D42 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				DF9122142E043CD800036DD2 /* UserImage.swift */,
+				DF9122122E043BC400036DD2 /* FetchUserImageCommand.swift */,
+				DF9122102E043BB800036DD2 /* UserImageType.swift */,
 				DFF2D9992E0199400057C6BC /* ImageMeta.swift */,
 				DFF27ED12DFD2D9A00582D42 /* ProfileImageDataService.swift */,
 			);
@@ -718,6 +730,7 @@
 			files = (
 				DF0F26C82DABA426002308E9 /* AppUser.swift in Sources */,
 				DFF2D9982E0197070057C6BC /* FetchImageDataPort.swift in Sources */,
+				DFF2D9982E0197070057C6BC /* FetchUserImageDataPort.swift in Sources */,
 				DFE17EDA2DD76F5B008A58C2 /* FriendListCellContentView.swift in Sources */,
 				DF7C16F62DBDDC0500CAF20F /* NewMessage.swift in Sources */,
 				DF0F26D52DAD14C0002308E9 /* ConversationUseCase.swift in Sources */,
@@ -736,6 +749,7 @@
 				DF7574642DDF63E800F08C10 /* UserRepositoryImplementation.swift in Sources */,
 				DF7FBDA62D7601E100753FCE /* AppSessionCoordinator.swift in Sources */,
 				DF7FBDA02D75F69200753FCE /* ConversationListViewModel.swift in Sources */,
+				DF9122152E043CDA00036DD2 /* UserImage.swift in Sources */,
 				DF75745A2DDF388500F08C10 /* UserDetail.swift in Sources */,
 				DFD1226F2DC8C6B5005E3ED1 /* SingInViewModel.swift in Sources */,
 				DF0F26CA2DABA8B7002308E9 /* Participant.swift in Sources */,
@@ -746,6 +760,7 @@
 				DF50BFDD2D9AB02B0022B1E3 /* FriendshipResponse.swift in Sources */,
 				DF0F26CE2DABAD23002308E9 /* GroupConversation.swift in Sources */,
 				DF9C91FF2D6F556E00A2BCDA /* ConversationViewModel.swift in Sources */,
+				DF9122132E043BCF00036DD2 /* FetchUserImageCommand.swift in Sources */,
 				DF4920022DB02B5300EA51D2 /* ConversationSummary.swift in Sources */,
 				DFD122762DCF54E7005E3ED1 /* ListSection.swift in Sources */,
 				DF50BFDB2D99B3C80022B1E3 /* FriendRepositoryImplementation.swift in Sources */,
@@ -757,6 +772,7 @@
 				DFD122692DC74E7D005E3ED1 /* MonoPrimaryButton.swift in Sources */,
 				DF350FB82DB211230010FE8A /* AuthenticationService.swift in Sources */,
 				DF7574582DDF387600F08C10 /* MessageDetail.swift in Sources */,
+				DF9122112E043BBA00036DD2 /* UserImageType.swift in Sources */,
 				DF9C91F12D6EEA6E00A2BCDA /* RemoteMessagesDataSource.swift in Sources */,
 				DF75744A2DDCC8FD00F08C10 /* AuthSession.swift in Sources */,
 				DF9676C02D994F980078D0D5 /* FetchFriendsListUseCase.swift in Sources */,
