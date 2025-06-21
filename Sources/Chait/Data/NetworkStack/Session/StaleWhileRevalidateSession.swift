@@ -6,6 +6,13 @@
 
 
 import Foundation
+import Combine
+
+enum StaleWhileRevalidateSessionError: Error {
+    case failed
+    case notFound
+    case unknown
+}
 
 struct StaleWhileRevalidateSession {
     
@@ -24,7 +31,34 @@ struct StaleWhileRevalidateSession {
     
     // MARK: Function(s)
     
-    func requestData(from url: URL) -> AsyncThrowingStream<Data, Error> {
+    func requestDataPublisher(from url: URL) -> AnyPublisher<Data, StaleWhileRevalidateSessionError> {
+        let request = URLRequest(url: url)
+        let freshPublisher: AnyPublisher<Data, StaleWhileRevalidateSessionError> = Deferred {
+            session.dataTaskPublisher(for: url)
+                .handleEvents(receiveOutput: { data, response in
+                    let toCache = CachedURLResponse(response: response, data: data)
+                    urlCache.storeCachedResponse(toCache, for: request)
+                })
+                .map(\.data)
+                .mapError { _ in
+                    return StaleWhileRevalidateSessionError.failed
+                }.eraseToAnyPublisher()
+        }.eraseToAnyPublisher()
+        
+        if let cached = urlCache.cachedResponse(for: request) {
+            return Just(cached.data)
+                .setFailureType(to: StaleWhileRevalidateSessionError.self)
+                .append(freshPublisher)
+                .eraseToAnyPublisher()
+        } else {
+            return Empty()
+                .setFailureType(to: StaleWhileRevalidateSessionError.self)
+                .append(freshPublisher)
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    func requestDataStream(from url: URL) -> AsyncThrowingStream<Data, Error> {
         return AsyncThrowingStream<Data, Error> { continuation in
             
             let request = URLRequest(url: url)
