@@ -5,12 +5,11 @@
 //  Copyright (c) 2025 Jeremy All rights reserved.
     
 import UIKit
+import Combine
 
 final class FriendListCellContentView: UIView,  UIContentView {
-    struct Configuration: UIContentConfiguration {
-        var image: UIImage?
-        var name: String?
-        var status: String?
+    struct Configuration: UIContentConfiguration, Equatable {
+        var viewModel: FriendViewModel?
         var imageToTextSpacing: CGFloat = 8
         var imageWidth: CGFloat = 55
         
@@ -32,11 +31,14 @@ final class FriendListCellContentView: UIView,  UIContentView {
     private let statusLabel = UILabel()
     
     private var imageWidthConstraint: NSLayoutConstraint?
+    private var cancelBag = Set<AnyCancellable>()
     
     // MARK: Override(s) & Requirement(s)
     
+    var currentConfiguration: Configuration?
     var configuration: any UIContentConfiguration {
         didSet {
+            cancelBag.removeAll()
             apply(configuration: configuration)
         }
     }
@@ -84,13 +86,23 @@ final class FriendListCellContentView: UIView,  UIContentView {
     }
     
     private func apply(configuration: UIContentConfiguration) {
-        guard let configuration = configuration as? Configuration else {
+        guard let configuration = configuration as? Configuration,
+              currentConfiguration != configuration
+        else {
             return
         }
-        imageView.image = configuration.image
-        nameLabel.text = configuration.name
-        statusLabel.text = configuration.status
+        nameLabel.text = configuration.viewModel?.name ?? "??"
+        statusLabel.text = configuration.viewModel?.status ?? "??"
         contentStack.setCustomSpacing(configuration.imageToTextSpacing, after: imageView)
         imageWidthConstraint?.constant = configuration.imageWidth
+        configuration.viewModel?.$imageData.sink { [weak self] imageData in
+            if let imageData, let image = UIImage(data: imageData) {
+                DispatchQueue.main.async {
+                    self?.imageView.image = image
+                }
+            }
+        }.store(in: &cancelBag)
+        configuration.viewModel?.prepareImageData()
+        currentConfiguration = configuration
     }
 }

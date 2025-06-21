@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-    
+
 
 import Foundation
 import Combine
@@ -15,12 +15,17 @@ final class FriendListViewModel {
     
     @Published var friendIdentifiers: [UUID] = []
     
-    private var allFriends: [FriendViewModel.ID: FriendViewModel] = [:]
+    private var allFriends: [UUID: Friend] = [:]
     private var cancelBag: Set<AnyCancellable> = .init()
     private let fetchFriendsListUseCase: FetchFriendsListUseCase
+    private let userImageService: UserImageService
     
-    init(fetchFriendsListUseCase: FetchFriendsListUseCase) {
+    init(
+        fetchFriendsListUseCase: FetchFriendsListUseCase,
+        userImageService: UserImageService
+    ) {
         self.fetchFriendsListUseCase = fetchFriendsListUseCase
+        self.userImageService = userImageService
     }
     
     // MARK: Function(s)
@@ -30,21 +35,23 @@ final class FriendListViewModel {
     }
     
     func friendViewModel(for id: UUID) -> FriendViewModel? {
-        return allFriends[id]
+        guard let friend = allFriends[id] else {
+            return nil
+        }
+        return FriendViewModel(profileImageDataService: self.userImageService, friend: friend)
     }
     
     // MARK: Private Function(s)
     
     private func fetchFriendsList() {
         fetchFriendsListUseCase.fetchFriendList()
-            .map { $0.map { FriendViewModel(friend: $0) }}
             .sink(
                 receiveCompletion: { _ in },
-                receiveValue: { [weak self] viewModels in
-                    for viewModel in viewModels {
-                        self?.allFriends[viewModel.id] = viewModel
+                receiveValue: { [weak self] friends in
+                    for friend in friends {
+                        self?.allFriends[friend.friendID] = friend
                     }
-                    self?.friendIdentifiers.append(contentsOf: viewModels.map(\.id))
+                    self?.friendIdentifiers.append(contentsOf: friends.map(\.friendID))
                 }
             )
             .store(in: &cancelBag)

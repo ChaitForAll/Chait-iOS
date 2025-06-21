@@ -93,14 +93,9 @@ final class FriendListViewController: UIViewController {
     }
     
     private func createListCellRegistration() -> ListCellRegistration {
-        return ListCellRegistration { cell, indexPath, itemIdentifier in
-            
+        return ListCellRegistration { [weak self] cell, indexPath, itemIdentifier in
             var content = cell.friedListContentConfiguration()
-            
-            if let friend = self.viewModel?.friendViewModel(for: itemIdentifier) {
-                content.name = friend.displayName
-                content.status = friend.status
-            }
+            content.viewModel = self?.viewModel?.friendViewModel(for: itemIdentifier)
             cell.contentConfiguration = content
         }
     }

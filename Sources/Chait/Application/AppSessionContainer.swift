@@ -3,7 +3,7 @@
 //  Chait
 //
 //  Copyright (c) 2025 Jeremy All rights reserved.
-  
+
 import Supabase
 import Foundation
 
@@ -11,10 +11,13 @@ final class AppSessionContainer {
     
     // MARK: Repository(s)
     
+    private let client: SupabaseClient
+    
     private let conversationRepository: ConversationRepository
     private let friendRepository: FriendRepository
     private let messageRepository: MessageRepository
     private let userRepository: UserRepository
+    private let userImageRepository: UserImageRepository
     
     // MARK: DataSource(s)
     
@@ -25,6 +28,7 @@ final class AppSessionContainer {
     
     
     init(client: SupabaseClient, authSession: AuthSession) {
+        self.client = client
         self.userRemoteDataSource = DefaultUserRemoteDataSource(supabase: client)
         self.conversationMembershipDataSource = DefaultConversationMembershipRemoteDataSource(
             supabase: client
@@ -51,8 +55,11 @@ final class AppSessionContainer {
             userDataSource: userRemoteDataSource,
             authSession: authSession
         )
+        self.userImageRepository = UserImageRepository(
+            supabase: client,
+            staleWhileRevalidateSession: StaleWhileRevalidateSession()
+        )
     }
-    
     
     // MARK: UseCase(s)
     
@@ -69,7 +76,7 @@ final class AppSessionContainer {
     private func fetchFriendListUseCase() -> FetchFriendsListUseCase {
         return DefaultFetchFriendsListUseCase(repository: friendRepository)
     }
-     
+    
     private func fetchConversationSummariesUseCase() -> FetchConversationSummariesUseCase {
         return FetchConversationSummariesUseCase(
             conversationRepository: conversationRepository,
@@ -90,6 +97,10 @@ final class AppSessionContainer {
         )
     }
     
+    private func userImageService() -> UserImageService {
+        return UserImageService(fetchImageDataPort: userImageRepository)
+    }
+    
     // MARK: ViewModel(s)
     
     func conversationListViewModel() -> ConversationListViewModel {
@@ -100,7 +111,8 @@ final class AppSessionContainer {
     
     func friendListViewModel() -> FriendListViewModel {
         return FriendListViewModel(
-            fetchFriendsListUseCase: fetchFriendListUseCase()
+            fetchFriendsListUseCase: fetchFriendListUseCase(),
+            userImageService: userImageService()
         )
     }
     
